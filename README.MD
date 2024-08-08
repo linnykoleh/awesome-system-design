@@ -1,6 +1,6 @@
 # System Design - Personal notes from courses and articles
 
-### 📚Resources I used:
+## 📚Resources I used:
 
 - Courses:
   - [Neetcode course System Design](https://neetcode.io)
@@ -30,7 +30,7 @@
 
 ---
 
-### Every architecture is different but there are common patterns:
+## Universal patterns for building scalable systems:
 
 ![common.png](images/common.png)
 
