@@ -26,9 +26,13 @@
   - [Videos System Design for Interviews and Beyond videos](https://www.youtube.com/c/SystemDesignInterview/videos) 
   - [System design playlist #1 on Youtube](https://www.youtube.com/playlist?list=PLMCXHnjXnTnvo6alSjVkgxV-VH6EPyvoX)  
   - [System design playlist #2 on Youtube](https://www.youtube.com/playlist?list=PLrtCHHeadkHp92TyPt1Fj452_VGLipJnL) 
-  - [Most Tech Interview Prep is GARBAGE. (From a Principal Engineer at Amazon)](https://www.youtube.com/watch?v=0Z9RW_hhUT4&ab_channel=ALifeEngineered) -
+  - [Most Tech Interview Prep is GARBAGE. (From a Principal Engineer at Amazon)](https://www.youtube.com/watch?v=0Z9RW_hhUT4&ab_channel=ALifeEngineered)
 
+---
 
+### Every architecture is different but there are common patterns:
+
+![common.png](images/common.png)
 
 ---
 
