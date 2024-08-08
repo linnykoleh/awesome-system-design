@@ -1,8 +1,32 @@
-# System Design
+# System Design - Personal notes from courses and articles
 
-## This is personal notes from courses and articles about system design.
+## 📚Resources I used:
+
+- `neetcode` course `System Design` - https://neetcode.io
+- Book: `System Design Interview – An insider's Guide` by Alex Xu
+- `System Design Interview – An insider's Guide` - https://youtube.com/playlist?list=PLlghaO_0b1OcY4yfpwGUOcFlnU7LpIkhC&si=Y7OqweK6rEgtaZUw
+- `System Design for Interviews and Beyond` https://www.youtube.com/c/SystemDesignInterview/videos
+- Course: `System Design for Interviews and Beyond` https://leetcode.com/explore/interview/card/system-design-for-interviews-and-beyond
+- `System design playlist #1` https://www.youtube.com/playlist?list=PLMCXHnjXnTnvo6alSjVkgxV-VH6EPyvoX
+- `System design playlist #2` https://www.youtube.com/playlist?list=PLrtCHHeadkHp92TyPt1Fj452_VGLipJnL
+- Course: `Highload Software Architecture` on Projector https://prjctr.com/course/highload-software-architecture
+- Helpful list of LeetCode Posts on System Design at Facebook, Google, Amazon, Uber, Microsoft - https://leetcode.com/discuss/interview-question/1140451/helpful-list-of-leetcode-posts-on-system-design-at-facebook-google-amazon-uber-microsoft
+- System design primer - https://github.com/donnemartin/system-design-primer
+- My System Design Template - https://leetcode.com/discuss/career/229177/My-System-Design-Template
+- Latency Numbers Every Programmer Should Know https://colin-scott.github.io/personal_website/research/interactive_latency.html
+- Real-time Messaging in Slack https://slack.engineering/real-time-messaging
+- HOW DISCORD STORES BILLIONS OF MESSAGES https://discord.com/blog/how-discord-stores-billions-of-messages
+- HOW DISCORD STORES TRILLINS OF MESSAGES https://discord.com/blog/how-discord-stores-trillions-of-messages
+- Microservices patterns: https://microservices.io/patterns
+- Meta Onsite System Design Questions - https://leetcode.com/discuss/interview-experience/4428743/Meta-Onsite-System-Design-Questions
+- A Senior Engineer's Guide to the System Design Interview: https://interviewing.io/guides/system-design-interview
+- system-design-resources - https://github.com/InterviewReady/system-design-resources
+- !!! Most Tech Interview Prep is GARBAGE. (From a Principal Engineer at Amazon) - https://www.youtube.com/watch?v=0Z9RW_hhUT4&ab_channel=ALifeEngineered
+
 
 ---
+
+## System Design Basics
 
 - The system should be designed according to:
     - Reliability 
