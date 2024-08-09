@@ -36,28 +36,37 @@
 
 ---
 
-## System Design Basics
+## System requirements
 
-- The system should be designed according to:
-    - Reliability 
-    - Fault Tolerance 
-    - Redundancy
-    - Availability
-    - Scalability
-    - Consistency
-    - Throughput
-        - The number of requests that can be handled per second `RPS`
-        - The number of queries to database per second `QPS`
-    - Scalability
-        - The ability to handle more requests per second
-    - Latency
-        - The time it takes to handle a request
-        - The time it takes to handle a query to database
-- The most important requirements:
-    - Scalability
-    - Availability
-    - Performance
-    - If persistence is required, then durability is also important
+- **𝐅𝐮𝐧𝐜𝐭𝐢𝐨𝐧𝐚𝐥 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬**
+    - Start with the customer and work backwards
+    - Who will use the system
+    - How the system will be used
+    - Platform (Mobile, Web, Desktop)
+- **𝐍𝐨𝐧 𝐅𝐮𝐧𝐜𝐭𝐢𝐨𝐧𝐚𝐥 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬**
+    - `High availability` system uptime in percentage
+        - 99 % => 3.65 days of downtime per year
+        - 99.9% => 8.76 hours of downtime per year
+        - 99.99% => 52 minutes 35 seconds of downtime per year
+        - 99.999% => 5 minutes 15 seconds of downtime per year
+        - 99.9999% => 31 seconds of downtime per year
+    - `Scalability` needs to handle peak load
+    - `Performance` in terms of latency and throughput
+    - `Durability` - data should not be lost
+    - `Consistency` - data should not be corrupted
+        - Strong consistency
+        - Weak consistency
+    - `Maintainability`
+        - Failure modes and mitigations
+        - Monitoring
+        - Testing
+        - Deployment
+    - `Security`
+    - `Cost`
+
+![1.png](./images/system.design.3/1.png)
+
+![2.png](./images/system.design.3/2.png)
 
 ---
 
@@ -180,44 +189,6 @@
 
 ---
 
-## Five common system design interview mistakes
-
-![Five common system design interview mistakes.png](./images/system.design.3/Five_common_system_design_interview_mistakes.png)
-
----
-
-## System requirements
-
-- **𝐅𝐮𝐧𝐜𝐭𝐢𝐨𝐧𝐚𝐥 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬**
-    - Start with the customer and work backwards
-    - Who will use the system
-    - How the system will be used
-    - Platform (Mobile, Web, Desktop)
-- **𝐍𝐨𝐧 𝐅𝐮𝐧𝐜𝐭𝐢𝐨𝐧𝐚𝐥 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬**
-    - `High availability` system uptime in percentage
-        - 99 % => 3.65 days of downtime per year
-        - 99.9% => 8.76 hours of downtime per year
-        - 99.99% => 52 minutes 35 seconds of downtime per year
-        - 99.999% => 5 minutes 15 seconds of downtime per year
-        - 99.9999% => 31 seconds of downtime per year
-    - `Scalability` needs to handle peak load
-    - `Performance` in terms of latency and throughput
-    - `Durability` - data should not be lost
-    - `Consistency` - data should not be corrupted
-        - Strong consistency
-        - Weak consistency
-    - `Maintainability`
-        - Failure modes and mitigations
-        - Monitoring
-        - Testing
-        - Deployment
-    - `Security`
-    - `Cost`
-
-![1.png](./images/system.design.3/1.png)
-
-![2.png](./images/system.design.3/2.png)
-
 
 ## System Design Blueprint: The Ultimate Guide
 
@@ -225,15 +196,10 @@
 
 ![sys_design_blue_print_2.png](./images/system.design/sys_design_blue_print_2.png)
 
---- 
-
-## Cloud design patterns
-
-![sys_des_practices.png](./images/system.design/sys_des_practices.png)
 
 ---
 
-## System Design resources
+## System Desing resources
 
 ![dZEbZaT.png](./images/system.design/dZEbZaT.png)
 
@@ -3019,5 +2985,16 @@ The fanout service works as follows:
 
 ![Twitter API.png](./images/system.design.4/Twitter_API.png)
 
+--- 
+
+## Cloud design patterns
+
+![sys_des_practices.png](./images/system.design/sys_des_practices.png)
+
 ---
 
+## Five common system design interview mistakes
+
+![Five common system design interview mistakes.png](./images/system.design.3/Five_common_system_design_interview_mistakes.png)
+
+---
