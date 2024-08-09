@@ -885,11 +885,11 @@
 - In summary, the commit log is a crucial component of Cassandra's data durability mechanism, ensuring the reliability
   of data in case of system failures.
 
-![Write path in key-value store.png](./images/system.design.3/Write path in key-value store.png)
+![Write path in key-value store.png](./images/system.design.3/Write_path_in_key_value_store.png)
 
-![Write path in key-value store 2.png](./images/system.design.3/Write path in key-value store 2.png)
+![Write path in key-value store 2.png](./images/system.design.3/Write_path_in_key_value_store_2.png)
 
-![Write path in key-value store 3.png](./images/system.design.3/Write path in key-value store 3.png)
+![Write path in key-value store 3.png](./images/system.design.3/Write_path_in_key_value_store_3.png)
 
 - The write request is persisted on a commit log file.
     - `log` - this is a **linked list** data-structute. Where adding a new entry is `O(1)` and reading is `O(n)`.
@@ -2670,7 +2670,7 @@ The fanout service works as follows:
 
 ## Online Judge for coding contests
 
-![Online Judge for coding contests.png](./images/system.design.3/Online Judge for coding contests.png)
+![Online Judge for coding contests.png](./images/system.design.3/Online_Judge_for_coding_contests.png)
 
 ---
 
@@ -2684,7 +2684,7 @@ The fanout service works as follows:
 
 #### Download
 
-![Object Storage Download.png](./images/system.design.3/Object Storage Download.png)
+![Object Storage Download.png](./images/system.design.3/Object_Storage_Download.png)
 
 ---
 
@@ -2692,7 +2692,7 @@ The fanout service works as follows:
 
 - https://www.youtube.com/watch?v=lamooN_E5aY&ab_channel=CrushingTechEducation
 
-![Design a Dropbox.png](./images/system.design.3/Design a Dropbox.png)
+![Design a Dropbox.png](./images/system.design.3/Design_a_Dropbox.png)
 
 ---
 
@@ -2700,13 +2700,13 @@ The fanout service works as follows:
 
 ### Non functional requirements
 
-![Design Reddit home page feed.png](./images/system.design.3/Design Reddit home page feed.png)
+![Design Reddit home page feed.png](./images/system.design.3/Design_Reddit_home_page_feed.png)
 
 ### Design
 
-![Design Reddit home page feed 2.png](./images/system.design.3/Design Reddit home page feed 2.png)
+![Design Reddit home page feed 2.png](./images/system.design.3/Design_Reddit_home_page_feed_2.png)
 
-![Design Reddit home page feed 3.png](./images/system.design.3/Design Reddit home page feed 3.png)
+![Design Reddit home page feed 3.png](./images/system.design.3/Design_Reddit_home_page_feed_3.png)
 
 ---
 
@@ -2714,21 +2714,21 @@ The fanout service works as follows:
 
 ### Requirements
 
-![Design Parking Garage.png](./images/system.design.3/Design Parking Garage.png)
+![Design Parking Garage.png](./images/system.design.3/Design_Parking_Garage.png)
 
 ### API
 
-![Design Parking Garage 2.png](./images/system.design.3/Design Parking Garage 2.png)
+![Design Parking Garage 2.png](./images/system.design.3/Design_Parking_Garage_2.png)
 
 ### Data types
 
-![Design Parking Garage 3.png](./images/system.design.3/Design Parking Garage 3.png)
+![Design Parking Garage 3.png](./images/system.design.3/Design_Parking_Garage_3.png)
 
-![Design Parking Garage 4.png](./images/system.design.3/Design Parking Garage 4.png)
+![Design Parking Garage 4.png](./images/system.design.3/Design_Parking_Garage_4.png)
 
 ### Design
 
-![Design Parking Garage 5.png](./images/system.design.3/Design Parking Garage 5.png)
+![Design Parking Garage 5.png](./images/system.design.3/Design_Parking_Garage_5.png)
 
 ---
 
@@ -2964,7 +2964,7 @@ The fanout service works as follows:
 
 ## Five common system design interview mistakes
 
-![Five common system design interview mistakes.png](./images/system.design.3/Five common system design interview mistakes.png)
+![Five common system design interview mistakes.png](./images/system.design.3/Five_common_system_design_interview_mistakes.png)
 
 ---
 
