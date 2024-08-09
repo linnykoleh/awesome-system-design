@@ -266,7 +266,7 @@
 
 ![replication_3.png](./images/system.design/replication_3.png)
 
-![leader leader replication.png](./images/system.design.4/leader leader replication.png)
+![leader leader replication.png](./images/system.design.4/leader_leader_replication.png)
 
 ### Sharding
 
@@ -2680,7 +2680,7 @@ The fanout service works as follows:
 
 #### Upload
 
-![Object Storage Upload.png](./images/system.design.3/Object Storage Upload.png)
+![Object Storage Upload.png](./images/system.design.3/Object_Storage_Upload.png)
 
 #### Download
 
@@ -2736,11 +2736,11 @@ The fanout service works as follows:
 
 ### Requirements
 
-![Design TicTok.png](./images/system.design.4/Design TicTok.png)
+![Design TicTok.png](./images/system.design.4/Design_TicTok.png)
 
 ### Design
 
-![Design TicTok 2.png](./images/system.design.4/Design TicTok 2.png)
+![Design TicTok 2.png](./images/system.design.4/Design_TicTok_2.png)
 
 ---
 
@@ -2748,11 +2748,11 @@ The fanout service works as follows:
 
 ### Requirements
 
-![Design Facebook Messenger.png](./images/system.design.4/Design Facebook Messenger.png)
+![Design Facebook Messenger.png](./images/system.design.4/Design_Facebook_Messenger.png)
 
 ### Design
 
-![Design Facebook Messenger 2.png](./images/system.design.4/Design Facebook Messenger 2.png)
+![Design Facebook Messenger 2.png](./images/system.design.4/Design_Facebook_Messenger_2.png)
 
 ---
 
@@ -2760,17 +2760,17 @@ The fanout service works as follows:
 
 ### Requirements
 
-![Design Instagram.png](./images/system.design.4/Design Instagram.png)
+![Design Instagram.png](./images/system.design.4/Design_Instagram.png)
 
-![Design Instagram 2.png](./images/system.design.4/Design Instagram 2.png)
+![Design Instagram 2.png](./images/system.design.4/Design_Instagram_2.png)
 
 ### Data types
 
-![Design Instagram 3.png](./images/system.design.4/Design Instagram 3.png)
+![Design Instagram 3.png](./images/system.design.4/Design_Instagram_3.png)
 
 ### Design
 
-![Design Instagram 4.png](./images/system.design.4/Design Instagram 4.png)
+![Design Instagram 4.png](./images/system.design.4/Design_Instagram_4.png)
 
 ---
 
@@ -2778,19 +2778,19 @@ The fanout service works as follows:
 
 ### Requirements
 
-![Design Amazon Kindle Payments.png](./images/system.design.4/Design Amazon Kindle Payments.png)
+![Design Amazon Kindle Payments.png](./images/system.design.4/Design_Amazon_Kindle_Payments.png)
 
 ### API
 
-![Design Amazon Kindle Payments 3.png](./images/system.design.4/Design Amazon Kindle Payments 3.png)
+![Design Amazon Kindle Payments 3.png](./images/system.design.4/Design_Amazon_Kindle_Payments_3.png)
 
 ### Data model
 
-![Design Amazon Kindle Payments 4.png](./images/system.design.4/Design Amazon Kindle Payments 4.png)
+![Design Amazon Kindle Payments 4.png](./images/system.design.4/Design_Amazon_Kindle_Payments_4.png)
 
 ### Design
 
-![Design Amazon Kindle Payments 2.png](./images/system.design.4/Design Amazon Kindle Payments 2.png)
+![Design Amazon Kindle Payments 2.png](./images/system.design.4/Design_Amazon_Kindle_Payments_2.png)
 
 ---
 
@@ -2798,11 +2798,11 @@ The fanout service works as follows:
 
 ### Requirements
 
-![Design Amazon Prime Video.png](./images/system.design.4/Design Amazon Prime Video.png)
+![Design Amazon Prime Video.png](./images/system.design.4/Design_Amazon_Prime_Video.png)
 
 ### Design
 
-![Design Amazon Prime Video 2.png](./images/system.design.4/Design Amazon Prime Video 2.png)
+![Design Amazon Prime Video 2.png](./images/system.design.4/Design_Amazon_Prime_Video_2.png)
 
 ---
 
@@ -2810,7 +2810,7 @@ The fanout service works as follows:
 
 ### Design
 
-![Downloading User Data.png](./images/system.design.4/Downloading User Data.png)
+![Downloading User Data.png](./images/system.design.4/Downloading_User_Data.png)
 
 ---
 
@@ -2833,13 +2833,13 @@ The fanout service works as follows:
 
 ### Data base design
 
-![Calendar data entities mapping.drawio.png](./images/system.design.4/Calendar data entities mapping.drawio.png)
+![Calendar data entities mapping.drawio.png](./images/system.design.4/Calendar_data_entities_mapping.drawio.png)
 
 ---
 
 ## Twitter API
 
-![Twitter API.png](./images/system.design.4/Twitter API.png)
+![Twitter API.png](./images/system.design.4/Twitter_API.png)
 
 ---
 
