@@ -61,6 +61,184 @@
 
 ---
 
+## System Design template
+
+> Do not jump right in to give a solution. Slow down.
+> Think deeply and ask questions to clarify requirements and assumptions.
+> This is extremely important.
+
+- **𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭 𝐂𝐥𝐚𝐫𝐢𝐟𝐢𝐜𝐚𝐭𝐢𝐨𝐧𝐬 (3-5 𝐦𝐢𝐧)**
+    - Ask clarifying questions to understand the problem and expectations of the interviewer.
+        - Use cases
+        - Scenarios that will not be covered
+        - Who will use
+        - How many will use
+        - Usage patterns
+        - Technology stack
+    - **𝐅𝐮𝐧𝐜𝐭𝐢𝐨𝐧𝐚𝐥 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬**
+        - Start with the customer and work backwards
+        - Who will use the system
+        - How the system will be used
+        - Platform (Mobile, Web, Desktop)
+    - **𝐍𝐨𝐧 𝐅𝐮𝐧𝐜𝐭𝐢𝐨𝐧𝐚𝐥 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬**
+        - `High availability` system uptime in percentage
+            - 99 % => 3.65 days of downtime per year
+            - 99.9% => 8.76 hours of downtime per year
+            - 99.99% => 52 minutes 35 seconds of downtime per year
+            - 99.999% => 5 minutes 15 seconds of downtime per year
+            - 99.9999% => 31 seconds of downtime per year
+        - `Scalability` needs to handle peak load
+        - `Performance` in terms of latency and throughput
+        - `Durability` - data should not be lost
+        - `Consistency` - data should not be corrupted
+            - Strong consistency
+            - Weak consistency
+        - `Maintainability`
+            - Failure modes and mitigations
+            - Monitoring
+            - Testing
+            - Deployment
+        - `Security`
+        - `Cost`
+- **𝐄𝐬𝐭𝐢𝐦𝐚𝐭𝐢𝐨𝐧𝐬 (3-5 𝐦𝐢𝐧)**
+    - Latency/Throughput expectations
+    - QPS (Queries Per Second) Read/Write ratio
+    - Total/Daily active users
+        - Traffic estimates
+            - Write (QPS, Volume of data)
+            - Read  (QPS, Volume of data)
+        - Storage estimates
+        - Memory estimates
+            - If we are using a cache, what is the kind of data we want to store in cache
+            - How much RAM and how many machines do we need for us to achieve this ?
+            - Amount of data you want to store in disk/ssd
+            - Number of users/tweets/likes etc
+- **Start with something simple**
+    - Single machine solution only
+    - Single service solution
+    - Design monolith service and then break it into microservices
+- **High level design (5-10 min)**
+    - APIs for Read/Write scenarios for crucial components
+    - Database schema
+    - Basic algorithm
+    - High level design for Read/Write scenario
+    - High level design for `Read heavy` scenario
+    - High level design for `Write heavy` scenario
+- **𝐃𝐞𝐬𝐢𝐠𝐧 details (15-20 min)**
+    - Scaling the algorithm
+    - Scaling individual components:
+        - Availability, Consistency and Scale story for each component
+        - Consistency and availability patterns
+    - Think about the following components, how they would fit in and how it would help
+        - Client (Mobile, Browser)
+        - DNS
+        - CDN (Push vs Pull)
+        - Load Balancers (Active-Passive, Active-Active, Layer 4, Layer 7)
+        - Reverse Proxy
+        - Blob / Object Storage
+        - Application layer scaling (Microservices, Service Discovery)
+        - DB (RDBMS, NoSQL)
+            - RDBMS
+                - Master-slave, Master-master, Federation, Sharding, Denormalization, SQL Tuning
+            - NoSQL
+                - Key-Value, Wide-Column, Graph, Document
+                    - Fast-lookups:
+                        - RAM (Bounded size) => Redis, Memcached
+                        - AP (Unbounded size) => Cassandra, RIAK, Voldemort
+                        - CP (Unbounded size) => HBase, MongoDB, Couchbase, DynamoDB
+                - Read heavy: MongoDB, Couchbase
+                - Write heavy: Cassandra, ScyllaDB
+        - Caches
+            - Client caching, CDN caching, Webserver caching, Database caching, Application caching, Cache @Query level,
+              Cache @Object level
+            - Eviction policies:
+                - Cache aside
+                - Write through
+                - Write behind
+                - Refresh ahead
+            - Asynchronism
+                - Message queues
+                - Task queues
+                - Back pressure
+        - Communication
+            - TCP
+            - UDP
+            - REST
+            - RPC
+            - Web Sockets
+            - HTTP/S
+    - Logging, Metrics and Automation
+- **Justify (5 min)**
+    - Throughput of each layer
+    - Latency caused between each layer
+    - Overall latency justification
+- **𝐑𝐞𝐬𝐨𝐥𝐯𝐞 𝐛𝐨𝐭𝐭𝐥𝐞𝐧𝐞𝐜𝐤𝐬 𝐚𝐧𝐝 𝐟𝐨𝐥𝐥𝐨𝐰-𝐮𝐩 𝐪𝐮𝐞𝐬𝐭𝐢𝐨𝐧𝐬 (2-3 𝐦𝐢𝐧𝐮𝐭𝐞𝐬)**
+    - Error cases (server failure, network loss, etc.) and how to handle them
+    - Bottlenecks
+    - How to monitor the system and what metrics to collect
+    - How to scale the system to the next level
+
+---
+
+## Five common system design interview mistakes
+
+![Five common system design interview mistakes.png](./images/system.design.3/Five_common_system_design_interview_mistakes.png)
+
+---
+
+## System requirements
+
+- **𝐅𝐮𝐧𝐜𝐭𝐢𝐨𝐧𝐚𝐥 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬**
+    - Start with the customer and work backwards
+    - Who will use the system
+    - How the system will be used
+    - Platform (Mobile, Web, Desktop)
+- **𝐍𝐨𝐧 𝐅𝐮𝐧𝐜𝐭𝐢𝐨𝐧𝐚𝐥 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬**
+    - `High availability` system uptime in percentage
+        - 99 % => 3.65 days of downtime per year
+        - 99.9% => 8.76 hours of downtime per year
+        - 99.99% => 52 minutes 35 seconds of downtime per year
+        - 99.999% => 5 minutes 15 seconds of downtime per year
+        - 99.9999% => 31 seconds of downtime per year
+    - `Scalability` needs to handle peak load
+    - `Performance` in terms of latency and throughput
+    - `Durability` - data should not be lost
+    - `Consistency` - data should not be corrupted
+        - Strong consistency
+        - Weak consistency
+    - `Maintainability`
+        - Failure modes and mitigations
+        - Monitoring
+        - Testing
+        - Deployment
+    - `Security`
+    - `Cost`
+
+![1.png](./images/system.design.3/1.png)
+
+![2.png](./images/system.design.3/2.png)
+
+
+## System Design Blueprint: The Ultimate Guide
+
+![sys_design_blue_print.png](./images/system.design/sys_design_blue_print_1.png)
+
+![sys_design_blue_print_2.png](./images/system.design/sys_design_blue_print_2.png)
+
+--- 
+
+## Cloud design patterns
+
+![sys_des_practices.png](./images/system.design/sys_des_practices.png)
+
+---
+
+## System Design resources
+
+![dZEbZaT.png](./images/system.design/dZEbZaT.png)
+
+---
+
 ## Networking
 
 ### TCP vs UDP
@@ -2843,178 +3021,3 @@ The fanout service works as follows:
 
 ---
 
-## System Design template
-
-> Do not jump right in to give a solution. Slow down.
-> Think deeply and ask questions to clarify requirements and assumptions.
-> This is extremely important.
-
-- **𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭 𝐂𝐥𝐚𝐫𝐢𝐟𝐢𝐜𝐚𝐭𝐢𝐨𝐧𝐬 (3-5 𝐦𝐢𝐧)**
-    - Ask clarifying questions to understand the problem and expectations of the interviewer.
-        - Use cases
-        - Scenarios that will not be covered
-        - Who will use
-        - How many will use
-        - Usage patterns
-        - Technology stack
-    - **𝐅𝐮𝐧𝐜𝐭𝐢𝐨𝐧𝐚𝐥 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬**
-        - Start with the customer and work backwards
-        - Who will use the system
-        - How the system will be used
-        - Platform (Mobile, Web, Desktop)
-    - **𝐍𝐨𝐧 𝐅𝐮𝐧𝐜𝐭𝐢𝐨𝐧𝐚𝐥 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬**
-        - `High availability` system uptime in percentage
-            - 99 % => 3.65 days of downtime per year
-            - 99.9% => 8.76 hours of downtime per year
-            - 99.99% => 52 minutes 35 seconds of downtime per year
-            - 99.999% => 5 minutes 15 seconds of downtime per year
-            - 99.9999% => 31 seconds of downtime per year
-        - `Scalability` needs to handle peak load
-        - `Performance` in terms of latency and throughput
-        - `Durability` - data should not be lost
-        - `Consistency` - data should not be corrupted
-            - Strong consistency
-            - Weak consistency
-        - `Maintainability`
-            - Failure modes and mitigations
-            - Monitoring
-            - Testing
-            - Deployment
-        - `Security`
-        - `Cost`
-- **𝐄𝐬𝐭𝐢𝐦𝐚𝐭𝐢𝐨𝐧𝐬 (3-5 𝐦𝐢𝐧)**
-    - Latency/Throughput expectations
-    - QPS (Queries Per Second) Read/Write ratio
-    - Total/Daily active users
-        - Traffic estimates
-            - Write (QPS, Volume of data)
-            - Read  (QPS, Volume of data)
-        - Storage estimates
-        - Memory estimates
-            - If we are using a cache, what is the kind of data we want to store in cache
-            - How much RAM and how many machines do we need for us to achieve this ?
-            - Amount of data you want to store in disk/ssd
-            - Number of users/tweets/likes etc
-- **Start with something simple**
-    - Single machine solution only
-    - Single service solution
-    - Design monolith service and then break it into microservices
-- **High level design (5-10 min)**
-    - APIs for Read/Write scenarios for crucial components
-    - Database schema
-    - Basic algorithm
-    - High level design for Read/Write scenario
-    - High level design for `Read heavy` scenario
-    - High level design for `Write heavy` scenario
-- **𝐃𝐞𝐬𝐢𝐠𝐧 details (15-20 min)**
-    - Scaling the algorithm
-    - Scaling individual components:
-        - Availability, Consistency and Scale story for each component
-        - Consistency and availability patterns
-    - Think about the following components, how they would fit in and how it would help
-        - Client (Mobile, Browser)
-        - DNS
-        - CDN (Push vs Pull)
-        - Load Balancers (Active-Passive, Active-Active, Layer 4, Layer 7)
-        - Reverse Proxy
-        - Blob / Object Storage
-        - Application layer scaling (Microservices, Service Discovery)
-        - DB (RDBMS, NoSQL)
-            - RDBMS
-                - Master-slave, Master-master, Federation, Sharding, Denormalization, SQL Tuning
-            - NoSQL
-                - Key-Value, Wide-Column, Graph, Document
-                    - Fast-lookups:
-                        - RAM (Bounded size) => Redis, Memcached
-                        - AP (Unbounded size) => Cassandra, RIAK, Voldemort
-                        - CP (Unbounded size) => HBase, MongoDB, Couchbase, DynamoDB
-                - Read heavy: MongoDB, Couchbase
-                - Write heavy: Cassandra, ScyllaDB
-        - Caches
-            - Client caching, CDN caching, Webserver caching, Database caching, Application caching, Cache @Query level,
-              Cache @Object level
-            - Eviction policies:
-                - Cache aside
-                - Write through
-                - Write behind
-                - Refresh ahead
-            - Asynchronism
-                - Message queues
-                - Task queues
-                - Back pressure
-        - Communication
-            - TCP
-            - UDP
-            - REST
-            - RPC
-            - Web Sockets
-            - HTTP/S
-    - Logging, Metrics and Automation
-- **Justify (5 min)**
-    - Throughput of each layer
-    - Latency caused between each layer
-    - Overall latency justification
-- **𝐑𝐞𝐬𝐨𝐥𝐯𝐞 𝐛𝐨𝐭𝐭𝐥𝐞𝐧𝐞𝐜𝐤𝐬 𝐚𝐧𝐝 𝐟𝐨𝐥𝐥𝐨𝐰-𝐮𝐩 𝐪𝐮𝐞𝐬𝐭𝐢𝐨𝐧𝐬 (2-3 𝐦𝐢𝐧𝐮𝐭𝐞𝐬)**
-    - Error cases (server failure, network loss, etc.) and how to handle them
-    - Bottlenecks
-    - How to monitor the system and what metrics to collect
-    - How to scale the system to the next level
-
----
-
-## Five common system design interview mistakes
-
-![Five common system design interview mistakes.png](./images/system.design.3/Five_common_system_design_interview_mistakes.png)
-
----
-
-## System requirements
-
-- **𝐅𝐮𝐧𝐜𝐭𝐢𝐨𝐧𝐚𝐥 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬**
-    - Start with the customer and work backwards
-    - Who will use the system
-    - How the system will be used
-    - Platform (Mobile, Web, Desktop)
-- **𝐍𝐨𝐧 𝐅𝐮𝐧𝐜𝐭𝐢𝐨𝐧𝐚𝐥 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬**
-    - `High availability` system uptime in percentage
-        - 99 % => 3.65 days of downtime per year
-        - 99.9% => 8.76 hours of downtime per year
-        - 99.99% => 52 minutes 35 seconds of downtime per year
-        - 99.999% => 5 minutes 15 seconds of downtime per year
-        - 99.9999% => 31 seconds of downtime per year
-    - `Scalability` needs to handle peak load
-    - `Performance` in terms of latency and throughput
-    - `Durability` - data should not be lost
-    - `Consistency` - data should not be corrupted
-        - Strong consistency
-        - Weak consistency
-    - `Maintainability`
-        - Failure modes and mitigations
-        - Monitoring
-        - Testing
-        - Deployment
-    - `Security`
-    - `Cost`
-
-![1.png](./images/system.design.3/1.png)
-
-![2.png](./images/system.design.3/2.png)
-
-
-## System Design Blueprint: The Ultimate Guide
-
-![sys_design_blue_print.png](./images/system.design/sys_design_blue_print_1.png)
-
-![sys_design_blue_print_2.png](./images/system.design/sys_design_blue_print_2.png)
-
---- 
-
-## Cloud design patterns
-
-![sys_des_practices.png](./images/system.design/sys_des_practices.png)
-
----
-
-## System Design resources
-
-![dZEbZaT.png](./images/system.design/dZEbZaT.png)
