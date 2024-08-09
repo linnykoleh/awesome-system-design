@@ -2,31 +2,43 @@
 
 ## 📚Resources I used:
 
-- Courses:
-  - [Neetcode course System Design](https://neetcode.io)
-  - [System Design for Interviews and Beyond](https://leetcode.com/explore/interview/card/system-design-for-interviews-and-beyond)
-  - [Highload Software Architecture on Projector](https://prjctr.com/course/highload-software-architecture)
-- Articles:
-  - [Helpful list of LeetCode Posts on System Design at Facebook, Google, Amazon, Uber, Microsoft](https://leetcode.com/discuss/interview-question/1140451/helpful-list-of-leetcode-posts-on-system-design-at-facebook-google-amazon-uber-microsoft)
-  - [System design primer](https://github.com/donnemartin/system-design-primer)
-  - [My System Design Template](https://leetcode.com/discuss/career/229177/My-System-Design-Template)
-  - [Latency Numbers Every Programmer Should Know](https://colin-scott.github.io/personal_website/research/interactive_latency.html)
-  - [Real-time Messaging in Slack](https://slack.engineering/real-time-messaging)
-  - [How Discord Stores Billions of Messages](https://discord.com/blog/how-discord-stores-billions-of-messages)
-  - [How Discord Stores Trillions of Messages](https://discord.com/blog/how-discord-stores-trillions-of-messages)
-  - [Meta Onsite System Design Questions](https://leetcode.com/discuss/interview-experience/4428743/Meta-Onsite-System-Design-Questions)
-  - [A Senior Engineer's Guide to the System Design Interview](https://interviewing.io/guides/system-design-interview)
-  - [system-design-resources on github](https://github.com/InterviewReady/system-design-resources)
-- Books:
-  - [System Design Interview – An insider's Guide by Alex Xu](https://www.amazon.com/System-Design-Interview-insiders-Second/dp/B08CMF2CQF?tag=interior0d3-20)
-  - [Microservices patterns](https://microservices.io/patterns)
-  - [Microservices Patterns: With examples in Java by Chris Richardson](https://www.amazon.com/Microservices-Patterns-examples-Chris-Richardson/dp/1617294543?tag=interior0d3-20)
-- Videos:
-  - [System Design Interview – An insider's Guide discussion](https://youtube.com/playlist?list=PLlghaO_0b1OcY4yfpwGUOcFlnU7LpIkhC&si=Y7OqweK6rEgtaZUw)
-  - [Videos System Design for Interviews and Beyond videos](https://www.youtube.com/c/SystemDesignInterview/videos) 
-  - [System design playlist #1 on Youtube](https://www.youtube.com/playlist?list=PLMCXHnjXnTnvo6alSjVkgxV-VH6EPyvoX)  
-  - [System design playlist #2 on Youtube](https://www.youtube.com/playlist?list=PLrtCHHeadkHp92TyPt1Fj452_VGLipJnL) 
-  - [Most Tech Interview Prep is GARBAGE. (From a Principal Engineer at Amazon)](https://www.youtube.com/watch?v=0Z9RW_hhUT4&ab_channel=ALifeEngineered)
+### Courses:
+- [x] [System Design course on neetcode.io](https://neetcode.io)
+- [x] [System Design for Interviews and Beyond](https://leetcode.com/explore/interview/card/system-design-for-interviews-and-beyond)
+- [ ] [Highload Software Architecture on Projector](https://prjctr.com/course/highload-software-architecture)
+- [ ] [System Design Simplified on interviewready.io](https://interviewready.io/course-page/system-design-course)
+- [ ] [Grokking the System Design Interview](https://www.designgurus.io/course/grokking-the-system-design-interview)
+- [ ] [AWS certification](https://aws.amazon.com/certification)
+
+### Articles:
+- [x] [Helpful list of LeetCode Posts on System Design at Facebook, Google, Amazon, Uber, Microsoft](https://leetcode.com/discuss/interview-question/1140451/helpful-list-of-leetcode-posts-on-system-design-at-facebook-google-amazon-uber-microsoft)
+- [x] [My System Design Template](https://leetcode.com/discuss/career/229177/My-System-Design-Template)
+- [x] [Latency Numbers Every Programmer Should Know](https://colin-scott.github.io/personal_website/research/interactive_latency.html)
+- [x] [Real-time Messaging in Slack](https://slack.engineering/real-time-messaging)
+- [x] [How Discord Stores Billions of Messages](https://discord.com/blog/how-discord-stores-billions-of-messages)
+- [x] [How Discord Stores Trillions of Messages](https://discord.com/blog/how-discord-stores-trillions-of-messages)
+- [x] [Meta Onsite System Design Questions](https://leetcode.com/discuss/interview-experience/4428743/Meta-Onsite-System-Design-Questions)
+- [x] [A Senior Engineer's Guide to the System Design Interview](https://interviewing.io/guides/system-design-interview)
+- [x] [system-design-resources on github](https://github.com/InterviewReady/system-design-resources)
+- [x] [System design interview guide for Software Engineers](https://www.techinterviewhandbook.org/system-design/)
+- [x] [ByteByteGo Newsletter](https://blog.bytebytego.com/)
+- [ ] [System design primer on github](https://github.com/donnemartin/system-design-primer)
+
+### Books:
+- [x] [System Design Interview – An insider's Guide by Alex Xu](https://www.amazon.com/System-Design-Interview-insiders-Second/dp/B08CMF2CQF?tag=interior0d3-20)
+- [x] [Microservices patterns](https://microservices.io/patterns)
+- [x] [Microservices Patterns: With examples in Java by Chris Richardson](https://www.amazon.com/Microservices-Patterns-examples-Chris-Richardson/dp/1617294543?tag=interior0d3-20)
+- [ ] [Designing Data-Intensive Applications by Martin Kleppmann](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321?tag=interior0d3-20)
+- [ ] [Distributed Systems 4 by Maarten van Steen](https://www.amazon.com/Distributed-Systems-Maarten-van-Steen/dp/9081540637?tag=interior0d3-20)
+- [ ] [System Design Interview – An Insider's Guide Volume 2 by Alex Xu, Sahn Lam](https://www.amazon.com/System-Design-Interview-Insiders-Guide/dp/1736049119?tag=interior0d3-20)
+
+### Videos:
+- [x] [Most Tech Interview Prep is GARBAGE. (From a Principal Engineer at Amazon)](https://www.youtube.com/watch?v=0Z9RW_hhUT4&ab_channel=ALifeEngineered)
+- [x] [System Design Interview – An insider's Guide discussion](https://youtube.com/playlist?list=PLlghaO_0b1OcY4yfpwGUOcFlnU7LpIkhC&si=Y7OqweK6rEgtaZUw)
+- [x] [Videos System Design for Interviews and Beyond videos](https://www.youtube.com/c/SystemDesignInterview/videos) 
+- [x] [System design playlist #1 on Youtube](https://www.youtube.com/playlist?list=PLMCXHnjXnTnvo6alSjVkgxV-VH6EPyvoX)  
+- [x] [System design playlist #2 on Youtube](https://www.youtube.com/playlist?list=PLrtCHHeadkHp92TyPt1Fj452_VGLipJnL) 
+- [ ] [System design playlist #3 on Youtube](https://www.youtube.com/playlist?list=PLm6XThSMgu_FFth3WUNBKnz_1dG3BKdBn)
 
 ---
 
