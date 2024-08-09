@@ -174,7 +174,7 @@
   only a small portion of the keys need to be remapped. When a server is removed, the keys that were assigned to
   that server are evenly distributed among the remaining servers.
 
-![Consistent Hashing.png](./images/system.design/Consistent Hashing.png)
+![Consistent Hashing.png](./images/system.design/Consistent_Hashing.png)
 
 ---
 
