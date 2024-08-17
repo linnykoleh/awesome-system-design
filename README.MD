@@ -1,8 +1,9 @@
 # System Design - Personal notes from courses and articles
 
-## 📚Resources I used:
+## 📈 Resources:
 
-### Courses:
+### 💽 Courses:
+
 - [x] [System Design course on neetcode.io](https://neetcode.io)
 - [x] [System Design for Interviews and Beyond](https://leetcode.com/explore/interview/card/system-design-for-interviews-and-beyond)
 - [ ] [Highload Software Architecture on Projector](https://prjctr.com/course/highload-software-architecture)
@@ -10,7 +11,8 @@
 - [ ] [Grokking the System Design Interview](https://www.designgurus.io/course/grokking-the-system-design-interview)
 - [ ] [AWS certification](https://aws.amazon.com/certification)
 
-### Articles:
+### 📝 Articles:
+
 - [x] [Helpful list of LeetCode Posts on System Design at Facebook, Google, Amazon, Uber, Microsoft](https://leetcode.com/discuss/interview-question/1140451/helpful-list-of-leetcode-posts-on-system-design-at-facebook-google-amazon-uber-microsoft)
 - [x] [My System Design Template](https://leetcode.com/discuss/career/229177/My-System-Design-Template)
 - [x] [Latency Numbers Every Programmer Should Know](https://colin-scott.github.io/personal_website/research/interactive_latency.html)
@@ -24,7 +26,8 @@
 - [x] [ByteByteGo Newsletter](https://blog.bytebytego.com/)
 - [ ] [System design primer on github](https://github.com/donnemartin/system-design-primer)
 
-### Books:
+### 📚 Books:
+
 - [x] [System Design Interview – An insider's Guide by Alex Xu](https://www.amazon.com/System-Design-Interview-insiders-Second/dp/B08CMF2CQF?tag=interior0d3-20)
 - [x] [Microservices patterns](https://microservices.io/patterns)
 - [x] [Microservices Patterns: With examples in Java by Chris Richardson](https://www.amazon.com/Microservices-Patterns-examples-Chris-Richardson/dp/1617294543?tag=interior0d3-20)
@@ -32,7 +35,8 @@
 - [ ] [Distributed Systems 4 by Maarten van Steen](https://www.amazon.com/Distributed-Systems-Maarten-van-Steen/dp/9081540637?tag=interior0d3-20)
 - [ ] [System Design Interview – An Insider's Guide Volume 2 by Alex Xu, Sahn Lam](https://www.amazon.com/System-Design-Interview-Insiders-Guide/dp/1736049119?tag=interior0d3-20)
 
-### Videos:
+### 🎬 Videos:
+
 - [x] [Most Tech Interview Prep is GARBAGE. (From a Principal Engineer at Amazon)](https://www.youtube.com/watch?v=0Z9RW_hhUT4&ab_channel=ALifeEngineered)
 - [x] [System Design Interview – An insider's Guide discussion](https://youtube.com/playlist?list=PLlghaO_0b1OcY4yfpwGUOcFlnU7LpIkhC&si=Y7OqweK6rEgtaZUw)
 - [x] [Videos System Design for Interviews and Beyond videos](https://www.youtube.com/c/SystemDesignInterview/videos) 
@@ -41,6 +45,39 @@
 - [ ] [System design playlist #3 on Youtube](https://www.youtube.com/playlist?list=PLm6XThSMgu_FFth3WUNBKnz_1dG3BKdBn)
 
 ---
+
+## [A Senior Engineer's Guide to the System Design Interview](https://interviewing.io/guides/system-design-interview)
+
+### Part 1:
+
+- Do not panic!
+- Don’t think like a coder. Think like a Tech Lead.
+  - During the interview, you’ll spend an hour playing the role of a `Tech Lead`, so just pretend that the interviewer is a junior engineer who will be implementing your design.
+- There are no optimal solutions in system design interviews.
+- It’s your responsibility to leave breadcrumbs for the interviewer to `go where you want them to go`. That way you have them walk you down the road where you are at your best
+- You do not need to display deep expertise in the given problem domain. 
+- Interviewers want to see that you have a broad, base-level understanding of system design fundamentals.
+- Interviewers want to engage you in a back-and-forth conversation about problem constraints and parameters, so avoid making assumptions about the prompt.
+- Interviewers are not looking for specific answers with ironclad certainty. They want to see well-reasoned, qualified decisions based on engineering trade-offs.
+- Interviewers are not looking for a predefined path from the beginning to end of the problem. They want to see the unique direction your experience and decisions take them.
+- Interviewers seek a holistic view of a system and its users.
+- `Communicate honestly` about what you know and what you don’t.
+- For senior role, it’s a good sign if you direct more of the interview
+- A common failure point occurs when candidates don’t make decisions
+- Not being familiar with specific databases or other components is fine. Be smart and don’t say brand names just for the sake of saying them.
+  - _"I’m going to use Cassandra ..."_ unless you are VERY familiar with that, because the next question will be: _"Why Cassandra and not some_other_db?"_
+  - _"I will use Kafka ..."_ unless you’re prepared to explain how Kafka works. Don’t say _"I will use Kafka"_ unless you are prepared to talk about other types of queues, because they may ask you: _"Oh, Kafka, interesting choice. Why that instead of [some other queue]?"_
+
+### Part 2:
+
+- There’s no right way to design a system.
+
+### Part 3:
+
+### Part 4:
+
+---
+
 
 ## Universal patterns for building scalable systems:
 
@@ -209,13 +246,13 @@
 ![sys_design_blue_print_2.png](./images/system.design/sys_design_blue_print_2.png)
 
 
----
+[//]: # (## System Desing resources)
 
-## System Desing resources
-
-![dZEbZaT.png](./images/system.design/dZEbZaT.png)
+[//]: # (![dZEbZaT.png]&#40;./images/system.design/dZEbZaT.png&#41;)
 
 ---
+
+## System Design Basics
 
 ## Networking
 
