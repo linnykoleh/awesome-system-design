@@ -1,5 +1,42 @@
 # System Design - Personal notes from courses and articles
 
+## Navigation:
+
+- [Resources](#-resources)
+  - [Courses](#-courses)
+  - [Articles](#-articles)
+  - [Books](#-books)
+  - [Videos](#-videos)
+- [A Senior Engineer's Guide to the System Design Interview](#a-senior-engineers-guide-to-the-system-design-interview)
+  - [Part 1](#part-1)
+  - [Part 2](#part-2)
+  - [Part 3](#part-3)
+  - [Part 4](#part-4)
+- [Universal patterns for building scalable systems](#universal-patterns-for-building-scalable-systems)
+- [System requirements](#system-requirements)
+- [System Design template](#system-design-template)
+- [System Design Blueprint: The Ultimate Guide](#system-design-blueprint-the-ultimate-guide)
+- [System Design Basics](#system-design-basics)
+- [Networking](#networking)
+  - [TCP vs UDP](#tcp-vs-udp)
+  - [OSI Model](#osi-model)
+  - [DNS](#dns)
+  - [Network protocols](#network-protocols)
+- [CDN](#cdn)
+- [Proxies](#proxies)
+  - [Forward Proxy and Reverse Proxy](#forward-proxy-and-reverse-proxy)
+- [Load Balancing stategies](#load-balancing-stategies)
+- [Consistent Hashing](#consistent-hashing)
+- [Databases](#databases)
+  - [Relational Database](#relational-database)
+  - [NoSQL Database](#nosql-database)
+  - [SQL vs NoSQL](#sql-vs-nosql)
+  - [Replication](#replication)
+  - [Sharding](#sharding)
+  - [Cache](#cache)
+  - [Dedicated Cache](#dedicated-cache)
+  - 
+
 ## 📈 Resources:
 
 ### 💽 Courses:
@@ -328,7 +365,7 @@
 
 ![forward_proxy_vs_reverse_proxy-f_mobile.png](./images/system.design/forward_proxy_vs_reverse_proxy-f_mobile.png)
 
-### Load Balancing stategies
+## Load Balancing stategies
 
 - **Round Robin** - The simplest load balancing method. The load balancer cycles through the available servers, and
   each server handles an equal number of requests. If one of the servers goes down, the load balancer stops sending
@@ -352,7 +389,7 @@
 
 ![the-five-most-common-balancing-methods.jpg](./images/system.design/the-five-most-common-balancing-methods.jpg)
 
-### Consistent Hashing
+## Consistent Hashing
 
 - `Consistent hashing` is a special kind of hashing such that when a hash table is resized, only `K/n` keys need to
   be remapped on average, where `K` is the number of keys, and `n` is the number of slots. `Consistent hashing` is
@@ -503,7 +540,6 @@
     - `LRU Cache` - Least Recently Used Cache
     - `LFU Cache` - Least Frequently Used Cache
 
-
 - [Сaching strategies](https://codeahoy.com/2017/08/11/caching-strategies-and-how-to-choose-the-right-one):
     - `Cache-Aside` - The cache sits on the side and the application directly talks to both the cache and the database.
       There is no connection between the cache and the primary database. All operations to cache and the database are
@@ -541,7 +577,7 @@
       good for `write-heavy` workloads.
       ![cache_4.png](./images/system.design/cache_4.png)
 
-- **Deduplication cache**
+### Deduplication cache
 
 ![3.png](./images/system.design.3/3.png)
 
