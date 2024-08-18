@@ -8,10 +8,6 @@
   - [Books](#-books)
   - [Videos](#-videos)
 - [A Senior Engineer's Guide to the System Design Interview](#a-senior-engineers-guide-to-the-system-design-interview)
-  - [Part 1](#part-1)
-  - [Part 2](#part-2)
-  - [Part 3](#part-3)
-  - [Part 4](#part-4)
 - [Universal patterns for building scalable systems](#universal-patterns-for-building-scalable-systems)
 - [System requirements](#system-requirements)
 - [System Design template](#system-design-template)
@@ -34,8 +30,59 @@
   - [Replication](#replication)
   - [Sharding](#sharding)
   - [Cache](#cache)
-  - [Dedicated Cache](#dedicated-cache)
-  - 
+  - [Deduplication Cache](#deduplication-cache)
+  - [CAP Theorem](#cap-theorem)
+  - [PACELC Theorem](#pacelc-theorem)
+- [Numbers every programmer should know](#numbers-every-programmer-should-know)
+  - [Availability](#availability)
+- [System Design terms](#system-design-terms)
+  - [Edge computing](#edge-computing)
+  - [Bloom filter](#bloom-filter)
+  - [Message delivery guarantees](#message-delivery-guarantees)
+  - [Autoscaling](#autoscaling)
+  - [How to avoid cascading failures in a distributed system](#how-to-avoid-cascading-failures-in-a-distributed-system)
+  - [Region vs Availability Zone](#region-vs-availability-zone)
+- [System Design Interview Questions](#system-design-interview-questions)
+  - [Design Rate Limiter #1](#design-rate-limiter-1)
+  - [Desing Consistent hashing](#desing-consistent-hashing)
+  - [Desing a key-value store](#desing-a-key-value-store)
+  - [Desing a unique ID generator in distributed systems](#desing-a-unique-id-generator-in-distributed-systems)
+  - [Design a URL shortening service like TinyURL](#design-a-url-shortening-service-like-tinyurl)
+  - [Design a web crawler](#design-a-web-crawler)
+  - [Design a notification system #1](#design-a-notification-system-1)
+  - [Design a news feed system](#design-a-news-feed-system)
+  - [Design a chat system](#design-a-chat-system)
+  - [Desing a search autocomplete system](#desing-a-search-autocomplete-system)
+  - [Desing video sharing service](#desing-video-sharing-service)
+  - [Design a google drive](#design-a-google-drive)
+  - [Distributed Message Queue](#distributed-message-queue)
+  - [Desing a notification service #2](#desing-a-notification-service-2)
+  - [Design Rate Limiter #2](#design-rate-limiter-2)
+  - [Design a distributed cache system](#design-a-distributed-cache-system)
+  - [Top K Problem #2](#top-k-problem-2)
+  - [Desing a system to count videos views](#desing-a-system-to-count-videos-views)
+  - [URL shortening system questions about system](#url-shortening-system-questions-about-system)
+  - [Fraud detection system](#fraud-detection-system)
+  - [Authentication and authorization system](#authentication-and-authorization-system)
+  - [Monitoring system](#monitoring-system)
+  - [Design TicTok/Instagram reels system](#design-tictokinstagram-reels-system)
+  - [Online Judge for coding contests](#online-judge-for-coding-contests)
+  - [Design an Amazon S3 or Object Storage](#design-an-amazon-s3-or-object-storage)
+  - [Design a Dropbox](#design-a-dropbox)
+  - [Design Reddit home page feed](#design-reddit-home-page-feed)
+  - [Design Parking Garage](#design-parking-garage)
+  - [Design TicTok #2](#design-tictok)
+  - [Design Facebook Messenger](#design-facebook-messenger)
+  - [Design Instagram](#design-instagram)
+  - [Design Amazon Kindle Payments](#design-amazon-kindle-payments)
+  - [Design Amazon Prime Video](#design-amazon-prime-video)
+  - [Downloading User Data](#downloading-user-data)
+  - [Design Calendar data entities mapping](#design-calendar-data-entities-mapping)
+  - [Twitter API](#twitter-api)
+- [Cloud design patterns](#cloud-design-patterns)
+- [Five common system design interview mistakes](#five-common-system-design-interview-mistakes)
+
+---
 
 ## 📈 Resources:
 
@@ -638,7 +685,7 @@
     - Compress data before sending it over the internet if possible.
     - Data centers are usually in different regions, and it takes time to send data between them.
 
-#### Availability
+### Availability
 
 ![numbers_4.png](./images/system.design/numbers_4.png)
 
@@ -653,6 +700,8 @@
   cloud and moving those processes to local places, such as on a user’s computer, an IoT device, or an edge server.
   Bringing computation to the network’s edge minimizes the amount of long-distance communication that has to happen
   between a client and server.
+
+---
 
 ### Bloom filter
 
@@ -2903,9 +2952,7 @@ The fanout service works as follows:
 
 ---
 
-### Design an Amazon S3 or Object Storage
-
-- https://www.youtube.com/watch?v=vTPR6fIgC-I&ab_channel=CrushingTechEducation
+## Design an Amazon S3 or Object Storage
 
 #### Upload
 
@@ -2917,9 +2964,7 @@ The fanout service works as follows:
 
 ---
 
-### Design a Dropbox
-
-- https://www.youtube.com/watch?v=lamooN_E5aY&ab_channel=CrushingTechEducation
+## Design a Dropbox
 
 ![Design a Dropbox.png](./images/system.design.3/Design_a_Dropbox.png)
 
