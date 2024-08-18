@@ -1,13 +1,11 @@
 # System Design - Personal notes from courses and articles
 
-```docker
-- Author is not a system design expert, but a software engineer who is passionate about learning and sharing knowledge.
-- This is a collection of personal notes from various courses, articles, and books on system design. 
-- The goal is to share a comprehensive guide to system design that can be used as a reference for interviews and real-world projects.
-- The notes are organized by topics and include diagrams, code snippets, and examples to help understand the concepts better.
-- The notes are a work in progress and will be updated regularly with new information and resources.
-- Feel free to contribute to the notes by adding new topics, examples, or corrections.
-```
+> - Author is not a system design expert, but a software engineer who is passionate about learning and sharing knowledge.
+> - This is a collection of personal notes from various courses, articles, and books on system design. 
+> - The goal is to share a comprehensive guide to system design that can be used as a reference for interviews and real-world projects.
+> - The notes are organized by topics and include diagrams, code snippets, and examples to help understand the concepts better.
+> - The notes are a work in progress and will be updated regularly with new information and resources.
+> -- Feel free to contribute to the notes by adding new topics, examples, or corrections.
 
 ## 📈 Resources:
 
@@ -54,7 +52,7 @@
 - [ ] [System design playlist #3 on Youtube](https://www.youtube.com/playlist?list=PLm6XThSMgu_FFth3WUNBKnz_1dG3BKdBn)
 
 
-## 🌐Navigation:
+## 🌐 Navigation:
 
 - [A Senior Engineer's Guide to the System Design Interview](#a-senior-engineers-guide-to-the-system-design-interview)
 - [Universal patterns for building scalable systems](#universal-patterns-for-building-scalable-systems)
