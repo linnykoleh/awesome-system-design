@@ -51,38 +51,36 @@
 - [x] [System design playlist #2 on Youtube](https://www.youtube.com/playlist?list=PLrtCHHeadkHp92TyPt1Fj452_VGLipJnL)
 - [ ] [System design playlist #3 on Youtube](https://www.youtube.com/playlist?list=PLm6XThSMgu_FFth3WUNBKnz_1dG3BKdBn)
 
-
 ## 🌐 Navigation:
 
 - [A Senior Engineer's Guide to the System Design Interview](#a-senior-engineers-guide-to-the-system-design-interview)
-- [Universal patterns for building scalable systems](#universal-patterns-for-building-scalable-systems)
 - [System requirements](#system-requirements)
 - [System Design template](#system-design-template)
 - [System Design Blueprint: The Ultimate Guide](#system-design-blueprint-the-ultimate-guide)
+- [Universal patterns for building scalable systems](#universal-patterns-for-building-scalable-systems)
 - [System Design Basics](#system-design-basics)
-- [Networking](#networking)
-  - [TCP vs UDP](#tcp-vs-udp)
-  - [OSI Model](#osi-model)
-  - [DNS](#dns)
-  - [Network protocols](#network-protocols)
-- [CDN](#cdn)
-- [Proxies](#proxies)
-  - [Forward Proxy and Reverse Proxy](#forward-proxy-and-reverse-proxy)
-- [Load Balancing stategies](#load-balancing-stategies)
-- [Consistent Hashing](#consistent-hashing)
-- [Databases](#databases)
-  - [Relational Database](#relational-database)
-  - [NoSQL Database](#nosql-database)
-  - [SQL vs NoSQL](#sql-vs-nosql)
-  - [Replication](#replication)
-  - [Sharding](#sharding)
-  - [Cache](#cache)
-  - [Deduplication Cache](#deduplication-cache)
-  - [CAP Theorem](#cap-theorem)
-  - [PACELC Theorem](#pacelc-theorem)
-- [Numbers every programmer should know](#numbers-every-programmer-should-know)
-  - [Availability](#availability)
-- [System Design terms](#system-design-terms)
+  - [Networking](#networking)
+    - [TCP vs UDP](#tcp-vs-udp)
+    - [OSI Model](#osi-model)
+    - [DNS](#dns)
+    - [Network protocols](#network-protocols)
+  - [CDN](#cdn)
+  - [Proxies](#proxies)
+    - [Forward Proxy and Reverse Proxy](#forward-proxy-and-reverse-proxy)
+  - [Load Balancing stategies](#load-balancing-stategies)
+  - [Consistent Hashing](#consistent-hashing)
+  - [Databases](#databases)
+    - [Relational Database](#relational-database)
+    - [NoSQL Database](#nosql-database)
+    - [SQL vs NoSQL](#sql-vs-nosql)
+    - [Replication](#replication)
+    - [Sharding](#sharding)
+    - [Cache](#cache)
+    - [Deduplication Cache](#deduplication-cache)
+    - [CAP Theorem](#cap-theorem)
+    - [PACELC Theorem](#pacelc-theorem)
+  - [Numbers every programmer should know](#numbers-every-programmer-should-know)
+    - [Availability](#availability)
   - [Edge computing](#edge-computing)
   - [Bloom filter](#bloom-filter)
   - [Message delivery guarantees](#message-delivery-guarantees)
@@ -160,13 +158,6 @@
 ### Part 3:
 
 ### Part 4:
-
----
-
-
-## Universal patterns for building scalable systems:
-
-![common.png](images/common.png)
 
 ---
 
@@ -329,6 +320,12 @@
 ![sys_design_blue_print.png](./images/system.design/sys_design_blue_print_1.png)
 
 ![sys_design_blue_print_2.png](./images/system.design/sys_design_blue_print_2.png)
+
+---
+
+## Universal patterns for building scalable systems:
+
+![common.png](images/common.png)
 
 
 [//]: # (## System Desing resources)
@@ -656,8 +653,6 @@
   reads, even though it might return `stale` data. For writes, `n1` and `n2` will keep accepting writes,
   and data will be synced to `n3` when the network partition is resolved.
 
-![key_value_store_1.png](./images/system.design/key_value_store_1.png)
-
 ### PACELC Theorem
 
 ![PACELC-theorem-diagram-1.webp](./images/system.design/PACELC-theorem-diagram-1.webp)
@@ -692,9 +687,7 @@
 
 ---
 
-## System Design terms
-
-### Edge computing
+## Edge computing
 
 - `Edge computing` is a networking philosophy focused on bringing computing as close to the source of data as possible
   in order to reduce latency and bandwidth use. In simpler terms, edge computing means running fewer processes in the
@@ -704,7 +697,7 @@
 
 ---
 
-### Bloom filter
+## Bloom filter
 
 - `Bloom filter` is a space-efficient probabilistic data structure, that is used to test whether an element is a member
   of a set.
@@ -717,7 +710,7 @@
 
 ---
 
-### Message delivery guarantees
+## Message delivery guarantees
 
 - At-most-once guarantee
 - At-least-once guarantee
@@ -727,13 +720,13 @@
 
 ![At-most-once-guarantee.png](./images/system.design.3/At-most-once-guarantee.png)
 
-![At-least-once guarantee.png](./images/system.design.3/At-least-once guarantee.png)
+![At-least-once guarantee.png](./images/system.design.3/At-least-once-guarantee.png)
 
-![Exactly-once guarantee.png](./images/system.design.3/Exactly-once guarantee.png)
+![Exactly-once guarantee.png](./images/system.design.3/Exactly-once-guarantee.png)
 
 ---
 
-### Autoscaling
+## Autoscaling
 
 - Scaling policies (metric-based, schedule-based, predictive)
 
@@ -741,7 +734,7 @@
 
 ---
 
-### How to avoid cascading failures in a distributed system
+## How to avoid cascading failures in a distributed system
 
 ![cascading_failures_in_distributed_system.png](./images/system.design.3/cascading_failures_in_distributed_system.png)
 
