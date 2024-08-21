@@ -31,6 +31,7 @@
 - [x] [system-design-resources on github](https://github.com/InterviewReady/system-design-resources)
 - [x] [System design interview guide for Software Engineers](https://www.techinterviewhandbook.org/system-design/)
 - [x] [ByteByteGo Newsletter](https://blog.bytebytego.com/)
+- [ ] [Learn System Design in a Hurry](https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction)
 - [ ] [System design primer on github](https://github.com/donnemartin/system-design-primer)
 
 ### 📚 Books:
