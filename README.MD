@@ -1,11 +1,10 @@
 # System Design - Personal notes from courses and articles
 
-> - Author is not a system design expert, but a software engineer who is passionate about learning and sharing knowledge.
+> - Author is not a super turbo system design expert, but a software engineer who is passionate about learning and sharing knowledge.
 > - This is a collection of personal notes from various courses, articles, and books on system design. 
 > - The goal is to share a comprehensive guide to system design that can be used as a reference for interviews and real-world projects.
 > - The notes are organized by topics and include diagrams, code snippets, and examples to help understand the concepts better.
 > - The notes are a work in progress and will be updated regularly with new information and resources.
-> -- Feel free to contribute to the notes by adding new topics, examples, or corrections.
 
 ## 📈 Resources:
 
@@ -156,6 +155,12 @@
 ### Part 2:
 
 - There’s no right way to design a system.
+- If the interviewer interrupts you, it's probably because you’re going off track.
+- It’s fine if the interviewer asks you questions, but it’s a bad sign if the interviewer starts telling you how to do things.
+- It's more important to cover everything broadly than it is to explain every small thing in detail.
+- Whatever decision you make, explain why. In a system design interview, why is more important than what. For anything you say, be prepared to explain why.
+- Mock interviews with different types of interviewers are `the best solution we’ve found to refining your communication skills`, or working with a dedicated coach who can get to know you (and your areas of expertise and improvement) very well.
+- There is no strictly wrong answer for which database to use, as long as you can justify yourself and demonstrate an understanding of the alternative options.
 
 ### Part 3:
 
@@ -457,7 +462,7 @@
 
 ## Databases
 
-### Relational Database
+### SQL Database
 
 - `Relational database` is a database that stores and provides access to data points that are related to one another.
   Relational databases are based on the relational model, an intuitive, straightforward way of representing data in
@@ -479,6 +484,14 @@
       that transaction has been completed.
     - **Durability** - Durability ensures that once a transaction has been committed, it will remain so, even in the
       event of power loss, crashes, or errors.
+- `Advantages of SQL Databases`:
+    - SQL offers more powerful querying out of the box
+    - SQL has stronger ACID guarantees out of the box
+- `Disadvantages of SQL Databases`:
+    - B-Trees, used in SQL DBs, are slower to write into
+    - Strong consistency is expensive to reduce latency for
+    - SQL does *not* work well for mixed schema data
+    - SQL databases are hard to scale horizontally
 
 ### NoSQL Database
 
@@ -493,18 +506,17 @@
     - **Soft state** - The state of the system may change over time.
     - **Eventual consistency** - The system will become consistent over a period of time.
     - **Consistency** - The system will become consistent over a period of time.
-- NoSQL pros:
-    - When a lot of Inserts and Reads
+- `Advantages of NoSQL Database`:
+    - NoSQL is faster for writes but slower to query.
+      - `Log-structured merge tree` is much faster for writes since you don't do anything to maintain structure when you add to it
+    - NoSQL has sharding and scaling out of the box
     - Shema is easily changeable
-    - Build for scale
-    - Build for aggregations
 
-- NoSQL cons:
-    - Not build for updates
-    - ACID not guaranteed
-    - Cannot have transactions
-    - Joins are hard
-    - Difference between SQL and NoSQL
+- `Disadvantages of NoSQL Database`:
+  - NoSQL databases are more limited in the types of efficient queries that can be done
+  - They are less suitable for circumstances where strong consistency is required,
+  - Cannot have transactions
+  - Joins are hard
 
 ### SQL vs NoSQL
 
@@ -513,6 +525,8 @@
 ![04fig04_alt.jpg](./images/system.design/04fig04_alt.jpg)
 
 ![photo_2023-02-15_09-50-11.jpg](./images/system.design/photo_2023-02-15_09-50-11.jpg)
+
+![simple-map-for-db.png](images/system.design.4/simple-map-for-db.png)
 
 ### Replication
 
@@ -546,6 +560,8 @@
 ![leader leader replication.png](./images/system.design.4/leader_leader_replication.png)
 
 ### Sharding
+
+![sharding.png](images/system.design.4/sharding.png)
 
 - `Sharding` is the process of storing the same data set in multiple databases. Sharding is used to increase
   scalability and performance of databases. It is also used to distribute data geographically so that it can be
