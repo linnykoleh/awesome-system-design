@@ -65,6 +65,7 @@
     - [DNS](#dns)
     - [Network protocols](#network-protocols)
   - [CDN](#cdn)
+  - [Security](#security)
   - [Proxies](#proxies)
     - [Forward Proxy and Reverse Proxy](#forward-proxy-and-reverse-proxy)
   - [Load Balancing stategies](#load-balancing-stategies)
@@ -396,6 +397,42 @@
 
 ---
 
+## Security
+
+- `Authentication` - figuring out who you're talking to
+- `Authorization` - figuring out what they're allowed to do
+- `Secure password storage` is the use of a cryptographic hash function to store passwords in a way that makes it difficult
+  for an attacker to recover the original password.
+
+![security_1.png](images/system.design.4/security_1.png)
+
+![security_2.png](images/system.design.4/security_2.png)
+
+- `Salting` is the process of adding a random string of characters to a password before hashing it. This makes it more
+  difficult for an attacker to crack the password using a precomputed hash table or rainbow table.
+- `Session Tokens` are used to authenticate users and authorize access to resources. A session token is a unique string
+  of characters that is generated when a user logs in and is stored in a cookie or in the URL. The session token is
+  sent with each request to the server to identify the user and authorize access to resources.
+  - Session tokens should also come with an expiration date, as short as feasible.
+  - Session token is equivalent to a password, so it should be stored securely.
+- `JSON Web Tokens` (JWT) are a standard for representing claims securely between two parties. JWTs are signed using a
+  secret key or a public/private key pair, which makes them secure and tamper-proof. JWTs can be used to authenticate
+  users and authorize access to resources.
+
+![security_3.png](images/system.design.4/security_3.png)
+
+- `Cookies` - by storing a session token or JWT in a cookie, we can ensure that all subsequent requests will include it and allow the server to validate the current user session.
+
+### Summary of web authentication and basic security
+
+1. The user signs up. At this point, we need to salt and hash their password and store those values (but not the password itself!).
+2. The user logs in with their username and password. We verify the password by hashing it with the stored salt and checking to see if it matches the stored hash (ideally using a secure library to make the comparison). We then send some kind of identifying token, either a simple session token or a JWT or similar token, back to the client in a cookie set header.
+3. On subsequent requests, the browser sends the cookie back to the server, where we can verify the session token or check the signature on/decrypt a JWT.
+4. Periodically, the session token or JWT should be expired and a new one generated and sent down to the client with a cookie set header.
+5. Eventually, the user's session may expire from inactivity. In this case, we go back to step 2.
+
+---
+
 ## Proxies
 
 ### Forward Proxy and Reverse Proxy
@@ -646,7 +683,7 @@
 
 ### CAP Theorem
 
-- `CAP theorem` states that it is impossible for a distributed data store to simultaneously provide more than two
+- `CAP theorem` states that it is impossible for a distributed data store to simultaneously provide `more than two`
   out of the following three guarantees:
     - **Consistency** - Every read receives the most recent write or an error.
     - **Availability** - Every request receives a (non-error) response, without the guarantee that it contains the
@@ -670,6 +707,8 @@
 - If we choose `availability` over `consistency` (`AP` system), the system keeps accepting
   reads, even though it might return `stale` data. For writes, `n1` and `n2` will keep accepting writes,
   and data will be synced to `n3` when the network partition is resolved.
+
+For some systems like financial systems, consistency is very important. For others like TikTok, where it is OK if some users get access to certain videos later than the rest, we try to aim for availability over consistency. Even in these cases, we want our system to eventually have the same view of the data. And that is called eventual consistency, where systems become consistent eventually, if not immediately.
 
 ### PACELC Theorem
 
