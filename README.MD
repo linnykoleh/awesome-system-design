@@ -1,6 +1,5 @@
-# System Design - Personal notes from courses and articles
+# Awesome System Design 
 
-> - Author is not a super turbo system design expert, but a software engineer who is passionate about learning and sharing knowledge.
 > - This is a collection of personal notes from various courses, articles, and books on system design. 
 > - The goal is to share a comprehensive guide to system design that can be used as a reference for interviews and real-world projects.
 > - The notes are organized by topics and include diagrams, code snippets, and examples to help understand the concepts better.
