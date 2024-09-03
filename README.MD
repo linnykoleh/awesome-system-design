@@ -3331,7 +3331,7 @@ Response:
 
 ## Design Instagram #2
 
-![instagram.svg](images/system.design.5/instagram.svg)
+![instagram.svg](images/system.design.5/instagram.png)
 
 ---
 
