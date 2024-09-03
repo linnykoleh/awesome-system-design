@@ -125,6 +125,7 @@
   - [Design Calendar data entities mapping](#design-calendar-data-entities-mapping)
   - [Twitter API](#twitter-api)
   - [Design architecture for Instagram likes and comments](#design-architecture-for-instagram-likes-and-comments)
+  - [Design instagram #2](#design-instagram-2)
 - [Cloud design patterns](#cloud-design-patterns)
 - [Five common system design interview mistakes](#five-common-system-design-interview-mistakes)
 
@@ -3327,6 +3328,12 @@ Response:
 4. In case of a 10x read increase, we can use `Cache` to store the most frequently accessed data. This will reduce the load on the database and improve the response time.
 
 --- 
+
+## Design Instagram #2
+
+![instagram.svg](images/system.design.5/instagram.svg)
+
+---
 
 ## Cloud design patterns
 
