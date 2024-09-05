@@ -70,10 +70,12 @@
   - [Load Balancing stategies](#load-balancing-stategies)
   - [Consistent Hashing](#consistent-hashing)
   - [Databases](#databases)
-    - [Relational Database](#relational-database)
+    - [Relational Database](#sql-database)
+      - [Indexing](#indexing)
     - [NoSQL Database](#nosql-database)
     - [SQL vs NoSQL](#sql-vs-nosql)
     - [Replication](#replication)
+    - [Quorum](#quorum)
     - [Sharding](#sharding)
     - [Cache](#cache)
     - [Deduplication Cache](#deduplication-cache)
@@ -530,6 +532,16 @@
     - SQL does *not* work well for mixed schema data
     - SQL databases are hard to scale horizontally
 
+#### Indexing
+
+- `B-trees` are self-adjusting trees that can achieve multilevel indexing. They are a generalized form of Binary Search Trees. The data is stored in sorted order in the B-trees. B-tree achieves the efficient utilization of space in nodes, along with keeping the height of the tree small.
+
+![b-tree.png](images/system.design.5/b-tree.png)
+
+- `B+ trees` are an extension of B-trees. The major differences in the data structure are:
+  - Only the leaf nodes store the record or reference to the record.
+  - All the leaf nodes are connected to form a linked list. This enables sequential access along with direct access.
+
 ### NoSQL Database
 
 - `NoSQL database` is a database that stores and provides access to data that does not have a predefined data
@@ -567,6 +579,10 @@
 
 ### Replication
 
+- Some key terms to understand for `replication`:
+  - `Replica`: Copy of data 
+  - `Leader`: Machine that handles write requests to the data store. 
+  - `Followers`: Machines that are replicas of the leader node, and cater to read requests.
 - `Replication` is the process of copying data from one database to another. Replication is used to increase
   availability and reliability of data. It is also used to distribute data geographically so that it can be
   accessed locally from various places.
@@ -595,6 +611,22 @@
 ![replication_3.png](./images/system.design/replication_3.png)
 
 ![leader leader replication.png](./images/system.design.4/leader_leader_replication.png)
+
+### Quorum
+
+- `Quorum` refers to a mechanism used to ensure consistency and availability of data in distributed systems. It is commonly used in databases with replication, such as Cassandra, MongoDB, or systems that implement consensus protocols like Paxos or Raft.
+- The basic idea behind Quorum is that for an operation (such as a write or read) to be considered successful, a majority of replicas in the system must agree. The number of replicas required for the operation to succeed is known as the quorum.
+- `Quorum Read`: If you have 5 replicas, and 3 of them must return the latest data for the read to be considered successful, this is called a quorum read.
+- `Quorum Write`: For a write operation to be successful, it must be acknowledged by a majority of replicas.
+- Quorum ensures that any read will always retrieve the most up-to-date replica. The general formula is:
+  - `W + R > N`:
+    - `W` — the number of replicas to which a write operation must be applied (write quorum).
+    - `R` — the number of replicas from which a read operation must be successful (read quorum).
+    - `N` — the total number of replicas.
+- Advantages of using Quorum:
+  - `High availability`: The system can continue to operate even if some replicas are unavailable.
+  - `Consistency`: Data remains consistent across the majority of replicas.
+  - `Scalability`: It is easier to scale the number of replicas in distributed systems.
 
 ### Sharding
 
@@ -636,9 +668,12 @@
 - `Cache` is a temporary storage area for data that is accessed very frequently. It is used to increase the
   performance of data retrieval operations. It is also used to reduce the load on the database by storing
   frequently-accessed data in the cache.
-- Types:
+- Types (_It’s a good practice to include a brief point about cache invalidation during system design interviews_):
     - `LRU Cache` - Least Recently Used Cache
     - `LFU Cache` - Least Frequently Used Cache
+- Generally, caching is used for read-heavy systems.
+
+![cache.png](images/system.design.5/cache.png)
 
 - [Сaching strategies](https://codeahoy.com/2017/08/11/caching-strategies-and-how-to-choose-the-right-one):
     - `Cache-Aside` - The cache sits on the side and the application directly talks to both the cache and the database.
