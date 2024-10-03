@@ -31,6 +31,7 @@
 - [x] [ByteByteGo Newsletter](https://blog.bytebytego.com/)
 - [ ] [Learn System Design in a Hurry](https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction)
 - [ ] [System design primer on github](https://github.com/donnemartin/system-design-primer)
+- [ ] [How Figma’s databases team lived to tell the scale](https://www.figma.com/blog/how-figmas-databases-team-lived-to-tell-the-scale)
 
 ### 📚 Books:
 
@@ -43,12 +44,13 @@
 
 ### 🎬 Videos:
 
-- [x] [Most Tech Interview Prep is GARBAGE. (From a Principal Engineer at Amazon)](https://www.youtube.com/watch?v=0Z9RW_hhUT4&ab_channel=ALifeEngineered)
+- [x] [!!! Most Tech Interview Prep is GARBAGE. (From a Principal Engineer at Amazon)](https://www.youtube.com/watch?v=0Z9RW_hhUT4&ab_channel=ALifeEngineered)
 - [x] [System Design Interview – An insider's Guide discussion](https://youtube.com/playlist?list=PLlghaO_0b1OcY4yfpwGUOcFlnU7LpIkhC&si=Y7OqweK6rEgtaZUw)
 - [x] [Videos System Design for Interviews and Beyond videos](https://www.youtube.com/c/SystemDesignInterview/videos)
 - [x] [System design playlist #1 on Youtube](https://www.youtube.com/playlist?list=PLMCXHnjXnTnvo6alSjVkgxV-VH6EPyvoX)
 - [x] [System design playlist #2 on Youtube](https://www.youtube.com/playlist?list=PLrtCHHeadkHp92TyPt1Fj452_VGLipJnL)
 - [ ] [System design playlist #3 on Youtube](https://www.youtube.com/playlist?list=PLm6XThSMgu_FFth3WUNBKnz_1dG3BKdBn)
+- [ ] [System design mock interviews](https://www.youtube.com/playlist?list=PLf3F6FcQwgqEpnucyupbIqzxyvFOz9uDq)
 
 ## 🌐 Navigation:
 
@@ -167,7 +169,29 @@
 
 ### Part 3:
 
+- You should start with the functional requirements first—that is, the core product features and use cases that the system needs to support.
+- What makes these questions difficult or complicated is not the fact that they are inherently complicated. It's because the interviewer intentionally chooses to withhold information. Information that you can only get if you ask the right questions.
+- Treat the system as a black box. No thinking about design, implementation, or pretty much anything technical. The sole goal of this first step is to specify what needs to be built. Not how. Not the scale. Focus on the “what.”
+- Consider mutability.  Can tweets be edited after they’re published? Can tweets be deleted?
+- Your interviewer cares less about your decisions, and more about whether you are able to talk about the trade-offs (positives and negatives) of your decisions
+- We measure availability by the percentage of the time the system is up and running. A common goal is to aim for five nines, i.e., 99.999% availability—that’s less than 6 minutes of downtime a year.
+- Whenever there is user-generated code execution involved (aka low trust code), running it in isolation should be a non-functional security requirement.
+- Want speed, use a cache. Want availability, put in some redundancy. Want fast reads to db, use a read replica. Want fast writes to db, use sharding.
+- Consider using caching when all three of these are true:
+  - Computing the result is costly
+  - Once computed, the result tends to not change very often (or at all)
+  - The objects we are caching are read often
+
 ### Part 4:
+
+- System Design problems are almost always easier in the immutable case (compared to the mutable one).
+- `How to Get Yourself Unstuck – Tip #1` - To simplify the problem, think about the data in the problem as immutable. You can choose to add mutability back in later after you have an initial working design.
+- `How to Get Yourself Unstuck – Tip #2` - Ask your interviewer: “Are there any important requirements you have in mind that I’ve overlooked?”
+- `How to Get Yourself Unstuck – Tip #3` - Ask your interviewer if they’d like to see some calculations before jumping in and starting them—you might be able to skip these entirely if the interviewer doesn’t care about it!
+- `How to Get Yourself Unstuck – Tip #4` - Follow these rough guides to get the basic estimates for any system
+  - `Storage` Estimation: Storage = daily data used by 1 user * DAU count * length of time to store data
+  - `Bandwidth` Estimation: Bandwidth per second = (daily data used by 1 user * DAU count ) / total seconds in a day
+- `How to Get Yourself Unstuck – Tip #5` - “Would it be fine if the data in my system was occasionally wrong for a split second or so?” If the answer is yes, then you probably want eventual consistency. If the answer is no, then you’re looking for a strong type of consistency called linearizability.
 
 ---
 
@@ -179,7 +203,7 @@
     - How the system will be used
     - Platform (Mobile, Web, Desktop)
 - **𝐍𝐨𝐧 𝐅𝐮𝐧𝐜𝐭𝐢𝐨𝐧𝐚𝐥 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬**
-    - `High availability` system uptime in percentage
+    - `High availability` system uptime in percentage (Service Level Agreements or SLAs)
         - 99 % => 3.65 days of downtime per year
         - 99.9% => 8.76 hours of downtime per year
         - 99.99% => 52 minutes 35 seconds of downtime per year
