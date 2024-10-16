@@ -29,6 +29,8 @@
 - [x] [system-design-resources on github](https://github.com/InterviewReady/system-design-resources)
 - [x] [System design interview guide for Software Engineers](https://www.techinterviewhandbook.org/system-design/)
 - [x] [ByteByteGo Newsletter](https://blog.bytebytego.com/)
+- [x] [Netflix’s interview process and questions](https://interviewing.io/guides/hiring-process/netflix)
+- [x] [How software engineering behavioral interviews are evaluated at Meta](https://interviewing.io/blog/how-software-engineering-behavioral-interviews-are-evaluated-meta)
 - [ ] [Learn System Design in a Hurry](https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction)
 - [ ] [System design primer on github](https://github.com/donnemartin/system-design-primer)
 - [ ] [How Figma’s databases team lived to tell the scale](https://www.figma.com/blog/how-figmas-databases-team-lived-to-tell-the-scale)
