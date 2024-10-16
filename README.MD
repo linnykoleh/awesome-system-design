@@ -12,6 +12,7 @@
 - [x] [System Design course on neetcode.io](https://neetcode.io)
 - [x] [System Design for Interviews and Beyond](https://leetcode.com/explore/interview/card/system-design-for-interviews-and-beyond)
 - [ ] [Highload Software Architecture on Projector](https://prjctr.com/course/highload-software-architecture)
+- [ ] [Learn System Design in a Hurry](https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction)
 - [ ] [System Design Simplified on interviewready.io](https://interviewready.io/course-page/system-design-course)
 - [ ] [Grokking the System Design Interview](https://www.designgurus.io/course/grokking-the-system-design-interview)
 - [ ] [AWS certification](https://aws.amazon.com/certification)
