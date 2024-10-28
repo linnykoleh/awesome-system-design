@@ -94,6 +94,7 @@
   - [Autoscaling](#autoscaling)
   - [How to avoid cascading failures in a distributed system](#how-to-avoid-cascading-failures-in-a-distributed-system)
   - [Region vs Availability Zone](#region-vs-availability-zone)
+  - [Resource monitoring](#resource-monitoring)
 - [System Design Interview Questions](#system-design-interview-questions)
   - [Design Rate Limiter #1](#design-rate-limiter-1)
   - [Desing Consistent hashing](#desing-consistent-hashing)
@@ -873,6 +874,78 @@ For some systems like financial systems, consistency is very important. For othe
 
 ![region_availability_zone_2.png](./images/system.design.4/region_availability_zone_2.png)
 
+---
+
+## Resource monitoring
+
+### Metrics
+
+###### Load average
+
+- `LA` is a measure of the amount of computational work that a computer system performs. The load average represents the average system load over a period of time
+- System Load average is the average number of processes either in a `runnable` or `uninterruptible` sleep state
+- Normal when it less than amount of CPU cores, e.g.
+    - 8 core CPU, load average is 8 this is ok
+    - 1 core CPU, load average is 8 this is bad
+
+![2.png](images/system.design.6/2.png)
+
+###### RAM usage
+
+- Running out of RAM indicates that the server is under severe load and application performance will almost certainly be noticeable to end users.
+- Database uses RAM for load `indexes` and cache data
+
+![3.png](images/system.design.6/3.png)
+
+###### SWAP usage
+
+- Swap is a space on a disk that is used when the amount of physical RAM memory is full. When a Linux system runs out of RAM, inactive pages are moved from the RAM to the swap space.
+- When available RAM is short or totally maxed out, Linux moves data from RAM to SWAP. 
+- High SWAP usage means that you don’t have enough RAM
+- Server might reboot if you will run out of SWAP
+
+###### Disc usage
+
+- Track current disk space used
+- Monitor `Docker` images (prune unused images)
+- Monitor logs if they are stored on the disk, because HDD is slower than this is the slower part of the system
+
+![4.png](images/system.design.6/4.png)
+
+###### CPU usage
+
+- `Idle` - idle task - when nothing to do
+- `User` - running user space processes
+- `System` - running the kernel
+- `Iowait` - idle, while system making disk I/O request (_if this is high, it means that the disk is not enough, need to look at IO requests to HDD_)
+- `Steal` - virtual CPU waits for a real CPU while the hypervisor is servicing another virtual processor
+- `Softirq` - processor swtches context
+- `Nice`  - users' priority processes that have been `niced`
+
+![1.png](images/system.design.6/1.png)
+
+### Monitoring systems
+
+- `Agents` - Software on every machine for collecting and reporting metrics and events
+  - Telegraf
+  - Zabbix
+- `Storages` - Database with metrics and events
+   - InfluxDB
+   - ElasticSearch
+   - Graphite
+   - MySQL
+   - Zabbix Server
+   - Prometheus
+- `Dashboards` - Visualization of metrics and events
+   - Grafana
+   - Kibana
+   - Zabbix Frontend
+   - Datadog
+
+### Systems
+
+- `TIG` - Telegraf, InfluxDB, Grafana
+- `ELK` - ElasticSearch, Logstash, Kibana
 
 --- 
 
