@@ -973,7 +973,6 @@ For some systems like financial systems, consistency is very important. For othe
   - **Spike Testing** - Spike testing is a stress testing approach that involves `simulating sudden spikes` in user activity or load on a system or application. Spike testing is used to evaluate the behavior of the system `under sudden and unexpected increases` in traffic, such as during a marketing campaign or product launch
   - **Endurance Testing** - Endurance testing is a stress testing approach that involves `measuring the performance` of a system or application `over an extended period of time`, usually several hours or days. Endurance testing is used to evaluate the system's ability to maintain its performance under a sustained load or stress
   - **Worsening Tests** - We create high load in part of production environment. Results affect real users. By observing the change in hardware metrics we can judge how these changes affect user metrics. So instead of spending weeks on improving something it’s easier to artificially slow down (worsen) that part and see if there is any impact
-
   
 ---
 
