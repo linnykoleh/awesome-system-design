@@ -95,6 +95,7 @@
   - [How to avoid cascading failures in a distributed system](#how-to-avoid-cascading-failures-in-a-distributed-system)
   - [Region vs Availability Zone](#region-vs-availability-zone)
   - [Resource monitoring](#resource-monitoring)
+  - [Stress Testing](#stress-testing)
 - [System Design Interview Questions](#system-design-interview-questions)
   - [Design Rate Limiter #1](#design-rate-limiter-1)
   - [Desing Consistent hashing](#desing-consistent-hashing)
@@ -369,6 +370,12 @@
 [//]: # (## System Desing resources)
 
 [//]: # (![dZEbZaT.png]&#40;./images/system.design/dZEbZaT.png&#41;)
+
+---
+
+---
+
+---
 
 ---
 
@@ -947,7 +954,37 @@ For some systems like financial systems, consistency is very important. For othe
 - `TIG` - Telegraf, InfluxDB, Grafana
 - `ELK` - ElasticSearch, Logstash, Kibana
 
---- 
+---
+
+## Stress testing
+
+- `Stress testing` is a type of performance testing that verifies the stability and reliability of the system under extreme conditions. 
+- The purpose of `stress testing` is to ensure that the system or application can handle the expected and unexpected load
+- Stress testing can help to identify and fix performance issues, such as slow response times, high CPU or memory usage, database connectivity problems, or network latency.
+- Can help find `bottlenecks` because the _system's speed depends on the slowest part of the system_
+- `Tools`:
+  - Apache JMeter
+  - Siege
+  - ab (Apache Benchmark)
+  - Gatling
+- `Approaches`:
+  - **Load Testing** - Load testing is the most common approach to stress testing, which involves simulating the `expected user load` on a system or application and measuring its performance
+  - **Performance Testing** - Performance testing is a stress testing approach that focuses on `measuring the response time of a system or application under different loads` and scenarios
+  - **Spike Testing** - Spike testing is a stress testing approach that involves `simulating sudden spikes` in user activity or load on a system or application. Spike testing is used to evaluate the behavior of the system `under sudden and unexpected increases` in traffic, such as during a marketing campaign or product launch
+  - **Endurance Testing** - Endurance testing is a stress testing approach that involves `measuring the performance` of a system or application `over an extended period of time`, usually several hours or days. Endurance testing is used to evaluate the system's ability to maintain its performance under a sustained load or stress
+  - **Worsening Tests** - We create high load in part of production environment. Results affect real users. By observing the change in hardware metrics we can judge how these changes affect user metrics. So instead of spending weeks on improving something it’s easier to artificially slow down (worsen) that part and see if there is any impact
+
+  
+---
+
+---
+
+---
+
+---
+
+---
+
 
 # System Design Interview Questions
 
