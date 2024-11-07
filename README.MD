@@ -11,7 +11,7 @@
 
 - [x] [System Design course on neetcode.io](https://neetcode.io)
 - [x] [System Design for Interviews and Beyond](https://leetcode.com/explore/interview/card/system-design-for-interviews-and-beyond)
-- [ ] [Highload Software Architecture on Projector](https://prjctr.com/course/highload-software-architecture)
+- [x] [Highload Software Architecture on Projector](https://prjctr.com/course/highload-software-architecture)
 - [ ] [Learn System Design in a Hurry](https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction)
 - [ ] [System Design Simplified on interviewready.io](https://interviewready.io/course-page/system-design-course)
 - [ ] [Grokking the System Design Interview](https://www.designgurus.io/course/grokking-the-system-design-interview)
@@ -32,8 +32,8 @@
 - [x] [ByteByteGo Newsletter](https://blog.bytebytego.com/)
 - [x] [Netflix’s interview process and questions](https://interviewing.io/guides/hiring-process/netflix)
 - [x] [How software engineering behavioral interviews are evaluated at Meta](https://interviewing.io/blog/how-software-engineering-behavioral-interviews-are-evaluated-meta)
-- [ ] [Learn System Design in a Hurry](https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction)
-- [ ] [System design primer on github](https://github.com/donnemartin/system-design-primer)
+- [ ] [github.com/donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer)
+- [ ] [github.com/karanpratapsingh/system-design](https://github.com/karanpratapsingh/system-design)
 - [ ] [How Figma’s databases team lived to tell the scale](https://www.figma.com/blog/how-figmas-databases-team-lived-to-tell-the-scale)
 
 ### 📚 Books:
@@ -61,7 +61,6 @@
 - [System requirements](#system-requirements)
 - [System Design template](#system-design-template)
 - [System Design Blueprint: The Ultimate Guide](#system-design-blueprint-the-ultimate-guide)
-- [Universal patterns for building scalable systems](#universal-patterns-for-building-scalable-systems)
 - [System Design Basics](#system-design-basics)
   - [Networking](#networking)
     - [TCP vs UDP](#tcp-vs-udp)
@@ -96,6 +95,7 @@
   - [Region vs Availability Zone](#region-vs-availability-zone)
   - [Resource monitoring](#resource-monitoring)
   - [Stress Testing](#stress-testing)
+  - [High Load Applications Architecture](#high-load-applications-architecture)
 - [System Design Interview Questions](#system-design-interview-questions)
   - [Design Rate Limiter #1](#design-rate-limiter-1)
   - [Desing Consistent hashing](#desing-consistent-hashing)
@@ -359,12 +359,6 @@
 ![sys_design_blue_print.png](./images/system.design/sys_design_blue_print_1.png)
 
 ![sys_design_blue_print_2.png](./images/system.design/sys_design_blue_print_2.png)
-
----
-
-## Universal patterns for building scalable systems:
-
-![common.png](images/common.png)
 
 
 [//]: # (## System Desing resources)
@@ -974,6 +968,90 @@ For some systems like financial systems, consistency is very important. For othe
   - **Endurance Testing** - Endurance testing is a stress testing approach that involves `measuring the performance` of a system or application `over an extended period of time`, usually several hours or days. Endurance testing is used to evaluate the system's ability to maintain its performance under a sustained load or stress
   - **Worsening Tests** - We create high load in part of production environment. Results affect real users. By observing the change in hardware metrics we can judge how these changes affect user metrics. So instead of spending weeks on improving something it’s easier to artificially slow down (worsen) that part and see if there is any impact
   
+
+## High Load Applications Architecture
+
+### Problems
+
+- `Single point of failure` - `SPOF` is a part of a system that, if it fails, will stop the entire system from working. SPOFs are undesirable in any system with a goal of high availability or reliability.
+- `Bottlenecks` - Bottleneck occurs when the capacity of an application or a computer system is severely limited by a single component. It has lowest throughput of all parts of the transaction path. **System works as fast as the slowest part of the system**.
+
+### Main principles
+
+- Reliability
+- Scalability
+- Efficiency
+- Performance
+
+### Simplicity is a key
+
+- It is better to have a bunch of simple components in the system. 
+- Simple things are easier to understand, analyze, improve, replace. 
+- Look at `SOLID`. `S` there stands exactly for that - Single Responsibility Principle. Each component in the system should serve one and only one goal.
+
+### Proper approach
+
+- Always keep in mind what is your main goal
+- Start with `simplest` solution (**Simple is not weak**)
+- Continuously look for `bottlenecks` and `SPOFs` - improve first and avoid second
+- Split complex things into `simple` ones
+
+### Architecture Patterns
+
+![common.png](images/common.png)
+
+#### Load Balancer
+
+- This pattern is used to distribute incoming traffic evenly across multiple servers to prevent overload and improve the system's overall performance. Load balancing patterns can be applied at different levels, including network, transport, application, and database.
+
+#### N Tier
+
+- This pattern involves dividing an application into separate tiers, each responsible for a different aspect of the application, making it easier to scale and manage
+
+![n-tier.webp](images/system.design.6/n-tier.webp)
+
+#### Event Notification
+
+- Is a pattern in which a system sends an event in order to notify other systems of a change. 
+- A defining feature of this architecture is that the system doesn't expect a response from the event at all. 
+- There should be a separation between the logic that sends the event and any logic that get triggered by it. 
+- This pattern is handy because it makes a lower level of coupling simple.
+
+![event-notification.png](images/system.design.6/event-notification.png)
+
+#### Event-carried State Transfer
+
+- The event-carried state transfer pattern is very similar to the event notification pattern. 
+- It often shows up when you're looking for less communication between systems. 
+- This is achieved by duplicating data across multiple systems
+- Write operations are done on the `master`, and then the `replica` can be accessed by other systems.
+
+![5.png](images/system.design.6/5.png)
+
+#### Event Sourcing
+
+- This pattern is less commonly used but the main idea of event sourcing all changes to a systems state is recorded as an event. 
+- You should be able to recreate the current state by replaying all previous events. 
+- This is a fundamentally different way of looking at a system because the event store is the source of truth, not the database. 
+- A commonly used example for describing this pattern is a version control system like git where each commit is an event.
+- Built for `audit` and `replay` purposes. Finance systems use this pattern a lot.
+
+#### CQRS
+
+- `Command Query Responsibility Segregation` Pattern: This pattern separates read and write operations, allowing for the scaling and optimization of each independently.
+
+![6.png](images/system.design.6/6.png)
+
+#### Map-Reduce
+
+- This pattern is commonly used in big data processing and involves splitting large data sets into smaller chunks, processing them independently, and then combining the results.
+
+![7.png](images/system.design.6/7.png)
+
+#### Microservices
+
+- It is a variant of the service-oriented architecture (`SOA`) architectural style that structures an application as a collection of loosely coupled services. 
+- In a microservices architecture, services are fine-grained and the protocols are lightweight.
 
 ---
 
