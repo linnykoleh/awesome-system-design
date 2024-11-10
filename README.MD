@@ -58,16 +58,19 @@
 ## 🌐 Navigation:
 
 - [A Senior Engineer's Guide to the System Design Interview](#a-senior-engineers-guide-to-the-system-design-interview)
-- [System requirements](#system-requirements)
-- [System Design template](#system-design-template)
+  - [System Design Interview Requirements](#system-design-interview-requirements)
+    - [Availability](#availability)
 - [System Design Blueprint: The Ultimate Guide](#system-design-blueprint-the-ultimate-guide)
+  - [High Load Applications Architecture](#high-load-applications-architecture)
 - [System Design Basics](#system-design-basics)
   - [Networking](#networking)
+    - [Web servers](#web-servers)
     - [TCP vs UDP](#tcp-vs-udp)
     - [OSI Model](#osi-model)
     - [DNS](#dns)
     - [Network protocols](#network-protocols)
   - [CDN](#cdn)
+    - [Edge computing](#edge-computing)
   - [Security](#security)
   - [Proxies](#proxies)
     - [Forward Proxy and Reverse Proxy](#forward-proxy-and-reverse-proxy)
@@ -84,10 +87,8 @@
     - [Cache](#cache)
     - [Deduplication Cache](#deduplication-cache)
     - [CAP Theorem](#cap-theorem)
-    - [PACELC Theorem](#pacelc-theorem)
+      - [PACELC Theorem](#pacelc-theorem)
   - [Numbers every programmer should know](#numbers-every-programmer-should-know)
-    - [Availability](#availability)
-  - [Edge computing](#edge-computing)
   - [Bloom filter](#bloom-filter)
   - [Message delivery guarantees](#message-delivery-guarantees)
   - [Autoscaling](#autoscaling)
@@ -95,7 +96,6 @@
   - [Region vs Availability Zone](#region-vs-availability-zone)
   - [Resource monitoring](#resource-monitoring)
   - [Stress Testing](#stress-testing)
-  - [High Load Applications Architecture](#high-load-applications-architecture)
 - [System Design Interview Questions](#system-design-interview-questions)
   - [Design Rate Limiter #1](#design-rate-limiter-1)
   - [Desing Consistent hashing](#desing-consistent-hashing)
@@ -200,41 +200,7 @@
 
 ---
 
-## System requirements
-
-- **𝐅𝐮𝐧𝐜𝐭𝐢𝐨𝐧𝐚𝐥 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬**
-    - Start with the customer and work backwards
-    - Who will use the system
-    - How the system will be used
-    - Platform (Mobile, Web, Desktop)
-- **𝐍𝐨𝐧 𝐅𝐮𝐧𝐜𝐭𝐢𝐨𝐧𝐚𝐥 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬**
-    - `High availability` system uptime in percentage (Service Level Agreements or SLAs)
-        - 99 % => 3.65 days of downtime per year
-        - 99.9% => 8.76 hours of downtime per year
-        - 99.99% => 52 minutes 35 seconds of downtime per year
-        - 99.999% => 5 minutes 15 seconds of downtime per year
-        - 99.9999% => 31 seconds of downtime per year
-    - `Scalability` needs to handle peak load
-    - `Performance` in terms of latency and throughput
-    - `Durability` - data should not be lost
-    - `Consistency` - data should not be corrupted
-        - Strong consistency
-        - Weak consistency
-    - `Maintainability`
-        - Failure modes and mitigations
-        - Monitoring
-        - Testing
-        - Deployment
-    - `Security`
-    - `Cost`
-
-![1.png](./images/system.design.3/1.png)
-
-![2.png](./images/system.design.3/2.png)
-
----
-
-## System Design template
+## System Design interview requirements
 
 > Do not jump right in to give a solution. Slow down.
 > Think deeply and ask questions to clarify requirements and assumptions.
@@ -351,6 +317,15 @@
     - How to monitor the system and what metrics to collect
     - How to scale the system to the next level
 
+
+![1.png](./images/system.design.3/1.png)
+
+![2.png](./images/system.design.3/2.png)
+
+### Availability
+
+![numbers_4.png](./images/system.design/numbers_4.png)
+
 ---
 
 
@@ -359,6 +334,90 @@
 ![sys_design_blue_print.png](./images/system.design/sys_design_blue_print_1.png)
 
 ![sys_design_blue_print_2.png](./images/system.design/sys_design_blue_print_2.png)
+
+## High Load Applications Architecture
+
+### Problems
+
+- `Single point of failure` - `SPOF` is a part of a system that, if it fails, will stop the entire system from working. SPOFs are undesirable in any system with a goal of high availability or reliability.
+- `Bottlenecks` - Bottleneck occurs when the capacity of an application or a computer system is severely limited by a single component. It has lowest throughput of all parts of the transaction path. **System works as fast as the slowest part of the system**.
+
+### Main principles
+
+- Reliability
+- Scalability
+- Efficiency
+- Performance
+
+### Simplicity is a key
+
+- It is better to have a bunch of simple components in the system.
+- Simple things are easier to understand, analyze, improve, replace.
+- Look at `SOLID`. `S` there stands exactly for that - `Single Responsibility Principle`. Each component in the system should serve one and only one goal.
+
+### Proper approach
+
+- Always keep in mind what is your main goal
+- Start with `simplest` solution (**Simple is not weak**)
+- Continuously look for `bottlenecks` and `SPOFs` - improve first and avoid second
+- Split complex things into `simple` ones
+
+### Architecture Patterns
+
+![common.png](images/common.png)
+
+#### Load Balancer
+
+- This pattern is used to distribute incoming traffic evenly across multiple servers to prevent overload and improve the system's overall performance. Load balancing patterns can be applied at different levels, including network, transport, application, and database.
+
+#### N Tier
+
+- This pattern involves dividing an application into separate tiers, each responsible for a different aspect of the application, making it easier to scale and manage
+
+![n-tier.webp](images/system.design.6/n-tier.webp)
+
+#### Event Notification
+
+- Is a pattern in which a system sends an event in order to notify other systems of a change.
+- A defining feature of this architecture is that the system doesn't expect a response from the event at all.
+- There should be a separation between the logic that sends the event and any logic that get triggered by it.
+- This pattern is handy because it makes a lower level of coupling simple.
+
+![event-notification.png](images/system.design.6/event-notification.png)
+
+#### Event-carried State Transfer
+
+- The event-carried state transfer pattern is very similar to the event notification pattern.
+- It often shows up when you're looking for less communication between systems.
+- This is achieved by duplicating data across multiple systems
+- Write operations are done on the `master`, and then the `replica` can be accessed by other systems.
+
+![5.png](images/system.design.6/5.png)
+
+#### Event Sourcing
+
+- This pattern is less commonly used but the main idea of event sourcing all changes to a systems state is recorded as an event.
+- You should be able to recreate the current state by replaying all previous events.
+- This is a fundamentally different way of looking at a system because the event store is the source of truth, not the database.
+- A commonly used example for describing this pattern is a version control system like git where each commit is an event.
+- Built for `audit` and `replay` purposes. Finance systems use this pattern a lot.
+
+#### CQRS
+
+- `Command Query Responsibility Segregation` Pattern: This pattern separates read and write operations, allowing for the scaling and optimization of each independently.
+
+![6.png](images/system.design.6/6.png)
+
+#### Map-Reduce
+
+- This pattern is commonly used in big data processing and involves splitting large data sets into smaller chunks, processing them independently, and then combining the results.
+
+![7.png](images/system.design.6/7.png)
+
+#### Microservices
+
+- It is a variant of the service-oriented architecture (`SOA`) architectural style that structures an application as a collection of loosely coupled services.
+- In a microservices architecture, services are fine-grained and the protocols are lightweight.
 
 
 [//]: # (## System Desing resources)
@@ -376,6 +435,21 @@
 ## System Design Basics
 
 ## Networking
+
+### Web Servers
+
+- A web server is a software application or a hardware device that serves web content (such as HTML pages, images, and other resources) to clients, typically web browsers, over the internet or an intranet.
+- It listens for requests on a specific port (usually port 80 for HTTP or 443 for HTTPS) and responds with the requested content.
+
+https://trends.builtwith.com/web-server
+
+![8.png](images/system.design.6/8.png)
+
+### Applications in High Load
+
+- `Handling High Traffic`: In high-load applications, web servers must efficiently handle a large number of concurrent requests without significant delays or downtime.
+- `Scalability`: Web servers should be scalable, meaning they can handle increasing loads by adding resources (such as memory, CPU, or additional servers) without requiring significant changes to the architecture.
+- `Performance Optimization`: High-load applications often require optimizations such as `caching`, `load balancing`, and `content compression` to ensure that the web server can handle the traffic without compromising on performance.
 
 ### TCP vs UDP
 
@@ -425,6 +499,14 @@
 - `Origin server` is a server that stores the original, definitive versions of web pages and other files. It is usually
   located in a data center that is far from the user. The origin server receives requests from edge servers and
   fulfills them by sending the appropriate content.
+
+### Edge computing
+
+- `Edge computing` is a networking philosophy focused on bringing computing as close to the source of data as possible
+  in order to reduce latency and bandwidth use. In simpler terms, edge computing means running fewer processes in the
+  cloud and moving those processes to local places, such as on a user’s computer, an IoT device, or an edge server.
+  Bringing computation to the network’s edge minimizes the amount of long-distance communication that has to happen
+  between a client and server.
 
 ---
 
@@ -774,7 +856,7 @@
 
 For some systems like financial systems, consistency is very important. For others like TikTok, where it is OK if some users get access to certain videos later than the rest, we try to aim for availability over consistency. Even in these cases, we want our system to eventually have the same view of the data. And that is called eventual consistency, where systems become consistent eventually, if not immediately.
 
-### PACELC Theorem
+#### PACELC Theorem
 
 ![PACELC-theorem-diagram-1.webp](./images/system.design/PACELC-theorem-diagram-1.webp)
 
@@ -802,19 +884,8 @@ For some systems like financial systems, consistency is very important. For othe
     - Compress data before sending it over the internet if possible.
     - Data centers are usually in different regions, and it takes time to send data between them.
 
-### Availability
 
-![numbers_4.png](./images/system.design/numbers_4.png)
 
----
-
-## Edge computing
-
-- `Edge computing` is a networking philosophy focused on bringing computing as close to the source of data as possible
-  in order to reduce latency and bandwidth use. In simpler terms, edge computing means running fewer processes in the
-  cloud and moving those processes to local places, such as on a user’s computer, an IoT device, or an edge server.
-  Bringing computation to the network’s edge minimizes the amount of long-distance communication that has to happen
-  between a client and server.
 
 ---
 
@@ -969,89 +1040,6 @@ For some systems like financial systems, consistency is very important. For othe
   - **Worsening Tests** - We create high load in part of production environment. Results affect real users. By observing the change in hardware metrics we can judge how these changes affect user metrics. So instead of spending weeks on improving something it’s easier to artificially slow down (worsen) that part and see if there is any impact
   
 
-## High Load Applications Architecture
-
-### Problems
-
-- `Single point of failure` - `SPOF` is a part of a system that, if it fails, will stop the entire system from working. SPOFs are undesirable in any system with a goal of high availability or reliability.
-- `Bottlenecks` - Bottleneck occurs when the capacity of an application or a computer system is severely limited by a single component. It has lowest throughput of all parts of the transaction path. **System works as fast as the slowest part of the system**.
-
-### Main principles
-
-- Reliability
-- Scalability
-- Efficiency
-- Performance
-
-### Simplicity is a key
-
-- It is better to have a bunch of simple components in the system. 
-- Simple things are easier to understand, analyze, improve, replace. 
-- Look at `SOLID`. `S` there stands exactly for that - Single Responsibility Principle. Each component in the system should serve one and only one goal.
-
-### Proper approach
-
-- Always keep in mind what is your main goal
-- Start with `simplest` solution (**Simple is not weak**)
-- Continuously look for `bottlenecks` and `SPOFs` - improve first and avoid second
-- Split complex things into `simple` ones
-
-### Architecture Patterns
-
-![common.png](images/common.png)
-
-#### Load Balancer
-
-- This pattern is used to distribute incoming traffic evenly across multiple servers to prevent overload and improve the system's overall performance. Load balancing patterns can be applied at different levels, including network, transport, application, and database.
-
-#### N Tier
-
-- This pattern involves dividing an application into separate tiers, each responsible for a different aspect of the application, making it easier to scale and manage
-
-![n-tier.webp](images/system.design.6/n-tier.webp)
-
-#### Event Notification
-
-- Is a pattern in which a system sends an event in order to notify other systems of a change. 
-- A defining feature of this architecture is that the system doesn't expect a response from the event at all. 
-- There should be a separation between the logic that sends the event and any logic that get triggered by it. 
-- This pattern is handy because it makes a lower level of coupling simple.
-
-![event-notification.png](images/system.design.6/event-notification.png)
-
-#### Event-carried State Transfer
-
-- The event-carried state transfer pattern is very similar to the event notification pattern. 
-- It often shows up when you're looking for less communication between systems. 
-- This is achieved by duplicating data across multiple systems
-- Write operations are done on the `master`, and then the `replica` can be accessed by other systems.
-
-![5.png](images/system.design.6/5.png)
-
-#### Event Sourcing
-
-- This pattern is less commonly used but the main idea of event sourcing all changes to a systems state is recorded as an event. 
-- You should be able to recreate the current state by replaying all previous events. 
-- This is a fundamentally different way of looking at a system because the event store is the source of truth, not the database. 
-- A commonly used example for describing this pattern is a version control system like git where each commit is an event.
-- Built for `audit` and `replay` purposes. Finance systems use this pattern a lot.
-
-#### CQRS
-
-- `Command Query Responsibility Segregation` Pattern: This pattern separates read and write operations, allowing for the scaling and optimization of each independently.
-
-![6.png](images/system.design.6/6.png)
-
-#### Map-Reduce
-
-- This pattern is commonly used in big data processing and involves splitting large data sets into smaller chunks, processing them independently, and then combining the results.
-
-![7.png](images/system.design.6/7.png)
-
-#### Microservices
-
-- It is a variant of the service-oriented architecture (`SOA`) architectural style that structures an application as a collection of loosely coupled services. 
-- In a microservices architecture, services are fine-grained and the protocols are lightweight.
 
 ---
 
