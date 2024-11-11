@@ -355,7 +355,7 @@
 - Simple things are easier to understand, analyze, improve, replace.
 - Look at `SOLID`. `S` there stands exactly for that - `Single Responsibility Principle`. Each component in the system should serve one and only one goal.
 
-### Proper approach
+### Proper approach for building High Load Applications
 
 - Always keep in mind what is your main goal
 - Start with `simplest` solution (**Simple is not weak**)
@@ -438,12 +438,84 @@
 
 ### Web Servers
 
-- A web server is a software application or a hardware device that serves web content (such as HTML pages, images, and other resources) to clients, typically web browsers, over the internet or an intranet.
+- A web server is a software application or a hardware device that caches static content and proxies dynamic content to application servers.
 - It listens for requests on a specific port (usually port 80 for HTTP or 443 for HTTPS) and responds with the requested content.
 
 https://trends.builtwith.com/web-server
 
 ![8.png](images/system.design.6/8.png)
+
+#### Nginx
+
+- Load balancer
+- Web server
+- Cache server
+- Static content server
+- No dynamic content handling
+- Compression (_this is very useful because the internet is slow but the CPU is fast_)
+
+```nginx configuration
+user www-data;
+worker_processes 4;
+pid /run/nginx.pid;
+daemon off;
+
+events {
+  worker_connections  2048;
+  multi_accept on;
+  use epoll;
+}
+
+http {
+  server_tokens off;
+  sendfile on;
+  tcp_nopush on;
+  tcp_nodelay on;
+  keepalive_timeout 15;
+  types_hash_max_size 2048;
+  client_max_body_size 20M;
+  include /etc/nginx/mime.types;
+  default_type application/octet-stream;
+  access_log /dev/stdout;
+  error_log /dev/stderr;
+  gzip on;
+  gzip_disable "msie6";
+  gzip_comp_level 5;
+  gzip_min_length 256;
+  gzip_proxied any;
+  gzip_vary on;
+
+  gzip_types
+  application/atom+xml
+  application/javascript
+  application/json
+  application/rss+xml
+  application/vnd.ms-fontobject
+  application/x-font-ttf
+  application/x-web-app-manifest+json
+  application/xhtml+xml
+  application/xml
+  font/opentype
+  image/svg+xml
+  image/x-icon
+  text/css
+  text/plain
+  text/x-component;
+  
+  ssl_protocols TLSv1.2 TLSv1.3;
+  ssl_ciphers 'ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:DES-CBC3-SHA:!DSS';
+  
+  include /etc/nginx/conf.d/*.conf;
+  include /etc/nginx/sites-available/*.conf;
+  open_file_cache off; 
+  charset UTF-8;
+}
+```
+
+- Examples:
+  - https://github.com/linnykoleh/nginx
+  - https://github.com/laradock/laradock/tree/master/nginx
+  - https://medium.com/@jituboss/nginx-and-php-fpm-optimization-for-high-traffic-web-applications-f790bf1b30fb
 
 ### Applications in High Load
 
