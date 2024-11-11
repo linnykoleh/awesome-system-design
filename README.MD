@@ -27,14 +27,18 @@
 - [x] [How Discord Stores Trillions of Messages](https://discord.com/blog/how-discord-stores-trillions-of-messages)
 - [x] [Meta Onsite System Design Questions](https://leetcode.com/discuss/interview-experience/4428743/Meta-Onsite-System-Design-Questions)
 - [x] [A Senior Engineer's Guide to the System Design Interview](https://interviewing.io/guides/system-design-interview)
-- [x] [system-design-resources on github](https://github.com/InterviewReady/system-design-resources)
 - [x] [System design interview guide for Software Engineers](https://www.techinterviewhandbook.org/system-design/)
 - [x] [ByteByteGo Newsletter](https://blog.bytebytego.com/)
 - [x] [Netflix’s interview process and questions](https://interviewing.io/guides/hiring-process/netflix)
 - [x] [How software engineering behavioral interviews are evaluated at Meta](https://interviewing.io/blog/how-software-engineering-behavioral-interviews-are-evaluated-meta)
-- [ ] [github.com/donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer)
-- [ ] [github.com/karanpratapsingh/system-design](https://github.com/karanpratapsingh/system-design)
 - [ ] [How Figma’s databases team lived to tell the scale](https://www.figma.com/blog/how-figmas-databases-team-lived-to-tell-the-scale)
+
+### 🐈 GitHub Repositories:
+
+- [ ] [https://github.com/InterviewReady/system-design-resources](https://github.com/InterviewReady/system-design-resources)
+- [ ] [https://github.com/donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer)
+- [ ] [https://github.com/karanpratapsingh/system-design](https://github.com/karanpratapsingh/system-design)
+- [ ] [https://github.com/charlax/professional-programming](https://github.com/charlax/professional-programming)
 
 ### 📚 Books:
 
