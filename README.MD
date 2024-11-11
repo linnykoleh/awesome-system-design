@@ -178,6 +178,7 @@
 - What makes these questions difficult or complicated is not the fact that they are inherently complicated. It's because the interviewer intentionally chooses to withhold information. Information that you can only get if you ask the right questions.
 - Treat the system as a black box. No thinking about design, implementation, or pretty much anything technical. The sole goal of this first step is to specify what needs to be built. Not how. Not the scale. Focus on the “what.”
 - Consider mutability.  Can tweets be edited after they’re published? Can tweets be deleted?
+  - It might sound like a small detail at first, but `mutability can limit our ability` to use caching in our design
 - Your interviewer cares less about your decisions, and more about whether you are able to talk about the trade-offs (positives and negatives) of your decisions
 - We measure availability by the percentage of the time the system is up and running. A common goal is to aim for five nines, i.e., 99.999% availability—that’s less than 6 minutes of downtime a year.
 - Whenever there is user-generated code execution involved (aka low trust code), running it in isolation should be a non-functional security requirement.
@@ -196,7 +197,9 @@
 - `How to Get Yourself Unstuck – Tip #4` - Follow these rough guides to get the basic estimates for any system
   - `Storage` Estimation: Storage = daily data used by 1 user * DAU count * length of time to store data
   - `Bandwidth` Estimation: Bandwidth per second = (daily data used by 1 user * DAU count ) / total seconds in a day
-- `How to Get Yourself Unstuck – Tip #5` - “Would it be fine if the data in my system was occasionally wrong for a split second or so?” If the answer is yes, then you probably want eventual consistency. If the answer is no, then you’re looking for a strong type of consistency called linearizability.
+- `How to Get Yourself Unstuck – Tip #5` “Would it be fine if the data in my system was occasionally wrong for a split second or so?” 
+  - If the answer is **yes**, then you probably want `eventual consistency`. 
+  - If the answer is **no**, then you’re looking for a `strong consistency` called linearizability.
 
 ---
 
@@ -327,7 +330,6 @@
 ![numbers_4.png](./images/system.design/numbers_4.png)
 
 ---
-
 
 ## System Design Blueprint: The Ultimate Guide
 
