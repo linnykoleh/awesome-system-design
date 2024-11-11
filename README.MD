@@ -55,6 +55,44 @@
 - [ ] [System design playlist #3 on Youtube](https://www.youtube.com/playlist?list=PLm6XThSMgu_FFth3WUNBKnz_1dG3BKdBn)
 - [ ] [System design mock interviews](https://www.youtube.com/playlist?list=PLf3F6FcQwgqEpnucyupbIqzxyvFOz9uDq)
 
+### ⚙️ Tech Blogs:
+
+- [ ] https://blog.bytebytego.com
+- [ ] https://newsletter.pragmaticengineer.com
+- [ ] https://newsletter.systemdesign.one
+- [ ] https://highscalability.com
+- [ ] https://engineering.fb.com
+- [ ] https://www.notion.so/blog/topic/tech
+- [ ] https://www.notion.so/blog
+- [ ] https://netflixtechblog.com
+- [ ] https://stripe.com/blog
+- [ ] https://medium.com/airbnb-engineering
+- [ ] https://www.uber.com/en-IN/blog/engineering
+- [ ] https://medium.com/pinterest-engineering
+- [ ] https://www.figma.com/blog/engineering
+- [ ] https://engineering.atspotify.com
+- [ ] https://slack.engineering
+- [ ] https://blog.x.com
+- [ ] https://engineering.ramp.com
+- [ ] https://www.canva.dev/blog/engineering
+- [ ] https://stackoverflow.blog/engineering
+- [ ] https://medium.com/paypal-tech
+- [ ] https://medium.engineering
+- [ ] https://dropbox.tech
+- [ ] https://quoraengineering.quora.com
+- [ ] https://blog.cloudflare.com
+- [ ] https://www.akamai.com/blog
+- [ ] https://www.linkedin.com/blog/engineering
+- [ ] https://discord.com/category/engineering
+- [ ] https://www.grammarly.com/blog
+- [ ] https://eng.lyft.com
+- [ ] https://medium.com/strava-engineering
+- [ ] https://medium.com/tinder
+- [ ] https://www.toptal.com/developers/blog
+- [ ] https://github.blog/engineering
+- [ ] https://devblogs.microsoft.com/engineering-at-microsoft
+- [ ] https://blogs.nvidia.com
+
 ## 🌐 Navigation:
 
 - [A Senior Engineer's Guide to the System Design Interview](#a-senior-engineers-guide-to-the-system-design-interview)
