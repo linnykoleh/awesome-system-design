@@ -121,15 +121,24 @@
   - [Load Balancing stategies](#load-balancing-stategies)
   - [Consistent Hashing](#consistent-hashing)
   - [Databases](#databases)
-    - [Relational Database](#sql-database)
+    - [SQL Database](#sql-database)
+      - [ACID](#acid)
+      - [Replication](#replication)
+      - [Sharding](#sharding)
       - [Indexing](#indexing)
     - [NoSQL Database](#nosql-database)
+      - [BASE](#base)
     - [SQL vs NoSQL](#sql-vs-nosql)
-    - [Replication](#replication)
     - [Quorum](#quorum)
-    - [Sharding](#sharding)
+    - [Consensus](#consensus)
     - [Cache](#cache)
-    - [Deduplication Cache](#deduplication-cache)
+      - [Сaching strategies](#Caching-strategies)
+        - [Cache aside](#cache-aside)
+        - [Read through](#read-through)
+        - [Write through](#write-through)
+        - [Write-Around](#Write-Around)
+        - [Write-Back](#Write-Back)
+      - [Deduplication Cache](#deduplication-cache)
     - [CAP Theorem](#cap-theorem)
       - [PACELC Theorem](#pacelc-theorem)
   - [Numbers every programmer should know](#numbers-every-programmer-should-know)
@@ -731,21 +740,7 @@ http {
   tables. Each row in the table is a record with a unique ID called the key. The columns of the table hold attributes
   of the data, and each record usually has a value for each attribute, making it easy to establish the relationships
   among data points.
-- `ACID`:
-    - **Atomicity** - Atomicity guarantees that each transaction is "all or nothing": if one part of the transaction
-      fails, the entire transaction fails, and the database state is left unchanged. For example, if a transfer
-      transaction is supposed to debit $100 from one account and credit $100 to another, but the debit succeeds and the
-      credit fails, then the entire transaction fails, and the balance in both accounts remains unchanged.
-    - **Consistency** - Consistency ensures that any transaction will bring the database from one valid state to
-      another. Any data written to the database must be valid according to all defined rules, including constraints,
-      cascades, triggers, and any combination thereof.
-    - **Isolation** - Isolation ensures that the concurrent execution of transactions results in a system state that
-      would be obtained if transactions were executed serially, i.e., one after the other. The database guarantees
-      that the results of any transaction are as if transactions were executed one at a time. Transactions are
-      isolated from each other. The effects of any given transaction are not visible to any other transaction until
-      that transaction has been completed.
-    - **Durability** - Durability ensures that once a transaction has been committed, it will remain so, even in the
-      event of power loss, crashes, or errors.
+
 - `Advantages of SQL Databases`:
     - SQL offers more powerful querying out of the box
     - SQL has stronger ACID guarantees out of the box
@@ -755,57 +750,30 @@ http {
     - SQL does *not* work well for mixed schema data
     - SQL databases are hard to scale horizontally
 
-#### Indexing
+#### ACID
 
-- `B-trees` are self-adjusting trees that can achieve multilevel indexing. They are a generalized form of Binary Search Trees. The data is stored in sorted order in the B-trees. B-tree achieves the efficient utilization of space in nodes, along with keeping the height of the tree small.
+- **Atomicity** - Atomicity guarantees that each transaction is "all or nothing": if one part of the transaction
+fails, the entire transaction fails, and the database state is left unchanged. For example, if a transfer
+transaction is supposed to debit $100 from one account and credit $100 to another, but the debit succeeds and the
+credit fails, then the entire transaction fails, and the balance in both accounts remains unchanged.
+- **Consistency** - Consistency ensures that any transaction will bring the database from one valid state to
+another. Any data written to the database must be valid according to all defined rules, including constraints,
+cascades, triggers, and any combination thereof.
+- **Isolation** - Isolation ensures that the concurrent execution of transactions results in a system state that
+would be obtained if transactions were executed serially, i.e., one after the other. The database guarantees
+that the results of any transaction are as if transactions were executed one at a time. Transactions are
+isolated from each other. The effects of any given transaction are not visible to any other transaction until
+that transaction has been completed.
+- **Durability** - Durability ensures that once a transaction has been committed, it will remain so, even in the
+event of power loss, crashes, or errors.
 
-![b-tree.png](images/system.design.5/b-tree.png)
 
-- `B+ trees` are an extension of B-trees. The major differences in the data structure are:
-  - Only the leaf nodes store the record or reference to the record.
-  - All the leaf nodes are connected to form a linked list. This enables sequential access along with direct access.
-
-### NoSQL Database
-
-- `NoSQL database` is a database that stores and provides access to data that does not have a predefined data
-  model. NoSQL databases are highly scalable and are designed to handle large amounts of data and high user
-  traffic. They are well suited for storing large sets of user data, such as social media profiles, product
-  catalogs, and inventory records. NoSQL databases are also well suited for storing large sets of time series data
-  such as clickstreams and location tracking data. NoSQL databases are not good at handling complex queries that
-  require joins.
-- `BASE`:
-    - **Basically Available** - The system guarantees availability.
-    - **Soft state** - The state of the system may change over time.
-    - **Eventual consistency** - The system will become consistent over a period of time.
-    - **Consistency** - The system will become consistent over a period of time.
-- `Advantages of NoSQL Database`:
-    - NoSQL is faster for writes but slower to query.
-      - `Log-structured merge tree` is much faster for writes since you don't do anything to maintain structure when you add to it
-    - NoSQL has sharding and scaling out of the box
-    - Shema is easily changeable
-
-- `Disadvantages of NoSQL Database`:
-  - NoSQL databases are more limited in the types of efficient queries that can be done
-  - They are less suitable for circumstances where strong consistency is required,
-  - Cannot have transactions
-  - Joins are hard
-
-### SQL vs NoSQL
-
-![asidvsbase.webp](./images/system.design/asidvsbase.webp)
-
-![04fig04_alt.jpg](./images/system.design/04fig04_alt.jpg)
-
-![photo_2023-02-15_09-50-11.jpg](./images/system.design/photo_2023-02-15_09-50-11.jpg)
-
-![simple-map-for-db.png](images/system.design.4/simple-map-for-db.png)
-
-### Replication
+#### Replication
 
 - Some key terms to understand for `replication`:
-  - `Replica`: Copy of data 
-  - `Leader`: Machine that handles write requests to the data store. 
-  - `Followers`: Machines that are replicas of the leader node, and cater to read requests.
+    - `Replica`: Copy of data
+    - `Leader`: Machine that handles write requests to the data store.
+    - `Followers`: Machines that are replicas of the leader node, and cater to read requests.
 - `Replication` is the process of copying data from one database to another. Replication is used to increase
   availability and reliability of data. It is also used to distribute data geographically so that it can be
   accessed locally from various places.
@@ -835,23 +803,7 @@ http {
 
 ![leader leader replication.png](./images/system.design.4/leader_leader_replication.png)
 
-### Quorum
-
-- `Quorum` refers to a mechanism used to ensure consistency and availability of data in distributed systems. It is commonly used in databases with replication, such as Cassandra, MongoDB, or systems that implement consensus protocols like Paxos or Raft.
-- The basic idea behind Quorum is that for an operation (such as a write or read) to be considered successful, a majority of replicas in the system must agree. The number of replicas required for the operation to succeed is known as the quorum.
-- `Quorum Read`: If you have 5 replicas, and 3 of them must return the latest data for the read to be considered successful, this is called a quorum read.
-- `Quorum Write`: For a write operation to be successful, it must be acknowledged by a majority of replicas.
-- Quorum ensures that any read will always retrieve the most up-to-date replica. The general formula is:
-  - `W + R > N`:
-    - `W` — the number of replicas to which a write operation must be applied (write quorum).
-    - `R` — the number of replicas from which a read operation must be successful (read quorum).
-    - `N` — the total number of replicas.
-- Advantages of using Quorum:
-  - `High availability`: The system can continue to operate even if some replicas are unavailable.
-  - `Consistency`: Data remains consistent across the majority of replicas.
-  - `Scalability`: It is easier to scale the number of replicas in distributed systems.
-
-### Sharding
+#### Sharding
 
 ![sharding.png](images/system.design.4/sharding.png)
 
@@ -886,58 +838,80 @@ http {
 
 ![DB-Shard-Pic-1-e1513014455288.png](./images/system.design/DB-Shard-Pic-1-e1513014455288.png)
 
-### Cache
+#### Indexing
 
-- `Cache` is a temporary storage area for data that is accessed very frequently. It is used to increase the
-  performance of data retrieval operations. It is also used to reduce the load on the database by storing
-  frequently-accessed data in the cache.
-- Types (_It’s a good practice to include a brief point about cache invalidation during system design interviews_):
-    - `LRU Cache` - Least Recently Used Cache
-    - `LFU Cache` - Least Frequently Used Cache
-- Generally, caching is used for read-heavy systems.
+- `B-trees` are self-adjusting trees that can achieve multilevel indexing. They are a generalized form of Binary Search Trees. The data is stored in sorted order in the B-trees. B-tree achieves the efficient utilization of space in nodes, along with keeping the height of the tree small.
 
-![cache.png](images/system.design.5/cache.png)
+![b-tree.png](images/system.design.5/b-tree.png)
 
-- [Сaching strategies](https://codeahoy.com/2017/08/11/caching-strategies-and-how-to-choose-the-right-one):
-    - `Cache-Aside` - The cache sits on the side and the application directly talks to both the cache and the database.
-      There is no connection between the cache and the primary database. All operations to cache and the database are
-      handled by the application. Cache-aside caches are usually general purpose and work best for `read-heavy`
-      workloads.
-        1. The application first checks the cache.
-        2. If the data is found in cache, we’ve cache hit. The data is read and returned to the client.
-        3. If the data is not found in cache, we’ve cache miss. The application has to do some extra work. It
-           queries the database to read the data, returns it to the client and stores the data in cache so the
-           subsequent reads for the same data results in a cache hit.
-           ![cache_1.png](./images/system.design/cache_1.png)
+- `B+ trees` are an extension of B-trees. The major differences in the data structure are:
+  - Only the leaf nodes store the record or reference to the record.
+  - All the leaf nodes are connected to form a linked list. This enables sequential access along with direct access.
 
-    - `Read-Through Cache` - Read-through cache sits in-line with the database. When there is a cache miss, it loads
-      missing data from database, populates the cache and returns it to the application. Read-through caches work best
-      for `read-heavy` workloads when the same data is requested many times. For example, a news story.
-        1. In cache-aside, the application is responsible for fetching data from the database and populating the cache.
-           In read-through, this logic is usually supported by the library or stand-alone cache provider.
-        2. Unlike cache-aside, the data model in read-through cache cannot be different than that of the database.
-           ![cache_2.png](./images/system.design/cache_2.png)
+### NoSQL Database
 
-    - `Write-Through Cache` - data is first written to the cache and then to the database. The cache sits in-line with
-      the database and writes always go through the cache to the main database. This helps cache maintain consistency
-      with the main database.
-        1. The application writes the data directly to the cache.
-        2. The cache updates the data in the main database. When the write is complete, both the cache and the database
-           have the same value and the cache always remains consistent.
-           ![cache_3.png](./images/system.design/cache_3.png)
+- `NoSQL database` is a database that stores and provides access to data that does not have a predefined data
+  model. NoSQL databases are highly scalable and are designed to handle large amounts of data and high user
+  traffic. They are well suited for storing large sets of user data, such as social media profiles, product
+  catalogs, and inventory records. NoSQL databases are also well suited for storing large sets of time series data
+  such as clickstreams and location tracking data. NoSQL databases are not good at handling complex queries that
+  require joins.
 
-    - `Write-Around` - Here, data is written directly to the database and only the data that is read makes it way into
-      the cache.
-    - `Write-Back` or `Write-Behind` - Here, the application writes data to the cache which stores the data and
-      acknowledges to the application immediately. Then later, the cache writes the data back to the database. Here, the
-      application writes data to the cache which stores the data and acknowledges to the application immediately. Then
-      later, the cache writes the data back to the database. Write back caches improve the write performance and are
-      good for `write-heavy` workloads.
-      ![cache_4.png](./images/system.design/cache_4.png)
+- `Advantages of NoSQL Database`:
+    - NoSQL is faster for writes but slower to query.
+        - `Log-structured merge tree` is much faster for writes since you don't do anything to maintain structure when you add to it
+    - NoSQL has sharding and scaling out of the box
+    - Shema is easily changeable
 
-### Deduplication cache
+- `Disadvantages of NoSQL Database`:
+    - NoSQL databases are more limited in the types of efficient queries that can be done
+    - They are less suitable for circumstances where strong consistency is required,
+    - Cannot have transactions
+    - Joins are hard
 
-![3.png](./images/system.design.3/3.png)
+#### BASE
+
+- **Basically Available** - The system guarantees availability.
+- **Soft state** - The state of the system may change over time.
+- **Eventual consistency** - The system will become consistent over a period of time.
+- **Consistency** - The system will become consistent over a period of time.
+
+### SQL vs NoSQL
+
+![asidvsbase.webp](./images/system.design/asidvsbase.webp)
+
+![04fig04_alt.jpg](./images/system.design/04fig04_alt.jpg)
+
+![photo_2023-02-15_09-50-11.jpg](./images/system.design/photo_2023-02-15_09-50-11.jpg)
+
+![simple-map-for-db.png](images/system.design.4/simple-map-for-db.png)
+
+### Quorum
+
+- `Quorum` ensures that a sufficient number of nodes agree on a value to maintain consistency and allow the system to progress even if some nodes are unavailable.
+- `Quorum` refers to a mechanism used to ensure consistency and availability of data in distributed systems. It is commonly used in databases with replication, such as Cassandra, MongoDB, or systems that implement consensus protocols like Paxos or Raft.
+- The basic idea behind Quorum is that for an operation (such as a write or read) to be considered successful, a majority of replicas in the system must agree. The number of replicas required for the operation to succeed is known as the quorum.
+- `Quorum Read`: If you have 5 replicas, and 3 of them must return the latest data for the read to be considered successful, this is called a quorum read.
+- `Quorum Write`: For a write operation to be successful, it must be acknowledged by a majority of replicas.
+- Quorum ensures that any read will always retrieve the most up-to-date replica. The general formula is:
+  - `W + R > N`:
+    - `W` — the number of replicas to which a write operation must be applied (write quorum).
+    - `R` — the number of replicas from which a read operation must be successful (read quorum).
+    - `N` — the total number of replicas.
+- Advantages of using Quorum:
+  - `High availability`: The system can continue to operate even if some replicas are unavailable.
+  - `Consistency`: Data remains consistent across the majority of replicas.
+  - `Scalability`: It is easier to scale the number of replicas in distributed systems.
+- `Consensus` requires all (or a majority) of nodes to agree, while `Quorum` only requires agreement from a subset, leading to lower latency in Quorum.
+
+### Consensus
+
+- `Consensus` is a fundamental problem in distributed systems that requires multiple nodes to agree on a single value or a sequence of values. 
+- In distributed systems, consensus is critical to keep data consistent across nodes. 
+- For example:
+  - In a distributed database, consensus helps ensure that all replicas agree on updates or state changes, allowing users to see consistent data even if nodes go offline temporarily.
+  - Consensus algorithms ensure that all nodes agree on the leader or primary data source.
+- `Consensus` requires all (or a majority) of nodes to agree, while `Quorum` only requires agreement from a subset, leading to lower latency in Quorum.
 
 ### CAP Theorem
 
@@ -971,6 +945,77 @@ For some systems like financial systems, consistency is very important. For othe
 #### PACELC Theorem
 
 ![PACELC-theorem-diagram-1.webp](./images/system.design/PACELC-theorem-diagram-1.webp)
+
+### Cache
+
+- `Cache` is a temporary storage area for data that is accessed very frequently. It is used to increase the
+  performance of data retrieval operations. It is also used to reduce the load on the database by storing
+  frequently-accessed data in the cache.
+- Types (_It’s a good practice to include a brief point about cache invalidation during system design interviews_):
+    - `LRU Cache` - Least Recently Used Cache
+    - `LFU Cache` - Least Frequently Used Cache
+- Generally, caching is used for read-heavy systems.
+
+![cache.png](images/system.design.5/cache.png)
+
+### Сaching strategies
+
+- https://codeahoy.com/2017/08/11/caching-strategies-and-how-to-choose-the-right-one
+
+###### Cache-Aside
+ 
+- The cache sits on the side and the application directly talks to both the cache and the database.
+  There is no connection between the cache and the primary database. All operations to cache and the database are
+  handled by the application. Cache-aside caches are usually general purpose and work best for `read-heavy`
+  workloads.
+    1. The application first checks the cache.
+    2. If the data is found in cache, we’ve cache hit. The data is read and returned to the client.
+    3. If the data is not found in cache, we’ve cache miss. The application has to do some extra work. It
+       queries the database to read the data, returns it to the client and stores the data in cache so the
+       subsequent reads for the same data results in a cache hit.
+
+![cache_1.png](./images/system.design/cache_1.png)
+
+###### Read-Through
+
+- `Read-through cache` sits in-line with the database. When there is a cache miss, it loads
+  missing data from database, populates the cache and returns it to the application. Read-through caches work best
+  for `read-heavy` workloads when the same data is requested many times. For example, a news story.
+    1. In cache-aside, the application is responsible for fetching data from the database and populating the cache.
+       In read-through, this logic is usually supported by the library or stand-alone cache provider.
+    2. Unlike cache-aside, the data model in read-through cache cannot be different than that of the database.
+
+![cache_2.png](./images/system.design/cache_2.png)
+
+###### Write-Through
+
+- `Write-Through Cache` - data is first written to the cache and then to the database. The cache sits in-line with
+  the database and writes always go through the cache to the main database. This helps cache maintain consistency
+  with the main database.
+    1. The application writes the data directly to the cache.
+    2. The cache updates the data in the main database. When the write is complete, both the cache and the database
+       have the same value and the cache always remains consistent.
+
+![cache_3.png](./images/system.design/cache_3.png)
+
+###### Write-Around
+
+- `Write-Around` - Here, data is written directly to the database and only the data that is read makes it way into
+  the cache.
+
+###### Write-Back
+
+- `Write-Back` or `Write-Behind` - Here, the application writes data to the cache which stores the data and
+  acknowledges to the application immediately. Then later, the cache writes the data back to the database. Here, the
+  application writes data to the cache which stores the data and acknowledges to the application immediately. Then
+  later, the cache writes the data back to the database. Write back caches improve the write performance and are
+  good for `write-heavy` workloads.
+
+![cache_4.png](./images/system.design/cache_4.png)
+
+#### Deduplication cache
+
+![3.png](./images/system.design.3/3.png)
 
 ---
 
