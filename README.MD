@@ -33,13 +33,6 @@
 - [x] [How software engineering behavioral interviews are evaluated at Meta](https://interviewing.io/blog/how-software-engineering-behavioral-interviews-are-evaluated-meta)
 - [ ] [How Figma’s databases team lived to tell the scale](https://www.figma.com/blog/how-figmas-databases-team-lived-to-tell-the-scale)
 
-### 🐈 GitHub Repositories:
-
-- [ ] [https://github.com/InterviewReady/system-design-resources](https://github.com/InterviewReady/system-design-resources)
-- [ ] [https://github.com/donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer)
-- [ ] [https://github.com/karanpratapsingh/system-design](https://github.com/karanpratapsingh/system-design)
-- [ ] [https://github.com/charlax/professional-programming](https://github.com/charlax/professional-programming)
-
 ### 📚 Books:
 
 - [x] [System Design Interview – An insider's Guide by Alex Xu](https://www.amazon.com/System-Design-Interview-insiders-Second/dp/B08CMF2CQF?tag=interior0d3-20)
@@ -58,6 +51,13 @@
 - [x] [System design playlist #2 on Youtube](https://www.youtube.com/playlist?list=PLrtCHHeadkHp92TyPt1Fj452_VGLipJnL)
 - [ ] [System design playlist #3 on Youtube](https://www.youtube.com/playlist?list=PLm6XThSMgu_FFth3WUNBKnz_1dG3BKdBn)
 - [ ] [System design mock interviews](https://www.youtube.com/playlist?list=PLf3F6FcQwgqEpnucyupbIqzxyvFOz9uDq)
+
+### 🐈 GitHub Repositories:
+
+- [ ] [https://github.com/InterviewReady/system-design-resources](https://github.com/InterviewReady/system-design-resources)
+- [ ] [https://github.com/donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer)
+- [ ] [https://github.com/karanpratapsingh/system-design](https://github.com/karanpratapsingh/system-design)
+- [ ] [https://github.com/charlax/professional-programming](https://github.com/charlax/professional-programming)
 
 ### ⚙️ Tech Blogs:
 
@@ -96,6 +96,8 @@
 - [ ] https://github.blog/engineering
 - [ ] https://devblogs.microsoft.com/engineering-at-microsoft
 - [ ] https://blogs.nvidia.com
+
+---
 
 ## 🌐 Navigation:
 
@@ -467,12 +469,6 @@
 [//]: # (## System Desing resources)
 
 [//]: # (![dZEbZaT.png]&#40;./images/system.design/dZEbZaT.png&#41;)
-
----
-
----
-
----
 
 ---
 
@@ -1000,9 +996,6 @@ For some systems like financial systems, consistency is very important. For othe
     - Compress data before sending it over the internet if possible.
     - Data centers are usually in different regions, and it takes time to send data between them.
 
-
-
-
 ---
 
 ## Bloom filter
@@ -1154,19 +1147,8 @@ For some systems like financial systems, consistency is very important. For othe
   - **Spike Testing** - Spike testing is a stress testing approach that involves `simulating sudden spikes` in user activity or load on a system or application. Spike testing is used to evaluate the behavior of the system `under sudden and unexpected increases` in traffic, such as during a marketing campaign or product launch
   - **Endurance Testing** - Endurance testing is a stress testing approach that involves `measuring the performance` of a system or application `over an extended period of time`, usually several hours or days. Endurance testing is used to evaluate the system's ability to maintain its performance under a sustained load or stress
   - **Worsening Tests** - We create high load in part of production environment. Results affect real users. By observing the change in hardware metrics we can judge how these changes affect user metrics. So instead of spending weeks on improving something it’s easier to artificially slow down (worsen) that part and see if there is any impact
-  
-
 
 ---
-
----
-
----
-
----
-
----
-
 
 # System Design Interview Questions
 
