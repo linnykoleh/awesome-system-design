@@ -123,6 +123,8 @@
   - [Databases](#databases)
     - [SQL Database](#sql-database)
       - [ACID](#acid)
+      - [Explain](#explain)
+      - [Concurrent access management](#concurrent-access-management)
       - [Replication](#replication)
       - [Sharding](#sharding)
       - [Indexing](#indexing)
@@ -734,38 +736,98 @@ http {
 
 ### SQL Database
 
+![mysql-architecture.png](images/system.design.6/mysql-architecture.png)
+
 - `Relational database` is a database that stores and provides access to data points that are related to one another.
   Relational databases are based on the relational model, an intuitive, straightforward way of representing data in
   tables. Each row in the table is a record with a unique ID called the key. The columns of the table hold attributes
   of the data, and each record usually has a value for each attribute, making it easy to establish the relationships
   among data points.
-
 - `Advantages of SQL Databases`:
-    - SQL offers more powerful querying out of the box
-    - SQL has stronger ACID guarantees out of the box
+  - SQL offers more powerful querying out of the box
+  - SQL has stronger ACID guarantees out of the box
 - `Disadvantages of SQL Databases`:
-    - B-Trees, used in SQL DBs, are slower to write into
-    - Strong consistency is expensive to reduce latency for
-    - SQL does *not* work well for mixed schema data
-    - SQL databases are hard to scale horizontally
+  - B-Trees, used in SQL DBs, are slower to write into
+  - Strong consistency is expensive to reduce latency for
+  - SQL does *not* work well for mixed schema data
+  - SQL databases are hard to scale horizontally
+- `Common problems`:
+  - Writing to HDD is slow
+  - No indexes for fast reading
+  - No enough RAM for caching 
+  - Slow writing because of not correct indexes
+  - Full scan of the table
+  - Locking in transactions
+- `Optimization`:
+  - Saving data in one transaction by `chunks`, this will reduce the time of rebuilding the indexes. This is possible because of the `atomicity` of the transaction.
+  - Using RAM more than HDD
+    - For `InnoDB` set buffer size `innodb_buffer_pool_size`
+      - https://dev.mysql.com/doc/refman/8.4/en/innodb-buffer-pool-resize.html 
+      - https://dev.mysql.com/doc/refman/8.4/en/innodb-buffer-pool.html
+      - `show variables like '%innodb_buffer_pool_size%';`
+      - `SET GLOBAL innodb_buffer_pool_size=402653184;`
+    - The `InnoDB` buffer uses for: 
+      - indexes
+      - cache
+      - temporary tables
+  - Increase the size of your `redo log` files:
+    - It’s a special log that stores all changes made to the database before they are permanently written to disk 
+    - If the server unexpectedly shuts down, any changes that were made but not yet saved to the main database can be recovered from the redo log.
+    - Instead of writing each operation directly to the main database, MySQL first writes changes to the redo log
+    - During a MySQL restart, the redo log is used to recover any changes that were planned but hadn’t yet been written to the main database.
+    - Small redo log files cause many unnecessary disk writes.
+      - `innodb_log_file_size = 512M`
+  - Define how frequently the data in the `redo log` is flushed to disk during transaction commits:
+    - Use `innodb_flush_log_at_trx_commit` parameter
+      - This parameter in MySQL controls how frequently the data in the `redo log` is flushed to disk during transaction commits.
+    - `0` - writes to the log and flushes to disk once per second, but does nothing for each commit
+    - `1` - writes to the log and flushes the log to disk every transaction. Default value
+    - `2` - writes to the log every commit, flushes to disk once a second
+  - Scan database with https://github.com/major/MySQLTuner-perl
+  - Use indexes if not used
+  - Use `show full processlist` to see hosts connected to the database and queries they are running
+  - Set connection timeout, to avoid the situation when the connection is not closed and the database is overloaded
 
 #### ACID
 
-- **Atomicity** - Atomicity guarantees that each transaction is "all or nothing": if one part of the transaction
-fails, the entire transaction fails, and the database state is left unchanged. For example, if a transfer
-transaction is supposed to debit $100 from one account and credit $100 to another, but the debit succeeds and the
-credit fails, then the entire transaction fails, and the balance in both accounts remains unchanged.
-- **Consistency** - Consistency ensures that any transaction will bring the database from one valid state to
-another. Any data written to the database must be valid according to all defined rules, including constraints,
-cascades, triggers, and any combination thereof.
-- **Isolation** - Isolation ensures that the concurrent execution of transactions results in a system state that
-would be obtained if transactions were executed serially, i.e., one after the other. The database guarantees
-that the results of any transaction are as if transactions were executed one at a time. Transactions are
-isolated from each other. The effects of any given transaction are not visible to any other transaction until
-that transaction has been completed.
-- **Durability** - Durability ensures that once a transaction has been committed, it will remain so, even in the
-event of power loss, crashes, or errors.
+- **Atomicity** - The transaction must function as a single, indivisible unit of work such that the entire transaction is either committed or cancelled. When transactions are atomic, there is no such thing as a partially completed transaction: all or nothing.
+- **Consistency** - The database must always transition from one consistent state to another.
+- **Isolation** - The results of a transaction are **usually** (_because in read uncommited it's possible, we can read from buffer data that is not committed yet_) invisible to other transactions until it is completed.
+- **Durability** - Once committed, the changes made during the transaction become permanent. This means that changes must be recorded so that data cannot be lost in the event of a system failure.
 
+#### Explain
+
+- The `EXPLAIN` command is the primary way to find out what decisions the query optimizer is making. It has a lot of limitations and doesn't always tell the truth, but since there's no better one anyway, it makes sense to learn how to use it so you can make educated guesses about how queries are executed.
+- Explain vs Explain Analyze 
+  - `Explain` - just gives you the query plan, but doesn't actually run the query
+  - `Explain Analyze` - actually **runs** the query and gives you the actual time it took to run the query (`turn off the cache` to get the real time)
+
+![9.png](images/system.design.6/9.png)
+
+![10.png](images/system.design.6/10.png)
+
+- With index, we are using `B-Tree` type of data structure 
+- If we have a lot of indexes, it can slow down the writing because we need to update all indexes
+- If we are using `WHERE` in the query we need to check if we have an index for that column, this can improve the
+  performance of the query (`O(log(n))` complexity)
+- Index can be not used if the query contains a big range of data or when using `functions` for the column
+
+#### Concurrent access management
+
+- Links:
+  - https://dev.mysql.com/doc/refman/8.4/en/innodb-enabling-monitors.html
+  - https://dev.mysql.com/doc/refman/8.4/en/innodb-standard-monitor.html
+- `Read locks` on a resource are shared or mutually non-blocking: any number of clients can read from a resource at the same time without affecting each other.
+- `Write locks`, on the other hand, are exclusive. They exclude the possibility of setting a read lock and other write locks, since the only safe policy is to have only one client writing at a time and prevent all reads of the resource's content for the duration of the write.
+- Different systems has different concurrent access management strategies.
+  - `InnoDb` system is great for concurrent access, it has locking on `row` and `table` level
+- How to search locks:
+  - Execute `SET GLOBAL innodb_status_output=ON;`
+  - Execute `SET GLOBAL innodb_status_output_locks=ON;`
+  - Execute `SHOW ENGINE INNODB STATUS`
+  - Look for `Transaction` section
+
+![11.png](images/system.design.6/11.png)
 
 #### Replication
 
@@ -839,6 +901,11 @@ event of power loss, crashes, or errors.
 
 #### Indexing
 
+- For every write, indexes need to be updated. This can slow down the write operation.
+- If a lot of `reads` and not many writes, indexes has to be everywhere.
+- If a lot of `writes` then wrap this operation in chunk and write in one transaction to update indexes only once. 
+  - Or use sharding to reduce the number of indexes that need to be updated.
+- Index can be hash or tree based. Hash is faster but tree is more flexible.
 - `B-trees` are self-adjusting trees that can achieve multilevel indexing. They are a generalized form of Binary Search Trees. The data is stored in sorted order in the B-trees. B-tree achieves the efficient utilization of space in nodes, along with keeping the height of the tree small.
 
 ![b-tree.png](images/system.design.5/b-tree.png)
@@ -846,6 +913,8 @@ event of power loss, crashes, or errors.
 - `B+ trees` are an extension of B-trees. The major differences in the data structure are:
   - Only the leaf nodes store the record or reference to the record.
   - All the leaf nodes are connected to form a linked list. This enables sequential access along with direct access.
+- Adaptive Hash Index - https://dev.mysql.com/doc/refman/8.4/en/innodb-adaptive-hash.html
+  - Even when you have a hash index, you still have a B-tree index.  
 
 ### NoSQL Database
 
