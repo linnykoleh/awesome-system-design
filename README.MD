@@ -807,6 +807,7 @@ http {
 ![10.png](images/system.design.6/10.png)
 
 - With index, we are using `B-Tree` type of data structure 
+  - Because of that, we have `O(log(n))` complexity for searching, inserting, deleting. 
 - If we have a lot of indexes, it can slow down the writing because we need to update all indexes
 - If we are using `WHERE` in the query we need to check if we have an index for that column, this can improve the
   performance of the query (`O(log(n))` complexity)
@@ -819,6 +820,7 @@ http {
   - https://dev.mysql.com/doc/refman/8.4/en/innodb-standard-monitor.html
 - `Read locks` on a resource are `shared` or mutually non-blocking: any number of clients can read from a resource at the same time without affecting each other.
 - `Write locks`, on the other hand, are `exclusive`. They exclude the possibility of setting a read lock and other write locks, since the only safe policy is to have only one client writing at a time and prevent all reads of the resource's content for the duration of the write.
+  - Always working with `indexes` not with snapshots.
 - Different systems has different concurrent access management strategies.
   - `InnoDb` system is great for concurrent access, it has locking on `row` and `table` level
 - How to search locks:
@@ -827,6 +829,12 @@ http {
   - Execute `SET GLOBAL innodb_status_output_locks=ON;` enable Locks Monitor
   - Execute `SHOW ENGINE INNODB STATUS` - to see the transaction, locks
   - Look for `Transaction` section
+- `Сonsistent Read`
+  - At the time of the first request in a transaction, a `snapshot` of the database data (read view) is created, which `is not affected by changes in parallel transactions`, but is affected by changes in the current one
+  - Reading from such a snapshot is called a `non-blocking consistent read`.
+  - Non-blocking - because no locks are required to create a snapshot, consistent — because no operations in the outside world (except DROP TABLE and ALTER TABLE) will affect the snapshot.
+  - InnoDB can be asked to take a snapshot before the first request in a transaction, for this you need to mention this at the time of the start of the transaction - `START TRANSACTION WITH CONSISTENT SNAPSHOT`.
+  - For 10 parallel transactions, 10 snapshots will be created, and each transaction will work with its own snapshot.
 
 ![11.png](images/system.design.6/11.png)
 
@@ -842,8 +850,62 @@ http {
     - Intentions Locks Protocol
       - Before a transaction can acquire a `shared lock` on a row in a table, it must first acquire an `IS lock` or stronger on the table.    
       - Before a transaction can acquire an `exclusive lock` on a row in a table, it must first acquire an `IX lock` on the table.
+  - **Gap Locks**
+    - Gap lock is needed in order `to avoid the appearance of phantom records`, when, for example, between two identical readings of a range, a neighboring transaction manages to insert a record into this range.
+    - A gap lock is a lock between index records, or a gap lock before the first or after the last entry in the index. 
+    - For example, `SELECT c1 FROM t WHERE c1 BETWEEN 10 and 20 FOR UPDATE;` prevents other transactions from inserting the value 15 into column t.c1, regardless of whether any such value was already in the column, because gaps between all existing values in the range are locked
 
 ![12.png](images/system.design.6/12.png)
+
+- Isolation:
+  - InnoDB allows you to set the isolation level globally and per session.
+    - `SET GLOBAL TRANSACTION ISOLATION LEVEL`
+    - `SET SESSION TRANSACTION ISOLATION LEVEL`
+  - Levels:
+    - `Repeatable Read`:
+      - **Default** isolation level in InnoDB.
+      - A consistent read (`SELECT`) doesn't block anything, it reads rows `from a snapshot` that is created **on the first read in a transaction**. 
+        - The same queries will always return the same result.
+      - For blocking reads (`SELECT ... FOR UPDATE/LOCK IN SHARE MODE`), UPDATE and DELETE, the lock will depend on the condition type. 
+        - If the condition is unique (`WHERE id = 42`), then only the found record `in the index` is locked (record lock). 
+        - If the condition is with a range (`WHERE id > 42`), then the `entire range is blocked in the index` (gap lock or next-key lock).
+      - Example:
+        - Start Transaction 
+          - Select 1 — Snapshot 1
+            - Insert or Update index (snapshots are for reading only)
+          - Select 2 — Snapshot 1
+        - Commit transaction
+    - `Read Committed`:
+      - Each consistent read, even within the same transaction, sets and reads its own `snapshot`.
+      - Within the same transaction, for every `SELECT`, the snapshot is created anew, and works with it.
+      - Example:
+        - Start Transaction
+            - Select 1 — Snapshot 1
+              - Insert or Update index (snapshots are for reading only)
+            - Select 2 — Snapshot 2, and we can see the changes from previous insert or update
+        - Commit transaction
+    - `Read Uncommitted`:
+      - All SELECT queries are read in a `non-blocking manner`. 
+      - Not snapshots at all, reads and writes to the database.
+      - Changes to an incomplete transaction can be read in other transactions, and these changes can also be rolled back later. 
+      - This is the so-called `dirty read`
+    - `Serializable`:
+      - Completely similar to `REPEATABLE READ`, except for one moment. 
+      - If autocommit is disabled (and it is disabled when a transaction is explicitly started), then all simple SELECT queries are implicitly converted into `SELECT ... LOCK IN SHARE MODE`, if enabled, each SELECT goes into a separate transaction. 
+      - It is used, as a rule, to turn all read requests into `SELECT ... LOCK IN SHARE MODE`, if this cannot be done in the application code.
+      - If after select request is insert request, this insert request will wait when the select is finished.
+      - This level quarantees that the data will be the same, all requests will be done in the same order.
+      - Read is possible.
+  - Considerations
+    - `Performance vs Consistency`: 
+      - Higher isolation levels like Serializable provide more consistency but at the cost of performance and scalability. 
+      - They increase the likelihood of transaction conflicts and can lead to higher rates of transaction rollbacks in high-concurrency environments.
+    - `Database Specifics`:
+      - Different databases implement these isolation levels in different ways
+    - `Deadlocks and Concurrency`: 
+      - Higher isolation levels can increase the risk of deadlocks, which your application must handle
+    - `Default Settings`: 
+      - Be aware of your database's default transaction isolation level and how it affects your application.
 
 #### Replication
 
