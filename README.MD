@@ -124,7 +124,7 @@
     - [SQL Database](#sql-database)
       - [ACID](#acid)
       - [Explain](#explain)
-      - [Concurrent access management](#concurrent-access-management)
+      - [Transactions, Isolations, Locks](#transactions-isolations-locks)
       - [Replication](#replication)
       - [Sharding](#sharding)
       - [Indexing](#indexing)
@@ -792,7 +792,7 @@ http {
 
 - **Atomicity** - The transaction must function as a single, indivisible unit of work such that the entire transaction is either committed or cancelled. When transactions are atomic, there is no such thing as a partially completed transaction: all or nothing.
 - **Consistency** - The database must always transition from one consistent state to another.
-- **Isolation** - The results of a transaction are **usually** (_because in read uncommited it's possible, we can read from buffer data that is not committed yet_) invisible to other transactions until it is completed.
+- **Isolation** - The results of a transaction are **usually** (_because in read uncommited it's possible, we can read from buffer data(snapshot) that is not committed yet_) invisible to other transactions until it is completed.
 - **Durability** - Once committed, the changes made during the transaction become permanent. This means that changes must be recorded so that data cannot be lost in the event of a system failure.
 
 #### Explain
@@ -812,22 +812,38 @@ http {
   performance of the query (`O(log(n))` complexity)
 - Index can be not used if the query contains a big range of data or when using `functions` for the column
 
-#### Concurrent access management
+#### Transactions, Isolations, Locks
 
 - Links:
   - https://dev.mysql.com/doc/refman/8.4/en/innodb-enabling-monitors.html
   - https://dev.mysql.com/doc/refman/8.4/en/innodb-standard-monitor.html
-- `Read locks` on a resource are shared or mutually non-blocking: any number of clients can read from a resource at the same time without affecting each other.
-- `Write locks`, on the other hand, are exclusive. They exclude the possibility of setting a read lock and other write locks, since the only safe policy is to have only one client writing at a time and prevent all reads of the resource's content for the duration of the write.
+- `Read locks` on a resource are `shared` or mutually non-blocking: any number of clients can read from a resource at the same time without affecting each other.
+- `Write locks`, on the other hand, are `exclusive`. They exclude the possibility of setting a read lock and other write locks, since the only safe policy is to have only one client writing at a time and prevent all reads of the resource's content for the duration of the write.
 - Different systems has different concurrent access management strategies.
   - `InnoDb` system is great for concurrent access, it has locking on `row` and `table` level
 - How to search locks:
-  - Execute `SET GLOBAL innodb_status_output=ON;`
-  - Execute `SET GLOBAL innodb_status_output_locks=ON;`
-  - Execute `SHOW ENGINE INNODB STATUS`
+  - Execute `SET autocommit=0;` disable auto commit after each request
+  - Execute `SET GLOBAL innodb_status_output=ON;` enable InnoDB standard Monitor
+  - Execute `SET GLOBAL innodb_status_output_locks=ON;` enable Locks Monitor
+  - Execute `SHOW ENGINE INNODB STATUS` - to see the transaction, locks
   - Look for `Transaction` section
 
 ![11.png](images/system.design.6/11.png)
+
+- Types of Locks:
+  - **shared lock** `(S)` - shared lock, allows other transactions to read the row and set the same shared lock on it, but does not allow changing the row or setting an exclusive lock
+    - `SELECT ... LOCK IN SHARE MODE` - Locks affected rows for writing. Other sessions can read, but wait for the end of the transaction to modify the affected rows
+  - **exclusive lock** `(X)` - exclusive lock, prohibits other transactions from locking the row, and can also lock the row for both writing and reading, depending on the current isolation level
+    - `SELECT... FOR UPDATE` - locks read rows for reading.
+  - **Intention Locks** - locks on locks. `table-level locks` and only block other locks and operations on the entire table of type LOCK TABLE
+    - Types:
+      - **Intention shared lock** `(IS)` - blocks only the creation of other shared locks and LOCK TABLE operations. Ex: `SELECT ... LOCK IN SHARE MODE`
+      - **Intention exclusive lock** `(IX)` - blocks only the creation of other exclusive locks and LOCK TABLE operations. Ex: `SELECT ... FOR UPDATE`
+    - Intentions Locks Protocol
+      - Before a transaction can acquire a `shared lock` on a row in a table, it must first acquire an `IS lock` or stronger on the table.    
+      - Before a transaction can acquire an `exclusive lock` on a row in a table, it must first acquire an `IX lock` on the table.
+
+![12.png](images/system.design.6/12.png)
 
 #### Replication
 
