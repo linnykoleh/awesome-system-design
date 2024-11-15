@@ -50,6 +50,7 @@
 - [x] [System design playlist #1 on Youtube](https://www.youtube.com/playlist?list=PLMCXHnjXnTnvo6alSjVkgxV-VH6EPyvoX)
 - [x] [System design playlist #2 on Youtube](https://www.youtube.com/playlist?list=PLrtCHHeadkHp92TyPt1Fj452_VGLipJnL)
 - [ ] [System design playlist #3 on Youtube](https://www.youtube.com/playlist?list=PLm6XThSMgu_FFth3WUNBKnz_1dG3BKdBn)
+- [ ] [Google SWE teaches systems design](https://www.youtube.com/playlist?list=PLjTveVh7FakKjb4UYzUazqBNNF-WGurXp)
 - [ ] [System design mock interviews](https://www.youtube.com/playlist?list=PLf3F6FcQwgqEpnucyupbIqzxyvFOz9uDq)
 
 ### 🐈 GitHub Repositories:
@@ -916,21 +917,24 @@ http {
 - `Replication` is the process of copying data from one database to another. Replication is used to increase
   availability and reliability of data. It is also used to distribute data geographically so that it can be
   accessed locally from various places.
+- Replication fixes the problem of `slow reading`.
+
+![13.png](images/system.design.6/13.png)
+
 - Replication stategies:
     - **Master-slave replication** - In this strategy, all writes are done to the master database, and the slave
       databases are updated with the changes. If the master database goes down, one of the slave databases can be
       promoted to be the new master. This strategy is simple and easy to implement, but it does not scale well.
+      - Example how-to setup master-slave replication: https://github.com/linnykoleh/mysql-replication-demo
+    
+    ![replication.png](./images/system.design/replication.png)
+
     - **Master-master replication** - In this strategy, both master databases are writable and both read from the
       slave databases. This strategy can scale well, but it is more complex to implement and it can lead to conflicts
       when the same data is modified concurrently on both master databases.
-    - **Federation** - In this strategy, each database is treated as a separate entity. Applications connect directly
-      to the appropriate database, with no single master database. This strategy can scale well, but it is more
-      complex to implement and it can lead to conflicts when the same data is modified concurrently on multiple
-      databases.
+      - When happened network partitioning with concurrent access, can be a problem with the `data consistency` with this type of replication. This leads to the `hand fixing` of the database.
 
-![replication.png](./images/system.design/replication.png)
-
-![replication_2.png](./images/system.design/replication_2.png)
+    ![replication_2.png](./images/system.design/replication_2.png)
 
 - A `master database` generally only supports `write` operations. A `slave database` gets copies of
   the data from the master database and only supports read operations. All the data-modifying
@@ -949,6 +953,8 @@ http {
 - `Sharding` is the process of storing the same data set in multiple databases. Sharding is used to increase
   scalability and performance of databases. It is also used to distribute data geographically so that it can be
   accessed locally from various places.
+  - Sharding helps to fix a problem with `slow writing`.
+  - When we have sharding, `master-slave replication` is not needed, because they both are fixing the problem of `slow writing`.
 - Sharding stategies:
     - **Hash-based sharding** - Hash-based sharding is the most common sharding strategy. In this strategy, each
       shard is responsible for a range of the hash values. For example, if we have three shards, one shard may be
@@ -1058,6 +1064,7 @@ http {
   - In a distributed database, consensus helps ensure that all replicas agree on updates or state changes, allowing users to see consistent data even if nodes go offline temporarily.
   - Consensus algorithms ensure that all nodes agree on the leader or primary data source.
 - `Consensus` requires all (or a majority) of nodes to agree, while `Quorum` only requires agreement from a subset, leading to lower latency in Quorum.
+- `Consenses` helps slaves to assign a new master if the old one is down. 
 
 ### CAP Theorem
 
