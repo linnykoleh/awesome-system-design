@@ -62,41 +62,41 @@
 
 ### ⚙️ Tech Blogs:
 
-- [ ] https://blog.bytebytego.com
-- [ ] https://newsletter.pragmaticengineer.com
-- [ ] https://newsletter.systemdesign.one
-- [ ] https://highscalability.com
-- [ ] https://engineering.fb.com
-- [ ] https://www.notion.so/blog/topic/tech
-- [ ] https://www.notion.so/blog
-- [ ] https://netflixtechblog.com
-- [ ] https://stripe.com/blog
-- [ ] https://medium.com/airbnb-engineering
-- [ ] https://www.uber.com/en-IN/blog/engineering
-- [ ] https://medium.com/pinterest-engineering
-- [ ] https://www.figma.com/blog/engineering
-- [ ] https://engineering.atspotify.com
-- [ ] https://slack.engineering
-- [ ] https://blog.x.com
-- [ ] https://engineering.ramp.com
-- [ ] https://www.canva.dev/blog/engineering
-- [ ] https://stackoverflow.blog/engineering
-- [ ] https://medium.com/paypal-tech
-- [ ] https://medium.engineering
-- [ ] https://dropbox.tech
-- [ ] https://quoraengineering.quora.com
-- [ ] https://blog.cloudflare.com
-- [ ] https://www.akamai.com/blog
-- [ ] https://www.linkedin.com/blog/engineering
-- [ ] https://discord.com/category/engineering
-- [ ] https://www.grammarly.com/blog
-- [ ] https://eng.lyft.com
-- [ ] https://medium.com/strava-engineering
-- [ ] https://medium.com/tinder
-- [ ] https://www.toptal.com/developers/blog
-- [ ] https://github.blog/engineering
-- [ ] https://devblogs.microsoft.com/engineering-at-microsoft
-- [ ] https://blogs.nvidia.com
+- https://blog.bytebytego.com
+- https://newsletter.pragmaticengineer.com
+- https://newsletter.systemdesign.one
+- https://highscalability.com
+- https://engineering.fb.com
+- https://www.notion.so/blog/topic/tech
+- https://www.notion.so/blog
+- https://netflixtechblog.com
+- https://stripe.com/blog
+- https://medium.com/airbnb-engineering
+- https://www.uber.com/en-IN/blog/engineering
+- https://medium.com/pinterest-engineering
+- https://www.figma.com/blog/engineering
+- https://engineering.atspotify.com
+- https://slack.engineering
+- https://blog.x.com
+- https://engineering.ramp.com
+- https://www.canva.dev/blog/engineering
+- https://stackoverflow.blog/engineering
+- https://medium.com/paypal-tech
+- https://medium.engineering
+- https://dropbox.tech
+- https://quoraengineering.quora.com
+- https://blog.cloudflare.com
+- https://www.akamai.com/blog
+- https://www.linkedin.com/blog/engineering
+- https://discord.com/category/engineering
+- https://www.grammarly.com/blog
+- https://eng.lyft.com
+- https://medium.com/strava-engineering
+- https://medium.com/tinder
+- https://www.toptal.com/developers/blog
+- https://github.blog/engineering
+- https://devblogs.microsoft.com/engineering-at-microsoft
+- https://blogs.nvidia.com
 
 ---
 
@@ -127,9 +127,14 @@
       - [Explain](#explain)
       - [Views](#views)
       - [Transactions, Isolations, Locks](#transactions-isolations-locks)
+        - [Types of locks](#types-of-locks)
+        - [Isolation levels](#isolation-levels)
       - [Replication](#replication)
+        - [Replication stategies](#replication-stategies)
       - [Sharding](#sharding)
+        - [Sharding strategies](#sharding-stategies)
       - [Indexing](#indexing)
+      - [Optimization](#optimization)
     - [NoSQL Database](#nosql-database)
       - [BASE](#base)
     - [SQL vs NoSQL](#sql-vs-nosql)
@@ -760,37 +765,6 @@ http {
   - Slow writing because of not correct indexes
   - Full scan of the table
   - Locking in transactions
-- `Optimization`:
-  - Saving data in one transaction by `chunks`, this will reduce the time of rebuilding the indexes. This is possible because of the `atomicity` of the transaction.
-  - Using RAM more than HDD
-    - For `InnoDB` set buffer size `innodb_buffer_pool_size`
-      - https://dev.mysql.com/doc/refman/8.4/en/innodb-buffer-pool-resize.html 
-      - https://dev.mysql.com/doc/refman/8.4/en/innodb-buffer-pool.html
-      - `show variables like '%innodb_buffer_pool_size%';`
-      - `SET GLOBAL innodb_buffer_pool_size=402653184;`
-    - The `InnoDB` buffer uses for: 
-      - indexes
-      - cache
-      - temporary tables
-  - Increase the size of your `redo log` files:
-    - It’s a special log that stores all changes made to the database before they are permanently written to disk 
-    - If the server unexpectedly shuts down, any changes that were made but not yet saved to the main database can be recovered from the redo log.
-    - Instead of writing each operation directly to the main database, MySQL first writes changes to the redo log
-    - During a MySQL restart, the redo log is used to recover any changes that were planned but hadn’t yet been written to the main database.
-    - Small redo log files cause many unnecessary disk writes.
-      - `innodb_log_file_size = 512M`
-  - Define how frequently the data in the `redo log` is flushed to disk during transaction commits:
-    - Use `innodb_flush_log_at_trx_commit` parameter
-      - This parameter in MySQL controls how frequently the data in the `redo log` is flushed to disk during transaction commits.
-    - `0` - writes to the log and flushes to disk once per second, but does nothing for each commit
-    - `1` - writes to the log and flushes the log to disk every transaction. Default value
-    - `2` - writes to the log every commit, flushes to disk once a second
-  - Scan database with https://github.com/major/MySQLTuner-perl
-  - Use indexes if not used
-  - Use `show full processlist` to see hosts connected to the database and queries they are running
-  - Set connection timeout, to avoid the situation when the connection is not closed and the database is overloaded
-
-
 
 #### ACID
 
@@ -823,7 +797,8 @@ http {
     - virtual table based on the result-set of an SQL statement.
     - A view contains rows and columns, just like a real table.
     - The fields in the view are fields from one or more real tables in the database.
-    - `reactively` updated when the data in the base tables changes.
+    - `reactively` updated when the data in the base tables changes
+    - cannot have indexes
 - `materialized view`
     - a database object that contains the results of a query.
     - this is a snapshot of the data, and it is not updated automatically when the base table is updated.
@@ -854,74 +829,76 @@ http {
 
 ![11.png](images/system.design.6/11.png)
 
-- Types of Locks:
-  - **shared lock** `(S)` - shared lock, allows other transactions to read the row and set the same shared lock on it, but does not allow changing the row or setting an exclusive lock
-    - `SELECT ... LOCK IN SHARE MODE` - Locks affected rows for writing. Other sessions can read, but wait for the end of the transaction to modify the affected rows
-  - **exclusive lock** `(X)` - exclusive lock, prohibits other transactions from locking the row, and can also lock the row for both writing and reading, depending on the current isolation level
-    - `SELECT... FOR UPDATE` - locks read rows for reading.
-  - **Intention Locks** - locks on locks. `table-level locks` and only block other locks and operations on the entire table of type LOCK TABLE
-    - Types:
-      - **Intention shared lock** `(IS)` - blocks only the creation of other shared locks and LOCK TABLE operations. Ex: `SELECT ... LOCK IN SHARE MODE`
-      - **Intention exclusive lock** `(IX)` - blocks only the creation of other exclusive locks and LOCK TABLE operations. Ex: `SELECT ... FOR UPDATE`
-    - Intentions Locks Protocol
-      - Before a transaction can acquire a `shared lock` on a row in a table, it must first acquire an `IS lock` or stronger on the table.    
-      - Before a transaction can acquire an `exclusive lock` on a row in a table, it must first acquire an `IX lock` on the table.
-  - **Gap Locks**
-    - Gap lock is needed in order `to avoid the appearance of phantom records`, when, for example, between two identical readings of a range, a neighboring transaction manages to insert a record into this range.
-    - A gap lock is a lock between index records, or a gap lock before the first or after the last entry in the index. 
-    - For example, `SELECT c1 FROM t WHERE c1 BETWEEN 10 and 20 FOR UPDATE;` prevents other transactions from inserting the value 15 into column t.c1, regardless of whether any such value was already in the column, because gaps between all existing values in the range are locked
+#### Types of Locks
+
+- **Shared lock** `(S)` - shared lock, allows other transactions to read the row and set the same shared lock on it, but does not allow changing the row or setting an exclusive lock
+  - `SELECT ... LOCK IN SHARE MODE` - Locks affected rows for writing. Other sessions can read, but wait for the end of the transaction to modify the affected rows
+- **Exclusive lock** `(X)` - exclusive lock, prohibits other transactions from locking the row, and can also lock the row for both writing and reading, depending on the current isolation level
+  - `SELECT... FOR UPDATE` - locks read rows for reading.
+- **Intention Locks** - locks on locks. `table-level locks` and only block other locks and operations on the entire table of type LOCK TABLE
+  - Types:
+    - **Intention shared lock** `(IS)` - blocks only the creation of other shared locks and LOCK TABLE operations. Ex: `SELECT ... LOCK IN SHARE MODE`
+    - **Intention exclusive lock** `(IX)` - blocks only the creation of other exclusive locks and LOCK TABLE operations. Ex: `SELECT ... FOR UPDATE`
+  - Intentions Locks Protocol
+    - Before a transaction can acquire a `shared lock` on a row in a table, it must first acquire an `IS lock` or stronger on the table.    
+    - Before a transaction can acquire an `exclusive lock` on a row in a table, it must first acquire an `IX lock` on the table.
+- **Gap Locks**
+  - Gap lock is needed in order `to avoid the appearance of phantom records`, when, for example, between two identical readings of a range, a neighboring transaction manages to insert a record into this range.
+  - A gap lock is a lock between index records, or a gap lock before the first or after the last entry in the index. 
+  - For example, `SELECT c1 FROM t WHERE c1 BETWEEN 10 and 20 FOR UPDATE;` prevents other transactions from inserting the value 15 into column t.c1, regardless of whether any such value was already in the column, because gaps between all existing values in the range are locked
 
 ![12.png](images/system.design.6/12.png)
 
-- Isolation:
-  - InnoDB allows you to set the isolation level globally and per session.
-    - `SET GLOBAL TRANSACTION ISOLATION LEVEL`
-    - `SET SESSION TRANSACTION ISOLATION LEVEL`
-  - Levels:
-    - `Repeatable Read`:
-      - **Default** isolation level in InnoDB.
-      - A consistent read (`SELECT`) doesn't block anything, it reads rows `from a snapshot` that is created **on the first read in a transaction**. 
-        - The same queries will always return the same result.
-      - For blocking reads (`SELECT ... FOR UPDATE/LOCK IN SHARE MODE`), UPDATE and DELETE, the lock will depend on the condition type. 
-        - If the condition is unique (`WHERE id = 42`), then only the found record `in the index` is locked (record lock). 
-        - If the condition is with a range (`WHERE id > 42`), then the `entire range is blocked in the index` (gap lock or next-key lock).
-      - Example:
-        - Start Transaction 
+##### Isolation levels
+
+- InnoDB allows you to set the isolation level globally and per session.
+  - `SET GLOBAL TRANSACTION ISOLATION LEVEL`
+  - `SET SESSION TRANSACTION ISOLATION LEVEL`
+- **Levels**:
+  - `Repeatable Read`:
+    - **Default** isolation level in InnoDB.
+    - A consistent read (`SELECT`) doesn't block anything, it reads rows `from a snapshot` that is created **on the first read in a transaction**. 
+      - The same queries will always return the same result.
+    - For blocking reads (`SELECT ... FOR UPDATE/LOCK IN SHARE MODE`), UPDATE and DELETE, the lock will depend on the condition type. 
+      - If the condition is unique (`WHERE id = 42`), then only the found record `in the index` is locked (record lock). 
+      - If the condition is with a range (`WHERE id > 42`), then the `entire range is blocked in the index` (gap lock or next-key lock).
+    - Example:
+      - Start Transaction 
+        - Select 1 — Snapshot 1
+          - Insert or Update index (snapshots are for reading only)
+        - Select 2 — Snapshot 1
+      - Commit transaction
+  - `Read Committed`:
+    - Each consistent read, even within the same transaction, sets and reads its own `snapshot`.
+    - Within the same transaction, for every `SELECT`, the snapshot is created anew, and works with it.
+    - Example:
+      - Start Transaction
           - Select 1 — Snapshot 1
             - Insert or Update index (snapshots are for reading only)
-          - Select 2 — Snapshot 1
-        - Commit transaction
-    - `Read Committed`:
-      - Each consistent read, even within the same transaction, sets and reads its own `snapshot`.
-      - Within the same transaction, for every `SELECT`, the snapshot is created anew, and works with it.
-      - Example:
-        - Start Transaction
-            - Select 1 — Snapshot 1
-              - Insert or Update index (snapshots are for reading only)
-            - Select 2 — Snapshot 2, and we can see the changes from previous insert or update
-        - Commit transaction
-    - `Read Uncommitted`:
-      - All SELECT queries are read in a `non-blocking manner`. 
-      - Not snapshots at all, reads and writes to the database.
-      - Changes to an incomplete transaction can be read in other transactions, and these changes can also be rolled back later. 
-      - This is the so-called `dirty read`
-    - `Serializable`:
-      - Completely similar to `REPEATABLE READ`, except for one moment. 
-      - If autocommit is disabled (and it is disabled when a transaction is explicitly started), then all simple SELECT queries are implicitly converted into `SELECT ... LOCK IN SHARE MODE`, if enabled, each SELECT goes into a separate transaction. 
-      - It is used, as a rule, to turn all read requests into `SELECT ... LOCK IN SHARE MODE`, if this cannot be done in the application code.
-      - If after select request is insert request, this insert request will wait when the select is finished.
-      - This level quarantees that the data will be the same, all requests will be done in the same order.
-      - Read is possible.
-  - Considerations
-    - `Performance vs Consistency`: 
-      - Higher isolation levels like Serializable provide more consistency but at the cost of performance and scalability. 
-      - They increase the likelihood of transaction conflicts and can lead to higher rates of transaction rollbacks in high-concurrency environments.
-    - `Database Specifics`:
-      - Different databases implement these isolation levels in different ways
-    - `Deadlocks and Concurrency`: 
-      - Higher isolation levels can increase the risk of deadlocks, which your application must handle
-    - `Default Settings`: 
-      - Be aware of your database's default transaction isolation level and how it affects your application.
+          - Select 2 — Snapshot 2, and we can see the changes from previous insert or update
+      - Commit transaction
+  - `Read Uncommitted`:
+    - All SELECT queries are read in a `non-blocking manner`. 
+    - Not snapshots at all, reads and writes to the database.
+    - Changes to an incomplete transaction can be read in other transactions, and these changes can also be rolled back later. 
+    - This is the so-called `dirty read`
+  - `Serializable`:
+    - Completely similar to `REPEATABLE READ`, except for one moment. 
+    - If autocommit is disabled (and it is disabled when a transaction is explicitly started), then all simple SELECT queries are implicitly converted into `SELECT ... LOCK IN SHARE MODE`, if enabled, each SELECT goes into a separate transaction. 
+    - It is used, as a rule, to turn all read requests into `SELECT ... LOCK IN SHARE MODE`, if this cannot be done in the application code.
+    - If after select request is insert request, this insert request will wait when the select is finished.
+    - This level quarantees that the data will be the same, all requests will be done in the same order.
+    - Read is possible.
+- Considerations
+  - `Performance vs Consistency`: 
+    - Higher isolation levels like Serializable provide more consistency but at the cost of performance and scalability. 
+    - They increase the likelihood of transaction conflicts and can lead to higher rates of transaction rollbacks in high-concurrency environments.
+  - `Database Specifics`:
+    - Different databases implement these isolation levels in different ways
+  - `Deadlocks and Concurrency`: 
+    - Higher isolation levels can increase the risk of deadlocks, which your application must handle
+  - `Default Settings`: 
+    - Be aware of your database's default transaction isolation level and how it affects your application.
 
 #### Replication
 
@@ -936,21 +913,6 @@ http {
 
 ![13.png](images/system.design.6/13.png)
 
-- Replication stategies:
-    - **Master-slave replication** - In this strategy, all writes are done to the master database, and the slave
-      databases are updated with the changes. If the master database goes down, one of the slave databases can be
-      promoted to be the new master. This strategy is simple and easy to implement, but it does not scale well.
-      - Example how-to setup master-slave replication: https://github.com/linnykoleh/mysql-replication-demo
-    
-    ![replication.png](./images/system.design/replication.png)
-
-    - **Master-master replication** - In this strategy, both master databases are writable and both read from the
-      slave databases. This strategy can scale well, but it is more complex to implement and it can lead to conflicts
-      when the same data is modified concurrently on both master databases.
-      - When happened network partitioning with concurrent access, can be a problem with the `data consistency` with this type of replication. This leads to the `hand fixing` of the database.
-
-    ![replication_2.png](./images/system.design/replication_2.png)
-
 - A `master database` generally only supports `write` operations. A `slave database` gets copies of
   the data from the master database and only supports read operations. All the data-modifying
   commands like insert, delete, or update must be sent to the master database. Most
@@ -960,6 +922,22 @@ http {
 ![replication_3.png](./images/system.design/replication_3.png)
 
 ![leader leader replication.png](./images/system.design.4/leader_leader_replication.png)
+
+##### Replication stategies
+
+- **Master-slave replication** - In this strategy, all writes are done to the master database, and the slave
+  databases are updated with the changes. If the master database goes down, one of the slave databases can be
+  promoted to be the new master. This strategy is simple and easy to implement, but it does not scale well.
+    - Example how-to setup master-slave replication: https://github.com/linnykoleh/mysql-replication-demo
+
+  ![replication.png](./images/system.design/replication.png)
+
+- **Master-master replication** - In this strategy, both master databases are writable and both read from the
+  slave databases. This strategy can scale well, but it is more complex to implement and it can lead to conflicts
+  when the same data is modified concurrently on both master databases.
+    - When happened network partitioning with concurrent access, can be a problem with the `data consistency` with this type of replication. This leads to the `hand fixing` of the database.
+
+  ![replication_2.png](./images/system.design/replication_2.png)
 
 #### Sharding
 
@@ -975,33 +953,35 @@ http {
 - There are two different kinds of sharding: 
   - `vertical sharding` (also known as partitioning)
   - `horizontal sharding`
-- Sharding stategies:
-    - **Hash-based sharding** - Hash-based sharding is the most common sharding strategy. In this strategy, each
-      shard is responsible for a range of the hash values. For example, if we have three shards, one shard may be
-      responsible for hash values 0-33, the second shard may be responsible for hash values 34-66, and the third shard
-      may be responsible for hash values 67-99. When a new record is inserted into the database, the hash value of the
-      key is computed, and the record is inserted into the shard that is responsible for that hash value range.
-    - **Range-based sharding** - Range-based sharding is similar to hash-based sharding, except that the shards are
-      responsible for a range of the actual values of the keys. For example, if we have three shards, one shard may
-      be responsible for keys a-m, the second shard may be responsible for keys n-z, and the third shard may be
-      responsible for keys 0-9. When a new record is inserted into the database, the key is compared against the
-      ranges, and the record is inserted into the shard that is responsible for that key range.
-    - **List sharding** - List sharding is similar to range-based sharding, except that the shards are responsible
-      for a list of the actual values of the keys. For example, if we have three shards, one shard may be responsible
-      for keys a, d, g, j, m, p, s, v, y, and the second shard may be responsible for keys b, e, h, k, n, q, t, w, z,
-      and the third shard may be responsible for keys c, f, i, l, o, r, u, x. When a new record is inserted into the
-      database, the key is compared against the lists, and the record is inserted into the shard that is responsible
-      for that key.
-    - **Directory sharding** - Directory sharding is similar to list sharding, except that the shards are
-      responsible for a directory of the actual values of the keys. For example, if we have three shards, one shard
-      may be responsible for keys starting with a-m, the second shard may be responsible for keys starting with n-z,
-      and the third shard may be responsible for keys starting with 0-9. When a new record is inserted into the
-      database, the key is compared against the directories, and the record is inserted into the shard that is
-      responsible for that key.
 
 ![DB_image_2_cropped.png](./images/system.design/DB_image_2_cropped.png)
 
 ![DB-Shard-Pic-1-e1513014455288.png](./images/system.design/DB-Shard-Pic-1-e1513014455288.png)
+
+##### Sharding stategies
+
+- **Hash-based sharding** - Hash-based sharding is the most common sharding strategy. In this strategy, each
+  shard is responsible for a range of the hash values. For example, if we have three shards, one shard may be
+  responsible for hash values 0-33, the second shard may be responsible for hash values 34-66, and the third shard
+  may be responsible for hash values 67-99. When a new record is inserted into the database, the hash value of the
+  key is computed, and the record is inserted into the shard that is responsible for that hash value range.
+- **Range-based sharding** - Range-based sharding is similar to hash-based sharding, except that the shards are
+  responsible for a range of the actual values of the keys. For example, if we have three shards, one shard may
+  be responsible for keys a-m, the second shard may be responsible for keys n-z, and the third shard may be
+  responsible for keys 0-9. When a new record is inserted into the database, the key is compared against the
+  ranges, and the record is inserted into the shard that is responsible for that key range.
+- **List sharding** - List sharding is similar to range-based sharding, except that the shards are responsible
+  for a list of the actual values of the keys. For example, if we have three shards, one shard may be responsible
+  for keys a, d, g, j, m, p, s, v, y, and the second shard may be responsible for keys b, e, h, k, n, q, t, w, z,
+  and the third shard may be responsible for keys c, f, i, l, o, r, u, x. When a new record is inserted into the
+  database, the key is compared against the lists, and the record is inserted into the shard that is responsible
+  for that key.
+- **Directory sharding** - Directory sharding is similar to list sharding, except that the shards are
+  responsible for a directory of the actual values of the keys. For example, if we have three shards, one shard
+  may be responsible for keys starting with a-m, the second shard may be responsible for keys starting with n-z,
+  and the third shard may be responsible for keys starting with 0-9. When a new record is inserted into the
+  database, the key is compared against the directories, and the record is inserted into the shard that is
+  responsible for that key.
 
 #### Indexing
 
@@ -1019,6 +999,38 @@ http {
   - All the leaf nodes are connected to form a linked list. This enables sequential access along with direct access.
 - Adaptive Hash Index - https://dev.mysql.com/doc/refman/8.4/en/innodb-adaptive-hash.html
   - Even when you have a hash index, you still have a B-tree index.  
+
+#### Optimization
+
+- Saving data in one transaction by `chunks`, this will reduce the time of rebuilding the indexes. This is possible because of the `atomicity` of the transaction.
+- Using RAM more than HDD
+    - For `InnoDB` set buffer size `innodb_buffer_pool_size`
+        - https://dev.mysql.com/doc/refman/8.4/en/innodb-buffer-pool-resize.html
+        - https://dev.mysql.com/doc/refman/8.4/en/innodb-buffer-pool.html
+        - `show variables like '%innodb_buffer_pool_size%';`
+        - `SET GLOBAL innodb_buffer_pool_size=402653184;`
+    - The `InnoDB` buffer uses for:
+        - indexes
+        - cache
+        - temporary tables
+- Increase the size of your `redo log` files:
+    - It’s a special log that stores all changes made to the database before they are permanently written to disk
+    - If the server unexpectedly shuts down, any changes that were made but not yet saved to the main database can be recovered from the redo log.
+    - Instead of writing each operation directly to the main database, MySQL first writes changes to the redo log
+    - During a MySQL restart, the redo log is used to recover any changes that were planned but hadn’t yet been written to the main database.
+    - Small redo log files cause many unnecessary disk writes.
+        - `innodb_log_file_size = 512M`
+- Define how frequently the data in the `redo log` is flushed to disk during transaction commits:
+    - Use `innodb_flush_log_at_trx_commit` parameter
+        - This parameter in MySQL controls how frequently the data in the `redo log` is flushed to disk during transaction commits.
+    - `0` - writes to the log and flushes to disk once per second, but does nothing for each commit
+    - `1` - writes to the log and flushes the log to disk every transaction. Default value
+    - `2` - writes to the log every commit, flushes to disk once a second
+- Scan database with https://github.com/major/MySQLTuner-perl
+- Use indexes if not used
+- Use `show full processlist` to see hosts connected to the database and queries they are running
+- Set connection timeout, to avoid the situation when the connection is not closed and the database is overloaded
+
 
 ### NoSQL Database
 
