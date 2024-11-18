@@ -47,9 +47,9 @@
 - [x] [!!! Most Tech Interview Prep is GARBAGE. (From a Principal Engineer at Amazon)](https://www.youtube.com/watch?v=0Z9RW_hhUT4&ab_channel=ALifeEngineered)
 - [x] [System Design Interview – An insider's Guide discussion](https://youtube.com/playlist?list=PLlghaO_0b1OcY4yfpwGUOcFlnU7LpIkhC&si=Y7OqweK6rEgtaZUw)
 - [x] [Videos System Design for Interviews and Beyond videos](https://www.youtube.com/c/SystemDesignInterview/videos)
-- [x] [System design playlist #1 on Youtube](https://www.youtube.com/playlist?list=PLMCXHnjXnTnvo6alSjVkgxV-VH6EPyvoX)
-- [x] [System design playlist #2 on Youtube](https://www.youtube.com/playlist?list=PLrtCHHeadkHp92TyPt1Fj452_VGLipJnL)
-- [ ] [System design playlist #3 on Youtube](https://www.youtube.com/playlist?list=PLm6XThSMgu_FFth3WUNBKnz_1dG3BKdBn)
+- [x] [System design playlist #1 on YouTube](https://www.youtube.com/playlist?list=PLMCXHnjXnTnvo6alSjVkgxV-VH6EPyvoX)
+- [x] [System design playlist #2 on YouTube](https://www.youtube.com/playlist?list=PLrtCHHeadkHp92TyPt1Fj452_VGLipJnL)
+- [ ] [System design playlist #3 on YouTube](https://www.youtube.com/playlist?list=PLm6XThSMgu_FFth3WUNBKnz_1dG3BKdBn)
 - [ ] [Google SWE teaches systems design](https://www.youtube.com/playlist?list=PLjTveVh7FakKjb4UYzUazqBNNF-WGurXp)
 - [ ] [System design mock interviews](https://www.youtube.com/playlist?list=PLf3F6FcQwgqEpnucyupbIqzxyvFOz9uDq)
 
@@ -97,6 +97,7 @@
 - https://github.blog/engineering
 - https://devblogs.microsoft.com/engineering-at-microsoft
 - https://blogs.nvidia.com
+- https://www.allthingsdistributed.com
 
 ---
 
