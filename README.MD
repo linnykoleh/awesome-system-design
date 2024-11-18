@@ -125,6 +125,7 @@
     - [SQL Database](#sql-database)
       - [ACID](#acid)
       - [Explain](#explain)
+      - [Views](#views)
       - [Transactions, Isolations, Locks](#transactions-isolations-locks)
       - [Replication](#replication)
       - [Sharding](#sharding)
@@ -789,6 +790,8 @@ http {
   - Use `show full processlist` to see hosts connected to the database and queries they are running
   - Set connection timeout, to avoid the situation when the connection is not closed and the database is overloaded
 
+
+
 #### ACID
 
 - **Atomicity** - The transaction must function as a single, indivisible unit of work such that the entire transaction is either committed or cancelled. When transactions are atomic, there is no such thing as a partially completed transaction: all or nothing.
@@ -813,6 +816,18 @@ http {
 - If we are using `WHERE` in the query we need to check if we have an index for that column, this can improve the
   performance of the query (`O(log(n))` complexity)
 - Index can be not used if the query contains a big range of data or when using `functions` for the column
+
+#### Views
+
+- `view`
+    - virtual table based on the result-set of an SQL statement.
+    - A view contains rows and columns, just like a real table.
+    - The fields in the view are fields from one or more real tables in the database.
+    - `reactively` updated when the data in the base tables changes.
+- `materialized view`
+    - a database object that contains the results of a query.
+    - this is a snapshot of the data, and it is not updated automatically when the base table is updated.
+    - can have indexes
 
 #### Transactions, Isolations, Locks
 
@@ -948,13 +963,18 @@ http {
 
 #### Sharding
 
+- Links:
+  - https://www.notion.so/blog/sharding-postgres-at-notion
+  - https://onesignal.com/blog/lessons-learned-from-5-years-of-scaling-postgresql
+
 ![sharding.png](images/system.design.4/sharding.png)
 
-- `Sharding` is the process of storing the same data set in multiple databases. Sharding is used to increase
-  scalability and performance of databases. It is also used to distribute data geographically so that it can be
-  accessed locally from various places.
-  - Sharding helps to fix a problem with `slow writing`.
+- `Sharding` is a scaling technique, when we split our database into smaller parts. Sometimes these parts can be stored on  several servers. We use this technique when trying to solve problem of slow writing or slow reading. 
+  - Sharding helps to fix a problem with `slow writing`(after write, we need to update indexes) 
   - When we have sharding, `master-slave replication` is not needed, because they both are fixing the problem of `slow writing`.
+- There are two different kinds of sharding: 
+  - `vertical sharding` (also known as partitioning)
+  - `horizontal sharding`
 - Sharding stategies:
     - **Hash-based sharding** - Hash-based sharding is the most common sharding strategy. In this strategy, each
       shard is responsible for a range of the hash values. For example, if we have three shards, one shard may be
