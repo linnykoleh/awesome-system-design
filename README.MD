@@ -771,7 +771,8 @@ http {
 
 - **Atomicity** - The transaction must function as a single, indivisible unit of work such that the entire transaction is either committed or cancelled. When transactions are atomic, there is no such thing as a partially completed transaction: all or nothing.
 - **Consistency** - The database must always transition from one consistent state to another.
-- **Isolation** - The results of a transaction are **usually** (_because in read uncommited it's possible, we can read from buffer data(snapshot) that is not committed yet_) invisible to other transactions until it is completed.
+- **Isolation** - The results of a transaction are `usually` invisible to other transactions until it is completed.
+  - This occurs because changes made by a transaction are directly written to the database and are visible to other transactions `without using snapshots`.
 - **Durability** - Once committed, the changes made during the transaction become permanent. This means that changes must be recorded so that data cannot be lost in the event of a system failure.
 
 #### Explain
