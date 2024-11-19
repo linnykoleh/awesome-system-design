@@ -883,9 +883,9 @@ http {
         - Commit transaction
   - `Repeatable Read`:
     - **Default** isolation level in InnoDB.
-    - A consistent read (`SELECT`) doesn't block anything, it reads rows `from a snapshot` that is created **on the first read in a transaction**. 
+    - A `consistent read` (`SELECT`) doesn't block anything, it reads rows `from a snapshot` that is created **on the first read in a transaction**. 
       - The same queries will always return the same result.
-    - For blocking reads (`SELECT ... FOR UPDATE/LOCK IN SHARE MODE`), UPDATE and DELETE, the lock will depend on the condition type. 
+    - For `blocking reads` (`SELECT ... FOR UPDATE/LOCK IN SHARE MODE`), UPDATE and DELETE, the lock will depend on the condition type. 
       - If the condition is unique (`WHERE id = 42`), then only the found record `in the index` is locked (record lock). 
       - If the condition is with a range (`WHERE id > 42`), then the `entire range is blocked in the index` (gap lock or next-key lock).
     - Example:
@@ -899,7 +899,7 @@ http {
     - If autocommit is disabled (and it is disabled when a transaction is explicitly started), then all simple SELECT queries are implicitly converted into `SELECT ... LOCK IN SHARE MODE`, if enabled, each SELECT goes into a separate transaction. 
     - It is used, as a rule, to turn all read requests into `SELECT ... LOCK IN SHARE MODE`, if this cannot be done in the application code.
     - If after select request is insert request, this insert request will wait when the select is finished.
-    - This level quarantees that the data will be the same, all requests will be done in the same order.
+    - This level quarantees that the data will be the same, all requests will be done `in the same order`.
     - Read is possible.
 - Considerations
   - `Performance vs Consistency`: 
@@ -1014,35 +1014,42 @@ http {
 
 #### Optimization
 
+##### Common ideas for optimization
+
 - Saving data in one transaction by `chunks`, this will reduce the time of rebuilding the indexes. This is possible because of the `atomicity` of the transaction.
-- Using RAM more than HDD
-    - For `InnoDB` set buffer size `innodb_buffer_pool_size`
-        - https://dev.mysql.com/doc/refman/8.4/en/innodb-buffer-pool-resize.html
-        - https://dev.mysql.com/doc/refman/8.4/en/innodb-buffer-pool.html
-        - `show variables like '%innodb_buffer_pool_size%';`
-        - `SET GLOBAL innodb_buffer_pool_size=402653184;`
-    - The `InnoDB` buffer uses for:
-        - indexes
-        - cache
-        - temporary tables
-- Increase the size of your `redo log` files:
-    - It’s a special log that stores all changes made to the database before they are permanently written to disk
-    - If the server unexpectedly shuts down, any changes that were made but not yet saved to the main database can be recovered from the redo log.
-    - Instead of writing each operation directly to the main database, MySQL first writes changes to the redo log
-    - During a MySQL restart, the redo log is used to recover any changes that were planned but hadn’t yet been written to the main database.
-    - Small redo log files cause many unnecessary disk writes.
-        - `innodb_log_file_size = 512M`
-- Define how frequently the data in the `redo log` is flushed to disk during transaction commits:
-    - Use `innodb_flush_log_at_trx_commit` parameter
-        - This parameter in MySQL controls how frequently the data in the `redo log` is flushed to disk during transaction commits.
-    - `0` - writes to the log and flushes to disk once per second, but does nothing for each commit
-    - `1` - writes to the log and flushes the log to disk every transaction. Default value
-    - `2` - writes to the log every commit, flushes to disk once a second
 - Scan database with https://github.com/major/MySQLTuner-perl
 - Use indexes if not used
 - Use `show full processlist` to see hosts connected to the database and queries they are running
-- Set connection timeout, to avoid the situation when the connection is not closed and the database is overloaded
+- Set connection timeout to avoid the situation when the connection is not closed and the database is overloaded
 
+##### Using RAM more than HDD
+
+- For `InnoDB` set buffer size `innodb_buffer_pool_size`
+    - https://dev.mysql.com/doc/refman/8.4/en/innodb-buffer-pool-resize.html
+    - https://dev.mysql.com/doc/refman/8.4/en/innodb-buffer-pool.html
+    - `show variables like '%innodb_buffer_pool_size%';`
+    - `SET GLOBAL innodb_buffer_pool_size=402653184;`
+- The `InnoDB` buffer uses for:
+    - indexes
+    - cache
+    - temporary tables
+
+##### Increase the size of your `redo log` files
+
+- It’s a special log that stores all changes made to the database before they are permanently written to disk
+- If the server unexpectedly shuts down, any changes that were made but not yet saved to the main database can be recovered from the redo log.
+- Instead of writing each operation directly to the main database, MySQL first writes changes to the redo log
+- During a MySQL restart, the redo log is used to recover any changes that were planned but hadn’t yet been written to the main database.
+- Small redo log files cause many unnecessary disk writes.
+    - `innodb_log_file_size = 512M`
+
+##### Define how frequently the data in the `redo log` is flushed to disk during transaction commits
+
+- Use `innodb_flush_log_at_trx_commit` parameter
+    - This parameter in MySQL controls how frequently the data in the `redo log` is flushed to disk during transaction commits.
+- `0` - writes to the log and flushes to disk once per second, but does nothing for each commit
+- `1` - writes to the log and flushes the log to disk every transaction. Default value
+- `2` - writes to the log every commit, flushes to disk once a second
 
 ### NoSQL Database
 
