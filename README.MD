@@ -822,7 +822,7 @@ http {
 - `Read locks` on a resource are `shared` or mutually non-blocking: any number of clients can read from a resource at the same time without affecting each other.
 - `Write locks`, on the other hand, are `exclusive`. They exclude the possibility of setting a read lock and other write locks, since the only safe policy is to have only one client writing at a time and prevent all reads of the resource's content for the duration of the write.
   - Always working with `indexes` not with snapshots.
-- Different systems has different concurrent access management strategies.
+- Different systems have different concurrent access management strategies.
   - `InnoDb` system is great for concurrent access, it has locking on `row` and `table` level
 - How to search locks:
   - Execute `SET autocommit=0;` disable auto commit after each request
@@ -830,14 +830,16 @@ http {
   - Execute `SET GLOBAL innodb_status_output_locks=ON;` enable Locks Monitor
   - Execute `SHOW ENGINE INNODB STATUS` - to see the transaction, locks
   - Look for `Transaction` section
+
+![11.png](images/system.design.6/11.png)
+
 - `Сonsistent Read`
   - At the time of the first request in a transaction, a `snapshot` of the database data (read view) is created, which `is not affected by changes in parallel transactions`, but is affected by changes in the current one
   - Reading from such a snapshot is called a `non-blocking consistent read`.
-  - Non-blocking - because no locks are required to create a snapshot, consistent — because no operations in the outside world (except DROP TABLE and ALTER TABLE) will affect the snapshot.
+    - non-blocking - because no locks are required to create a snapshot
+    - consistent — because no operations in the outside world (except DROP TABLE and ALTER TABLE) will affect the snapshot.
   - InnoDB can be asked to take a snapshot before the first request in a transaction, for this you need to mention this at the time of the start of the transaction - `START TRANSACTION WITH CONSISTENT SNAPSHOT`.
   - For 10 parallel transactions, 10 snapshots will be created, and each transaction will work with its own snapshot.
-
-![11.png](images/system.design.6/11.png)
 
 #### Types of Locks
 
@@ -865,6 +867,20 @@ http {
   - `SET GLOBAL TRANSACTION ISOLATION LEVEL`
   - `SET SESSION TRANSACTION ISOLATION LEVEL`
 - **Levels**:
+  - `Read Uncommitted`:
+    - All SELECT queries are read in a `non-blocking manner`.
+    - Not snapshots at all, reads and writes to the database.
+    - Changes to an incomplete transaction can be read in other transactions, and these changes can also be rolled back later.
+    - This is the so-called `dirty read`
+  - `Read Committed`:
+    - Each consistent read, even within the same transaction, sets and reads its own `snapshot`.
+    - Within the same transaction, for every `SELECT`, the snapshot is created anew, and works with it.
+    - Example:
+        - Start Transaction
+        - Select 1 — Creating snapshot 1
+        - Insert or Update index (snapshots are for reading only)
+        - Select 2 — Creating snapshot 2, and we can see the changes from previous insert or update
+        - Commit transaction
   - `Repeatable Read`:
     - **Default** isolation level in InnoDB.
     - A consistent read (`SELECT`) doesn't block anything, it reads rows `from a snapshot` that is created **on the first read in a transaction**. 
@@ -874,24 +890,10 @@ http {
       - If the condition is with a range (`WHERE id > 42`), then the `entire range is blocked in the index` (gap lock or next-key lock).
     - Example:
       - Start Transaction 
-        - Select 1 — Snapshot 1
-          - Insert or Update index (snapshots are for reading only)
-        - Select 2 — Snapshot 1
+      - Select 1 — Creating snapshot 1
+      - Insert or Update index (snapshots are for reading only)
+      - Select 2 — Using snapshot 1
       - Commit transaction
-  - `Read Committed`:
-    - Each consistent read, even within the same transaction, sets and reads its own `snapshot`.
-    - Within the same transaction, for every `SELECT`, the snapshot is created anew, and works with it.
-    - Example:
-      - Start Transaction
-          - Select 1 — Snapshot 1
-            - Insert or Update index (snapshots are for reading only)
-          - Select 2 — Snapshot 2, and we can see the changes from previous insert or update
-      - Commit transaction
-  - `Read Uncommitted`:
-    - All SELECT queries are read in a `non-blocking manner`. 
-    - Not snapshots at all, reads and writes to the database.
-    - Changes to an incomplete transaction can be read in other transactions, and these changes can also be rolled back later. 
-    - This is the so-called `dirty read`
   - `Serializable`:
     - Completely similar to `REPEATABLE READ`, except for one moment. 
     - If autocommit is disabled (and it is disabled when a transaction is explicitly started), then all simple SELECT queries are implicitly converted into `SELECT ... LOCK IN SHARE MODE`, if enabled, each SELECT goes into a separate transaction. 
@@ -2381,7 +2383,7 @@ The fanout service works as follows:
     - Fetching news feed is fast because the news feed is pre-computed during write time.
 - Cons:
     - If a user has many friends, fetching the friend list and generating news feeds for all of
-      them are slow and time consuming. It is called hotkey problem.
+      them are slow and time-consuming. It is called hotkey problem.
     - For inactive users or those rarely log in, pre-computing news feeds waste computing
       resources.
 
