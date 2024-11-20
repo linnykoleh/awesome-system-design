@@ -1021,6 +1021,7 @@ http {
 - Use indexes if not used
 - Use `show full processlist` to see hosts connected to the database and queries they are running
 - Set connection timeout to avoid the situation when the connection is not closed and the database is overloaded
+- Use optimize tables - `OPTIMIZE TABLE foo;` - this is a process of defragmenting the space on disc
 
 ##### Using RAM more than HDD
 
