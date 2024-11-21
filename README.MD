@@ -149,7 +149,7 @@
         - [Write-Around](#Write-Around)
         - [Write-Back](#Write-Back)
       - [Deduplication Cache](#deduplication-cache)
-      - [Technologies](#technologies-for-cache)
+      - [Redis](#redis)
     - [CAP Theorem](#cap-theorem)
       - [PACELC Theorem](#pacelc-theorem)
   - [Numbers every programmer should know](#numbers-every-programmer-should-know)
@@ -1224,9 +1224,7 @@ For some systems like financial systems, consistency is very important. For othe
 
 ![3.png](./images/system.design.3/3.png)
 
-#### Technologies for cache
-
-##### Redis
+#### Redis
 
 - in-memory data structure store, used as a database, cache, and message broker
 - Structure:
@@ -1243,7 +1241,24 @@ For some systems like financial systems, consistency is very important. For othe
 
 ![16.jpg](images/system.design.6/16.jpg)
 
+- Persistence:
+    - `RDB` - snapshot of the dataset in memory at a given point in time, `2x` of memory
+    - `AOF` - log only commands that change the dataset, slow restart, because we need to execute all commands
+
 ![17.png](images/system.design.6/17.png)
+
+- Keys Eviction - sometimes you are facing up with the situation, when you trying to put in more keys then system allows (maxmemory limit). Redis can handle this in 6 different ways. This process is controlled by eviction policy. Available modes:
+  - volatile-lru Evict using approximated LRU among the keys with an expire set.
+  - allkeys-lru Evict any key using approximated LRU.
+  - volatile-lfu Evict using approximated LFU among the keys with an expire set.
+  - allkeys-lfu Evict any key using approximated LFU.
+  - volatile-random Remove a random key among the ones with an expire set.
+  - allkeys-random Remove a random key, any key.
+  - volatile-ttl Remove the key with the nearest expire time (minor TTL)
+  - noeviction Don't evict anything, just return an error on write operations.
+- `LRU` means Least Recently Used LFU means Least Frequently Used
+
+![18.png](images/system.design.6/18.png)
 
 ---
 
