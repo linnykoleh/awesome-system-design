@@ -142,12 +142,14 @@
     - [Quorum](#quorum)
     - [Consensus](#consensus)
     - [Cache](#cache)
-      - [Cache aside](#cache-aside)
-      - [Read through](#read-through)
-      - [Write through](#write-through)
-      - [Write-Around](#Write-Around)
-      - [Write-Back](#Write-Back)
+      - [Cache types](#cache-types) 
+        - [Cache aside](#cache-aside)
+        - [Read through](#read-through)
+        - [Write through](#write-through)
+        - [Write-Around](#Write-Around)
+        - [Write-Back](#Write-Back)
       - [Deduplication Cache](#deduplication-cache)
+      - [Technologies](#technologies-for-cache)
     - [CAP Theorem](#cap-theorem)
       - [PACELC Theorem](#pacelc-theorem)
   - [Numbers every programmer should know](#numbers-every-programmer-should-know)
@@ -1165,7 +1167,9 @@ For some systems like financial systems, consistency is very important. For othe
 
 - https://codeahoy.com/2017/08/11/caching-strategies-and-how-to-choose-the-right-one
 
-#### Cache-Aside
+#### Cache types:
+
+##### Cache-Aside
  
 - The cache sits on the side and the application directly talks to both the cache and the database.
   There is no connection between the cache and the primary database. All operations to cache and the database are
@@ -1179,7 +1183,7 @@ For some systems like financial systems, consistency is very important. For othe
 
 ![cache_1.png](./images/system.design/cache_1.png)
 
-#### Read-Through
+##### Read-Through
 
 - `Read-through cache` sits in-line with the database. When there is a cache miss, it loads
   missing data from database, populates the cache and returns it to the application. Read-through caches work best
@@ -1190,7 +1194,7 @@ For some systems like financial systems, consistency is very important. For othe
 
 ![cache_2.png](./images/system.design/cache_2.png)
 
-#### Write-Through
+##### Write-Through
 
 - `Write-Through Cache` - data is first written to the cache and then to the database. The cache sits in-line with
   the database and writes always go through the cache to the main database. This helps cache maintain consistency
@@ -1201,12 +1205,12 @@ For some systems like financial systems, consistency is very important. For othe
 
 ![cache_3.png](./images/system.design/cache_3.png)
 
-#### Write-Around
+##### Write-Around
 
 - `Write-Around` - Here, data is written directly to the database and only the data that is read makes it way into
   the cache.
 
-#### Write-Back
+##### Write-Back
 
 - `Write-Back` or `Write-Behind` - Here, the application writes data to the cache which stores the data and
   acknowledges to the application immediately. Then later, the cache writes the data back to the database. Here, the
@@ -1219,6 +1223,27 @@ For some systems like financial systems, consistency is very important. For othe
 #### Deduplication cache
 
 ![3.png](./images/system.design.3/3.png)
+
+#### Technologies for cache
+
+##### Redis
+
+- in-memory data structure store, used as a database, cache, and message broker
+- Structure:
+    - `String` - simple key-value pairs
+    - `Hash` - map between string fields and string values
+    - `List` - collection of strings, sorted by insertion order
+    - `Set` - collection of unique strings
+    - `Sorted Set` - collection of unique strings with scores
+    - `HyperLogLog` - probabilistic data structure used to estimate the cardinality of a set
+    - `Geospatial` - store geospatial data
+    - `Streams` - append-only data structure
+
+![15.jpg](images/system.design.6/15.jpg)
+
+![16.jpg](images/system.design.6/16.jpg)
+
+![17.png](images/system.design.6/17.png)
 
 ---
 
