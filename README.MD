@@ -1260,6 +1260,12 @@ For some systems like financial systems, consistency is very important. For othe
 
 ![18.png](images/system.design.6/18.png)
 
+##### Cache problems
+
+- `Cache stampede` - when a cache is invalidated, and multiple requests try to repopulate the cache at the same time.
+  - It can be solved by using random for every request before cache invalidation.
+  - https://en.wikipedia.org/wiki/Cache_stampede
+
 ---
 
 ## Numbers every programmer should know
