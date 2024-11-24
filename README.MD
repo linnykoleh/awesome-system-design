@@ -273,40 +273,43 @@
 > Think deeply and ask questions to clarify requirements and assumptions.
 > This is extremely important.
 
-- **𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭 𝐂𝐥𝐚𝐫𝐢𝐟𝐢𝐜𝐚𝐭𝐢𝐨𝐧𝐬 (3-5 𝐦𝐢𝐧)**
+- `Requirements (3-5 min)`
     - Ask clarifying questions to understand the problem and expectations of the interviewer.
         - Use cases
         - Scenarios that will not be covered
-        - Who will use
-        - How many will use
-        - Usage patterns
+        - `Who` will use the system
+        - `How` will the system be used
+        - Usage patterns 
         - Technology stack
-    - **𝐅𝐮𝐧𝐜𝐭𝐢𝐨𝐧𝐚𝐥 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬**
+    - `Functional`
         - Start with the customer and work backwards
         - Who will use the system
         - How the system will be used
+        - What type of data needs to be stored
         - Platform (Mobile, Web, Desktop)
-    - **𝐍𝐨𝐧 𝐅𝐮𝐧𝐜𝐭𝐢𝐨𝐧𝐚𝐥 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬**
-        - `High availability` system uptime in percentage
+        - Question to interviewer: _Any requirements that I did not ask that are important for me to know?_
+    - `Non functional`
+        - **High availability** system uptime in percentage
             - 99 % => 3.65 days of downtime per year
             - 99.9% => 8.76 hours of downtime per year
             - 99.99% => 52 minutes 35 seconds of downtime per year
             - 99.999% => 5 minutes 15 seconds of downtime per year
             - 99.9999% => 31 seconds of downtime per year
-        - `Scalability` needs to handle peak load
-        - `Performance` in terms of latency and throughput
-        - `Durability` - data should not be lost
-        - `Consistency` - data should not be corrupted
+        - **Scalability** the property of a system to handle a growing load
+        - **Performance** in terms of latency and throughput
+        - **Rezilience** is how quickly the system can recover from failures
+        - **Durability** - data should not be lost
+        - **Consistency** - data should not be corrupted
             - Strong consistency
-            - Weak consistency
-        - `Maintainability`
+            - Eventual consistency
+        - **Maintainability**
             - Failure modes and mitigations
             - Monitoring
             - Testing
             - Deployment
-        - `Security`
-        - `Cost`
-- **𝐄𝐬𝐭𝐢𝐦𝐚𝐭𝐢𝐨𝐧𝐬 (3-5 𝐦𝐢𝐧)**
+        - **Security**
+        - **Cost**
+- `Estimations (3–5 min)` (_ask interviewer if needed_)
     - Latency/Throughput expectations
     - QPS (Queries Per Second) Read/Write ratio
     - Total/Daily active users
@@ -316,26 +319,29 @@
         - Storage estimates
         - Memory estimates
             - If we are using a cache, what is the kind of data we want to store in cache
-            - How much RAM and how many machines do we need for us to achieve this ?
+            - How much RAM and how many machines do we need for us to achieve this?
             - Amount of data you want to store in disk/ssd
-            - Number of users/tweets/likes etc
-- **Start with something simple**
-    - Single machine solution only
-    - Single service solution
-    - Design monolith service and then break it into microservices
-- **High level design (5-10 min)**
+- `API design (5–10 min)` (_ask interviewer if needed_)
+  - Public endpoints
+    - CRUD
+  - Private endpoints
+- `High level design (5–10 min)`
+    - Start with something simple
+      - Single machine solution only
+      - Single service solution
+      - Design monolith service and then break it into microservices
     - APIs for Read/Write scenarios for crucial components
     - Database schema
     - Basic algorithm
-    - High level design for Read/Write scenario
-    - High level design for `Read heavy` scenario
-    - High level design for `Write heavy` scenario
-- **𝐃𝐞𝐬𝐢𝐠𝐧 details (15-20 min)**
-    - Scaling the algorithm
+    - High level design for a Read/Write scenario
+      - High level design for `Read heavy` scenario
+      - High level design for `Write heavy` scenario
+- `Design details (15-20 min)`
+    - Scaling the high level design
     - Scaling individual components:
         - Availability, Consistency and Scale story for each component
         - Consistency and availability patterns
-    - Think about the following components, how they would fit in and how it would help
+    - Think about the following components, how they would fit in and how it would help:
         - Client (Mobile, Browser)
         - DNS
         - CDN (Push vs Pull)
@@ -343,44 +349,33 @@
         - Reverse Proxy
         - Blob / Object Storage
         - Application layer scaling (Microservices, Service Discovery)
-        - DB (RDBMS, NoSQL)
-            - RDBMS
-                - Master-slave, Master-master, Federation, Sharding, Denormalization, SQL Tuning
-            - NoSQL
-                - Key-Value, Wide-Column, Graph, Document
-                    - Fast-lookups:
-                        - RAM (Bounded size) => Redis, Memcached
-                        - AP (Unbounded size) => Cassandra, RIAK, Voldemort
-                        - CP (Unbounded size) => HBase, MongoDB, Couchbase, DynamoDB
-                - Read heavy: MongoDB, Couchbase
-                - Write heavy: Cassandra, ScyllaDB
+        - Database:
+          - SQL
+            - Replication, Sharding, Indexing, Denormalization, SQL Tuning
+          - NoSQL
+            - Types: Key-Value, Wide-Column, Graph, Document
+            - Read heavy: MongoDB, Couchbase
+            - Write heavy: Cassandra, ScyllaDB
         - Caches
-            - Client caching, CDN caching, Webserver caching, Database caching, Application caching, Cache @Query level,
-              Cache @Object level
+            - Client caching, CDN caching, Webserver caching, Database caching, Application caching
             - Eviction policies:
-                - Cache aside
-                - Write through
-                - Write behind
-                - Refresh ahead
-            - Asynchronism
-                - Message queues
-                - Task queues
-                - Back pressure
-        - Communication
-            - TCP
-            - UDP
-            - REST
-            - RPC
-            - Web Sockets
-            - HTTP/S
+              - LRU, LFU
+            - Types: 
+              - Cache aside, Write through, Write behind
+        - Queue:
+          - Message queues
+          - Task queues
+          - Back pressure
+        - Communication:
+          - HTTP/S, TCP, UDP, RPC, Web Sockets
     - Logging, Metrics and Automation
-- **Justify (5 min)**
-    - Throughput of each layer
-    - Latency caused between each layer
-    - Overall latency justification
-- **𝐑𝐞𝐬𝐨𝐥𝐯𝐞 𝐛𝐨𝐭𝐭𝐥𝐞𝐧𝐞𝐜𝐤𝐬 𝐚𝐧𝐝 𝐟𝐨𝐥𝐥𝐨𝐰-𝐮𝐩 𝐪𝐮𝐞𝐬𝐭𝐢𝐨𝐧𝐬 (2-3 𝐦𝐢𝐧𝐮𝐭𝐞𝐬)**
-    - Error cases (server failure, network loss, etc.) and how to handle them
+- `Follow-up (2–3 min)`
     - Bottlenecks
+    - SPOF
+    - Latency
+    - Security
+    - Cost
+    - Error cases (server failure, network loss, etc.) and how to handle them
     - How to monitor the system and what metrics to collect
     - How to scale the system to the next level
 
@@ -390,6 +385,10 @@
 ![2.png](./images/system.design.3/2.png)
 
 ### Availability
+
+![19.png](images/system.design.6/19.png)
+
+![20.png](images/system.design.6/20.png)
 
 ![numbers_4.png](./images/system.design/numbers_4.png)
 
@@ -2427,6 +2426,7 @@ The fanout service works as follows:
    news feed is slim. Most users are only interested in the latest content, so the cache miss
    rate is low.
 5. Store <post_id, user_id > in news feed cache.
+6. Use `collaborative filtering`
 
 ### Fanout on write for a news feed system
 
@@ -3357,13 +3357,13 @@ The fanout service works as follows:
 - SQL or NoSQL database to store the mapping between long and short URLs?
     - The URL shortening system is read-heavy. Any database that scales well for reads will work. And as we already
       know, both SQL databases (e.g. using solutions like Vitess) and NoSQL databases can scale reads very well. NoSQL
-      database (e.g. MongoDB) will be a better choice. Why? Let’s discuss it in the second module of the course.
+      database (e.g. MongoDB) will be a better choice.
 - How to retrieve long URLs quickly?
     - The cache will store the mapping between short URLs and long URLs. We can use either cache-aside
       and read-through pattern for updating the cache. With read-through being a better option. As for the eviction
       policy, the Least Recently Used (LRU) eviction policy is a good choice.
 - Should we have a separate component for handling read requests?
-    - Yes, we should introduce a separate web service for handling read requests. Let’s call it a Read service. Having a
+    - Yes, we should introduce a separate web service for handling read requests. Let’s call it a `Read service`. Having a
       separate component will allow us scale read requests independently of write requests and we can make this service
       act as a read-through cache.
 - How to scale read requests?
@@ -3371,8 +3371,8 @@ The fanout service works as follows:
       replicas to the database when needed. As mentioned earlier, we can also utilize Bloom filters to reduce the load
       on both the cache and the database.
 - How to properly handle large spikes or read requests (popular URLs)?
-    - We should utilize the local cache on Read service machines to store the same hot URL on multiple machines. This
-      way, read requests can be handled by any of the Read service machines in the cluster, avoiding heavy load on one
+    - We should utilize the local cache on `Read service` machines to store the same hot URL on multiple machines. This
+      way, read requests can be handled by any of the `Read service` machines in the cluster, avoiding heavy load on one
       particular machine.
 - How to achieve high availability?
     - As we already know, achieving high availability requires both architecture and processes. In our system, each
