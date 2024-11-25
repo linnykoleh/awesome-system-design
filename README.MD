@@ -798,6 +798,8 @@ http {
 
 ![14.gif](images/system.design.6/14.gif)
 
+##### !!! ACID relates to transactions
+
 #### Explain
 
 - The `EXPLAIN` command is the primary way to find out what decisions the query optimizer is making. It has a lot of limitations and doesn't always tell the truth, but since there's no better one anyway, it makes sense to learn how to use it so you can make educated guesses about how queries are executed.
@@ -1090,6 +1092,8 @@ http {
 
 #### BASE
 
+##### ACID related to transactions and BASE related to distributed systems
+
 - **Basically Available** - The system guarantees availability.
 - **Soft state** - The state of the system may change over time.
 - **Eventual consistency** - The system will become consistent over a period of time.
@@ -1261,14 +1265,14 @@ For some systems like financial systems, consistency is very important. For othe
 ![17.png](images/system.design.6/17.png)
 
 - Keys Eviction - sometimes you are facing up with the situation, when you trying to put in more keys then system allows (maxmemory limit). Redis can handle this in 6 different ways. This process is controlled by eviction policy. Available modes:
-  - volatile-lru Evict using approximated LRU among the keys with an expire set.
-  - allkeys-lru Evict any key using approximated LRU.
-  - volatile-lfu Evict using approximated LFU among the keys with an expire set.
-  - allkeys-lfu Evict any key using approximated LFU.
-  - volatile-random Remove a random key among the ones with an expire set.
-  - allkeys-random Remove a random key, any key.
-  - volatile-ttl Remove the key with the nearest expire time (minor TTL)
-  - noeviction Don't evict anything, just return an error on write operations.
+  - `volatile-lru` Evict using approximated LRU among the keys with an expire set.
+  - `allkeys-lru` Evict any key using approximated LRU.
+  - `volatile-lfu` Evict using approximated LFU among the keys with an expire set.
+  - `allkeys-lfu` Evict any key using approximated LFU.
+  - `volatile-random` Remove a random key among the ones with an expire set.
+  - `allkeys-random` Remove a random key, any key.
+  - `volatile-ttl` Remove the key with the nearest expire time (minor TTL)
+  - `noeviction` Don't evict anything, just return an error on write operations.
 - `LRU` means Least Recently Used LFU means Least Frequently Used
 
 ![18.png](images/system.design.6/18.png)
