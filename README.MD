@@ -274,20 +274,14 @@
 > This is extremely important.
 
 - `Requirements (3-5 min)`
-    - Ask clarifying questions to understand the problem and expectations of the interviewer.
-        - Use cases
-        - Scenarios that will not be covered
-        - `Who` will use the system
-        - `How` will the system be used
-        - Usage patterns 
-        - Technology stack
     - `Functional`
         - Start with the customer and work backwards
-        - Who will use the system
-        - How the system will be used
+        - **Who** will use the system
+        - **How** the system will be used
         - What type of data needs to be stored
         - Platform (Mobile, Web, Desktop)
-        - Question to interviewer: _Any requirements that I did not ask that are important for me to know?_
+        - Use cases
+        - Ask your interviewer: _“Are there any important requirements you have in mind that I’ve overlooked?”_
     - `Non functional`
         - **High availability** system uptime in percentage
             - 99 % => 3.65 days of downtime per year
@@ -296,19 +290,29 @@
             - 99.999% => 5 minutes 15 seconds of downtime per year
             - 99.9999% => 31 seconds of downtime per year
         - **Scalability** the property of a system to handle a growing load
+          - Vertical 
+          - Horizontal
+          - Elastic - ability to scale up and down
+          - Auto-scaling
         - **Performance** in terms of latency and throughput
         - **Rezilience** is how quickly the system can recover from failures
         - **Durability** - data should not be lost
+          - Backup
+          - RAID
+          - Replication
         - **Consistency** - data should not be corrupted
-            - Strong consistency
-            - Eventual consistency
+          - Strong consistency
+          - Eventual consistency
+          - Causal Consistency — correct order of events
         - **Maintainability**
-            - Failure modes and mitigations
-            - Monitoring
-            - Testing
-            - Deployment
+          - Failure modes and mitigations
+          - Monitoring
+          - Testing
+          - Deployment
         - **Security**
         - **Cost**
+          - Engineering
+          - Maintenance
 - `Estimations (3–5 min)` (_ask interviewer if needed_)
     - Latency/Throughput expectations
     - QPS (Queries Per Second) Read/Write ratio
@@ -348,15 +352,16 @@
         - Load Balancers (Active-Passive, Active-Active, Layer 4, Layer 7)
         - Reverse Proxy
         - Blob / Object Storage
-        - Application layer scaling (Microservices, Service Discovery)
+        - Application layer scaling (Microservices, Service Discovery, N tier)
         - Database:
-          - SQL
+          - **SQL**
             - Replication, Sharding, Indexing, Denormalization, SQL Tuning
-          - NoSQL
+          - **NoSQL**
             - Types: Key-Value, Wide-Column, Graph, Document
             - Read heavy: MongoDB, Couchbase
             - Write heavy: Cassandra, ScyllaDB
-        - Caches
+          - Cold/Hot storage
+        - Cache:
             - Client caching, CDN caching, Webserver caching, Database caching, Application caching
             - Eviction policies:
               - LRU, LFU
@@ -376,7 +381,7 @@
     - Security
     - Cost
     - Error cases (server failure, network loss, etc.) and how to handle them
-    - How to monitor the system and what metrics to collect
+    - Monitoring
     - How to scale the system to the next level
 
 
