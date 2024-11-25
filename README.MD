@@ -292,12 +292,12 @@
         - **Scalability** the property of a system to handle a growing load
           - Vertical 
           - Horizontal
-          - Elastic - ability to scale up and down
+          - Elastic — ability to scale up and down
           - Auto-scaling
         - **Performance** in terms of latency and throughput
         - **Rezilience** is how quickly the system can recover from failures
         - **Durability** - data should not be lost
-          - Backup
+          - Backups (full, differential, incremental)
           - RAID
           - Replication
         - **Consistency** - data should not be corrupted
@@ -310,9 +310,14 @@
           - Testing
           - Deployment
         - **Security**
+          - Authentication and Authorization
+          - DDOS protection
+          - SQL injection
+          - Data protection in transit and storage
         - **Cost**
-          - Engineering
-          - Maintenance
+          - Engineering cost
+          - Maintenance cost
+          - Resource cost
 - `Estimations (3–5 min)` (_ask interviewer if needed_)
     - Latency/Throughput expectations
     - QPS (Queries Per Second) Read/Write ratio
@@ -377,7 +382,7 @@
 - `Follow-up (2–3 min)`
     - Bottlenecks
     - SPOF
-    - Latency
+    - Latency (use other protocols, cache, multi-threading, faster algorithms, compression, cdn)
     - Security
     - Cost
     - Error cases (server failure, network loss, etc.) and how to handle them
@@ -679,6 +684,10 @@ http {
 3. On subsequent requests, the browser sends the cookie back to the server, where we can verify the session token or check the signature on/decrypt a JWT.
 4. Periodically, the session token or JWT should be expired and a new one generated and sent down to the client with a cookie set header.
 5. Eventually, the user's session may expire from inactivity. In this case, we go back to step 2.
+
+### Non-functional requirements for security
+
+![21.png](images/system.design.6/21.png)
 
 ---
 
