@@ -400,15 +400,15 @@
 
 ![20.png](images/system.design.6/20.png)
 
-![numbers_4.png](./images/system.design/numbers_4.png)
+![numbers_4.png](images/system.design.1/numbers_4.png)
 
 ---
 
 ## System Design Blueprint: The Ultimate Guide
 
-![sys_design_blue_print.png](./images/system.design/sys_design_blue_print_1.png)
+![sys_design_blue_print.png](images/system.design.1/sys_design_blue_print_1.png)
 
-![sys_design_blue_print_2.png](./images/system.design/sys_design_blue_print_2.png)
+![sys_design_blue_print_2.png](images/system.design.1/sys_design_blue_print_2.png)
 
 ## High Load Applications Architecture
 
@@ -594,9 +594,9 @@ http {
 
 ### TCP vs UDP
 
-![Graphic-UDP-Vs-TCP-Diagram_1150x685-700x417.png](./images/system.design/Graphic-UDP-Vs-TCP-Diagram_1150x685-700x417.png)
+![Graphic-UDP-Vs-TCP-Diagram_1150x685-700x417.png](images/system.design.1/Graphic-UDP-Vs-TCP-Diagram_1150x685-700x417.png)
 
-![table-tcp-udp.png](./images/system.design/table-tcp-udp.png)
+![table-tcp-udp.png](images/system.design.1/table-tcp-udp.png)
 
 - `TCP` is a connection-oriented protocol, which means that before data can be transferred, two computers must first
   establish a connection.
@@ -613,11 +613,11 @@ http {
 
 ### OSI Model
 
-![original-seven-layers-of-osi-model-1627523878-JYjV8oybcC.png](./images/system.design/original-seven-layers-of-osi-model-1627523878-JYjV8oybcC.png)
+![original-seven-layers-of-osi-model-1627523878-JYjV8oybcC.png](images/system.design.1/original-seven-layers-of-osi-model-1627523878-JYjV8oybcC.png)
 
 ### DNS
 
-![dns.png](./images/system.design/dns.png)
+![dns.png](images/system.design.1/dns.png)
 
 ![dns.png](./images/system.design.3/dns.png)
 
@@ -629,7 +629,7 @@ http {
 
 ## CDN
 
-![cdn_cover.png](./images/system.design/cdn_cover.png)
+![cdn_cover.png](images/system.design.1/cdn_cover.png)
 
 - `CDN` is a system of distributed servers (network) that deliver webpages and other web content to a user based on the
   geographic locations of the user, the origin of the webpage and a content delivery server.
@@ -710,7 +710,7 @@ http {
   distributing traffic across multiple servers. `reverse proxy` is used to provide security, load balancing, and caching
   for server requests.
 
-![forward_proxy_vs_reverse_proxy-f_mobile.png](./images/system.design/forward_proxy_vs_reverse_proxy-f_mobile.png)
+![forward_proxy_vs_reverse_proxy-f_mobile.png](images/system.design.1/forward_proxy_vs_reverse_proxy-f_mobile.png)
 
 ## Load Balancing stategies
 
@@ -734,7 +734,7 @@ http {
   each server does is roughly the same. If one server is much faster or slower than the others, this method will not
   work well.
 
-![the-five-most-common-balancing-methods.jpg](./images/system.design/the-five-most-common-balancing-methods.jpg)
+![the-five-most-common-balancing-methods.jpg](images/system.design.1/the-five-most-common-balancing-methods.jpg)
 
 ## Consistent Hashing
 
@@ -751,7 +751,7 @@ http {
   only a small portion of the keys need to be remapped. When a server is removed, the keys that were assigned to
   that server are evenly distributed among the remaining servers.
 
-![Consistent Hashing.png](./images/system.design/Consistent_Hashing.png)
+![Consistent Hashing.png](images/system.design.1/Consistent_Hashing.png)
 
 ---
 
@@ -948,7 +948,7 @@ http {
   applications require a much higher ratio of reads to writes; thus, the number of slave
   databases in a system is usually larger than the number of master databases.
 
-![replication_3.png](./images/system.design/replication_3.png)
+![replication_3.png](images/system.design.1/replication_3.png)
 
 ![leader leader replication.png](./images/system.design.4/leader_leader_replication.png)
 
@@ -959,14 +959,14 @@ http {
   promoted to be the new master. This strategy is simple and easy to implement, but it does not scale well.
     - Example how-to setup master-slave replication: https://github.com/linnykoleh/mysql-replication-demo
 
-  ![replication.png](./images/system.design/replication.png)
+  ![replication.png](images/system.design.1/replication.png)
 
 - **Master-master replication** - In this strategy, both master databases are writable and both read from the
   slave databases. This strategy can scale well, but it is more complex to implement and it can lead to conflicts
   when the same data is modified concurrently on both master databases.
     - When happened network partitioning with concurrent access, can be a problem with the `data consistency` with this type of replication. This leads to the `hand fixing` of the database.
 
-  ![replication_2.png](./images/system.design/replication_2.png)
+  ![replication_2.png](images/system.design.1/replication_2.png)
 
 #### Sharding
 
@@ -983,9 +983,9 @@ http {
   - `vertical sharding` (also known as partitioning)
   - `horizontal sharding`
 
-![DB_image_2_cropped.png](./images/system.design/DB_image_2_cropped.png)
+![DB_image_2_cropped.png](images/system.design.1/DB_image_2_cropped.png)
 
-![DB-Shard-Pic-1-e1513014455288.png](./images/system.design/DB-Shard-Pic-1-e1513014455288.png)
+![DB-Shard-Pic-1-e1513014455288.png](images/system.design.1/DB-Shard-Pic-1-e1513014455288.png)
 
 ##### Sharding stategies
 
@@ -1101,11 +1101,11 @@ http {
 
 ### SQL vs NoSQL
 
-![asidvsbase.webp](./images/system.design/asidvsbase.webp)
+![asidvsbase.webp](images/system.design.1/asidvsbase.webp)
 
-![04fig04_alt.jpg](./images/system.design/04fig04_alt.jpg)
+![04fig04_alt.jpg](images/system.design.1/04fig04_alt.jpg)
 
-![photo_2023-02-15_09-50-11.jpg](./images/system.design/photo_2023-02-15_09-50-11.jpg)
+![photo_2023-02-15_09-50-11.jpg](images/system.design.1/photo_2023-02-15_09-50-11.jpg)
 
 ![simple-map-for-db.png](images/system.design.4/simple-map-for-db.png)
 
@@ -1147,7 +1147,7 @@ http {
     - **Partition tolerance** - The system continues to operate despite an arbitrary number of messages being
       dropped (or delayed) by the network between nodes.
 
-![cap_theorem.webp](./images/system.design/cap_theorem.webp)
+![cap_theorem.webp](images/system.design.1/cap_theorem.webp)
 
 - In a distributed system, `partitions` cannot be avoided, and when a partition occurs, we must
   choose between `consistency` and `availability`. `n3` goes down and cannot
@@ -1168,7 +1168,7 @@ For some systems like financial systems, consistency is very important. For othe
 
 #### PACELC Theorem
 
-![PACELC-theorem-diagram-1.webp](./images/system.design/PACELC-theorem-diagram-1.webp)
+![PACELC-theorem-diagram-1.webp](images/system.design.1/PACELC-theorem-diagram-1.webp)
 
 ### Cache
 
@@ -1198,7 +1198,7 @@ For some systems like financial systems, consistency is very important. For othe
        queries the database to read the data, returns it to the client and stores the data in cache so the
        subsequent reads for the same data results in a cache hit.
 
-![cache_1.png](./images/system.design/cache_1.png)
+![cache_1.png](images/system.design.1/cache_1.png)
 
 ##### Read-Through
 
@@ -1209,7 +1209,7 @@ For some systems like financial systems, consistency is very important. For othe
        In read-through, this logic is usually supported by the library or stand-alone cache provider.
     2. Unlike cache-aside, the data model in read-through cache cannot be different than that of the database.
 
-![cache_2.png](./images/system.design/cache_2.png)
+![cache_2.png](images/system.design.1/cache_2.png)
 
 ##### Write-Through
 
@@ -1220,7 +1220,7 @@ For some systems like financial systems, consistency is very important. For othe
     2. The cache updates the data in the main database. When the write is complete, both the cache and the database
        have the same value and the cache always remains consistent.
 
-![cache_3.png](./images/system.design/cache_3.png)
+![cache_3.png](images/system.design.1/cache_3.png)
 
 ##### Write-Around
 
@@ -1235,7 +1235,7 @@ For some systems like financial systems, consistency is very important. For othe
   later, the cache writes the data back to the database. Write back caches improve the write performance and are
   good for `write-heavy` workloads.
 
-![cache_4.png](./images/system.design/cache_4.png)
+![cache_4.png](images/system.design.1/cache_4.png)
 
 #### Deduplication cache
 
@@ -1264,7 +1264,7 @@ For some systems like financial systems, consistency is very important. For othe
 
 ![17.png](images/system.design.6/17.png)
 
-- Keys Eviction - sometimes you are facing up with the situation, when you trying to put in more keys then system allows (maxmemory limit). Redis can handle this in 6 different ways. This process is controlled by eviction policy. Available modes:
+- Keys Eviction — sometimes you are facing up with the situation, when you trying to put in more keys then system allows (maxmemory limit). Redis can handle this in 6 different ways. This process is controlled by eviction policy. Available modes:
   - `volatile-lru` Evict using approximated LRU among the keys with an expire set.
   - `allkeys-lru` Evict any key using approximated LRU.
   - `volatile-lfu` Evict using approximated LFU among the keys with an expire set.
@@ -1294,11 +1294,11 @@ For some systems like financial systems, consistency is very important. For othe
     - `1 µs`= 10^-6 seconds = 1,000 ns
     - `1 ms` = 10^-3 seconds = 1,000 µs = 1,000,000 ns
 
-![numbers_1.png](./images/system.design/numbers_1.png)
+![numbers_1.png](images/system.design.1/numbers_1.png)
 
-![numbers_3.png](./images/system.design/numbers_3.png)
+![numbers_3.png](images/system.design.1/numbers_3.png)
 
-![numbers_2.png](./images/system.design/numbers_2.png)
+![numbers_2.png](images/system.design.1/numbers_2.png)
 
 - By analyzing the numbers we get the following conclusions:
     - Memory is fast but the disk is slow.
@@ -1318,7 +1318,7 @@ For some systems like financial systems, consistency is very important. For othe
 - Elements can be added to the set, but not removed (though this can be addressed with a "counting" filter);
 - the more elements that are added to the set, the larger the probability of false positives.
 
-![bloom_filter.png](./images/system.design/bloom_filter.png)
+![bloom_filter.png](images/system.design.1/bloom_filter.png)
 
 ---
 
@@ -1527,9 +1527,9 @@ For some systems like financial systems, consistency is very important. For othe
     - If there are enough tokens, we take one token out for each request, and the request goes through.
     - If there are not enough tokens, the request is dropped
 
-![rate_limiter_1.png](./images/system.design/rate_limiter_1.png)
+![rate_limiter_1.png](images/system.design.1/rate_limiter_1.png)
 
-![rate_limiter_2.png](./images/system.design/rate_limiter_2.png)
+![rate_limiter_2.png](images/system.design.1/rate_limiter_2.png)
 
 - The token bucket algorithm takes two parameters:
     - `Bucket size`: the maximum number of tokens allowed in the bucket
@@ -1553,7 +1553,7 @@ For some systems like financial systems, consistency is very important. For othe
     - Otherwise, the request is dropped.
     - Requests are pulled from the queue and processed at regular intervals.
 
-![rate_limiter_3.png](./images/system.design/rate_limiter_3.png)
+![rate_limiter_3.png](images/system.design.1/rate_limiter_3.png)
 
 - Leaking bucket algorithm takes the following two parameters:
     - `Bucket size`: it is equal to the queue size. The queue holds the requests to be processed at
@@ -1582,7 +1582,7 @@ For some systems like financial systems, consistency is very important. For othe
     - The system allows a maximum of 3 requests per second.
     - In each second window, if more than 3 requests are received, extra requests are dropped
 
-![rate_limiter_4.png](./images/system.design/rate_limiter_4.png)
+![rate_limiter_4.png](images/system.design.1/rate_limiter_4.png)
 
 - A major problem with this algorithm is that a burst of traffic at the edges of time windows
   could cause more requests than allowed quota to go through
@@ -1592,7 +1592,7 @@ For some systems like financial systems, consistency is very important. For othe
     - For the one-minute window between 2:00:30 and 2:01:30, 10 requests go through.
     - That is twice as many as allowed requests.
 
-![rate_limiter_5.png](./images/system.design/rate_limiter_5.png)
+![rate_limiter_5.png](images/system.design.1/rate_limiter_5.png)
 
 ### Sliding window log algorithm
 
@@ -1604,7 +1604,7 @@ For some systems like financial systems, consistency is very important. For othe
     - Add timestamp of the new request to the log.
     - If the log size is the same or lower than the allowed count, a request is accepted. Otherwise, it is rejected
 
-![rate_limiter_6.png](./images/system.design/rate_limiter_6.png)
+![rate_limiter_6.png](images/system.design.1/rate_limiter_6.png)
 
 - Example:
     - In this example, the rate limiter allows 2 requests per minute. The time unit is 1 minute.
@@ -1631,7 +1631,7 @@ For some systems like financial systems, consistency is very important. For othe
 - The `sliding window counter algorithm` is a hybrid approach that combines the fixed window counter and sliding window
   log.
 
-![rate_limiter_7.png](./images/system.design/rate_limiter_7.png)
+![rate_limiter_7.png](images/system.design.1/rate_limiter_7.png)
 
 - Example:
     - Let’s say I set a limit of `50` requests per minute on an API endpoint. The counter can be thought of like this:
@@ -1650,7 +1650,7 @@ For some systems like financial systems, consistency is very important. For othe
 
 ### Detailed design for rate limiter
 
-![rate_limiter_8.png](./images/system.design/rate_limiter_8.png)
+![rate_limiter_8.png](images/system.design.1/rate_limiter_8.png)
 
 - The rate limiter is implemented as a `middleware`. It is placed in front of the API server.
 - `Rules` are stored on the disk. Workers frequently pull rules from the disk and store them in the cache.
@@ -1663,7 +1663,7 @@ For some systems like financial systems, consistency is very important. For othe
 
 ### Synchronization issue
 
-![rate_limiter_9.png](./images/system.design/rate_limiter_9.png)
+![rate_limiter_9.png](images/system.design.1/rate_limiter_9.png)
 
 - `Synchronization issue` can be solved by using centralized data stores like `Redis`.
 
@@ -1688,7 +1688,7 @@ For some systems like financial systems, consistency is very important. For othe
 - Going clockwise, `key0` is stored on server 0; `key1` is stored on server 1; `key2` is stored on server 2
   and `key3` is stored on server 3
 
-![consistent_hashing_1.png](./images/system.design/consistent_hashing_1.png)
+![consistent_hashing_1.png](images/system.design.1/consistent_hashing_1.png)
 
 ### Add a server in Consistent hashing
 
@@ -1699,14 +1699,14 @@ For some systems like financial systems, consistency is very important. For othe
   server it encounters by going clockwise from `key0`’s position on the ring.
 - The other keys are not redistributed based on consistent hashing algorithm.
 
-![consistent_hashing_2.png](./images/system.design/consistent_hashing_2.png)
+![consistent_hashing_2.png](images/system.design.1/consistent_hashing_2.png)
 
 ### Remove a server in Consistent hashing
 
 - When a server is removed, only a small fraction of keys require redistribution with consistent hashing.
 - When server 1 is removed, only `key1` must be remapped to server 2. The rest of the keys are unaffected.
 
-![consistent_hashing_3.png](./images/system.design/consistent_hashing_3.png)
+![consistent_hashing_3.png](images/system.design.1/consistent_hashing_3.png)
 
 ### Virtual nodes in Consistent hashing
 
@@ -1719,12 +1719,12 @@ For some systems like financial systems, consistency is very important. For othe
   managed by `server 1`.
 - As the number of `virtual nodes` increases, the distribution of keys becomes more balanced.
 
-![consistent_hashing_4.png](./images/system.design/consistent_hashing_4.png)
+![consistent_hashing_4.png](images/system.design.1/consistent_hashing_4.png)
 
 - To find which server a key is stored on, we go `clockwise` from the key’s location and find the first `virtual node`
   encountered on the ring.
 
-![consistent_hashing_5.png](./images/system.design/consistent_hashing_5.png)
+![consistent_hashing_5.png](images/system.design.1/consistent_hashing_5.png)
 
 ### Redestribution when added server in Consistent hashing
 
@@ -1734,7 +1734,7 @@ For some systems like financial systems, consistency is very important. For othe
   around the ring until a server is found (`s3`).
 - Thus, keys located between `s3` and `s4` need to be redistributed to `s4`
 
-![consistent_hashing_6.png](./images/system.design/consistent_hashing_6.png)
+![consistent_hashing_6.png](images/system.design.1/consistent_hashing_6.png)
 
 ### Redestribution when removed server in Consistent hashing
 
@@ -1742,7 +1742,7 @@ For some systems like financial systems, consistency is very important. For othe
   the ring until a server is found (s0).
 - Thus, keys located between s0 and s1 must be redistributed to s2.
 
-![consistent_hashing_7.png](./images/system.design/consistent_hashing_7.png)
+![consistent_hashing_7.png](images/system.design.1/consistent_hashing_7.png)
 
 ### Data replication in Consistent hashing
 
@@ -1753,9 +1753,9 @@ For some systems like financial systems, consistency is very important. For othe
       and choose the first `N` servers on the ring to store data copies.
     - `key0` is replicated at `s1`, `s2`, and `s3`
 
-![replication_in_consistent_hashing.png](./images/system.design/replication_in_consistent_hashing.png)
+![replication_in_consistent_hashing.png](images/system.design.1/replication_in_consistent_hashing.png)
 
-![replication_in_consistent_hashing_1.png](./images/system.design/replication_in_consistent_hashing_1.png)
+![replication_in_consistent_hashing_1.png](images/system.design.1/replication_in_consistent_hashing_1.png)
 
 ---
 
@@ -1771,7 +1771,7 @@ For some systems like financial systems, consistency is very important. For othe
     - `Reads`, however, need to query the memtable and potentially multiple SSTables (on-disk files), a more expensive
       operation
 
-![key_value_store_1.png](./images/system.design/key_value_store_1.png)
+![key_value_store_1.png](images/system.design.1/key_value_store_1.png)
 
 ### Data partitioning in key-value store
 
@@ -1808,7 +1808,7 @@ For some systems like financial systems, consistency is very important. For othe
     - `Eventual consistency`: this is a specific form of weak consistency. Given enough time, all
       updates are propagated, and all replicas are consistent.
 
-![key_value_store_2.png](./images/system.design/key_value_store_2.png)
+![key_value_store_2.png](images/system.design.1/key_value_store_2.png)
 
 ### Handling temporary failures for key-value store
 
@@ -1818,7 +1818,7 @@ For some systems like financial systems, consistency is very important. For othe
 - Since `s2` is unavailable, reads and writes will be handled by `s3` temporarily.
 - When `s2` comes back online, `s3` will hand the data back to `s2`.
 
-![key_value_store_7.png](./images/system.design/key_value_store_7.png)
+![key_value_store_7.png](images/system.design.1/key_value_store_7.png)
 
 ### Handling permanent failures for key-value store
 
@@ -1836,7 +1836,7 @@ For some systems like financial systems, consistency is very important. For othe
 
 ### System architecture diagram for key-value store
 
-![key_value_store_3.png](./images/system.design/key_value_store_3.png)
+![key_value_store_3.png](images/system.design.1/key_value_store_3.png)
 
 - Main features of the architecture are listed as follows:
     - Clients communicate with the key-value store through simple APIs: get(key) and put(key,
@@ -1849,7 +1849,7 @@ For some systems like financial systems, consistency is very important. For othe
 
 ### Write path in key-value store
 
-![key_value_store_4.png](./images/system.design/key_value_store_4.png)
+![key_value_store_4.png](images/system.design.1/key_value_store_4.png)
 
 - When data is written to `Cassandra`, it is first written to the `commit log`. Subsequently, the data is asynchronously
   written to the `memtable` (in-memory storage) and the `SSTable` (sorted file data on disk).
@@ -1875,7 +1875,7 @@ For some systems like financial systems, consistency is very important. For othe
 
 ### Read path in key-value store
 
-![key_value_store_5.png](./images/system.design/key_value_store_5.png)
+![key_value_store_5.png](images/system.design.1/key_value_store_5.png)
 
 - The system first checks if data is in memory - `memtable`. If not, go to step 2.
     - Data in Cassandra `memtables` is stored in a highly optimized, columnar format, which allows for efficient read
@@ -1894,7 +1894,7 @@ For some systems like financial systems, consistency is very important. For othe
 
 ### Techniques for a distributed key-value store
 
-![key_value_store_6.png](./images/system.design/key_value_store_6.png)
+![key_value_store_6.png](images/system.design.1/key_value_store_6.png)
 
 ---
 
@@ -1934,7 +1934,7 @@ For some systems like financial systems, consistency is very important. For othe
     - IDs do not go up with time across multiple servers.
     - It does not scale well when a server is added or removed.
 
-![unique_id.png](./images/system.design/unique_id.png)
+![unique_id.png](images/system.design.1/unique_id.png)
 
 ### UUID
 
@@ -1953,7 +1953,7 @@ For some systems like financial systems, consistency is very important. For othe
     - IDs do not go up with time.
     - IDs could be non-numeric.
 
-![unique_id_1.png](./images/system.design/unique_id_1.png)
+![unique_id_1.png](images/system.design.1/unique_id_1.png)
 
 ### Ticket Server
 
@@ -1968,7 +1968,7 @@ For some systems like financial systems, consistency is very important. For othe
     - To avoid a single point of failure, we can set up multiple ticket servers.
     - However, this will introduce new challenges such as data synchronization
 
-![unique_id_2.png](./images/system.design/unique_id_2.png)
+![unique_id_2.png](images/system.design.1/unique_id_2.png)
 
 ### Twitter snowflake approach
 
@@ -1982,7 +1982,7 @@ For some systems like financial systems, consistency is very important. For othe
     - `Sequence number`: 12 bits. For every ID generated on that machine/process, the sequence
       number is incremented by 1. The number is reset to 0 every millisecond.
 
-![unique_id_3.png](./images/system.design/unique_id_3.png)
+![unique_id_3.png](images/system.design.1/unique_id_3.png)
 
 - `Datacenter IDs` and `machine IDs` are chosen at the startup time, generally fixed once the system is up running
 - `Timestamp`:
@@ -2026,9 +2026,9 @@ For some systems like financial systems, consistency is very important. For othe
 
 - Once the server receives a tinyurl request, it changes the short URL to the long URL with `301` redirect.
 
-![tiny_url.png](./images/system.design/tiny_url.png)
+![tiny_url.png](images/system.design.1/tiny_url.png)
 
-![tiny_url_1.png](./images/system.design/tiny_url_1.png)
+![tiny_url_1.png](images/system.design.1/tiny_url_1.png)
 
 ### 301 redirect vs 302 redirect for URL shortening service
 
@@ -2045,11 +2045,11 @@ For some systems like financial systems, consistency is very important. For othe
 - When `n` = 7, `62^n` = `~3.5 trillion`, 3.5 trillion is more than enough to hold 365 billion URLs, so the length of
   hashValue is `7`.
 
-![tiny_url_2.png](./images/system.design/tiny_url_2.png)
+![tiny_url_2.png](images/system.design.1/tiny_url_2.png)
 
 ### URL shortening deep dive
 
-![tiny_url_3.png](./images/system.design/tiny_url_3.png)
+![tiny_url_3.png](images/system.design.1/tiny_url_3.png)
 
 1. `longURL` is the input.
 2. The system checks if the `longURL` is in the database.
@@ -2066,13 +2066,13 @@ For some systems like financial systems, consistency is very important. For othe
     - Convert the ID to shortURL using the `base 62` conversion. ID (2009215674938) is converted to `zn9edcu`
     - Save `ID`, `shortURL`, and `longURL` to the database
 
-![tiny_url_4.png](./images/system.design/tiny_url_4.png)
+![tiny_url_4.png](images/system.design.1/tiny_url_4.png)
 
 ### URL redirecting deep dive
 
 - As there are more reads than writes, `<shortURL, longURL>` mapping is stored in a cache to improve performance.
 
-![tiny_url_5.png](./images/system.design/tiny_url_5.png)
+![tiny_url_5.png](images/system.design.1/tiny_url_5.png)
 
 - The flow of URL redirecting is summarized as follows:
     - A user clicks a short URL link: https://tinyurl.com/zn9edcu
@@ -2102,7 +2102,7 @@ For some systems like financial systems, consistency is very important. For othe
       maximal wait time is specified.
     - If a host does not respond within a predefined time, the crawler will stop the job and crawl some other pages.
 
-![web_crawler_1.png](./images/system.design/web_crawler_1.png)
+![web_crawler_1.png](images/system.design.1/web_crawler_1.png)
 
 ### Establish design scope for web crawler
 
@@ -2122,7 +2122,7 @@ For some systems like financial systems, consistency is very important. For othe
 
 ### Web crawler high level design
 
-![web_crawler_2.png](./images/system.design/web_crawler_2.png)
+![web_crawler_2.png](images/system.design.1/web_crawler_2.png)
 
 ### Seed URLs for web crawler
 
@@ -2178,7 +2178,7 @@ For some systems like financial systems, consistency is very important. For othe
 
 - URL Extractor parses and extracts links from HTML pages
 
-![web_crawler_3.png](./images/system.design/web_crawler_3.png)
+![web_crawler_3.png](images/system.design.1/web_crawler_3.png)
 
 ### URL Filter for web crawler
 
@@ -2198,7 +2198,7 @@ For some systems like financial systems, consistency is very important. For othe
 
 ### Web crawler workflow
 
-![web_crawler_4.png](./images/system.design/web_crawler_4.png)
+![web_crawler_4.png](images/system.design.1/web_crawler_4.png)
 
 - Step 1: Add `seed` URLs to the `URL Frontier`
 - Step 2: `HTML Downloader` fetches a list of URLs from `URL Frontier`.
@@ -2229,7 +2229,7 @@ For some systems like financial systems, consistency is very important. For othe
 - The general idea of enforcing politeness is to download one page at a time from the same host.
 - A delay can be added between two download tasks.
 
-![web_crawler_5.png](./images/system.design/web_crawler_5.png)
+![web_crawler_5.png](images/system.design.1/web_crawler_5.png)
 
 - Priority:
     - `Prioritizer`: It takes URLs as input and computes the priorities.
@@ -2274,7 +2274,7 @@ For some systems like financial systems, consistency is very important. For othe
 
 ### iOS push notification
 
-![notification_system.png](./images/system.design/notification_system.png)
+![notification_system.png](images/system.design.1/notification_system.png)
 
 - `Provider`. A provider builds and sends notification requests to `Apple Push Notification Service` (APNS). To
   construct a push notification, the provider provides the following data:
@@ -2285,14 +2285,14 @@ For some systems like financial systems, consistency is very important. For othe
 
 ### Android push notification
 
-![notification_system_2.png](./images/system.design/notification_system_1.png)
+![notification_system_2.png](images/system.design.1/notification_system_1.png)
 
 - `Android` adopts a similar notification flow. Instead of using APNs, `Firebase Cloud Messaging` (FCM) is commonly used
   to send push notifications to android devices
 
 ### SMS notification
 
-![notification_system_3.png](./images/system.design/notification_system_2.png)
+![notification_system_3.png](images/system.design.1/notification_system_2.png)
 
 - For `SMS` messages, third party SMS services like `Twilio`, `Nexmo`, and many others are commonly used. Most of them
   are
@@ -2300,7 +2300,7 @@ For some systems like financial systems, consistency is very important. For othe
 
 ### Email notification
 
-![notification_system_4.png](./images/system.design/notification_system_3.png)
+![notification_system_4.png](images/system.design.1/notification_system_3.png)
 
 - Although companies can set up their own email servers, many of them opt for commercial email services.
 - `Sendgrid` and `Mailchimp` are among the most popular email services, which offer a better delivery rate and data
@@ -2308,7 +2308,7 @@ For some systems like financial systems, consistency is very important. For othe
 
 ### High-level design of a notification system
 
-![notification_system_4.png](./images/system.design/notification_system_4.png)
+![notification_system_4.png](images/system.design.1/notification_system_4.png)
 
 1. A `service` calls APIs provided by notification servers to send notifications.
 2. `Notification servers` fetch metadata such as user info, device token, and notification setting from the cache or
@@ -2324,7 +2324,7 @@ For some systems like financial systems, consistency is very important. For othe
 - To satisfy this requirement, the notification system persists notification data in a database and implements a retry
   mechanism
 
-![notification_system_5.png](./images/system.design/notification_system_5.png)
+![notification_system_5.png](images/system.design.1/notification_system_5.png)
 
 ### Will recipients receive a notification exactly once in a notification system?
 
@@ -2372,7 +2372,7 @@ For some systems like financial systems, consistency is very important. For othe
 
 ### Deep dive into notification system
 
-![notification_system_6.png](./images/system.design/notification_system_6.png)
+![notification_system_6.png](images/system.design.1/notification_system_6.png)
 
 ---
 
@@ -2411,7 +2411,7 @@ For some systems like financial systems, consistency is very important. For othe
 
 ### Feed publishing deep dive for a news feed system
 
-![news_feed_system.png](./images/system.design/news_feed_system.png)
+![news_feed_system.png](images/system.design.1/news_feed_system.png)
 
 1. `User`: a user can view news feeds on a browser or mobile app. A user makes a posy through
    API: `/v1/me/feed?content=Hello&auth_token={auth_token}`
@@ -2425,7 +2425,7 @@ For some systems like financial systems, consistency is very important. For othe
 
 ### Fanout service for a news feed system
 
-![news_feed_system_1.png](./images/system.design/news_feed_system_1.png)
+![news_feed_system_1.png](images/system.design.1/news_feed_system_1.png)
 
 The fanout service works as follows:
 
@@ -2472,7 +2472,7 @@ The fanout service works as follows:
 
 ### Newsfeed retrieval deep dive for a news feed system
 
-![news_feed_system_2.png](./images/system.design/news_feed_system_2.png)
+![news_feed_system_2.png](images/system.design.1/news_feed_system_2.png)
 
 1. media content (images, videos, etc.) are stored in CDN for fast retrieval
 2. A user sends a request to retrieve her news feed. The request looks like this: `/v1/me/feed`
@@ -2521,7 +2521,7 @@ The fanout service works as follows:
 - Depending on polling frequency, polling could be costly.
 - It could consume precious server resources to answer a question that offers no as an answer most of the time.
 
-![chat_system.png](./images/system.design/chat_system.png)
+![chat_system.png](images/system.design.1/chat_system.png)
 
 ### Long polling in a chat system
 
@@ -2529,7 +2529,7 @@ The fanout service works as follows:
   threshold has been reached.
 - Once the client receives new messages, it immediately sends another request to the server, restarting the process.
 
-![chat_system_1.png](./images/system.design/chat_system_1.png)
+![chat_system_1.png](images/system.design.1/chat_system_1.png)
 
 ### WebSocket in a chat system
 
@@ -2540,13 +2540,13 @@ The fanout service works as follows:
 - By using `WebSocket` for both sending and receiving, it simplifies the design and makes implementation on both client
   and server more straightforward.
 
-![chat_system_2.png](./images/system.design/chat_system_2.png)
+![chat_system_2.png](images/system.design.1/chat_system_2.png)
 
-![chat_system_3.png](./images/system.design/chat_system_3.png)
+![chat_system_3.png](images/system.design.1/chat_system_3.png)
 
 ### High-level design for a chat system
 
-![chat_system_4.png](./images/system.design/chat_system_4.png)
+![chat_system_4.png](images/system.design.1/chat_system_4.png)
 
 - `Stateless services`
     - Stateless services are traditional public-facing request/response services, used to manage the
@@ -2560,7 +2560,7 @@ The fanout service works as follows:
 
 ### Adjusted high-level design for a chat system
 
-![chat_system_5.png](./images/system.design/chat_system_5.png)
+![chat_system_5.png](images/system.design.1/chat_system_5.png)
 
 - The client maintains a persistent `WebSocket` connection to a chat server for real-time messaging.
 - `Chat servers` facilitate message sending/receiving.
@@ -2583,13 +2583,13 @@ The fanout service works as follows:
 
 ### Message table for 1 on 1 chat in a chat system
 
-![chat_system_6.png](./images/system.design/chat_system_6.png)
+![chat_system_6.png](images/system.design.1/chat_system_6.png)
 
 - The primary key is `message_id`, which helps to decide message sequence
 
 ### Message table for group chat in a chat system
 
-![chat_system_7.png](./images/system.design/chat_system_7.png)
+![chat_system_7.png](images/system.design.1/chat_system_7.png)
 
 - The composite primary key is (`channel_id`, `message_id`).
 - `Channel` and `group` represent the same meaning here.
@@ -2600,7 +2600,7 @@ The fanout service works as follows:
 - The primary role of `service discovery` is to recommend the best chat server for a client based on the criteria like
   geographical location, server capacity, etc
 
-![chat_system_8.png](./images/system.design/chat_system_8.png)
+![chat_system_8.png](images/system.design.1/chat_system_8.png)
 
 1. `User A` tries to log in to the app.
 2. The load balancer sends the login request to API servers.
@@ -2610,13 +2610,13 @@ The fanout service works as follows:
 
 ### 1 on 1 chat flow in a chat system
 
-![chat_system_9.png](./images/system.design/chat_system_9.png)
+![chat_system_9.png](images/system.design.1/chat_system_9.png)
 
-![chat_system_10.png](./images/system.design/chat_system_10.png)
+![chat_system_10.png](images/system.design.1/chat_system_10.png)
 
 ### Message synchronization across multiple devices in a chat system
 
-![chat_system_11.png](./images/system.design/chat_system_11.png)
+![chat_system_11.png](images/system.design.1/chat_system_11.png)
 
 - Each device maintains a variable called `cur_max_message_id`, which keeps track of the latest
   message ID on the device.
@@ -2626,7 +2626,7 @@ The fanout service works as follows:
 
 ### Small group chat flow in a chat system
 
-![chat_system_12.png](./images/system.design/chat_system_12.png)
+![chat_system_12.png](images/system.design.1/chat_system_12.png)
 
 - First, the message from `User A` is copied to each group member’s message sync queue: one for `User B` and the second
   for `User C`.
@@ -2641,13 +2641,13 @@ The fanout service works as follows:
   and `last_active_at` timestamp are saved in the KV store.
 - Presence indicator shows the user is online after she logs in.
 
-![chat_system_13.png](./images/system.design/chat_system_13.png)
+![chat_system_13.png](images/system.design.1/chat_system_13.png)
 
 ### User logout flow in a chat system
 
 - The online status is changed to offline in the KV store. The presence indicator shows a user is offline
 
-![chat_system_14.png](./images/system.design/chat_system_14.png)
+![chat_system_14.png](images/system.design.1/chat_system_14.png)
 
 ### User disconnection flow in a chat system
 
@@ -2657,7 +2657,7 @@ The fanout service works as follows:
   considered as online.
 - Otherwise, it is offline
 
-![chat_system_15.png](./images/system.design/chat_system_15.png)
+![chat_system_15.png](images/system.design.1/chat_system_15.png)
 
 ### Online status fanout in a chat system
 
@@ -2667,7 +2667,7 @@ The fanout service works as follows:
 - Thus, it is easy for friends to get online status updates.
 - The communication between clients and servers is through real-time `WebSocket`
 
-![chat_system_16.png](./images/system.design/chat_system_16.png)
+![chat_system_16.png](images/system.design.1/chat_system_16.png)
 
 ### End-to-end encryption in a chat system
 
@@ -2690,7 +2690,7 @@ The fanout service works as follows:
 - This means that even if the message is intercepted or hacked, it cannot be read without the secret key, which is known
   only to the sender and recipient.
 
-![chat_system_17.png](./images/system.design/chat_system_17.png)
+![chat_system_17.png](images/system.design.1/chat_system_17.png)
 
 ---
 
@@ -2698,7 +2698,7 @@ The fanout service works as follows:
 
 ### What is a search autocomplete system?
 
-![autocomplete_system_9.png](./images/system.design/autocomplete_system_9.png)
+![autocomplete_system_9.png](images/system.design.1/autocomplete_system_9.png)
 
 ### Establish design scope for a search autocomplete system
 
@@ -2730,7 +2730,7 @@ The fanout service works as follows:
 
 ### Trie data structure for a search autocomplete system
 
-![autocomplete_system.png](./images/system.design/autocomplete_system.png)
+![autocomplete_system.png](images/system.design.1/autocomplete_system.png)
 
 - To avoid traversing the whole trie, we store `top k most frequently` used queries at each node.
 - Since 5 to 10 autocomplete suggestions are enough for users, `k` is a relatively small number.
@@ -2749,14 +2749,14 @@ The fanout service works as follows:
   remains the same because data used to build the trie is usually from analytics or logging
   services.
 
-![autocomplete_system_1.png](./images/system.design/autocomplete_system_1.png)
+![autocomplete_system_1.png](images/system.design.1/autocomplete_system_1.png)
 
 ### Analytics Logs for a search autocomplete system
 
 - It stores raw data about search queries
 - Logs are append-only and are not indexed
 
-![autocomplete_system_2.png](./images/system.design/autocomplete_system_2.png)
+![autocomplete_system_2.png](images/system.design.1/autocomplete_system_2.png)
 
 ### Aggregators for a search autocomplete system
 
@@ -2773,7 +2773,7 @@ The fanout service works as follows:
 - `time` field represents the start time of a week.
 - `frequency` field is the sum of the occurrences for the corresponding query in that week.
 
-![autocomplete_system_3.png](./images/system.design/autocomplete_system_3.png)
+![autocomplete_system_3.png](images/system.design.1/autocomplete_system_3.png)
 
 ### Workers for a search autocomplete system
 
@@ -2795,7 +2795,7 @@ The fanout service works as follows:
         - Every prefix in the trie is mapped to a key in a hash table
         - Data on each trie node is mapped to a value in a hash table
 
-![autocomplete_system_4.png](./images/system.design/autocomplete_system_4.png)
+![autocomplete_system_4.png](images/system.design.1/autocomplete_system_4.png)
 
 ### Create a trie for a search autocomplete system
 
@@ -2807,7 +2807,7 @@ The fanout service works as follows:
 - Update the trie `weekly`. Once a new trie is created, the new trie replaces the old one
 - Update individual trie node `directly` (slow)
 
-![autocomplete_system_6.png](./images/system.design/autocomplete_system_6.png)
+![autocomplete_system_6.png](images/system.design.1/autocomplete_system_6.png)
 
 ### Delete a trie for a search autocomplete system
 
@@ -2818,11 +2818,11 @@ The fanout service works as follows:
 - Unwanted suggestions are removed physically from the database asynchronically so the correct data set will be used to
   build trie in the next update cycle.
 
-![autocomplete_system_7.png](./images/system.design/autocomplete_system_7.png)
+![autocomplete_system_7.png](images/system.design.1/autocomplete_system_7.png)
 
 ### Query service for a search autocomplete system
 
-![autocomplete_system_5.png](./images/system.design/autocomplete_system_5.png)
+![autocomplete_system_5.png](images/system.design.1/autocomplete_system_5.png)
 
 1. A search query is sent to the `load balancer`.
 2. The load balancer routes the request to `API servers`.
@@ -2844,7 +2844,7 @@ The fanout service works as follows:
   combined, we
   can maintain two shards: one for ‘s’ and one for ‘u’ to ‘z’.
 
-![autocomplete_system_8.png](./images/system.design/autocomplete_system_8.png)
+![autocomplete_system_8.png](images/system.design.1/autocomplete_system_8.png)
 
 ### Follow-up questions for a search autocomplete system
 
@@ -2893,9 +2893,9 @@ The fanout service works as follows:
 
 ### Video uploading flow for a video sharing service
 
-![video_sharing_service.png](./images/system.design/video_sharing_service.png)
+![video_sharing_service.png](images/system.design.1/video_sharing_service.png)
 
-![video_sharing_service_1.png](./images/system.design/video_sharing_service_1.png)
+![video_sharing_service_1.png](images/system.design.1/video_sharing_service_1.png)
 
 ### Popular streaming protocols for a video sharing service
 
@@ -2906,7 +2906,7 @@ The fanout service works as follows:
 
 ### Pre-signed upload URL for a video sharing service
 
-![video_sharing_service_2.png](./images/system.design/video_sharing_service_2.png)
+![video_sharing_service_2.png](images/system.design.1/video_sharing_service_2.png)
 
 - Pre-signed upload URL is a URL that can be used to upload an object to a bucket.
 - The client makes a HTTP request to API servers to fetch the `pre-signed URL`, which
@@ -2932,7 +2932,7 @@ The fanout service works as follows:
 - It ensures fast video delivery on a global scale.
 - However, from the back of the envelope calculation, we know CDN is expensive, especially when the data size is large
 
-![video_sharing_service_3.png](./images/system.design/video_sharing_service_3.png)
+![video_sharing_service_3.png](images/system.design.1/video_sharing_service_3.png)
 
 - Only serve the most popular videos from CDN and other videos from our high capacity
 - For less popular content, we may not need to store many encoded video versions. Short videos can be encoded on-demand.
@@ -2962,7 +2962,7 @@ The fanout service works as follows:
 
 ## Design a google drive
 
-![google_drive.png](./images/system.design/google_drive.png)
+![google_drive.png](images/system.design.1/google_drive.png)
 
 ### Establish design scope for a google drive
 
@@ -3001,11 +3001,11 @@ The fanout service works as follows:
 
 - The `first version` that gets processed `wins`, and the version that gets processed later receives a conflict
 
-![google_drive_1.png](./images/system.design/google_drive_1.png)
+![google_drive_1.png](images/system.design.1/google_drive_1.png)
 
 ### High-level design for a google drive
 
-![google_drive_2.png](./images/system.design/google_drive_2.png)
+![google_drive_2.png](images/system.design.1/google_drive_2.png)
 
 - `User`: A user uses the application either through a browser or mobile app.
 - `Block servers`: Block servers upload blocks to cloud storage. Block storage, referred to as
@@ -3035,7 +3035,7 @@ The fanout service works as follows:
 - Block servers process files passed from clients by splitting a file into blocks, compressing each block, and
   encrypting them.
 
-![google_drive_3.png](./images/system.design/google_drive_3.png)
+![google_drive_3.png](images/system.design.1/google_drive_3.png)
 
 - A file is split into smaller blocks.
 - Each block is compressed using compression algorithms.
@@ -3044,7 +3044,7 @@ The fanout service works as follows:
 
 ### Metadata database for a google drive
 
-![google_drive_4.png](./images/system.design/google_drive_4.png)
+![google_drive_4.png](images/system.design.1/google_drive_4.png)
 
 - `User`: The user table contains basic information about the user such as username, email, profile photo, etc.
 - `Device`: Device table stores device info. Push_id is used for sending and receiving mobile
@@ -3089,39 +3089,39 @@ The fanout service works as follows:
 
 ### Distributed Message Queue Requirements
 
-![distribute_message_queue.png](./images/system.design/distribute_message_queue.png)
+![distribute_message_queue.png](images/system.design.1/distribute_message_queue.png)
 
 ### High-level architecture for Distributed Message Queue
 
-![distribute_message_queue_1.png](./images/system.design/distribute_message_queue_1.png)
+![distribute_message_queue_1.png](images/system.design.1/distribute_message_queue_1.png)
 
 ### VIP and Load balancer for Distributed Message Queue
 
 - `VIP` - virtual IP
 
-![distribute_message_queue_2.png](./images/system.design/distribute_message_queue_2.png)
+![distribute_message_queue_2.png](images/system.design.1/distribute_message_queue_2.png)
 
 ### FrontEnd service for Distributed Message Queue
 
-![distribute_message_queue_3.png](./images/system.design/distribute_message_queue_3.png)
+![distribute_message_queue_3.png](images/system.design.1/distribute_message_queue_3.png)
 
 ### Metadata service for Distributed Message Queue
 
-![distribute_message_queue_4.png](./images/system.design/distribute_message_queue_4.png)
+![distribute_message_queue_4.png](images/system.design.1/distribute_message_queue_4.png)
 
 ### Backend service for Distributed Message Queue
 
-![distribute_message_queue_5.png](./images/system.design/distribute_message_queue_5.png)
+![distribute_message_queue_5.png](images/system.design.1/distribute_message_queue_5.png)
 
-![distribute_message_queue_6.png](./images/system.design/distribute_message_queue_6.png)
+![distribute_message_queue_6.png](images/system.design.1/distribute_message_queue_6.png)
 
-![distribute_message_queue_7.png](./images/system.design/distribute_message_queue_7.png)
+![distribute_message_queue_7.png](images/system.design.1/distribute_message_queue_7.png)
 
-![distribute_message_queue_8.png](./images/system.design/distribute_message_queue_8.png)
+![distribute_message_queue_8.png](images/system.design.1/distribute_message_queue_8.png)
 
 ### Other discussion topics for Distributed Message Queue
 
-![distribute_message_queue_9.png](./images/system.design/distribute_message_queue_9.png)
+![distribute_message_queue_9.png](images/system.design.1/distribute_message_queue_9.png)
 
 ---
 
@@ -3129,37 +3129,37 @@ The fanout service works as follows:
 
 ### Requirements for a notification service
 
-![notification_system_0001.png](./images/system.design/notification_system_0001.png)
+![notification_system_0001.png](images/system.design.1/notification_system_0001.png)
 
 ### High-level architecture for a notification service
 
-![notification_system_0002.png](./images/system.design/notification_system_0002.png)
+![notification_system_0002.png](images/system.design.1/notification_system_0002.png)
 
 ### Frontend service for a notification service
 
-![notification_system_0003.png](./images/system.design/notification_system_0003.png)
+![notification_system_0003.png](images/system.design.1/notification_system_0003.png)
 
-![notification_system_0004.png](./images/system.design/notification_system_0004.png)
+![notification_system_0004.png](images/system.design.1/notification_system_0004.png)
 
 ### Metadata service for a notification service
 
 - Responsible for storing metadata such as topics, subscriptions in the database.
 
-![notification_system_0005.png](./images/system.design/notification_system_0005.png)
+![notification_system_0005.png](images/system.design.1/notification_system_0005.png)
 
 ### Temporary storage for a notification service
 
 - Temporary storage is used to store messages that are not yet delivered to subscribers.
 
-![notification_system_0006.png](./images/system.design/notification_system_0006.png)
+![notification_system_0006.png](images/system.design.1/notification_system_0006.png)
 
 ### Sender service for a notification service
 
-![notification_system_0007.png](./images/system.design/notification_system_0007.png)
+![notification_system_0007.png](images/system.design.1/notification_system_0007.png)
 
 ### Other discussion topics for a notification service
 
-![notification_system_0008.png](./images/system.design/notification_system_0008.png)
+![notification_system_0008.png](images/system.design.1/notification_system_0008.png)
 
 ---
 
@@ -3985,7 +3985,7 @@ Response:
 
 ## Cloud design patterns
 
-![sys_des_practices.png](./images/system.design/sys_des_practices.png)
+![sys_des_practices.png](images/system.design.1/sys_des_practices.png)
 
 ---
 
