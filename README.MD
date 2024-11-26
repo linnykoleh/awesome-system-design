@@ -162,34 +162,34 @@
   - [Stress Testing](#stress-testing)
 - [System Design Interview Questions](#system-design-interview-questions)
   - [Design Rate Limiter #1](#design-rate-limiter-1)
+  - [Design Rate Limiter #2](#design-rate-limiter-2)
   - [Desing Consistent hashing](#desing-consistent-hashing)
   - [Desing a key-value store](#desing-a-key-value-store)
   - [Desing a unique ID generator in distributed systems](#desing-a-unique-id-generator-in-distributed-systems)
   - [Design a URL shortening service like TinyURL](#design-a-url-shortening-service-like-tinyurl)
   - [Design a web crawler](#design-a-web-crawler)
   - [Design a notification system #1](#design-a-notification-system-1)
+  - [Design a notification system #2](#design-a-notification-system-2)
   - [Design a news feed system](#design-a-news-feed-system)
   - [Design a chat system](#design-a-chat-system)
   - [Desing a search autocomplete system](#desing-a-search-autocomplete-system)
   - [Desing video sharing service](#desing-video-sharing-service)
-  - [Design a google drive](#design-a-google-drive)
+  - [Design a Google Drive](#design-a-google-drive)
   - [Distributed Message Queue](#distributed-message-queue)
-  - [Desing a notification service #2](#desing-a-notification-service-2)
-  - [Design Rate Limiter #2](#design-rate-limiter-2)
   - [Design a distributed cache system](#design-a-distributed-cache-system)
   - [Top K Problem #2](#top-k-problem-2)
-  - [Desing a system to count videos views](#desing-a-system-to-count-videos-views)
+  - [Desing a system to count video views](#desing-a-system-to-count-videos-views)
   - [URL shortening system questions about system](#url-shortening-system-questions-about-system)
   - [Fraud detection system](#fraud-detection-system)
   - [Authentication and authorization system](#authentication-and-authorization-system)
   - [Monitoring system](#monitoring-system)
   - [Design TicTok/Instagram reels system](#design-tictokinstagram-reels-system)
+  - [Design TicTok #2](#design-tictok)
   - [Online Judge for coding contests](#online-judge-for-coding-contests)
   - [Design an Amazon S3 or Object Storage](#design-an-amazon-s3-or-object-storage)
   - [Design a Dropbox](#design-a-dropbox)
   - [Design Reddit home page feed](#design-reddit-home-page-feed)
   - [Design Parking Garage](#design-parking-garage)
-  - [Design TicTok #2](#design-tictok)
   - [Design Facebook Messenger](#design-facebook-messenger)
   - [Design Instagram](#design-instagram)
   - [Design Amazon Kindle Payments](#design-amazon-kindle-payments)
@@ -282,7 +282,7 @@
         - Platform (Mobile, Web, Desktop)
         - Use cases
         - Ask your interviewer: _“Are there any important requirements you have in mind that I’ve overlooked?”_
-    - `Non functional`
+    - `Non functional` (use **why** you used such NFR)
         - **High availability** system uptime in percentage
             - 99 % => 3.65 days of downtime per year
             - 99.9% => 8.76 hours of downtime per year
@@ -1366,6 +1366,10 @@ For some systems like financial systems, consistency is very important. For othe
 
 ![region_availability_zone_2.png](./images/system.design.4/region_availability_zone_2.png)
 
+![22.png](images/system.design.6/22.png)
+
+![23.png](images/system.design.6/23.png)
+
 ---
 
 ## Resource monitoring
@@ -1463,7 +1467,42 @@ For some systems like financial systems, consistency is very important. For othe
 
 # System Design Interview Questions
 
+---
+
 ## Design Rate Limiter #1
+
+### Requirements for a rate limiter
+
+![design_rate_limiter.png](./images/system.design.2/design_rate_limiter.png)
+
+### Simple solution for a rate limiter
+
+![design_rate_limiter_2.png](./images/system.design.2/design_rate_limiter_2.png)
+
+### Token bucket algorithm for a rate limiter
+
+![design_rate_limiter_3.png](./images/system.design.2/design_rate_limiter_3.png)
+
+### Token bucket algorithm code for a rate limiter
+
+![design_rate_limiter_4.png](./images/system.design.2/design_rate_limiter_4.png)
+
+![design_rate_limiter_5.png](./images/system.design.2/design_rate_limiter_5.png)
+
+### Token bucket algorithm classes for a rate limiter
+
+![design_rate_limiter_6.png](./images/system.design.2/design_rate_limiter_6.png)
+
+### Message broadcasting for a rate limiter
+
+![design_rate_limiter_7.png](./images/system.design.2/design_rate_limiter_7.png)
+
+### How to integrate a rate limiter to a system
+
+![design_rate_limiter_8.png](./images/system.design.2/design_rate_limiter_8.png)
+
+
+## Design Rate Limiter #2
 
 ### What is Rate Limiter?
 
@@ -2250,7 +2289,45 @@ For some systems like financial systems, consistency is very important. For othe
 
 ## Design a notification system #1
 
-### Establish design scope for notification system
+### Requirements for a notification service
+
+![notification_system_0001.png](images/system.design.1/notification_system_0001.png)
+
+### High-level architecture for a notification service
+
+![notification_system_0002.png](images/system.design.1/notification_system_0002.png)
+
+### Frontend service for a notification service
+
+![notification_system_0003.png](images/system.design.1/notification_system_0003.png)
+
+![notification_system_0004.png](images/system.design.1/notification_system_0004.png)
+
+### Metadata service for a notification service
+
+- Responsible for storing metadata such as topics, subscriptions in the database.
+
+![notification_system_0005.png](images/system.design.1/notification_system_0005.png)
+
+### Temporary storage for a notification service
+
+- Temporary storage is used to store messages that are not yet delivered to subscribers.
+
+![notification_system_0006.png](images/system.design.1/notification_system_0006.png)
+
+### Sender service for a notification service
+
+![notification_system_0007.png](images/system.design.1/notification_system_0007.png)
+
+### Other discussion topics for a notification service
+
+![notification_system_0008.png](images/system.design.1/notification_system_0008.png)
+
+---
+
+## Design a notification system #2
+
+### Establish design scope for a notification system
 
 - `Candidate`: What types of notifications does the system support?
 - `Interviewer`: Push notification, SMS message, and email.
@@ -3123,77 +3200,7 @@ The fanout service works as follows:
 
 ![distribute_message_queue_9.png](images/system.design.1/distribute_message_queue_9.png)
 
----
 
-## Desing a notification service #2
-
-### Requirements for a notification service
-
-![notification_system_0001.png](images/system.design.1/notification_system_0001.png)
-
-### High-level architecture for a notification service
-
-![notification_system_0002.png](images/system.design.1/notification_system_0002.png)
-
-### Frontend service for a notification service
-
-![notification_system_0003.png](images/system.design.1/notification_system_0003.png)
-
-![notification_system_0004.png](images/system.design.1/notification_system_0004.png)
-
-### Metadata service for a notification service
-
-- Responsible for storing metadata such as topics, subscriptions in the database.
-
-![notification_system_0005.png](images/system.design.1/notification_system_0005.png)
-
-### Temporary storage for a notification service
-
-- Temporary storage is used to store messages that are not yet delivered to subscribers.
-
-![notification_system_0006.png](images/system.design.1/notification_system_0006.png)
-
-### Sender service for a notification service
-
-![notification_system_0007.png](images/system.design.1/notification_system_0007.png)
-
-### Other discussion topics for a notification service
-
-![notification_system_0008.png](images/system.design.1/notification_system_0008.png)
-
----
-
-## Design Rate Limiter #2
-
-### Requirements for a rate limiter
-
-![design_rate_limiter.png](./images/system.design.2/design_rate_limiter.png)
-
-### Simple solution for a rate limiter
-
-![design_rate_limiter_2.png](./images/system.design.2/design_rate_limiter_2.png)
-
-### Token bucket algorithm for a rate limiter
-
-![design_rate_limiter_3.png](./images/system.design.2/design_rate_limiter_3.png)
-
-### Token bucket algorithm code for a rate limiter
-
-![design_rate_limiter_4.png](./images/system.design.2/design_rate_limiter_4.png)
-
-![design_rate_limiter_5.png](./images/system.design.2/design_rate_limiter_5.png)
-
-### Token bucket algorithm classes for a rate limiter
-
-![design_rate_limiter_6.png](./images/system.design.2/design_rate_limiter_6.png)
-
-### Message broadcasting for a rate limiter
-
-![design_rate_limiter_7.png](./images/system.design.2/design_rate_limiter_7.png)
-
-### How to integrate a rate limiter to a system
-
-![design_rate_limiter_8.png](./images/system.design.2/design_rate_limiter_8.png)
 
 ---
 
@@ -3645,6 +3652,18 @@ The fanout service works as follows:
 
 ---
 
+## Design TicTok
+
+### Requirements
+
+![Design TicTok.png](./images/system.design.4/Design_TicTok.png)
+
+### Design
+
+![Design TicTok 2.png](./images/system.design.4/Design_TicTok_2.png)
+
+---
+
 ## Online Judge for coding contests
 
 ![Online Judge for coding contests.png](./images/system.design.3/Online_Judge_for_coding_contests.png)
@@ -3702,18 +3721,6 @@ The fanout service works as follows:
 ### Design
 
 ![Design Parking Garage 5.png](./images/system.design.3/Design_Parking_Garage_5.png)
-
----
-
-## Design TicTok
-
-### Requirements
-
-![Design TicTok.png](./images/system.design.4/Design_TicTok.png)
-
-### Design
-
-![Design TicTok 2.png](./images/system.design.4/Design_TicTok_2.png)
 
 ---
 
