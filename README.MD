@@ -649,6 +649,10 @@ http {
 
 ![32.png](images/system.design.6/32.png)
 
+### Network protocols
+
+![1696882344725.gif](./images/system.design.3/1696882344725.gif)
+
 ### OSI Model
 
 ![original-seven-layers-of-osi-model-1627523878-JYjV8oybcC.png](images/system.design.1/original-seven-layers-of-osi-model-1627523878-JYjV8oybcC.png)
@@ -658,10 +662,6 @@ http {
 ![dns.png](images/system.design.1/dns.png)
 
 ![dns.png](./images/system.design.3/dns.png)
-
-### Network protocols
-
-![1696882344725.gif](./images/system.design.3/1696882344725.gif)
 
 ---
 
