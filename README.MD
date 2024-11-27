@@ -111,7 +111,7 @@
 - [System Design Basics](#system-design-basics)
   - [Networking](#networking)
     - [Web servers](#web-servers)
-    - [TCP vs UDP](#tcp-vs-udp)
+    - [TCP vs UDP vs HTTP](#tcp-vs-udp-vs-http)
     - [OSI Model](#osi-model)
     - [DNS](#dns)
     - [Network protocols](#network-protocols)
@@ -514,6 +514,12 @@ https://trends.builtwith.com/web-server
 
 ![8.png](images/system.design.6/8.png)
 
+#### Webservers in High Load
+
+- `Handling High Traffic`: In high-load applications, web servers must efficiently handle a large number of concurrent requests without significant delays or downtime.
+- `Scalability`: Web servers should be scalable, meaning they can handle increasing loads by adding resources (such as memory, CPU, or additional servers) without requiring significant changes to the architecture.
+- `Performance Optimization`: High-load applications often require optimizations such as `caching`, `load balancing`, and `content compression` to ensure that the web server can handle the traffic without compromising on performance.
+
 #### Nginx
 
 - Load balancer
@@ -586,17 +592,10 @@ http {
   - https://github.com/laradock/laradock/tree/master/nginx
   - https://medium.com/@jituboss/nginx-and-php-fpm-optimization-for-high-traffic-web-applications-f790bf1b30fb
 
-### Applications in High Load
 
-- `Handling High Traffic`: In high-load applications, web servers must efficiently handle a large number of concurrent requests without significant delays or downtime.
-- `Scalability`: Web servers should be scalable, meaning they can handle increasing loads by adding resources (such as memory, CPU, or additional servers) without requiring significant changes to the architecture.
-- `Performance Optimization`: High-load applications often require optimizations such as `caching`, `load balancing`, and `content compression` to ensure that the web server can handle the traffic without compromising on performance.
+### TCP vs UDP vs HTTP
 
-### TCP vs UDP
-
-![Graphic-UDP-Vs-TCP-Diagram_1150x685-700x417.png](images/system.design.1/Graphic-UDP-Vs-TCP-Diagram_1150x685-700x417.png)
-
-![table-tcp-udp.png](images/system.design.1/table-tcp-udp.png)
+#### TCP 
 
 - `TCP` is a connection-oriented protocol, which means that before data can be transferred, two computers must first
   establish a connection.
@@ -604,12 +603,51 @@ http {
     - Connection-oriented
     - Slow
     - Used for HTTP, emails, file transfers, SSH.
+
+![24.png](images/system.design.6/24.png)
+
+#### UDP
+
 - `UDP` is a connectionless protocol, which means that data can be transferred as soon as you have the IP address and
   port number of the destination computer.
     - Unreliable
     - Connectionless
     - Fast
     - Used for DNS, streaming, video, online gaming.
+
+![25.png](images/system.design.6/25.png)
+
+#### TCP vs UDP
+
+![Graphic-UDP-Vs-TCP-Diagram_1150x685-700x417.png](images/system.design.1/Graphic-UDP-Vs-TCP-Diagram_1150x685-700x417.png)
+
+![table-tcp-udp.png](images/system.design.1/table-tcp-udp.png)
+
+#### HTTP
+
+![26.png](images/system.design.6/26.png)
+
+![27.png](images/system.design.6/27.png)
+
+### Blocking vs non-blocking I/O
+
+#### Sockets
+
+![28.png](images/system.design.6/28.png)
+
+#### Connection
+
+![29.png](images/system.design.6/29.png)
+
+#### Blocking/Non blocking sockets
+
+![30.png](images/system.design.6/30.png)
+
+#### Thread per connection vs Thread per request vs Event loop
+
+![31.png](images/system.design.6/31.png)
+
+![32.png](images/system.design.6/32.png)
 
 ### OSI Model
 
