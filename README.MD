@@ -144,9 +144,7 @@
     - [Cache](#cache)
       - [Cache types](#cache-types) 
         - [Cache aside](#cache-aside)
-        - [Read through](#read-through)
-        - [Write through](#write-through)
-        - [Write-Around](#Write-Around)
+        - [Read Write through](#read-write-through)
         - [Write-Back](#Write-Back)
       - [Deduplication Cache](#deduplication-cache)
       - [Redis](#redis)
@@ -1212,13 +1210,17 @@ For some systems like financial systems, consistency is very important. For othe
 
 - `Cache` is a temporary storage area for data that is accessed very frequently. It is used to increase the
   performance of data retrieval operations. It is also used to reduce the load on the database by storing
-  frequently-accessed data in the cache.
+  frequently accessed data in the cache.
 - Types (_It’s a good practice to include a brief point about cache invalidation during system design interviews_):
     - `LRU Cache` - Least Recently Used Cache
     - `LFU Cache` - Least Frequently Used Cache
 - Generally, caching is used for read-heavy systems.
 
 ![cache.png](images/system.design.5/cache.png)
+
+![33.png](images/system.design.6/33.png)
+
+![34.png](images/system.design.6/34.png)
 
 - https://codeahoy.com/2017/08/11/caching-strategies-and-how-to-choose-the-right-one
 
@@ -1236,9 +1238,9 @@ For some systems like financial systems, consistency is very important. For othe
        queries the database to read the data, returns it to the client and stores the data in cache so the
        subsequent reads for the same data results in a cache hit.
 
-![cache_1.png](images/system.design.1/cache_1.png)
+![38.png](images/system.design.6/38.png)
 
-##### Read-Through
+##### Read-Write-Through
 
 - `Read-through cache` sits in-line with the database. When there is a cache miss, it loads
   missing data from database, populates the cache and returns it to the application. Read-through caches work best
@@ -1247,10 +1249,6 @@ For some systems like financial systems, consistency is very important. For othe
        In read-through, this logic is usually supported by the library or stand-alone cache provider.
     2. Unlike cache-aside, the data model in read-through cache cannot be different than that of the database.
 
-![cache_2.png](images/system.design.1/cache_2.png)
-
-##### Write-Through
-
 - `Write-Through Cache` - data is first written to the cache and then to the database. The cache sits in-line with
   the database and writes always go through the cache to the main database. This helps cache maintain consistency
   with the main database.
@@ -1258,26 +1256,33 @@ For some systems like financial systems, consistency is very important. For othe
     2. The cache updates the data in the main database. When the write is complete, both the cache and the database
        have the same value and the cache always remains consistent.
 
+![1.png](images/system.design.7/1.png)
+
+![cache_2.png](images/system.design.1/cache_2.png)
+
 ![cache_3.png](images/system.design.1/cache_3.png)
-
-##### Write-Around
-
-- `Write-Around` - Here, data is written directly to the database and only the data that is read makes it way into
-  the cache.
 
 ##### Write-Back
 
-- `Write-Back` or `Write-Behind` - Here, the application writes data to the cache which stores the data and
+- `Write-Back` or `Write-Behind` - Here, the application writes data to the cache which `stores the data in queue` and
   acknowledges to the application immediately. Then later, the cache writes the data back to the database. Here, the
   application writes data to the cache which stores the data and acknowledges to the application immediately. Then
   later, the cache writes the data back to the database. Write back caches improve the write performance and are
   good for `write-heavy` workloads.
+
+![2.png](images/system.design.7/2.png)
 
 ![cache_4.png](images/system.design.1/cache_4.png)
 
 #### Deduplication cache
 
 ![3.png](./images/system.design.3/3.png)
+
+![35.png](images/system.design.6/35.png)
+
+![36.png](images/system.design.6/36.png)
+
+![37.png](images/system.design.6/37.png)
 
 #### Redis
 
