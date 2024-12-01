@@ -1226,6 +1226,8 @@ For some systems like financial systems, consistency is very important. For othe
 
 #### Cache types:
 
+![3.gif](images/system.design.7/3.gif)
+
 ##### Cache-Aside
  
 - The cache sits on the side and the application directly talks to both the cache and the database.
