@@ -145,12 +145,13 @@
     - [Cache](#cache)
       - [Cache types](#cache-types) 
         - [Cache aside](#cache-aside)
-        - [Read Write through](#read-write-through)
+        - [Read-Write through](#read-write-through)
         - [Write-Back](#Write-Back)
       - [Deduplication Cache](#deduplication-cache)
       - [Redis](#redis)
     - [CAP Theorem](#cap-theorem)
       - [PACELC Theorem](#pacelc-theorem)
+  - [Queue](#queue)
   - [Numbers every programmer should know](#numbers-every-programmer-should-know)
   - [Bloom filter](#bloom-filter)
   - [Message delivery guarantees](#message-delivery-guarantees)
@@ -1341,6 +1342,20 @@ For some systems like financial systems, consistency is very important. For othe
 
 ---
 
+## Queue
+
+### Log file
+
+![5.png](images/system.design.7/5.png)
+
+![6.png](images/system.design.7/6.png)
+
+![7.png](images/system.design.7/7.png)
+
+### Index for log files
+
+![8.png](images/system.design.7/8.png)
+
 ## Numbers every programmer should know
 
 - [Latency Numbers Every Programmer Should Know](https://colin-scott.github.io/personal_website/research/interactive_latency.html)
@@ -1475,6 +1490,10 @@ For some systems like financial systems, consistency is very important. For othe
 - `Nice`  - users' priority processes that have been `niced`
 
 ![1.png](images/system.design.6/1.png)
+
+### Thread pool
+
+![4.png](images/system.design.7/4.png)
 
 ### Monitoring systems
 
