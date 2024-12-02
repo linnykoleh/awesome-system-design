@@ -120,7 +120,8 @@
   - [Security](#security)
   - [Proxies](#proxies)
     - [Forward Proxy and Reverse Proxy](#forward-proxy-and-reverse-proxy)
-  - [Load Balancing stategies](#load-balancing-stategies)
+    - [Service discovery](#service-discovery)
+    - [Load Balancing stategies](#load-balancing-stategies)
   - [Consistent Hashing](#consistent-hashing)
   - [Databases](#databases)
     - [SQL Database](#sql-database)
@@ -668,6 +669,14 @@ http {
 
 ![dns.png](./images/system.design.3/dns.png)
 
+![26.png](images/system.design.7/26.png)
+
+![27.png](images/system.design.7/27.png)
+
+- `ISP` - internet service provider
+
+![28.png](images/system.design.7/28.png)
+
 ---
 
 ## CDN
@@ -755,7 +764,11 @@ http {
 
 ![forward_proxy_vs_reverse_proxy-f_mobile.png](images/system.design.1/forward_proxy_vs_reverse_proxy-f_mobile.png)
 
-## Load Balancing stategies
+### Service discovery
+
+![29.png](images/system.design.7/29.png)
+
+### Load Balancing stategies
 
 - **Round Robin** - The simplest load balancing method. The load balancer cycles through the available servers, and
   each server handles an equal number of requests. If one of the servers goes down, the load balancer stops sending
@@ -778,6 +791,8 @@ http {
   work well.
 
 ![the-five-most-common-balancing-methods.jpg](images/system.design.1/the-five-most-common-balancing-methods.jpg)
+
+---
 
 ## Consistent Hashing
 
@@ -1412,6 +1427,10 @@ For some systems like financial systems, consistency is very important. For othe
 ### Time series data
 
 ![9.png](images/system.design.7/9.png)
+
+### Push vs pull
+
+![25.png](images/system.design.7/25.png)
 
 ## Numbers every programmer should know
 
