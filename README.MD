@@ -135,6 +135,7 @@
       - [Sharding](#sharding)
         - [Sharding strategies](#sharding-stategies)
       - [Indexing](#indexing)
+        - [When to create indexes](#when-to-create-indexes)
       - [Optimization](#optimization)
     - [NoSQL Database](#nosql-database)
       - [BASE](#base)
@@ -1062,8 +1063,18 @@ http {
 - `B+ trees` are an extension of B-trees. The major differences in the data structure are:
   - Only the leaf nodes store the record or reference to the record.
   - All the leaf nodes are connected to form a linked list. This enables sequential access along with direct access.
-- Adaptive Hash Index - https://dev.mysql.com/doc/refman/8.4/en/innodb-adaptive-hash.html
+- Adaptive Hash Index — https://dev.mysql.com/doc/refman/8.4/en/innodb-adaptive-hash.html
   - Even when you have a hash index, you still have a B-tree index.  
+
+##### When to create indexes
+
+- Indexes should be created as soon as slow queries are detected. The slow log in MySQL can help with this.
+- Queries that take more than 1 second to execute are the first candidates for optimization.
+- Start creating indexes with the most frequent queries.
+- A query that takes a second to execute 1000 times a day does more damage than a 10-second query that is executed several times a day.
+- Do not create indexes on tables with fewer than a few thousand records. For such sizes, the benefit from using an index will be almost imperceptible.
+- Do not create indexes in advance, for example, in a development environment. Indexes should be installed exclusively for the shape and type of workload of the running system.
+- Remove unused indexes.
 
 #### Optimization
 
