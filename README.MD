@@ -1147,6 +1147,12 @@ http {
 - **Eventual consistency** - The system will become consistent over a period of time.
 - **Consistency** - The system will become consistent over a period of time.
 
+#### Simple key-value store
+
+![10.png](images/system.design.7/10.png)
+
+![11.png](images/system.design.7/11.png)
+
 ### SQL vs NoSQL
 
 ![asidvsbase.webp](images/system.design.1/asidvsbase.webp)
@@ -1355,6 +1361,10 @@ For some systems like financial systems, consistency is very important. For othe
 ### Index for log files
 
 ![8.png](images/system.design.7/8.png)
+
+### Time series data
+
+![9.png](images/system.design.7/9.png)
 
 ## Numbers every programmer should know
 
