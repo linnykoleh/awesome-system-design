@@ -135,11 +135,15 @@
       - [Sharding](#sharding)
         - [Sharding strategies](#sharding-stategies)
       - [Indexing](#indexing)
+        - [B-tree](#b-tree)
         - [When to create indexes](#when-to-create-indexes)
       - [Optimization](#optimization)
     - [NoSQL Database](#nosql-database)
       - [BASE](#base)
+      - [Simple key-value store](#simple-key-value-store)
+      - [Cassandra](#cassandra)
     - [SQL vs NoSQL](#sql-vs-nosql)
+      - [LSM-tree vs B-tree](#lsm-tree-vs-b-tree)
     - [Quorum](#quorum)
     - [Consensus](#consensus)
     - [Cache](#cache)
@@ -1057,15 +1061,19 @@ http {
 - If a lot of `writes` then wrap this operation in chunk and write in one transaction to update indexes only once. 
   - Or use sharding to reduce the number of indexes that need to be updated.
 - Index can be hash or tree based. Hash is faster but tree is more flexible.
+
+##### B-tree
+
 - `B-trees` are self-adjusting trees that can achieve multilevel indexing. They are a generalized form of Binary Search Trees. The data is stored in sorted order in the B-trees. B-tree achieves the efficient utilization of space in nodes, along with keeping the height of the tree small.
-
-![b-tree.png](images/system.design.5/b-tree.png)
-
 - `B+ trees` are an extension of B-trees. The major differences in the data structure are:
   - Only the leaf nodes store the record or reference to the record.
   - All the leaf nodes are connected to form a linked list. This enables sequential access along with direct access.
 - Adaptive Hash Index — https://dev.mysql.com/doc/refman/8.4/en/innodb-adaptive-hash.html
   - Even when you have a hash index, you still have a B-tree index.  
+
+![12.png](images/system.design.7/12.png)
+
+![13.png](images/system.design.7/13.png)
 
 ##### When to create indexes
 
@@ -1117,6 +1125,18 @@ http {
 - `1` - writes to the log and flushes the log to disk every transaction. Default value
 - `2` - writes to the log every commit, flushes to disk once a second
 
+##### Use batching for reducing I/O operations
+
+![20.png](images/system.design.7/20.png)
+
+##### Use zero-copy read (avoid page-cache)
+
+![21.png](images/system.design.7/21.png)
+
+![22.png](images/system.design.7/22.png)
+
+![23.png](images/system.design.7/23.png)
+
 ### NoSQL Database
 
 - `NoSQL database` is a database that stores and provides access to data that does not have a predefined data
@@ -1153,6 +1173,22 @@ http {
 
 ![11.png](images/system.design.7/11.png)
 
+#### Cassandra
+
+![15.png](images/system.design.7/15.png)
+
+##### Write
+
+![16.png](images/system.design.7/16.png)
+
+##### Read
+
+![17.png](images/system.design.7/17.png)
+
+##### LSM-tree
+
+![18.png](images/system.design.7/18.png)
+
 ### SQL vs NoSQL
 
 ![asidvsbase.webp](images/system.design.1/asidvsbase.webp)
@@ -1162,6 +1198,14 @@ http {
 ![photo_2023-02-15_09-50-11.jpg](images/system.design.1/photo_2023-02-15_09-50-11.jpg)
 
 ![simple-map-for-db.png](images/system.design.4/simple-map-for-db.png)
+
+#### LSM-tree vs B-tree
+
+![19.png](images/system.design.7/19.png)
+
+- LSM-tree databases use optimizations to speed up reads (bloom filters, internal cache, read-only memtables)
+- sharding helps to increase write throughput for both LSM-tree and B-tree databases
+- distributed cache in front of an LSM or B-tree database helps to increase read throughput and reduce latency
 
 ### Quorum
 
@@ -1361,6 +1405,8 @@ For some systems like financial systems, consistency is very important. For othe
 ### Index for log files
 
 ![8.png](images/system.design.7/8.png)
+
+![14.png](images/system.design.7/14.png)
 
 ### Time series data
 
