@@ -203,6 +203,7 @@
   - [Twitter API](#twitter-api)
   - [Design architecture for Instagram likes and comments](#design-architecture-for-instagram-likes-and-comments)
   - [Design instagram #2](#design-instagram-2)
+  - [Instagram stories system](#instagram-stories-system)
 - [Cloud design patterns](#cloud-design-patterns)
 - [Five common system design interview mistakes](#five-common-system-design-interview-mistakes)
 
@@ -4118,6 +4119,36 @@ Response:
 ## Design Instagram #2
 
 ![instagram.svg](images/system.design.5/instagram.png)
+
+---
+
+## Instagram stories system
+
+### Functional Requirements:
+
+- Users can upload images, videos as "stories"
+- Stories are visible to followers for 24 hours.
+- Users can view stories in chronological or other priority orders
+
+### Non-functional Requirements:
+
+- Low latency for uploading and viewing stories.
+- Highly available and reliable system.
+- Scalable to handle millions of concurrent users.
+- Data privacy and access control (e.g., only followers can view stories).
+
+### High-level Architecture:
+
+![24.png](images/system.design.7/24.png)
+
+1. User goes to `Write API` and find the best location for uploading story, `Write API` fire event for transcoding and saves location to DB
+2. `Transcoding farm` is doing transcoding in different dimensions
+3. Save transcoded results to `Object Storage` and save metadata to `DB`
+4. Fire event for scheduled story expiration
+5. `Transcoding farm` notifies Stories Service that story is ready for other users
+6. `Stories Service` updates `Stories Cache` for every user
+7. After 24H `workers` receive event for story expiration and then remove files in `Object store` and clear `DB`
+8. User read stories from `Stories Cache`
 
 ---
 
