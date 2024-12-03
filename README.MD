@@ -1,7 +1,7 @@
 # Awesome System Design 
 
 > - This is a collection of personal notes from various courses, articles, and books on system design. 
-> - The goal is to share a comprehensive guide to system design that can be used as a reference for interviews and real-world projects.
+> - The goal is to share a comprehensive guide to system design that can be used as a reference for real-world projects.
 > - The notes are organized by topics and include diagrams, code snippets, and examples to help understand the concepts better.
 > - The notes are a work in progress and will be updated regularly with new information and resources.
 
@@ -10,11 +10,11 @@
 ### 💽 Courses:
 
 - [x] [System Design course on neetcode.io](https://neetcode.io)
-- [x] [System Design for Interviews and Beyond](https://leetcode.com/explore/interview/card/system-design-for-interviews-and-beyond)
+- [x] [System Design from Mikhail Smarshchok](https://leetcode.com/explore/interview/card/system-design-for-interviews-and-beyond)
 - [x] [Highload Software Architecture on Projector](https://prjctr.com/course/highload-software-architecture)
 - [ ] [Learn System Design in a Hurry](https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction)
 - [ ] [System Design Simplified on interviewready.io](https://interviewready.io/course-page/system-design-course)
-- [ ] [Grokking the System Design Interview](https://www.designgurus.io/course/grokking-the-system-design-interview)
+- [ ] [Grokking the System Design](https://www.designgurus.io/course/grokking-the-system-design-interview)
 - [ ] [AWS certification](https://aws.amazon.com/certification)
 
 ### 📝 Articles:
@@ -26,7 +26,7 @@
 - [x] [How Discord Stores Billions of Messages](https://discord.com/blog/how-discord-stores-billions-of-messages)
 - [x] [How Discord Stores Trillions of Messages](https://discord.com/blog/how-discord-stores-trillions-of-messages)
 - [x] [Meta Onsite System Design Questions](https://leetcode.com/discuss/interview-experience/4428743/Meta-Onsite-System-Design-Questions)
-- [x] [A Senior Engineer's Guide to the System Design Interview](https://interviewing.io/guides/system-design-interview)
+- [x] [A Senior Engineer's Guide to the System Design](https://interviewing.io/guides/system-design-interview)
 - [x] [System design interview guide for Software Engineers](https://www.techinterviewhandbook.org/system-design/)
 - [x] [ByteByteGo Newsletter](https://blog.bytebytego.com/)
 - [x] [Netflix’s interview process and questions](https://interviewing.io/guides/hiring-process/netflix)
@@ -51,7 +51,7 @@
 - [x] [System design playlist #2 on YouTube](https://www.youtube.com/playlist?list=PLrtCHHeadkHp92TyPt1Fj452_VGLipJnL)
 - [ ] [System design playlist #3 on YouTube](https://www.youtube.com/playlist?list=PLm6XThSMgu_FFth3WUNBKnz_1dG3BKdBn)
 - [ ] [Google SWE teaches systems design](https://www.youtube.com/playlist?list=PLjTveVh7FakKjb4UYzUazqBNNF-WGurXp)
-- [ ] [System design mock interviews](https://www.youtube.com/playlist?list=PLf3F6FcQwgqEpnucyupbIqzxyvFOz9uDq)
+- [ ] [System design mock](https://www.youtube.com/playlist?list=PLf3F6FcQwgqEpnucyupbIqzxyvFOz9uDq)
 
 ### 🐈 GitHub Repositories:
 
@@ -99,6 +99,10 @@
 - https://blogs.nvidia.com
 - https://www.allthingsdistributed.com
 
+### ✍️ Excalidraw:
+
+- [Ticket master](excalidraw/ticket-master.excalidraw)
+
 ---
 
 ## 🌐 Navigation:
@@ -142,7 +146,7 @@
     - [NoSQL Database](#nosql-database)
       - [BASE](#base)
       - [Simple key-value store](#simple-key-value-store)
-      - [Cassandra](#cassandra)
+      - [How Cassandra works](#cassandra)
     - [SQL vs NoSQL](#sql-vs-nosql)
       - [LSM-tree vs B-tree](#lsm-tree-vs-b-tree)
     - [Quorum](#quorum)
@@ -157,14 +161,16 @@
     - [CAP Theorem](#cap-theorem)
       - [PACELC Theorem](#pacelc-theorem)
   - [Queue](#queue)
-  - [Numbers every programmer should know](#numbers-every-programmer-should-know)
+    - [Log file](#log-file) 
+    - [Index for log files](#index-for-log-files) 
+    - [Message delivery guarantees](#message-delivery-guarantees)
   - [Bloom filter](#bloom-filter)
-  - [Message delivery guarantees](#message-delivery-guarantees)
   - [Autoscaling](#autoscaling)
   - [How to avoid cascading failures in a distributed system](#how-to-avoid-cascading-failures-in-a-distributed-system)
   - [Region vs Availability Zone](#region-vs-availability-zone)
   - [Resource monitoring](#resource-monitoring)
   - [Stress Testing](#stress-testing)
+  - [Numbers every programmer should know](#numbers-every-programmer-should-know)
 - [System Design Interview Questions](#system-design-interview-questions)
   - [Design Rate Limiter #1](#design-rate-limiter-1)
   - [Design Rate Limiter #2](#design-rate-limiter-2)
@@ -1432,27 +1438,19 @@ For some systems like financial systems, consistency is very important. For othe
 
 ![25.png](images/system.design.7/25.png)
 
-## Numbers every programmer should know
+### Message delivery guarantees
 
-- [Latency Numbers Every Programmer Should Know](https://colin-scott.github.io/personal_website/research/interactive_latency.html)
+- At-most-once guarantee
+- At-least-once guarantee
+- Exactly-once guarantee
 
-- `ns` = nanosecond, `µs` = microsecond, `ms` = millisecond
-    - `1 ns` = 10^-9 seconds
-    - `1 µs`= 10^-6 seconds = 1,000 ns
-    - `1 ms` = 10^-3 seconds = 1,000 µs = 1,000,000 ns
+![message-delivery-guarantees.png](./images/system.design.3/message-delivery-guarantees.png)
 
-![numbers_1.png](images/system.design.1/numbers_1.png)
+![At-most-once-guarantee.png](./images/system.design.3/At-most-once-guarantee.png)
 
-![numbers_3.png](images/system.design.1/numbers_3.png)
+![At-least-once guarantee.png](./images/system.design.3/At-least-once-guarantee.png)
 
-![numbers_2.png](images/system.design.1/numbers_2.png)
-
-- By analyzing the numbers we get the following conclusions:
-    - Memory is fast but the disk is slow.
-    - Avoid disk seeks if possible.
-    - Simple compression algorithms are fast.
-    - Compress data before sending it over the internet if possible.
-    - Data centers are usually in different regions, and it takes time to send data between them.
+![Exactly-once guarantee.png](./images/system.design.3/Exactly-once-guarantee.png)
 
 ---
 
@@ -1469,21 +1467,6 @@ For some systems like financial systems, consistency is very important. For othe
 
 ---
 
-## Message delivery guarantees
-
-- At-most-once guarantee
-- At-least-once guarantee
-- Exactly-once guarantee
-
-![message-delivery-guarantees.png](./images/system.design.3/message-delivery-guarantees.png)
-
-![At-most-once-guarantee.png](./images/system.design.3/At-most-once-guarantee.png)
-
-![At-least-once guarantee.png](./images/system.design.3/At-least-once-guarantee.png)
-
-![Exactly-once guarantee.png](./images/system.design.3/Exactly-once-guarantee.png)
-
----
 
 ## Autoscaling
 
@@ -1613,6 +1596,30 @@ For some systems like financial systems, consistency is very important. For othe
   - **Spike Testing** - Spike testing is a stress testing approach that involves `simulating sudden spikes` in user activity or load on a system or application. Spike testing is used to evaluate the behavior of the system `under sudden and unexpected increases` in traffic, such as during a marketing campaign or product launch
   - **Endurance Testing** - Endurance testing is a stress testing approach that involves `measuring the performance` of a system or application `over an extended period of time`, usually several hours or days. Endurance testing is used to evaluate the system's ability to maintain its performance under a sustained load or stress
   - **Worsening Tests** - We create high load in part of production environment. Results affect real users. By observing the change in hardware metrics we can judge how these changes affect user metrics. So instead of spending weeks on improving something it’s easier to artificially slow down (worsen) that part and see if there is any impact
+
+---
+
+## Numbers every programmer should know
+
+- [Latency Numbers Every Programmer Should Know](https://colin-scott.github.io/personal_website/research/interactive_latency.html)
+
+- `ns` = nanosecond, `µs` = microsecond, `ms` = millisecond
+    - `1 ns` = 10^-9 seconds
+    - `1 µs`= 10^-6 seconds = 1,000 ns
+    - `1 ms` = 10^-3 seconds = 1,000 µs = 1,000,000 ns
+
+![numbers_1.png](images/system.design.1/numbers_1.png)
+
+![numbers_3.png](images/system.design.1/numbers_3.png)
+
+![numbers_2.png](images/system.design.1/numbers_2.png)
+
+- By analyzing the numbers we get the following conclusions:
+    - Memory is fast but the disk is slow.
+    - Avoid disk seeks if possible.
+    - Simple compression algorithms are fast.
+    - Compress data before sending it over the internet if possible.
+    - Data centers are usually in different regions, and it takes time to send data between them.
 
 ---
 
