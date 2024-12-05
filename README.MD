@@ -1,6 +1,6 @@
 # Awesome System Design 
 
-> - This is a collection of personal notes from various courses, articles, and books on system design. 
+> - This is ![img.png](images/system.design.8/5.png)a collection of personal notes from various courses, articles, and books on system design. 
 > - The goal is to share a comprehensive guide to system design that can be used as a reference for real-world projects.
 > - The notes are organized by topics and include diagrams, code snippets, and examples to help understand the concepts better.
 > - The notes are a work in progress and will be updated regularly with new information and resources.
@@ -99,7 +99,7 @@
 - https://blogs.nvidia.com
 - https://www.allthingsdistributed.com
 
-### ✍️ Excalidraw:
+### ✍️ Excalidraw schemes:
 
 - [Ticket master](excalidraw/ticket-master.excalidraw)
 
@@ -607,6 +607,8 @@ http {
 
 ### TCP vs UDP vs HTTP
 
+
+
 #### TCP 
 
 - `TCP` is a connection-oriented protocol, which means that before data can be transferred, two computers must first
@@ -615,6 +617,8 @@ http {
     - Connection-oriented
     - Slow
     - Used for HTTP, emails, file transfers, SSH.
+
+![6.png](images/system.design.8/6.png)
 
 ![24.png](images/system.design.6/24.png)
 
@@ -1201,7 +1205,18 @@ http {
 
 ##### Write
 
-![16.png](images/system.design.7/16.png)
+![7.png](images/system.design.8/7.png)
+
+1. Write Request → `Commit Log`:
+   - The incoming data is first written to the commit log (a disk-based transaction log) to ensure durability.
+   - This guarantees that even if the node crashes, the data can be recovered from the commit log.
+2. Simultaneously, the data is added to the `Memtable`: 
+   - The same data is stored in the `memtable`, which resides in memory. The `memtable` is a temporary in-memory structure where Cassandra writes data for fast access and updates.
+3. When the `Memtable` reaches its size threshold: 
+   - The memtable is flushed to disk as a new `SSTable` (Sorted Strings Table),
+      which is an immutable, disk-based structure.
+   - At this point, the associated entries in the commit log for the flushed `memtable` are deleted,
+      as the data is now durably stored in the `SSTable`.
 
 ##### Read
 
@@ -3487,6 +3502,17 @@ The fanout service works as follows:
 - `Gossip protocol` is a process of computer peer-to-peer communication that is based on the way epidemics
   spread. It is a communication protocol in which nodes periodically `exchange state` information about themselves and
   about other nodes they know about. Each node in the cluster knows about every other node in the cluster.
+
+![1.png](images/system.design.8/1.png)
+
+![2.png](images/system.design.8/2.png)
+
+![3.png](images/system.design.8/3.png)
+
+![4.png](images/system.design.8/4.png)
+
+![5.png](images/system.design.8/5.png)
+
 - `Quorum writes/reads` define a minimum number of nodes that must agree on the response
 - NoSQL provides `availability` and `partition tolerance` (AP) guarantees, but no consistency guarantee
 
