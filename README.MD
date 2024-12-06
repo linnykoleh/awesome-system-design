@@ -691,6 +691,8 @@ http {
 
 ## CDN
 
+![8.png](images/system.design.8/8.png)
+
 ![cdn_cover.png](images/system.design.1/cdn_cover.png)
 
 - `CDN` is a system of distributed servers (network) that deliver webpages and other web content to a user based on the
@@ -702,6 +704,10 @@ http {
 - `Origin server` is a server that stores the original, definitive versions of web pages and other files. It is usually
   located in a data center that is far from the user. The origin server receives requests from edge servers and
   fulfills them by sending the appropriate content.
+- CDN works as a work-through cache. It caches the content from the origin server and serves it to the user. If the
+  content is not in the cache, the CDN will `PULL` it from the origin server and cache it for future requests.
+
+![9.png](images/system.design.8/9.png)
 
 ### Edge computing
 
@@ -710,6 +716,8 @@ http {
   cloud and moving those processes to local places, such as on a user’s computer, an IoT device, or an edge server.
   Bringing computation to the network’s edge minimizes the amount of long-distance communication that has to happen
   between a client and server.
+
+![10.png](images/system.design.8/10.png)
 
 ---
 
