@@ -1,6 +1,6 @@
 # Awesome System Design 
 
-> - This is ![img.png](images/system.design.8/5.png)a collection of personal notes from various courses, articles, and books on system design. 
+> - This is a collection of personal notes from various courses, articles, and books on system design. 
 > - The goal is to share a comprehensive guide to system design that can be used as a reference for real-world projects.
 > - The notes are organized by topics and include diagrams, code snippets, and examples to help understand the concepts better.
 > - The notes are a work in progress and will be updated regularly with new information and resources.
