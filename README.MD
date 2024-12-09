@@ -99,9 +99,9 @@
 - https://blogs.nvidia.com
 - https://www.allthingsdistributed.com
 
-### ✍️ Excalidraw schemes:
+[//]: # (### ✍️ Excalidraw schemes:)
 
-- [Ticket master](excalidraw/ticket-master.excalidraw)
+[//]: # (- [Ticket master]&#40;excalidraw/ticket-master.excalidraw&#41;)
 
 ---
 
