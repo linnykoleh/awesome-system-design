@@ -1461,6 +1461,12 @@ For some systems like financial systems, consistency is very important. For othe
 
 ![25.png](images/system.design.7/25.png)
 
+![11.png](images/system.design.8/11.png)
+
+### Sharding
+
+![12.png](images/system.design.8/12.png)
+
 ### Message delivery guarantees
 
 - At-most-once guarantee
