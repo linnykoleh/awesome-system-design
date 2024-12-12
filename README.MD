@@ -142,6 +142,7 @@
       - [Indexing](#indexing)
         - [B-tree](#b-tree)
         - [When to create indexes](#when-to-create-indexes)
+        - [Specialized Indexes](#specialized-indexes)
       - [Optimization](#optimization)
     - [NoSQL Database](#nosql-database)
       - [BASE](#base)
@@ -170,6 +171,7 @@
   - [Region vs Availability Zone](#region-vs-availability-zone)
   - [Resource monitoring](#resource-monitoring)
   - [Stress Testing](#stress-testing)
+  - [Locking](#locking)
   - [Numbers every programmer should know](#numbers-every-programmer-should-know)
 - [System Design Interview Questions](#system-design-interview-questions)
   - [Design Rate Limiter #1](#design-rate-limiter-1)
@@ -343,12 +345,12 @@
             - How much RAM and how many machines do we need for us to achieve this?
             - Amount of data you want to store in disk/ssd
 - `API design (5–10 min)` (_ask interviewer if needed_)
+  - Putting sensitive information like `userId` in the request body is a security risk
   - Public endpoints
     - CRUD
   - Private endpoints
 - `High level design (5–10 min)`
-    - Start with something simple
-      - Single machine solution only
+  - Start with something simple (_Focus on a relatively simple design that meets the core functional requirements, and then layer on complexity to satisfy the non-functional requirements in your deep dives section_)
       - Single service solution
       - Design monolith service and then break it into microservices
     - APIs for Read/Write scenarios for crucial components
@@ -1119,6 +1121,13 @@ http {
 - Do not create indexes in advance, for example, in a development environment. Indexes should be installed exclusively for the shape and type of workload of the running system.
 - Remove unused indexes.
 
+##### Specialized Indexes
+
+- In addition to the basic indexing strategies, there are many specialized indexes that are used to solve specific problems. 
+- `Geospatial indexes` are used to index location data. This is useful for systems that need to do things like find the nearest restaurant or the nearest gas station. 
+- `Vector databases` are used to index high-dimensional data. This is useful for systems that need to do things like find similar images or similar documents. 
+- `Full-text indexes` are used to index text data. This is useful for systems that need to do things like search for documents or search for tweets.
+
 #### Optimization
 
 ##### Common ideas for optimization
@@ -1625,6 +1634,19 @@ For some systems like financial systems, consistency is very important. For othe
   - **Spike Testing** - Spike testing is a stress testing approach that involves `simulating sudden spikes` in user activity or load on a system or application. Spike testing is used to evaluate the behavior of the system `under sudden and unexpected increases` in traffic, such as during a marketing campaign or product launch
   - **Endurance Testing** - Endurance testing is a stress testing approach that involves `measuring the performance` of a system or application `over an extended period of time`, usually several hours or days. Endurance testing is used to evaluate the system's ability to maintain its performance under a sustained load or stress
   - **Worsening Tests** - We create high load in part of production environment. Results affect real users. By observing the change in hardware metrics we can judge how these changes affect user metrics. So instead of spending weeks on improving something it’s easier to artificially slow down (worsen) that part and see if there is any impact
+
+---
+
+## Locking
+
+- You'll be forced to contend with locks when you consider race conditions. 
+- A race condition, if you remember, is a situation where multiple clients are trying to access the same resource at the same time. 
+- This can lead to data corruption, lost updates, and other bad things.
+- In many cases, we can avoid locking by employing an "optimistic" concurrency control strategy, especially if the work to be done is either read-only or can be retried. 
+- In an optimistic strategy we're going to assume that we can do the work without locking and then check to see if we were right. 
+- In most systems, we can use a "compare and swap" operation to do this.
+
+![13.png](images/system.design.8/13.png)
 
 ---
 
