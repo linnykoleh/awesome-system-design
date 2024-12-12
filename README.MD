@@ -332,6 +332,8 @@
           - Engineering cost
           - Maintenance cost
           - Resource cost
+- `Core entities (2 min)`
+  - Example: User, Post, Comment, Like, Follow
 - `Estimations (3–5 min)` (_ask interviewer if needed_)
     - Latency/Throughput expectations
     - QPS (Queries Per Second) Read/Write ratio
@@ -344,7 +346,7 @@
             - If we are using a cache, what is the kind of data we want to store in cache
             - How much RAM and how many machines do we need for us to achieve this?
             - Amount of data you want to store in disk/ssd
-- `API design (5–10 min)` (_ask interviewer if needed_)
+- `API design (5–10 min)`
   - Putting sensitive information like `userId` in the request body is a security risk
   - Public endpoints
     - CRUD
@@ -353,12 +355,11 @@
   - Start with something simple (_Focus on a relatively simple design that meets the core functional requirements, and then layer on complexity to satisfy the non-functional requirements in your deep dives section_)
       - Single service solution
       - Design monolith service and then break it into microservices
-    - APIs for Read/Write scenarios for crucial components
-    - Database schema
-    - Basic algorithm
-    - High level design for a Read/Write scenario
-      - High level design for `Read heavy` scenario
-      - High level design for `Write heavy` scenario
+   - APIs for Read/Write scenarios for crucial components
+   - Simple `database schema` next to the database components, according to the **core entities**
+   - High level design for a Read/Write scenario
+     - High level design for `Read heavy` scenario
+     - High level design for `Write heavy` scenario
 - `Design details (15-20 min)`
     - Scaling the high level design
     - Scaling individual components:
