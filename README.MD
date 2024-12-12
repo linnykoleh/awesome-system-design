@@ -1640,7 +1640,7 @@ For some systems like financial systems, consistency is very important. For othe
 ## Locking
 
 - You'll be forced to contend with locks when you consider race conditions. 
-- A race condition, if you remember, is a situation where multiple clients are trying to access the same resource at the same time. 
+- A race condition is a situation where multiple clients are trying to access the same resource at the same time. 
 - This can lead to data corruption, lost updates, and other bad things.
 - In many cases, we can avoid locking by employing an "optimistic" concurrency control strategy, especially if the work to be done is either read-only or can be retried. 
 - In an optimistic strategy we're going to assume that we can do the work without locking and then check to see if we were right. 
