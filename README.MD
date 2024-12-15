@@ -292,9 +292,8 @@
         - Start with the customer and work backwards
         - **Who** will use the system
         - **How** the system will be used
-        - What type of data needs to be stored
-        - Platform (Mobile, Web, Desktop)
-        - Use cases
+        - Choosing just the `top 3` features 
+        - Adding features that are out of scope is a _nice to have_, it shows product thinking
         - Ask your interviewer: _“Are there any important requirements you have in mind that I’ve overlooked?”_
     - `Non functional` (use **why** you used such NFR)
         - **High availability** system uptime in percentage
@@ -333,21 +332,10 @@
           - Maintenance cost
           - Resource cost
 - `Core entities (2 min)`
-  - Example: User, Post, Comment, Like, Follow
-- `Estimations (3–5 min)` (_ask interviewer if needed_)
-    - Latency/Throughput expectations
-    - QPS (Queries Per Second) Read/Write ratio
-    - Total/Daily active users
-        - Traffic estimates
-            - Write (QPS, Volume of data)
-            - Read  (QPS, Volume of data)
-        - Storage estimates
-        - Memory estimates
-            - If we are using a cache, what is the kind of data we want to store in cache
-            - How much RAM and how many machines do we need for us to achieve this?
-            - Amount of data you want to store in disk/ssd
+  - Example: User, Post, Comment, Like, Event, Ticker, etc.
 - `API design (5–10 min)`
   - Putting sensitive information like `userId` in the request body is a security risk
+  - It's ok to have simple APIs from the start that you evolve as your design progresses
   - Public endpoints
     - CRUD
   - Private endpoints
@@ -394,6 +382,18 @@
         - Communication:
           - HTTP/S, TCP, UDP, RPC, Web Sockets
     - Logging, Metrics and Automation
+- `Estimations (3–5 min)` (_ask interviewer if needed_)
+    - Latency/Throughput expectations
+    - QPS (Queries Per Second) Read/Write ratio
+    - Total/Daily active users
+        - Traffic estimates
+            - Write (QPS, Volume of data)
+            - Read  (QPS, Volume of data)
+        - Storage estimates
+        - Memory estimates
+            - If we are using a cache, what is the kind of data we want to store in cache
+            - How much RAM and how many machines do we need for us to achieve this?
+            - Amount of data you want to store in disk/ssd
 - `Follow-up (2–3 min)`
     - Bottlenecks
     - SPOF
