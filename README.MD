@@ -9,9 +9,9 @@
 
 ### 💽 Courses:
 
-- [x] [System Design course on neetcode.io](https://neetcode.io)
-- [x] [System Design from Mikhail Smarshchok](https://leetcode.com/explore/interview/card/system-design-for-interviews-and-beyond)
-- [x] [Highload Software Architecture on Projector](https://prjctr.com/course/highload-software-architecture)
+- [x] [System Design course on neetcode.io ($100)](https://neetcode.io)
+- [x] [System Design from Mikhail Smarshchok ($75)](https://leetcode.com/explore/interview/card/system-design-for-interviews-and-beyond)
+- [x] [Highload Software Architecture on Projector ($600)](https://prjctr.com/course/highload-software-architecture)
 - [ ] [Learn System Design in a Hurry](https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction)
 - [ ] [System Design Simplified on interviewready.io](https://interviewready.io/course-page/system-design-course)
 - [ ] [Grokking the System Design](https://www.designgurus.io/course/grokking-the-system-design-interview)
@@ -287,6 +287,8 @@
 > Think deeply and ask questions to clarify requirements and assumptions.
 > This is extremely important.
 
+![14.png](images/system.design.8/14.png)
+
 - `Requirements (3-5 min)`
     - `Functional`
         - Start with the customer and work backwards
@@ -297,11 +299,11 @@
         - Ask your interviewer: _“Are there any important requirements you have in mind that I’ve overlooked?”_
     - `Non functional` (use **why** you used such NFR)
         - **High availability** system uptime in percentage
-            - 99 % => 3.65 days of downtime per year
-            - 99.9% => 8.76 hours of downtime per year
-            - 99.99% => 52 minutes 35 seconds of downtime per year
-            - 99.999% => 5 minutes 15 seconds of downtime per year
-            - 99.9999% => 31 seconds of downtime per year
+            - 99% ⇒ 3.65 days of downtime per year
+            - 99.9% ⇒ 8.76 hours of downtime per year
+            - 99.99% ⇒ 52 minutes 35 seconds of downtime per year
+            - 99.999% ⇒ 5 minutes 15 seconds of downtime per year
+            - 99.9999% ⇒ 31 seconds of downtime per year
         - **Scalability** the property of a system to handle a growing load
           - Vertical 
           - Horizontal
