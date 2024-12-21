@@ -335,13 +335,13 @@
           - Resource cost
 - `Core entities (2 min)`
   - Example: User, Post, Comment, Like, Event, Ticker, etc.
-- `API design (5–10 min)`
+- `API design (5–7 min)`
   - Putting sensitive information like `userId` in the request body is a security risk
   - It's ok to have simple APIs from the start that you evolve as your design progresses
   - Public endpoints
     - CRUD
   - Private endpoints
-- `High level design (5–10 min)`
+- `High level design (10–15 min)`
   - Start with something simple (_Focus on a relatively simple design that meets the core functional requirements, and then layer on complexity to satisfy the non-functional requirements in your deep dives section_)
       - Single service solution
       - Design monolith service and then break it into microservices
@@ -361,13 +361,13 @@
         - CDN (Push vs Pull)
         - Load Balancers (Active-Passive, Active-Active, Layer 4, Layer 7)
         - Reverse Proxy
-        - Blob / Object Storage
+        - Blob Storage
         - Application layer scaling (Microservices, Service Discovery, N tier)
         - Database:
           - **SQL**
             - Replication, Sharding, Indexing, Denormalization, SQL Tuning
           - **NoSQL**
-            - Types: Key-Value, Wide-Column, Graph, Document
+            - Types: Key-Value, Wide-Column, Graph, Document, Geospatial, Vector, Full-Text scanning
             - Read heavy: MongoDB, Couchbase
             - Write heavy: Cassandra, ScyllaDB
           - Cold/Hot storage
@@ -688,6 +688,12 @@ http {
 
 ![27.png](images/system.design.7/27.png)
 
+- DNS is one potential bottleneck that is often overlooked. 
+- If we're using a 3rd party DNS provider, we'll want to make sure they can handle the load. 
+- Most 3rd party providers have rate limits that can be increased by throwing money at them. 
+- While this is certainly an option, especially given our time constraints, it's worth considering other optimizations:
+  - `DNS caching`: We can cache DNS lookups in our crawlers to reduce the number of DNS requests we need to make. This way all URLs to the same domain will reuse the same DNS lookup.
+  - `Multiple DNS providers`: We can use multiple DNS providers and round-robin between them. This can help distribute the load across multiple providers and reduce the risk of hitting rate limits.
 - `ISP` - internet service provider
 
 ![28.png](images/system.design.7/28.png)
