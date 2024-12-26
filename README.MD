@@ -1414,6 +1414,7 @@ For some systems like financial systems, consistency is very important. For othe
 #### Redis
 
 - in-memory data structure store, used as a database, cache, and message broker
+- redis is single threaded, means operations are atomic and there is no race condition 
 - Structure:
     - `String` - simple key-value pairs
     - `Hash` - map between string fields and string values
