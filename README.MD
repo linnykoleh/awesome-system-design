@@ -350,7 +350,7 @@
    - High level design for a Read/Write scenario
      - High level design for `Read heavy` scenario
      - High level design for `Write heavy` scenario
-- `Design details (15-20 min)`
+- `Deep dives (15-20 min)`
     - Scaling the high level design
     - Scaling individual components:
         - Availability, Consistency and Scale story for each component
@@ -1413,8 +1413,10 @@ For some systems like financial systems, consistency is very important. For othe
 
 #### Redis
 
-- in-memory data structure store, used as a database, cache, and message broker
-- redis is single threaded, means operations are atomic and there is no race condition 
+- In-memory data structure store, used as a database, cache, and message broker
+- Redis is single threaded, means operations are `atomic` and there is no race condition 
+- Need to think about adding random value to the key to avoid `hot key issue` to evenly distribute the load among the nodes
+- Support `TTL` - time to live, when the key is expired, it will be removed from the cache
 - Structure:
     - `String` - simple key-value pairs
     - `Hash` - map between string fields and string values
@@ -1423,7 +1425,9 @@ For some systems like financial systems, consistency is very important. For othe
     - `Sorted Set` - collection of unique strings with scores
     - `HyperLogLog` - probabilistic data structure used to estimate the cardinality of a set
     - `Geospatial` - store geospatial data
-    - `Streams` - append-only data structure
+- Patterns:
+     - `Pub/Sub`
+     - `Streams`
 
 ![15.jpg](images/system.design.6/15.jpg)
 
