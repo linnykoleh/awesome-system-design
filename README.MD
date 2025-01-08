@@ -147,7 +147,8 @@
     - [NoSQL Database](#nosql-database)
       - [BASE](#base)
       - [Simple key-value store](#simple-key-value-store)
-      - [How Cassandra works](#cassandra)
+      - [Cassandra](#cassandra)
+      - [ElasticSearch](#elasticsearch)
     - [SQL vs NoSQL](#sql-vs-nosql)
       - [LSM-tree vs B-tree](#lsm-tree-vs-b-tree)
     - [Quorum](#quorum)
@@ -1251,6 +1252,16 @@ http {
 ##### LSM-tree
 
 ![18.png](images/system.design.7/18.png)
+
+#### Elasticsearch
+
+![15.png](images/system.design.8/15.png)
+
+![15.png](images/system.design.8/16.png)
+
+##### Inverted Index
+
+![17.png](images/system.design.8/17.png)
 
 ### SQL vs NoSQL
 
