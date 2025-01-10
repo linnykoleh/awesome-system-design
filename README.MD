@@ -166,6 +166,7 @@
     - [Log file](#log-file) 
     - [Index for log files](#index-for-log-files) 
     - [Message delivery guarantees](#message-delivery-guarantees)
+    - [Kafka](#kafka)
   - [Bloom filter](#bloom-filter)
   - [Autoscaling](#autoscaling)
   - [How to avoid cascading failures in a distributed system](#how-to-avoid-cascading-failures-in-a-distributed-system)
@@ -1514,6 +1515,29 @@ For some systems like financial systems, consistency is very important. For othe
 ![At-least-once guarantee.png](./images/system.design.3/At-least-once-guarantee.png)
 
 ![Exactly-once guarantee.png](./images/system.design.3/Exactly-once-guarantee.png)
+
+### Kafka
+
+- https://www.hellointerview.com/learn/system-design/deep-dives/kafka
+
+![18.png](images/system.design.8/18.png)
+
+![19.png](images/system.design.8/19.png)
+
+#### Terminology
+
+- `Brokers` - a Kafka cluster is made up of multiple `brokers`. These are just individual servers (they can be physical or virtual). Each broker is responsible for storing data and serving clients. The more brokers you have, the more data you can store and the more clients you can serve.
+- `Partitions` - each broker has a number of `partitions`. Each partition is an ordered, immutable sequence of messages that is continually appended to - think of like a log file. `Partitions` are the way Kafka scales as they allow for messages to be consumed in parallel.
+- `Topic` is just a logical grouping of partitions. `Topics` are the way you publish and subscribe to data in Kafka. When you publish a message, you publish it to a topic, and when you consume a message, you consume it from a topic. Topics are always multi-producer; that is, a topic can have zero, one, or many producers that write data to it.
+- `Producers` are the ones who write data to topics
+- `Consumers` are the ones who read data from topics.
+- You can use Kafka as either a `message queue` or a `stream`. Frankly, the distinction here is minor. The only meaningful difference is with how consumers interact with the data. In a `message queue`, consumers read messages from the queue and then acknowledge that they have processed the message. In a `stream`, consumers read messages from the stream and then process them, but they don't acknowledge that they have processed the message. This allows for more complex processing of the data.
+- `Single broker` can store around `1TB` of data and handle around `10,000` messages per second
+- `Message` consists of one required field, the `value`, and three _optional_ fields: 
+  - `Partition key` is used to determine which partition the message is sent to
+  - `Timestamp` is used to order messages within a partition. 
+  - `Headers`, like HTTP headers, are key - value pairs that can be used to store metadata about the message.
+- The biggest impact you can have to `performance` comes back to your choice of `partition key`. The goal is to maximize parallelism by ensuring that messages are **evenly** distributed across partitions
 
 ---
 
