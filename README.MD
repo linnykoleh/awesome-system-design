@@ -1229,7 +1229,23 @@ http {
 
 #### Cassandra
 
-![15.png](images/system.design.7/15.png)
+- https://docs.datastax.com/en/cassandra-oss/2.2/cassandra/dml/dmlTransactionsDiffer.html
+
+> Cassandra supports atomicity and isolation at the row-level, but trades transactional isolation and atomicity for high availability and fast write performance. Cassandra writes are durable.
+
+> Cassandra uses client-side timestamps to determine the most recent update to a column. The latest timestamp always wins when requesting data, so if multiple client sessions update the same columns in a row concurrently, the most recent update is the one seen by readers.
+
+
+##### Data model
+
+- `Keyspace` - Keyspaces are basically data containers, and can be likened to "databases" in relational systems like Postgres or MySQL
+- `Table` - A table is container for your data, in the form of rows
+- `Row` - A row is a container for data. It is represented by a primary key and contains columns.
+- `Column` - A column contains data belonging to a row
+- `Partition Key` - One or more columns that are used to determine what partition the row is in
+- `Clustering Key` - Zero or more columns that are used to determine the sorted order of rows in a table
+
+![20.png](images/system.design.8/20.png)
 
 ##### Write
 
