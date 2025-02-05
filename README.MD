@@ -32,6 +32,7 @@
 - [x] [Netflix’s interview process and questions](https://interviewing.io/guides/hiring-process/netflix)
 - [x] [How software engineering behavioral interviews are evaluated at Meta](https://interviewing.io/blog/how-software-engineering-behavioral-interviews-are-evaluated-meta)
 - [ ] [How Figma’s databases team lived to tell the scale](https://www.figma.com/blog/how-figmas-databases-team-lived-to-tell-the-scale)
+- [ ] [27 Fundamental Techniques for Software Architects](https://www.workingsoftware.dev/fundamental-techniques-for-software-architects/)
 
 ### 📚 Books:
 
@@ -120,6 +121,7 @@
     - [DNS](#dns)
     - [Network protocols](#network-protocols)
   - [CDN](#cdn)
+    - [Principal scheme](#principal-scheme)
     - [Edge computing](#edge-computing)
   - [Security](#security)
   - [Proxies](#proxies)
@@ -721,6 +723,14 @@ http {
   content is not in the cache, the CDN will `PULL` it from the origin server and cache it for future requests.
 
 ![9.png](images/system.design.8/9.png)
+
+### Principal scheme
+
+- GeoDNS
+- Load balancers
+- Caching servers
+
+![21.png](images/system.design.8/21.png)
 
 ### Edge computing
 
