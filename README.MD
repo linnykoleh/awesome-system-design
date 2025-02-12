@@ -155,6 +155,7 @@
       - [LSM-tree vs B-tree](#lsm-tree-vs-b-tree)
     - [Quorum](#quorum)
     - [Consensus](#consensus)
+    - [Strategies for Merging Data After a Partition](#strategies-for-merging-data-after-a-partition)
     - [Cache](#cache)
       - [Cache types](#cache-types) 
         - [Cache aside](#cache-aside)
@@ -177,6 +178,7 @@
   - [Stress Testing](#stress-testing)
   - [Locking](#locking)
   - [Numbers every programmer should know](#numbers-every-programmer-should-know)
+  - [Operational transformation](#operational-transformation)
 - [System Design Interview Questions](#system-design-interview-questions)
   - [Design Rate Limiter #1](#design-rate-limiter-1)
   - [Design Rate Limiter #2](#design-rate-limiter-2)
@@ -1336,6 +1338,28 @@ http {
 - `Consensus` requires all (or a majority) of nodes to agree, while `Quorum` only requires agreement from a subset, leading to lower latency in Quorum.
 - `Consenses` helps slaves to assign a new master if the old one is down. 
 
+### Strategies for Merging Data After a Partition
+
+1. `Last Write Wins (LWW)` – The Most Recent Update Prevails
+   - Each update is assigned a `timestamp`.
+   - After reconnection, nodes keep the version with the most recent `timestamp`.
+   - Problem: This can lead to data loss if multiple updates occur in parallel.
+   - Example: 
+     - Two users modify a bank balance: one decreases it by 10, another increases it by 20. `LWW` might keep only one of these updates, causing incorrect data.
+2. `CRDT (Conflict-Free Replicated Data Types) `– Automatic Merging
+   - Uses associative, commutative, and idempotent `structures` to ensure all nodes reach the same final state without conflicts.
+   - Data is aggregated so that no updates are lost.
+   - Example:
+     - For numeric fields, a `PN-Counter` keeps track of increments and decrements separately to merge balance changes.
+     - For sets, a `G-Set` ensures added elements are never lost.
+   - Where is it used? CRDTs power Riak, Redis CRDT, AntidoteDB, and Akka Distributed Data.
+3. `Version Vector (VV)` – Tracking Changes Per Node
+   - Each node maintains a `counter of changes` for every key.
+   - If two nodes have different versions, they can determine if one is a descendant of the other.
+   - If versions conflict, the system may store both versions (as seen in Amazon DynamoDB).
+   - Example: 
+     - DynamoDB keeps multiple conflicting versions of an object, allowing the client to resolve them manually.
+
 ### CAP Theorem
 
 - `CAP theorem` states that it is impossible for a distributed data store to simultaneously provide `more than two`
@@ -1746,6 +1770,34 @@ For some systems like financial systems, consistency is very important. For othe
     - Simple compression algorithms are fast.
     - Compress data before sending it over the internet if possible.
     - Data centers are usually in different regions, and it takes time to send data between them.
+
+---
+
+## Operational transformation
+
+- Links:
+  - https://medium.com/coinmonks/operational-transformations-as-an-algorithm-for-automatic-conflict-resolution-3bf8920ea447
+  - https://en.wikipedia.org/wiki/Operational_transformation
+  - https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type
+
+![22.png](images/system.design.8/22.png)
+
+- Operational Transformation (OT) is an algorithm that allows multiple users to edit the same document simultaneously without conflicts. Simply put, it ensures that all changes to the document are applied in the correct order, even if they arrive with a delay or in a different sequence.
+- How it works:
+  1. Each user makes changes. For example, two users are editing a text document:
+    - User A inserts the letter "X" at position 2.
+    - User B deletes a letter at position 5. 
+  2. The system sends the changes to the server
+     - A’s operation looks like "insert 'X' at position 2".
+     - B’s operation looks like "delete character at position 5".
+  3. The server transforms the changes if they conflict
+     - If the changes don’t interfere with each other, the server simply applies them.
+     - If they affect the same positions (e.g., A inserted a letter before B deleted a character), the server adjusts them so that all clients see a consistent version.
+  4. Clients receive updates and apply them
+     - Thanks to OT, all users see the same final text, regardless of the order in which their changes arrived.
+- The core principle of OT:
+  - If two users work independently, their changes can be reordered so that the final result is as if they had been applied sequentially, without losing any data.
+
 
 ---
 
