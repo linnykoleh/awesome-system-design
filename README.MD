@@ -179,6 +179,7 @@
   - [Locking](#locking)
   - [Numbers every programmer should know](#numbers-every-programmer-should-know)
   - [Operational transformation](#operational-transformation)
+  - [Rest API Example](#rest-api-example)
 - [System Design Interview Questions](#system-design-interview-questions)
   - [Design Rate Limiter #1](#design-rate-limiter-1)
   - [Design Rate Limiter #2](#design-rate-limiter-2)
@@ -1798,6 +1799,11 @@ For some systems like financial systems, consistency is very important. For othe
 - The core principle of OT:
   - If two users work independently, their changes can be reordered so that the final result is as if they had been applied sequentially, without losing any data.
 
+---
+
+## Rest api example
+
+![23.png](images/system.design.8/23.png)
 
 ---
 
