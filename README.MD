@@ -50,6 +50,7 @@
 - [x] [Videos System Design for Interviews and Beyond videos](https://www.youtube.com/c/SystemDesignInterview/videos)
 - [x] [System design playlist #1 on YouTube](https://www.youtube.com/playlist?list=PLMCXHnjXnTnvo6alSjVkgxV-VH6EPyvoX)
 - [x] [System design playlist #2 on YouTube](https://www.youtube.com/playlist?list=PLrtCHHeadkHp92TyPt1Fj452_VGLipJnL)
+- [x] [System Design Interview - Designing Google Docs](https://www.youtube.com/watch?v=9VUnUtPZ8xg&t=1s&ab_channel=%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%80%D0%91%D0%B0%D1%80%D0%BC%D0%B8%D0%BD)
 - [ ] [System design playlist #3 on YouTube](https://www.youtube.com/playlist?list=PLm6XThSMgu_FFth3WUNBKnz_1dG3BKdBn)
 - [ ] [Google SWE teaches systems design](https://www.youtube.com/playlist?list=PLjTveVh7FakKjb4UYzUazqBNNF-WGurXp)
 - [ ] [System design mock](https://www.youtube.com/playlist?list=PLf3F6FcQwgqEpnucyupbIqzxyvFOz9uDq)
@@ -178,8 +179,9 @@
   - [Stress Testing](#stress-testing)
   - [Locking](#locking)
   - [Numbers every programmer should know](#numbers-every-programmer-should-know)
-  - [Operational transformation](#operational-transformation)
+  - [Operational transformation and CRDT](#operational-transformation)
   - [Rest API Example](#rest-api-example)
+  - [DDOS attacks](#ddos-attacks)
 - [System Design Interview Questions](#system-design-interview-questions)
   - [Design Rate Limiter #1](#design-rate-limiter-1)
   - [Design Rate Limiter #2](#design-rate-limiter-2)
@@ -1783,7 +1785,7 @@ For some systems like financial systems, consistency is very important. For othe
 
 ![22.png](images/system.design.8/22.png)
 
-- Operational Transformation (OT) is an algorithm that allows multiple users to edit the same document simultaneously without conflicts. Simply put, it ensures that all changes to the document are applied in the correct order, even if they arrive with a delay or in a different sequence.
+- `Operational Transformation` (OT) is an algorithm that allows multiple users to edit the same document simultaneously without conflicts. Simply put, it ensures that all changes to the document are applied in the correct order, even if they arrive with a delay or in a different sequence.
 - How it works:
   1. Each user makes changes. For example, two users are editing a text document:
     - User A inserts the letter "X" at position 2.
@@ -1804,6 +1806,104 @@ For some systems like financial systems, consistency is very important. For othe
 ## Rest api example
 
 ![23.png](images/system.design.8/23.png)
+
+---
+
+## DDOS attacks
+
+> DDoS - Distributed Denial of Service. DDoS is a type of DoS attack where multiple compromised systems are used to target a single system causing a Denial of Service (DoS) attack. In doing so, the attacker hopes to exhaust the target’s Internet bandwidth and RAM. The ultimate goal is to crash the target’s system and disrupt its business.
+
+### Kinds Of DDoS Attacks
+
+- Volume-based:
+  - UDP flood
+  - ICMP (ping) flood
+- Application
+  - HTTP flood
+  - Slowloris
+- Protocol
+  - SYN flood
+  - Ping of Death
+
+### UDP flood
+
+> User Datagram Protocol (UDP) floods attack random ports on a remote server with requests called UDP packets. The host checks the ports for the appropriate applications. When no application can be found, the system responds to every request with a “destination unreachable” packet. The resulting traffic can overwhelm the service.
+
+![25.png](images/system.design.8/25.png)
+
+### ICMP (ping) flood
+
+> An Internet Control Message Protocol (ICMP) flood sends ICMP echo request packets (pings) to a host. Pings are common requests used to measure the connectivity of two servers. When a ping is sent, the server quickly responds. In a ping flood, however, an attacker uses an extensive series of pings to exhaust the incoming and outgoing bandwidth of the targeted server.
+
+![26.png](images/system.design.8/26.png)
+
+### DNS Amplification Attack
+
+> In this attack an attacker sends requests to a DNS server with a spoofed IP address (the victim's), causing the DNS server to send large amounts of data to the victim’s real address.
+
+![27.png](images/system.design.8/27.png)
+
+### HTTP flood
+
+> An HTTP flood is a Layer 7 application attack that uses botnets, often referred to as a “zombie army.” In this type of attack, standard GET and POST requests flood a web server or application. The server is inundated with requests and may shut down. These attacks can be particularly difficult to detect because they appear as perfectly valid traffic.
+
+![28.png](images/system.design.8/28.png)
+
+### Slowloris Attack
+
+> Slowloris - attack tool invented by Robert "RSnake" Hansen which allows a single machine to take down another machine's web server with minimal bandwidth and side effects on unrelated services and ports. Slowloris tries to keep many connections to the target web server open and hold them open as long as possible. It accomplishes this by opening connections to the target web server and sending a partial request.
+> 
+> Periodically, it will send subsequent HTTP headers, adding to, but never completing the request. Affected servers will keep these connections open, filling their maximum concurrent connection pool, eventually denying additional connection attempts from clients.
+
+![29.png](images/system.design.8/29.png)
+
+### SYN flood
+
+> In a SYN flood attack, the attacker sends seemingly normal SYN requests to a server, which responds with a SYN-ACK (synchronized-acknowledgment) request. Typically, a client then sends back an ACK request, and a connection is made. In a SYN flood attack, the attacker does not respond with a final ACK. The server is left with a large number of unfinished SYN-ACK requests that burden the system.
+
+![30.png](images/system.design.8/30.png)
+
+### Ping of Death Attack
+
+> PoD is caused by an attacker deliberately sending an IP packet larger than the 65,536 bytes allowed by the IP protocol. Can be executed by running
+> 
+> ping -l 65610 somesite.com
+> 
+> Before 1997 many operating systems didn't know what to do when they received an oversized packet, so they froze, crashed, or rebooted.
+
+### How to make DOS/DDOS Attack
+
+https://linux.die.net/man/8/hping3
+
+- For this you will need **hping3**:
+    - _docker pull utkudarilmaz/hping3:latest_
+- With this tool you can launch: HTTP Flood, TCP SYN Flood, UDP Flood, TCP FIN FLood, TCP RST Flood, PUSH and ACK Flood, ICMP Flood. And here is how:
+- **HTTP flood**:
+  - _docker run utkudarilmaz/hping3:latest --rand-source --flood [TARGET IP] -p [TARGET PORT]_
+- **TCP SYN flood**
+  - _docker run utkudarilmaz/hping3:latest --rand-source -S -q -n --flood [TARGET IP] -p [TARGET PORT]_
+- **UDP flood**:
+  - _docker run utkudarilmaz/hping3:latest --rand-source --udp --flood [TARGET IP] -p [TARGET PORT]_
+- **TCP FIN Flood**
+  - _docker run utkudarilmaz/hping3:latest --rand-source -F --flood [TARGET IP] -p [TARGET PORT]_
+- **TCP RST Flood**
+  - _docker run utkudarilmaz/hping3:latest --rand-source -R --flood [TARGET IP] -p [TARGET PORT]_  
+- **PUSH and ACK Flood**
+  - _docker run utkudarilmaz/hping3:latest --rand-source -PA --flood [TARGET IP] -p [TARGET PORT]_  
+- **ICMP Flood**
+  - _docker run utkudarilmaz/hping3:latest --rand-source -1 --flood [TARGET IP] -p [TARGET PORT]_
+
+### How to protect NGINX?
+
+https://blog.nginx.org/blog/mitigating-ddos-attacks-with-nginx-and-nginx-plus
+
+- Limit the Rate of Requests
+- Limit the Number of Connections
+- Closing Slow Connections
+- Blacklist suspicious IP Addresses
+- Whitelist trusted IP Addresses
+- Use Cache to Smooth Traffic Spikes
+- Block suspicious Requests
 
 ---
 
@@ -4372,6 +4472,15 @@ Response:
 8. User read stories from `Stories Cache`
 
 ---
+
+### Designing Google Docs
+
+- Use CRDT or Operational Transformation for real-time collaboration
+- Operational Transformation has downside, we need server to handle all operations
+
+![24.png](images/system.design.8/24.png)
+
+--- 
 
 ## Cloud design patterns
 
