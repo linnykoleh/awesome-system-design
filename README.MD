@@ -182,6 +182,7 @@
   - [Operational transformation and CRDT](#operational-transformation)
   - [Rest API Example](#rest-api-example)
   - [DDOS attacks](#ddos-attacks)
+  - [Storages Physics](#storages-physics)
 - [System Design Interview Questions](#system-design-interview-questions)
   - [Design Rate Limiter #1](#design-rate-limiter-1)
   - [Design Rate Limiter #2](#design-rate-limiter-2)
@@ -1904,6 +1905,35 @@ https://blog.nginx.org/blog/mitigating-ddos-attacks-with-nginx-and-nginx-plus
 - Whitelist trusted IP Addresses
 - Use Cache to Smooth Traffic Spikes
 - Block suspicious Requests
+
+---
+
+## Storages Physics
+
+### HDD 
+
+https://en.wikipedia.org/wiki/Hard_disk_drive
+
+- `Magnetic storage` is a common storage technology used in many types of devices, including hard disk drives (`HDDs`). At its core, magnetic storage relies on the principles of `magnetism` to encode and store data on a rotating disk.
+- Basic principles of magnetism and magnetic storage
+- The basic components of a hard disk drive include one or more magnetic platters, a read/write head for each platter, and a spindle motor that rotates the platters at high speeds (usually between 5400 and 15000 revolutions per minute). The read/write head is mounted on a moving arm that can position it above the surface of the platter to read or write data.
+- Data is written to the platter by encoding it as a series of magnetic bits, which are tiny areas of the platter that can be magnetized in either direction. The read/write head uses an electromagnet to create a magnetic field that magnetizes the appropriate bits to store the data. To read the data, the read/write head detects the magnetic field of the bits as they pass beneath it while the platters spin. The read/write head converts the magnetic signals into electrical signals that can be interpreted by the computer's processor
+- A hard disk drive consists of:
+  - `Platters` – magnetic disks where data is stored.
+  - `Tracks` – concentric circles on the surface of the platters.
+  - `Sectors` – small sections on the tracks (usually 512 or 4096 bytes).
+  - `Clusters` – groups of sectors used by the file system.
+-   The coordinates of a file are determined by the platter number, track, sector, and cluster where its data is located.
+
+![1.png](images/system.design.9/1.png)
+
+![2.png](images/system.design.9/2.png)
+
+![3.png](images/system.design.9/3.png)
+
+![4.png](images/system.design.9/4.png)
+
+![5.png](images/system.design.9/5.png)
 
 ---
 
