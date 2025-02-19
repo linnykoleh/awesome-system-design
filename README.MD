@@ -1935,6 +1935,46 @@ https://en.wikipedia.org/wiki/Hard_disk_drive
 
 ![5.png](images/system.design.9/5.png)
 
+### RAM
+
+- `Random Access Memory` (RAM) is a type of memory that is used to temporarily store data that the computer is currently
+  using. RAM is different from permanent storage devices, such as hard disk drives and solid-state drives, in that it is
+  volatile, meaning that the data it stores is lost when the computer is turned off.
+- RAM is kind of volatile memory with O(1) ability to read and write
+- How RAM designed? A single RAM cell, specifically in dynamic random-access memory (DRAM), works using a combination
+  of a capacitor and a transistor to store a bit of data (either 0 or 1). Here's a breakdown of how it operates:
+    - `Capacitor`:
+        - The capacitor stores electric charge. If the capacitor is charged, it represents a binary "1." If it is not
+          charged, it represents a binary "0." However, capacitors naturally discharge over time, which is why DRAM
+          cells need to be refreshed regularly.
+    - `Transistor`:
+        - The transistor acts as a switch that controls access to the capacitor. It connects or disconnects the
+          capacitor from the read/write circuitry.
+        - When a word line is activated, it turns on the transistor, allowing data to be written to or read from the
+          capacitor through a bit line.
+- `Write Operation`. To write data, the word line activates the transistor, and the bit line sets the charge in the
+  capacitor.
+    - If a "1" is being written, the bit line applies a charge to the capacitor.
+    - If a "0" is being written, no charge is applied (or the capacitor is discharged).
+- `Read Operation`. During a read operation, the word line activates the transistor, connecting the capacitor to the bit
+  line.
+    - If the capacitor is charged (holding a "1"), some charge is transferred to the bit line, and a sense amplifier
+      detects this as a "1."
+    - If the capacitor is not charged (holding a "0"), no charge is transferred, and the sense amplifier detects a "0."
+
+![6.png](images/system.design.9/6.png)
+
+### SSD
+
+- SSDs use NAND flash memory to store data, which is a type of non-volatile memory that retains data even when power is removed. Unlike traditional magnetic storage devices, SSDs have no moving parts, which means they are less prone to mechanical failure and are more durable in general. They also have faster access times and transfer rates, which makes them ideal for applications that require high-speed data transfer, such as gaming, video editing, and virtualization.
+- To write data to an SSD, the computer sends an electrical signal to the NAND flash memory, which changes the state of the memory cells to store the data. To read the data, the computer reads the electrical charge stored in the memory cells.
+- While SSDs have many advantages over traditional magnetic storage devices, they also have some limitations. One of the main challenges with SSDs is that the memory cells have a limited lifespan, and can only be written to and erased a finite number of times before they wear out. This can lead to a phenomenon known as "write amplification", where the SSD must move data around to ensure that all the memory cells wear out at the same rate. Additionally, SSDs can be more expensive than traditional magnetic storage devices, especially at higher capacities.
+
+### Comparison of HDD, SSD, and RAM
+
+![7.png](images/system.design.9/7.png)
+
+
 ---
 
 # System Design Interview Questions
