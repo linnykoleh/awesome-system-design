@@ -1397,6 +1397,13 @@ For some systems like financial systems, consistency is very important. For othe
 
 ![PACELC-theorem-diagram-1.webp](images/system.design.1/PACELC-theorem-diagram-1.webp)
 
+In case of **network partitioning** `P` in a distributed computer system, one has to choose between **availability** `A` and **consistency** `C` (as per the CAP theorem), but else `E`, even when the system is running normally in the absence of partitions, one has to choose between **latency** `L` and **loss of consistency** `C`.
+
+- `P + A` = in case of network partitioning system will prefer availability over consistency - in other words we will allow to write even if connectivity between segments is lost
+- `P + C` = n case of network partitioning system will prefer consistency over availability - in other words - we will prohibit to write if there is no connectivity between segments
+- `E + L` = in case when there is no network partitioning system will wait ( add latency ) until data will be written to all nodes
+- `E + C` = in case when there is no network partitioning system will return response to write operations even though data is not synced across all nodes ( loss of consistency )
+
 ### Cache
 
 - `Cache` is a temporary storage area for data that is accessed very frequently. It is used to increase the
