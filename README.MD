@@ -183,6 +183,7 @@
   - [Rest API Example](#rest-api-example)
   - [DDOS attacks](#ddos-attacks)
   - [Storages Physics](#storages-physics)
+  - [Backups](#backups)
 - [System Design Interview Questions](#system-design-interview-questions)
   - [Design Rate Limiter #1](#design-rate-limiter-1)
   - [Design Rate Limiter #2](#design-rate-limiter-2)
@@ -1981,6 +1982,48 @@ https://en.wikipedia.org/wiki/Hard_disk_drive
 
 ![7.png](images/system.design.9/7.png)
 
+
+---
+
+## Backups
+
+### Unstructured
+
+- An unstructured repository may simply be a stack of DVD-Rs or HDDs with minimal information about what was backed up and when. 
+- This is the easiest to implement, but probably the least likely to achieve a high level of recoverability as it lacks automation.
+
+### Full
+
+- Also known as System Imaging. 
+- Contains complete system images taken at specific points in time. 
+- This technology is frequently used to record known good configurations. 
+- Imaging is generally more useful for deploying a standard configuration to many systems rather than as a tool for making ongoing backups of diverse systems.
+
+### Incremental
+
+- An incremental style repository aims to make it more feasible to store backups from more points in time by organizing the data into increments of change between points in time.
+- This eliminates the need to store duplicate copies of unchanged data
+
+![8.png](images/system.design.9/8.png)
+
+### Differential
+
+- Each differential backup saves the data that has changed since the last full backup. 
+- It has the advantage that only a maximum of two data sets are needed to restore the data. 
+- One disadvantage, compared to the incremental backup method, is that as time from the last full backup increases, so does the time to perform the differential backup.
+
+![img.png](images/system.design.9/9.png)
+
+### Reverse Delta
+
+- A reverse delta type repository stores a recent "mirror" of the source data and a series of differences between the mirror in its current state and its previous states. 
+- A reverse delta backup will start with a normal full backup. 
+- After the full backup is performed, the system will periodically synchronize the full backup with the live copy, while storing the data necessary to reconstruct older versions
+
+### Continuous Data Protection
+
+- Instead of scheduling periodic backups, the system immediately logs every change on the host system. 
+- This is generally done by saving byte or block-level differences rather than file-level differences.
 
 ---
 
