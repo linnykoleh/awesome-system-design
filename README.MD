@@ -31,6 +31,7 @@
 - [x] [ByteByteGo Newsletter](https://blog.bytebytego.com/)
 - [x] [Netflix’s interview process and questions](https://interviewing.io/guides/hiring-process/netflix)
 - [x] [How software engineering behavioral interviews are evaluated at Meta](https://interviewing.io/blog/how-software-engineering-behavioral-interviews-are-evaluated-meta)
+- [x] [Designing a Payment System](https://newsletter.pragmaticengineer.com/p/designing-a-payment-system)
 - [ ] [How Figma’s databases team lived to tell the scale](https://www.figma.com/blog/how-figmas-databases-team-lived-to-tell-the-scale)
 - [ ] [27 Fundamental Techniques for Software Architects](https://www.workingsoftware.dev/fundamental-techniques-for-software-architects/)
 
@@ -39,6 +40,7 @@
 - [x] [System Design Interview – An insider's Guide by Alex Xu](https://www.amazon.com/System-Design-Interview-insiders-Second/dp/B08CMF2CQF?tag=interior0d3-20)
 - [x] [Microservices patterns](https://microservices.io/patterns)
 - [x] [Microservices Patterns: With examples in Java by Chris Richardson](https://www.amazon.com/Microservices-Patterns-examples-Chris-Richardson/dp/1617294543?tag=interior0d3-20)
+- [ ] [System Design Interview – An Insider's Guide: Volume 2](https://www.amazon.com/dp/1736049119)
 - [ ] [Designing Data-Intensive Applications by Martin Kleppmann](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321?tag=interior0d3-20)
 - [ ] [Distributed Systems 4 by Maarten van Steen](https://www.amazon.com/Distributed-Systems-Maarten-van-Steen/dp/9081540637?tag=interior0d3-20)
 - [ ] [System Design Interview – An Insider's Guide Volume 2 by Alex Xu, Sahn Lam](https://www.amazon.com/System-Design-Interview-Insiders-Guide/dp/1736049119?tag=interior0d3-20)
