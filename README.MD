@@ -19,7 +19,7 @@
 - [ ] [System Design Simplified on interviewready.io](https://interviewready.io/course-page/system-design-course)
 - [ ] [AWS certification](https://aws.amazon.com/certification)
 
-### Topics:
+### ⛳️ Topics:
 
 - [ ] Kafka:
   - [ ] [Apache Kafka for absolute beginners](https://www.udemy.com/course/apache-kafka-for-beginners/?couponCode=ST8MT220425G1)
