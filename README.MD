@@ -13,9 +13,27 @@
 - [x] [System Design from Mikhail Smarshchok ($75)](https://leetcode.com/explore/interview/card/system-design-for-interviews-and-beyond)
 - [x] [Highload Software Architecture on Projector ($600)](https://prjctr.com/course/highload-software-architecture)
 - [ ] [Learn System Design in a Hurry](https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction)
-- [ ] [System Design Simplified on interviewready.io](https://interviewready.io/course-page/system-design-course)
+- [ ] [Grokking Microservices Design Patterns](https://www.designgurus.io/course/grokking-microservices-design-patterns)
 - [ ] [Grokking the System Design](https://www.designgurus.io/course/grokking-the-system-design-interview)
+- [ ] [Grokking the Advanced System Design Interview](https://www.designgurus.io/course/grokking-the-advanced-system-design-interview)
+- [ ] [System Design Simplified on interviewready.io](https://interviewready.io/course-page/system-design-course)
 - [ ] [AWS certification](https://aws.amazon.com/certification)
+
+### Topics:
+
+- [ ] Kafka:
+  - [ ] [Apache Kafka for absolute beginners](https://www.udemy.com/course/apache-kafka-for-beginners/?couponCode=ST8MT220425G1)
+  - [ ] [Apache Kafka Series - Learn Apache Kafka for Beginners v3](https://www.udemy.com/course/apache-kafka/?couponCode=ST8MT220425G1)
+  - [ ] [Learn Apache Kafka like never before](https://learn.conduktor.io/kafka/)
+- [ ] Redis:
+  - [ ] [Redis for Java developers](https://university.redis.io/learningpath/kllayn0wtd847i?tab=details)
+  - [ ] [Redis: The Complete Developer's Guide](https://www.udemy.com/course/redis-the-complete-developers-guide-p/?couponCode=ST8MT220425G1)
+- [ ] Cassandra:
+  - [ ] [Getting Started With Apache Cassandra](https://www.udemy.com/course/apache-cassandra/?couponCode=ST8MT220425G1)
+  - [ ] [From 0 to 1: The Cassandra Distributed Database](https://www.udemy.com/course/from-0-to-1-the-cassandra-distributed-database/?ranMID=39197&ranEAID=CuIbQrBnhiw&ranSiteID=CuIbQrBnhiw-jwGzzeTYK0SSF8y58lnKPg&LSNPUBID=CuIbQrBnhiw&utm_source=aff-campaign&utm_medium=udemyads&couponCode=ST8MT220425G1)
+- [ ] MongoDB:
+  - [ ] [MongoDB - The Complete Developer's Guide 2025](https://www.udemy.com/course/mongodb-the-complete-developers-guide/?couponCode=ST8MT220425G1)
+  - [ ] [MongoDB - Complete MongoDB Administration Guide](https://www.udemy.com/course/mongodb-essentials-m/?LSNPUBID=JVFxdTr9V80&ranEAID=JVFxdTr9V80&ranMID=39197&ranSiteID=JVFxdTr9V80-lEfE8.muNb3NSb61UEflIA&utm_medium=udemyads&utm_source=aff-campaign&couponCode=ST8MT220425G1)
 
 ### 📝 Articles:
 
@@ -40,8 +58,8 @@
 - [x] [System Design Interview – An insider's Guide by Alex Xu](https://www.amazon.com/System-Design-Interview-insiders-Second/dp/B08CMF2CQF?tag=interior0d3-20)
 - [x] [Microservices patterns](https://microservices.io/patterns)
 - [x] [Microservices Patterns: With examples in Java by Chris Richardson](https://www.amazon.com/Microservices-Patterns-examples-Chris-Richardson/dp/1617294543?tag=interior0d3-20)
-- [ ] [System Design Interview – An Insider's Guide: Volume 2](https://www.amazon.com/dp/1736049119)
 - [ ] [Designing Data-Intensive Applications by Martin Kleppmann](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321?tag=interior0d3-20)
+- [ ] [System Design Interview – An Insider's Guide: Volume 2](https://www.amazon.com/dp/1736049119)
 - [ ] [Distributed Systems 4 by Maarten van Steen](https://www.amazon.com/Distributed-Systems-Maarten-van-Steen/dp/9081540637?tag=interior0d3-20)
 - [ ] [System Design Interview – An Insider's Guide Volume 2 by Alex Xu, Sahn Lam](https://www.amazon.com/System-Design-Interview-Insiders-Guide/dp/1736049119?tag=interior0d3-20)
 
