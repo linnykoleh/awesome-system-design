@@ -12,7 +12,7 @@
 - [x] [System Design course on neetcode.io ($100)](https://neetcode.io)
 - [x] [System Design from Mikhail Smarshchok ($75)](https://leetcode.com/explore/interview/card/system-design-for-interviews-and-beyond)
 - [x] [Highload Software Architecture on Projector ($600)](https://prjctr.com/course/highload-software-architecture)
-- [ ] [Learn System Design in a Hurry](https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction)
+- [x] [Learn System Design in a Hurry](https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction)
 - [ ] [Grokking Microservices Design Patterns](https://www.designgurus.io/course/grokking-microservices-design-patterns)
 - [ ] [Grokking the System Design](https://www.designgurus.io/course/grokking-the-system-design-interview)
 - [ ] [Grokking the Advanced System Design Interview](https://www.designgurus.io/course/grokking-the-advanced-system-design-interview)
@@ -132,6 +132,7 @@
 - [A Senior Engineer's Guide to the System Design Interview](#a-senior-engineers-guide-to-the-system-design-interview)
   - [System Design Interview Requirements](#system-design-interview-requirements)
     - [Availability](#availability)
+- [Microservices Design Patterns](#microservices-design-patterns)
 - [System Design Blueprint: The Ultimate Guide](#system-design-blueprint-the-ultimate-guide)
   - [High Load Applications Architecture](#high-load-applications-architecture)
 - [System Design Basics](#system-design-basics)
@@ -4619,6 +4620,43 @@ Response:
 - Operational Transformation has downside, we need server to handle all operations
 
 ![24.png](images/system.design.8/24.png)
+
+---
+
+## Microservices design patterns
+
+### Strangler Fig Pattern
+
+- It is an approach used in software development when transitioning from a monolithic architecture to a microservices architecture
+- It refers to the gradual process of replacing parts of a legacy system with new applications and services.
+- Here is how the strangler fig design pattern helps us replacing the legacy system:
+  - `Incremental Replacement`: Instead of a big bang approach, replace the legacy system piece by piece. This reduces risks and allows for iterative feedback.
+  - `Coexistence`: The new and old systems run side-by-side. As features are moved to the new system, traffic is rerouted accordingly, ensuring operations continue without disruption.
+  - `Feedback Loops`: By gradually transitioning users, feedback can be obtained early and often. This ensures the new system meets user needs.
+  - `Reduced Risk`: If a part of the new system has issues, it's easier to revert changes or fix them without affecting the entire system.
+  - `Flexibility`: The pattern provides flexibility in adopting new technologies. As the industry evolves, the new system can evolve with it.
+  - `End Goal`: Over time, the legacy system's functionality is entirely replaced by the new system. Once the old system has no more active users or features, it can be safely retired.
+
+![3.png](images/system.design.10/3.png)
+
+- The implementation of the Strangler Pattern
+  - `Identify Entry Points`: Choose parts of your legacy system you want to replace and build new services to replace old functionalities.
+  - `Route Traffic`: Use a router/proxy to redirect traffic either to the old system or new service, based on what's been migrated.
+  - `Incrementally Build & Replace`: Develop the new microservices and slowly replace old functionalities.
+  - `Retire the Old`: Once all functionalities have been taken over by the new system, safely retire the old system.
+
+![1.png](images/system.design.10/1.png)
+
+- The migration starts by identifying a piece of functionality that can be easily isolated and redirected from the legacy system to the new system. This piece of functionality is then rebuilt in the new system.
+- Once it's fully tested and ready to go live, the Facade Interface starts redirecting requests for this functionality to the new system, while still sending the remaining requests to the legacy system. This gradual shift of responsibilities from the old system to the new one forms the crux of the Strangler Pattern.
+
+![2.png](images/system.design.10/2.png)
+
+- **Proxy Layer**
+  - `Feature flags`: Turning features on/off to test new functionalities.
+  - `User segmentation`: Routing certain users to new services for A/B testing or phased rollouts.
+  - `API versioning`: Directing requests based on version headers or paths.
+
 
 --- 
 
