@@ -4708,6 +4708,14 @@ Response:
     - Problem: Some operations might take a long time to complete and shouldn’t block the client.
     - API Gateway Solution: The Gateway can handle these asynchronous operations, providing clients with a way to check on progress or receive a callback when the operation is complete.
 
+### Backends For Frontends (BFF) Pattern
+
+![5.png](images/system.design.10/5.png)
+
+- The Backends For Frontends pattern exists to create a user-centric, performance-optimized, and maintainable architecture in the microservices ecosystem. It’s all about giving each frontend exactly what it needs, while keeping things simple, fast, and tailored.
+- When a single codebase serves multiple frontends, it becomes bloated and complex. It's harder to maintain, troubleshoot, and update. The more complex the system, the more time and resources it consumes, which could be used for other productive tasks.
+
+![6.png](images/system.design.10/6.png)
 
 
 --- 
