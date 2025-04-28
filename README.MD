@@ -13,9 +13,10 @@
 - [x] [System Design from Mikhail Smarshchok ($75)](https://leetcode.com/explore/interview/card/system-design-for-interviews-and-beyond)
 - [x] [Highload Software Architecture on Projector ($600)](https://prjctr.com/course/highload-software-architecture)
 - [x] [Learn System Design in a Hurry](https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction)
-- [ ] [Grokking Microservices Design Patterns](https://www.designgurus.io/course/grokking-microservices-design-patterns)
-- [ ] [Grokking the System Design](https://www.designgurus.io/course/grokking-the-system-design-interview)
-- [ ] [Grokking the Advanced System Design Interview](https://www.designgurus.io/course/grokking-the-advanced-system-design-interview)
+- [ ] Courses on designgurus ($95 yearly subscription): 
+  - [ ] [Grokking Microservices Design Patterns](https://www.designgurus.io/course/grokking-microservices-design-patterns)
+  - [ ] [Grokking the System Design](https://www.designgurus.io/course/grokking-the-system-design-interview)
+  - [ ] [Grokking the Advanced System Design Interview](https://www.designgurus.io/course/grokking-the-advanced-system-design-interview)
 - [ ] [System Design Simplified on interviewready.io](https://interviewready.io/course-page/system-design-course)
 - [ ] [AWS certification](https://aws.amazon.com/certification)
 
@@ -4656,6 +4657,57 @@ Response:
   - `Feature flags`: Turning features on/off to test new functionalities.
   - `User segmentation`: Routing certain users to new services for A/B testing or phased rollouts.
   - `API versioning`: Directing requests based on version headers or paths.
+
+###  API Gateway Pattern
+
+![4.png](images/system.design.10/4.png)
+
+1. `Complexity of Interactions`:
+   - Problem: In a microservices architecture, there are many services talking to each other. If each service communicates with all the others directly, it can get very complex, very fast.
+   - API Gateway Solution: The API Gateway simplifies this by being the central point of communication. Services talk to the Gateway, and the Gateway talks to other services.
+2. `Inconsistency in Service Calls`:
+   - Problem: Different services might require different ways of interaction, have different data formats, etc.
+   - API Gateway Solution: It provides a consistent way to interact with all the services. The Gateway can translate calls and data formats, making life easier for the client.
+3. `Security and Authentication`:
+   - Problem: Handling security for each service individually can be a nightmare. You need to make sure each service is secure, and that’s a lot of work.
+   - API Gateway Solution: It can handle authentication and authorization centrally. Clients authenticate with the Gateway, and then the Gateway ensures that the clients are who they say they are.
+4. `Load Balancing`:
+   - Problem: Some services might get more traffic than others, and you need to manage this traffic efficiently.
+   - API Gateway Solution: It can distribute the incoming traffic evenly across services, ensuring no single service is overwhelmed.
+5. `Performance Issues`:
+   - Problem: Services might be spread out, and network calls between services can add delays.
+   - API Gateway Solution: It can cache responses from services, reducing the need for repeated calls and improving performance.
+6. `Cross-Cutting Concerns`:
+   - Problem: Concerns like logging, monitoring, and analytics need to be implemented in every service.
+   - API Gateway Solution: It can handle these concerns centrally, reducing the need to implement them in every single service.
+7. `Managing Legacy Systems`:
+   - Problem: You might have old services that need to be accessed in specific ways.
+   - API Gateway Solution: It can interact with legacy services, providing a modern interface to them.
+8. `Version Management`:
+   - Problem: Different clients might need to interact with different versions of a service.
+   - API Gateway Solution: The Gateway can route requests to the appropriate version of a service based on the client’s needs.
+9. `Aggregation of Results`:
+   - Problem: A client might need information that is spread across multiple services. Getting this info could require multiple network calls, which can be inefficient.
+   - API Gateway Solution: The Gateway can aggregate results from multiple services and send a consolidated response back to the client.
+10. `Service Orchestration`:
+    - Problem: Some operations might require a series of service calls to be made in a particular order.
+    - API Gateway Solution: The Gateway can orchestrate these calls and ensure they are made in the correct order, handling any necessary transformations along the way.
+11. `Handling Partial Failures`:
+    - Problem: In a distributed system, some services might fail while others are still functioning. Handling these partial failures gracefully is challenging.
+    - API Gateway Solution: The Gateway can detect these failures and reroute requests or provide fallback responses to ensure the system remains robust.
+12. `Request Transformation`:
+    - Problem: Different services might require requests to be formatted in different ways.
+    - API Gateway Solution: The Gateway can transform incoming requests into the format expected by each service.
+13. `Client-Specific Adaptations`:
+    - Problem: Different clients (mobile, web, etc.) might have different requirements.
+    - API Gateway Solution: The Gateway can adapt responses to suit the needs of different clients.
+14. `Centralized Logging and Monitoring`:
+    - Problem: Collecting logs and monitoring data from all services in a distributed system can be challenging.
+    - API Gateway Solution: The Gateway can collect logs and monitoring data, providing a centralized point for observability.
+15. `Handling Asynchronous Operations`:
+    - Problem: Some operations might take a long time to complete and shouldn’t block the client.
+    - API Gateway Solution: The Gateway can handle these asynchronous operations, providing clients with a way to check on progress or receive a callback when the operation is complete.
+
 
 
 --- 
