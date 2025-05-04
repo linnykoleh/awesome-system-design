@@ -834,9 +834,13 @@ http {
 
 ![forward_proxy_vs_reverse_proxy-f_mobile.png](images/system.design.1/forward_proxy_vs_reverse_proxy-f_mobile.png)
 
+![8.png](images/system.design.10/8.png)
+
 ### Service discovery
 
 ![29.png](images/system.design.7/29.png)
+
+![7.png](images/system.design.10/7.png)
 
 ### Load Balancing stategies
 
@@ -1058,6 +1062,9 @@ http {
     - Be aware of your database's default transaction isolation level and how it affects your application.
 
 #### Replication
+
+![13.png](images/system.design.10/11.png)
+
 
 - Some key terms to understand for `replication`:
     - `Replica`: Copy of data
@@ -4717,6 +4724,34 @@ Response:
 
 ![6.png](images/system.design.10/6.png)
 
+### Service Discovery Pattern
+
+- The Service Discovery pattern addresses the above challenges by introducing a central registry and lookup mechanism
+- Service Registry:
+  - This registry is a database that maintains a list of services and their locations. 
+  - When a service starts up, it registers itself with the Service Registry, providing its name and location. 
+  - When a service needs to interact with another service, it queries the Service Registry to get the location of the required service.
+
+![6.png](images/system.design.10/9.png)
+
+![10.png](images/system.design.10/10.png)
+
+### Circuit Breaker Pattern
+
+- The Circuit Breaker Pattern solves problems  by failing fast and preventing repeated futile attempts once a service is known to be faulty. In practice, you wrap calls to an external service in a `Circuit Breaker component` that monitors the outcomes of those calls. Initially, the circuit breaker is in a `Closed state`, allowing calls to flow normally. It counts failures (such as exceptions or timeouts). When the number of failures reaches a certain threshold, the breaker "trips" to an `Open state`. In the `Open state`, calls are immediately rejected – for example, your code might instantly throw an exception or return a fallback value without even attempting the remote call. By doing this, the application avoids waiting on a likely unresponsive service,  thus preserving its own responsiveness and resources.
+- Every call through the circuit breaker will perform a quick check of the state:
+  - If `Closed`, just attempt the call and record the outcome.
+  - If `Open`, skip the call and immediately return a failure (or use a fallback).
+  - If `Half-Open`, allow the call (perhaps only a certain number of concurrent calls) and then adjust the state based on the result.
+- the Circuit Breaker pattern introduces a slight overhead and some complexity in exchange for significant protection against cascading failures
+
+![10.png](images/system.design.10/12.png)
+
+### Bulkhead pattern
+
+- The essence of the Bulkhead pattern lies in isolation. Like the watertight compartments in a ship, the Bulkhead pattern partitions the components of a system into isolated units or 'bulkheads'. Each bulkhead is designed to operate independently of the others. So, if one bulkhead fails, the others can continue to function, thus preventing the failure from spreading across the system.
+- Resource allocation is a critical aspect of the Bulkhead pattern because it prevents a failure in one bulkhead from consuming all the system's resources.
+- For instance, if the user management service needs to interact with the inventory service, it could do so via a message queue or an API gateway. This way, if the inventory service fails, the failure doesn't directly impact the user management service.
 
 --- 
 
