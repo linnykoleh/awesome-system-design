@@ -4755,6 +4755,16 @@ Response:
 
 --- 
 
+### Retry Pattern
+
+- By automatically retrying failed operations that are likely transient, the system can self-heal from brief interruptions and deliver a smoother experience to the user
+- The core idea is simple: if an operation fails due to a temporary issue, wait a short period and try it again, on the assumption that the issue may have been resolved in the interim
+- `Exponential backoff` -  where each successive retry waits longer than the previous one
+  - For instance, a backoff schedule might wait 1 second before the first retry, 2 seconds before the second, 4 seconds before the third, and so on.
+  - Typically, implementations also `cap the maximum delay` to avoid waiting absurdly long (called capped exponential backoff).
+- `Jitter` (Randomization) - introduce randomness into backoff timings so that retries are de-synchronized across clients.
+- Idempotency & Side Effects - when integrating the Retry pattern, ensure that either the operation is safe to retry or the system has safeguards to prevent duplicate side effects.
+
 ## Cloud design patterns
 
 ![sys_des_practices.png](images/system.design.1/sys_des_practices.png)
