@@ -13,7 +13,7 @@
 - [x] [System Design from Mikhail Smarshchok ($75)](https://leetcode.com/explore/interview/card/system-design-for-interviews-and-beyond)
 - [x] [Highload Software Architecture on Projector ($600)](https://prjctr.com/course/highload-software-architecture)
 - [x] [Learn System Design in a Hurry](https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction)
-- [ ] Courses on designgurus ($95 yearly subscription): 
+- [ ] Courses on `designgurus` ($95 yearly subscription): 
   - [ ] [Grokking Microservices Design Patterns](https://www.designgurus.io/course/grokking-microservices-design-patterns)
   - [ ] [Grokking the System Design](https://www.designgurus.io/course/grokking-the-system-design-interview)
   - [ ] [Grokking the Advanced System Design Interview](https://www.designgurus.io/course/grokking-the-advanced-system-design-interview)
@@ -60,7 +60,6 @@
 - [x] [Microservices patterns](https://microservices.io/patterns)
 - [x] [Microservices Patterns: With examples in Java by Chris Richardson](https://www.amazon.com/Microservices-Patterns-examples-Chris-Richardson/dp/1617294543?tag=interior0d3-20)
 - [ ] [Designing Data-Intensive Applications by Martin Kleppmann](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321?tag=interior0d3-20)
-- [ ] [System Design Interview – An Insider's Guide: Volume 2](https://www.amazon.com/dp/1736049119)
 - [ ] [Distributed Systems 4 by Maarten van Steen](https://www.amazon.com/Distributed-Systems-Maarten-van-Steen/dp/9081540637?tag=interior0d3-20)
 - [ ] [System Design Interview – An Insider's Guide Volume 2 by Alex Xu, Sahn Lam](https://www.amazon.com/System-Design-Interview-Insiders-Guide/dp/1736049119?tag=interior0d3-20)
 
@@ -4669,51 +4668,39 @@ Response:
 
 ![4.png](images/system.design.10/4.png)
 
-1. `Complexity of Interactions`:
-   - Problem: In a microservices architecture, there are many services talking to each other. If each service communicates with all the others directly, it can get very complex, very fast.
-   - API Gateway Solution: The API Gateway simplifies this by being the central point of communication. Services talk to the Gateway, and the Gateway talks to other services.
-2. `Inconsistency in Service Calls`:
-   - Problem: Different services might require different ways of interaction, have different data formats, etc.
-   - API Gateway Solution: It provides a consistent way to interact with all the services. The Gateway can translate calls and data formats, making life easier for the client.
-3. `Security and Authentication`:
-   - Problem: Handling security for each service individually can be a nightmare. You need to make sure each service is secure, and that’s a lot of work.
-   - API Gateway Solution: It can handle authentication and authorization centrally. Clients authenticate with the Gateway, and then the Gateway ensures that the clients are who they say they are.
-4. `Load Balancing`:
-   - Problem: Some services might get more traffic than others, and you need to manage this traffic efficiently.
-   - API Gateway Solution: It can distribute the incoming traffic evenly across services, ensuring no single service is overwhelmed.
-5. `Performance Issues`:
-   - Problem: Services might be spread out, and network calls between services can add delays.
-   - API Gateway Solution: It can cache responses from services, reducing the need for repeated calls and improving performance.
-6. `Cross-Cutting Concerns`:
-   - Problem: Concerns like logging, monitoring, and analytics need to be implemented in every service.
-   - API Gateway Solution: It can handle these concerns centrally, reducing the need to implement them in every single service.
-7. `Managing Legacy Systems`:
-   - Problem: You might have old services that need to be accessed in specific ways.
-   - API Gateway Solution: It can interact with legacy services, providing a modern interface to them.
-8. `Version Management`:
-   - Problem: Different clients might need to interact with different versions of a service.
-   - API Gateway Solution: The Gateway can route requests to the appropriate version of a service based on the client’s needs.
-9. `Aggregation of Results`:
-   - Problem: A client might need information that is spread across multiple services. Getting this info could require multiple network calls, which can be inefficient.
-   - API Gateway Solution: The Gateway can aggregate results from multiple services and send a consolidated response back to the client.
-10. `Service Orchestration`:
-    - Problem: Some operations might require a series of service calls to be made in a particular order.
-    - API Gateway Solution: The Gateway can orchestrate these calls and ensure they are made in the correct order, handling any necessary transformations along the way.
-11. `Handling Partial Failures`:
-    - Problem: In a distributed system, some services might fail while others are still functioning. Handling these partial failures gracefully is challenging.
-    - API Gateway Solution: The Gateway can detect these failures and reroute requests or provide fallback responses to ensure the system remains robust.
-12. `Request Transformation`:
-    - Problem: Different services might require requests to be formatted in different ways.
-    - API Gateway Solution: The Gateway can transform incoming requests into the format expected by each service.
-13. `Client-Specific Adaptations`:
-    - Problem: Different clients (mobile, web, etc.) might have different requirements.
-    - API Gateway Solution: The Gateway can adapt responses to suit the needs of different clients.
-14. `Centralized Logging and Monitoring`:
-    - Problem: Collecting logs and monitoring data from all services in a distributed system can be challenging.
-    - API Gateway Solution: The Gateway can collect logs and monitoring data, providing a centralized point for observability.
-15. `Handling Asynchronous Operations`:
-    - Problem: Some operations might take a long time to complete and shouldn’t block the client.
-    - API Gateway Solution: The Gateway can handle these asynchronous operations, providing clients with a way to check on progress or receive a callback when the operation is complete.
+- The API Gateway simplifies this by being the central point of communication. Services talk to the Gateway, and the Gateway talks to other services.
+- It provides a consistent way to interact with all the services. The Gateway can translate calls and data formats, making life easier for the client.
+- It can handle `authentication and authorization` centrally. Clients authenticate with the Gateway, and then the Gateway ensures that the clients are who they say they are.
+- It can` distribute the incoming traffic` evenly across services, ensuring no single service is overwhelmed.
+- It can `cache` responses from services, reducing the need for repeated calls and improving performance.
+- It can `interact with legacy` services, providing a modern interface to them.
+- The Gateway can `route requests` to the appropriate version of a service based on the client’s needs.
+- The Gateway can `aggregate results` from multiple services and send a consolidated response back to the client.
+- The Gateway can detect these failures and reroute requests or provide fallback responses to ensure the system remains robust.
+- The Gateway can `transform incoming requests` into the format expected by each service.
+- The Gateway can adapt responses to suit the needs of different clients.
+- The Gateway can `collect logs` and monitoring data, providing a centralized point for observability.
+
+#### Key Differences between `API Gateway` and `Load Balancer`:
+
+- **Focus**: Load balancers are focused on distributing traffic to prevent overloading servers and ensure high availability and redundancy. API Gateways are more about providing a central point for managing, securing, and routing API calls.
+- **Functionality**: While both can route requests, the API Gateway offers more functionalities like API transformation, composition, and security.
+
+#### Load Balancer Before API Gateway
+
+- **Most Common Setup**: The Load Balancer is placed in front of the API Gateway. This is the typical configuration in many architectures.
+- **Functionality**: The Load Balancer distributes incoming traffic across multiple instances of the API Gateway, ensuring that no single gateway instance becomes a bottleneck.
+- **Benefits**:
+  - High Availability: This setup enhances the availability and reliability of the API Gateway.
+  - Scalability: Facilitates horizontal scaling of API Gateway instances.
+- **Example**: In a cloud-based microservices architecture, external traffic first hits the Load Balancer, which then routes requests to one of the several API Gateway instances. The chosen API Gateway instance then processes the request, communicates with the appropriate microservices, and returns the response.
+
+#### Load Balancer After API Gateway
+ 
+- **Alternative Configuration**: In some cases, the API Gateway can be placed in front of the Load Balancer, especially when the Load Balancer is used to distribute traffic to various microservices or backend services.
+- **Functionality**: The API Gateway first processes and routes the request to an internal Load Balancer, which then distributes the request to the appropriate service instances.
+- **Use Case**: Useful when different services behind the API Gateway require their own load balancing logic.
+
 
 ### Backends For Frontends (BFF) Pattern
 
@@ -4781,10 +4768,26 @@ Response:
 - Here, a sidecar can play an essential role. Instead of embedding security and authentication logic into your main application, you can delegate it to a sidecar. 
 - This simplifies your main application and makes security measures more consistent and easier to update.
 
-4. Networking Features:
+4. `Networking Features`:
 
 - A sidecar can handle service discovery, connection pooling, circuit-breaking, intelligent routing, and more. 
 - This allows your application to focus on its business logic without worrying about networking intricacies.
+
+### Saga Pattern
+
+> - In the simplest terms, a saga is a sequence of local transactions. 
+> - Each local transaction updates the database and publishes an event to trigger the next local transaction in the saga
+> - If a local transaction fails because it violates a business rule, the saga executes a series of compensating transactions that undo the changes that were made by the preceding local transactions.
+ 
+- It is designed to handle complex, distributed transactions by breaking them down into a series of local transactions, each with its own compensation transaction to undo the changes in case of failure
+- There are two types of Saga Patterns: `Choreography` and `Orchestration`.
+  - `choreography` could be a good option as it requires less coordination
+  - as the transaction becomes more complex, `orchestration` can provide better visibility and control over the business transactio
+- `The Saga Log `is a critical component that tracks the saga's progress. 
+  - It records all the local transactions and compensating transactions that have been executed. 
+  - This log serves as a memory of the saga, helping it resume from where it left off in case of a failure.
+
+![13.png](images/system.design.10/13.png)
 
 
 ---
