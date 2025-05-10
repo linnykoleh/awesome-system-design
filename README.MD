@@ -14,7 +14,7 @@
 - [x] [Highload Software Architecture on Projector ($600)](https://prjctr.com/course/highload-software-architecture)
 - [x] [Learn System Design in a Hurry](https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction)
 - [ ] Courses on `designgurus` ($95 yearly subscription): 
-  - [ ] [Grokking Microservices Design Patterns](https://www.designgurus.io/course/grokking-microservices-design-patterns)
+  - [x] [Grokking Microservices Design Patterns](https://www.designgurus.io/course/grokking-microservices-design-patterns)
   - [ ] [Grokking the System Design](https://www.designgurus.io/course/grokking-the-system-design-interview)
   - [ ] [Grokking the Advanced System Design Interview](https://www.designgurus.io/course/grokking-the-advanced-system-design-interview)
 - [ ] [System Design Simplified on interviewready.io](https://interviewready.io/course-page/system-design-course)
@@ -1430,8 +1430,8 @@ In case of **network partitioning** `P` in a distributed computer system, one ha
 
 - `P + A` = in case of network partitioning system will prefer availability over consistency - in other words we will allow to write even if connectivity between segments is lost
 - `P + C` = n case of network partitioning system will prefer consistency over availability - in other words - we will prohibit to write if there is no connectivity between segments
-- `E + L` = in case when there is no network partitioning system will wait ( add latency ) until data will be written to all nodes
-- `E + C` = in case when there is no network partitioning system will return response to write operations even though data is not synced across all nodes ( loss of consistency )
+- `E + L` = in case when there is no network partitioning system will wait ( `add latency` ) until data will be written to all nodes
+- `E + C` = in case when there is no network partitioning system will return response to write operations even though data is not synced across all nodes ( `loss of consistency` )
 
 ### Cache
 
@@ -4789,6 +4789,19 @@ Response:
 
 ![13.png](images/system.design.10/13.png)
 
+### Event-Driven Pattern
+
+![14.png](images/system.design.10/14.png)
+
+### CQRS Pattern
+
+#### Different Read and Write Database
+
+![15.png](images/system.design.10/15.png)
+
+#### Event Sourcing
+
+![16.png](images/system.design.10/16.png)
 
 ---
 
