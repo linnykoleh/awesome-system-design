@@ -13,10 +13,10 @@
 - [x] [System Design from Mikhail Smarshchok ($75)](https://leetcode.com/explore/interview/card/system-design-for-interviews-and-beyond)
 - [x] [Highload Software Architecture on Projector ($600)](https://prjctr.com/course/highload-software-architecture)
 - [x] [Learn System Design in a Hurry](https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction)
-- [ ] Courses on `designgurus` ($95 yearly subscription): 
+- [x] Courses on `designgurus` ($95 yearly subscription): 
   - [x] [Grokking Microservices Design Patterns](https://www.designgurus.io/course/grokking-microservices-design-patterns)
-  - [ ] [Grokking the System Design](https://www.designgurus.io/course/grokking-the-system-design-interview)
-  - [ ] [Grokking the Advanced System Design Interview](https://www.designgurus.io/course/grokking-the-advanced-system-design-interview)
+  - [x] [Grokking the System Design](https://www.designgurus.io/course/grokking-the-system-design-interview)
+  - [x] [Grokking the Advanced System Design Interview](https://www.designgurus.io/course/grokking-the-advanced-system-design-interview)
 - [ ] [System Design Simplified on interviewready.io](https://interviewready.io/course-page/system-design-course)
 - [ ] [AWS certification](https://aws.amazon.com/certification)
 
@@ -1272,27 +1272,52 @@ http {
 
 ![11.png](images/system.design.7/11.png)
 
-#### Cassandra
+### Cassandra
 
-- https://docs.datastax.com/en/cassandra-oss/2.2/cassandra/dml/dmlTransactionsDiffer.html
+- [How are Cassandra transactions different from RDBMS transactions?](https://docs.datastax.com/en/cassandra-oss/2.2/cassandra/dml/dmlTransactionsDiffer.html)
+- [Top 23 Cassandra Interview Questions and Answers](https://www.guru99.com/cassandra-interview-questions.html)
 
 > Cassandra supports atomicity and isolation at the row-level, but trades transactional isolation and atomicity for high availability and fast write performance. Cassandra writes are durable.
 
 > Cassandra uses client-side timestamps to determine the most recent update to a column. The latest timestamp always wins when requesting data, so if multiple client sessions update the same columns in a row concurrently, the most recent update is the one seen by readers.
 
-
-##### Data model
+#### Data model
 
 - `Keyspace` - Keyspaces are basically data containers, and can be likened to "databases" in relational systems like Postgres or MySQL
 - `Table` - A table is container for your data, in the form of rows
 - `Row` - A row is a container for data. It is represented by a primary key and contains columns.
 - `Column` - A column contains data belonging to a row
-- `Partition Key` - One or more columns that are used to determine what partition the row is in
-- `Clustering Key` - Zero or more columns that are used to determine the sorted order of rows in a table
+- `Partition Key` - One or more columns that are used to determine `what partition` the row is in
+- `Clustering Key` - Zero or more columns that are used to determine `the sorted order of rows` in a table
+
+![17.png](images/system.design.10/17.png)
 
 ![20.png](images/system.design.8/20.png)
 
-##### Write
+#### Partitioner
+
+![18.png](images/system.design.10/18.png)
+
+#### Coordinator node
+
+- A client may connect to any node in the cluster to initiate a read or write query. 
+- This node is known as the coordinator node. 
+- The coordinator identifies the nodes responsible for the data that is being written or read and forwards the queries to them.
+
+![19.png](images/system.design.10/19.png)
+
+#### Replication
+
+- The `replication factor` is the number of nodes that will receive the copy of the same data
+- `Replication strategy`:
+  - `Simple replication strategy` - his strategy is used only for a single data center cluster
+  - `Network topology strategy` - This strategy is used for multiple data-centers. This enables us to specify how many replicas will be placed in each data center.
+
+![21.png](images/system.design.10/21.png)
+
+![22.png](images/system.design.10/22.png)
+
+#### Write
 
 ![7.png](images/system.design.8/7.png)
 
@@ -1305,23 +1330,34 @@ http {
    - The memtable is flushed to disk as a new `SSTable` (Sorted Strings Table),
       which is an immutable, disk-based structure.
    - At this point, the associated entries in the commit log for the flushed `memtable` are deleted,
-      as the data is now durably stored in the `SSTable`.
+      as the data is now durably stored in the `SSTable` (Sorted String Table).
 
-##### Read
+#### Read
 
 ![17.png](images/system.design.7/17.png)
 
-##### LSM-tree
+#### LSM-tree (Compaction)
+
+- SSTables are immutable, which helps Cassandra achieve such high write speeds. 
+- Flushing of MemTable to SStable is a continuous process. This means we can have a large number of SStables lying on the disk. 
+- While reading, it is tedious to scan all these SStables. So, to improve the read performance, we need compaction. 
+- `Compaction` in Cassandra refers to the operation of merging multiple related SSTables into a single new one. 
+- During compaction, the data in SSTables is merged: the keys are merged, columns are combined, obsolete values are discarded, and a new index is created.
+- On compaction, the merged data is sorted, a new index is created over the sorted data, and this freshly merged, sorted, and indexed data is written to a single new SSTable.
+- Tombstones are removed as part of compaction
+  - A tombstone is similar to the idea of a "soft delete" from the relational database world. When we delete data, Cassandra does not delete it right away, instead associates a tombstone with it, with a time to expiry. 
+  - In other words, a tombstone is a marker that is kept to indicate data that has been deleted.
+  - Each tombstone has an expiry time associated with it, representing the amount of time that nodes will wait before removing the data permanently. By default, each tombstone has an expiry of `ten days`.
 
 ![18.png](images/system.design.7/18.png)
 
-#### Elasticsearch
+### Elasticsearch
 
 ![15.png](images/system.design.8/15.png)
 
 ![15.png](images/system.design.8/16.png)
 
-##### Inverted Index
+#### Inverted Index
 
 ![17.png](images/system.design.8/17.png)
 
@@ -1339,9 +1375,9 @@ http {
 
 ![19.png](images/system.design.7/19.png)
 
-- LSM-tree databases use optimizations to speed up reads (bloom filters, internal cache, read-only memtables)
+- `LSM-tree` (log-structured merge-tree) databases use optimizations to speed up reads (bloom filters, internal cache, read-only memtables)
 - sharding helps to increase write throughput for both LSM-tree and B-tree databases
-- distributed cache in front of an LSM or B-tree database helps to increase read throughput and reduce latency
+- distributed cache in front of an `LSM` or `B-tree` database helps to increase read throughput and reduce latency
 
 ### Quorum
 
@@ -2513,6 +2549,8 @@ https://en.wikipedia.org/wiki/Hard_disk_drive
       Cassandra's high-throughput, low-latency, and distributed architecture.
 - If data is not in memory, the system checks the `bloom filter`
     - `Bloom filter` is a probabilistic data structure that is used to test whether an element is a member of a set.
+    - `false negatives` are not possible, if the filter indicates that the element does not exist in the set, it certainly does not
+    - but if the filter thinks that the element is in the set (`false-positive`) , the disk is accessed to make sure.
 - The bloom filter is used to figure out which SSTables might contain the key.
 - `SSTables` return the result of the data set.
 - The result of the data set is returned to the client.
