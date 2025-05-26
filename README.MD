@@ -20,22 +20,6 @@
 - [ ] [System Design Simplified on interviewready.io](https://interviewready.io/course-page/system-design-course)
 - [ ] [AWS certification](https://aws.amazon.com/certification)
 
-### ⛳️ Topics:
-
-- [ ] Kafka:
-  - [ ] [Apache Kafka for absolute beginners](https://www.udemy.com/course/apache-kafka-for-beginners/?couponCode=ST8MT220425G1)
-  - [ ] [Apache Kafka Series - Learn Apache Kafka for Beginners v3](https://www.udemy.com/course/apache-kafka/?couponCode=ST8MT220425G1)
-  - [ ] [Learn Apache Kafka like never before](https://learn.conduktor.io/kafka/)
-- [ ] Redis:
-  - [ ] [Redis for Java developers](https://university.redis.io/learningpath/kllayn0wtd847i?tab=details)
-  - [ ] [Redis: The Complete Developer's Guide](https://www.udemy.com/course/redis-the-complete-developers-guide-p/?couponCode=ST8MT220425G1)
-- [ ] Cassandra:
-  - [ ] [Getting Started With Apache Cassandra](https://www.udemy.com/course/apache-cassandra/?couponCode=ST8MT220425G1)
-  - [ ] [From 0 to 1: The Cassandra Distributed Database](https://www.udemy.com/course/from-0-to-1-the-cassandra-distributed-database/?ranMID=39197&ranEAID=CuIbQrBnhiw&ranSiteID=CuIbQrBnhiw-jwGzzeTYK0SSF8y58lnKPg&LSNPUBID=CuIbQrBnhiw&utm_source=aff-campaign&utm_medium=udemyads&couponCode=ST8MT220425G1)
-- [ ] MongoDB:
-  - [ ] [MongoDB - The Complete Developer's Guide 2025](https://www.udemy.com/course/mongodb-the-complete-developers-guide/?couponCode=ST8MT220425G1)
-  - [ ] [MongoDB - Complete MongoDB Administration Guide](https://www.udemy.com/course/mongodb-essentials-m/?LSNPUBID=JVFxdTr9V80&ranEAID=JVFxdTr9V80&ranMID=39197&ranSiteID=JVFxdTr9V80-lEfE8.muNb3NSb61UEflIA&utm_medium=udemyads&utm_source=aff-campaign&couponCode=ST8MT220425G1)
-
 ### 📝 Articles:
 
 - [x] [Helpful list of LeetCode Posts on System Design at Facebook, Google, Amazon, Uber, Microsoft](https://leetcode.com/discuss/interview-question/1140451/helpful-list-of-leetcode-posts-on-system-design-at-facebook-google-amazon-uber-microsoft)
@@ -699,6 +683,8 @@ http {
 #### Thread per connection vs Thread per request vs Event loop
 
 ![31.png](images/system.design.6/31.png)
+
+[Spring WebFlux Internals: How Netty’s Event Loop & Threads Power Reactive Apps](https://medium.com/@gourav20056/spring-webflux-internals-how-nettys-event-loop-threads-power-reactive-apps-4698c144ef68)
 
 ![32.png](images/system.design.6/32.png)
 
@@ -1523,10 +1509,6 @@ In case of **network partitioning** `P` in a distributed computer system, one ha
 
 ![1.png](images/system.design.7/1.png)
 
-![cache_2.png](images/system.design.1/cache_2.png)
-
-![cache_3.png](images/system.design.1/cache_3.png)
-
 ##### Write-Back
 
 - `Write-Back` or `Write-Behind` - Here, the application writes data to the cache which `stores the data in queue` and
@@ -1536,8 +1518,6 @@ In case of **network partitioning** `P` in a distributed computer system, one ha
   good for `write-heavy` workloads.
 
 ![2.png](images/system.design.7/2.png)
-
-![cache_4.png](images/system.design.1/cache_4.png)
 
 #### Deduplication cache
 
