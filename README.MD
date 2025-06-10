@@ -1645,6 +1645,28 @@ In case of **network partitioning** `P` in a distributed computer system, one ha
   - `Headers`, like HTTP headers, are key - value pairs that can be used to store metadata about the message.
 - The biggest impact you can have to `performance` comes back to your choice of `partition key`. The goal is to maximize parallelism by ensuring that messages are **evenly** distributed across partitions
 
+#### Example how consumers consume messages from topic
+
+1. Let’s take topic T1 with four partitions. Now suppose we created a new consumer, C1, which is the only consumer in group G1, and use it to subscribe to topic T1. Consumer C1 will get all messages from all four t1 partitions. 
+
+![23.png](images/system.design.10/23.png)
+
+2. If we add another consumer, C2, to group G1, each consumer will only get messages from two partitions. Perhaps messages from partition 0 and 2 go to C1 and messages from partitions 1 and 3 go to consumer C2
+
+![24.png](images/system.design.10/24.png)
+
+3. If G1 has four consumers, then each will read messages from a single partition.
+
+![25.png](images/system.design.10/25.png)
+
+4. If we add more consumers to a single group with a single topic than we have partitions, some of the consumers will be idle and get no messages at all
+
+![26.png](images/system.design.10/26.png)
+
+5. If we add a new consumer group G2 with a single consumer, this consumer will get all the messages in topic T1 independent of what G1 is doing. G2 can have more than a single consumer, in which case they will each get a subset of partitions, just like we showed for G1, but G2 as a whole will still get all the messages regardless of other consumer groups.
+
+![27.png](images/system.design.10/27.png)
+
 ---
 
 ## Bloom filter
