@@ -159,6 +159,7 @@
       - [ElasticSearch](#elasticsearch)
     - [SQL vs NoSQL](#sql-vs-nosql)
       - [LSM-tree vs B-tree](#lsm-tree-vs-b-tree)
+    - [OLTP vs OLAP](#oltp-vs-olap)
     - [Quorum](#quorum)
     - [Consensus](#consensus)
     - [Strategies for Merging Data After a Partition](#strategies-for-merging-data-after-a-partition)
@@ -352,7 +353,7 @@
 - `Core entities (2 min)`
   - Example: User, Post, Comment, Like, Event, Ticker, etc.
 - `API design (5–7 min)`
-  - Putting sensitive information like `userId` in the request body is a security risk
+  - Putting sensitive information like `userId` in the request body is a security risk, put it in the request headers instead
   - It's ok to have simple APIs from the start that you evolve as your design progresses
   - Public endpoints
     - CRUD
@@ -367,7 +368,7 @@
      - High level design for `Read heavy` scenario
      - High level design for `Write heavy` scenario
 - `Deep dives (15-20 min)`
-    - Scaling the high level design
+    - Scaling the high-level design
     - Scaling individual components:
         - Availability, Consistency and Scale story for each component
         - Consistency and availability patterns
@@ -1135,6 +1136,9 @@ http {
 #### Indexing
 
 - For every write, indexes need to be updated. This can slow down the write operation.
+  - This is an important trade-off in storage systems: well-chosen indexes speed up read queries, but every index slows down writes. For this reason, databases don’t usually index everything by default,
+    but require you—the application developer or database administrator—to choose indexes manually, using your knowledge of the application’s typical query patterns. You can then choose the
+    indexes that give your application the greatest benefit, without introducing more overhead than necessary.
 - If a lot of `reads` and not many writes, indexes has to be everywhere.
 - If a lot of `writes` then wrap this operation in chunk and write in one transaction to update indexes only once. 
   - Or use sharding to reduce the number of indexes that need to be updated.
@@ -1267,6 +1271,11 @@ http {
 
 > Cassandra uses client-side timestamps to determine the most recent update to a column. The latest timestamp always wins when requesting data, so if multiple client sessions update the same columns in a row concurrently, the most recent update is the one seen by readers.
 
+> The idea behind column-oriented storage is simple: don’t store all the values from one row
+together, but store all the values from each column together instead. If each column is stored in
+a separate file, a query only needs to read and parse those columns that are used in that query,
+which can save a lot of work.
+
 #### Data model
 
 - `Keyspace` - Keyspaces are basically data containers, and can be likened to "databases" in relational systems like Postgres or MySQL
@@ -1356,6 +1365,32 @@ http {
 ![photo_2023-02-15_09-50-11.jpg](images/system.design.1/photo_2023-02-15_09-50-11.jpg)
 
 ![simple-map-for-db.png](images/system.design.4/simple-map-for-db.png)
+
+### OLTP vs OLAP
+
+![28.png](images/system.design.10/28.png)
+
+#### OLTP (Online Transaction Processing) databases 
+
+`OLTP` — for operational systems: storing and processing transactions in real time (banking, e-commerce orders, ticket booking). For many short transactions. Typical operations:` INSERT INTO orders`, `UPDATE balance`.
+
+- MySQL
+- Oracle
+- PostgreSQL
+- MongoDB
+
+In most `OLTP` databases, storage is laid out in a row-oriented fashion: all the values from one row  of a table are stored next to each other. Document databases are similar: an entire document is typically stored as one contiguous sequence of bytes
+
+#### OLAP (Online Analytical Processing) databases
+
+`OLAP` — for analytics: complex queries, aggregations, and analysis of large datasets (BI, reporting, forecasting). For few long-running, heavy queries. Typical operations: `SELECT SUM(sales) GROUP BY region`.
+
+- ClickHouse
+- Apache Druid
+- Apache Pinot
+- Snowflake
+
+Bank data warehouse where analysts calculate regional spending, yearly trends, fraud patterns.
 
 #### LSM-tree vs B-tree
 
