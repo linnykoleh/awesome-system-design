@@ -55,7 +55,6 @@
 - [x] [System design playlist #1 on YouTube](https://www.youtube.com/playlist?list=PLMCXHnjXnTnvo6alSjVkgxV-VH6EPyvoX)
 - [x] [System design playlist #2 on YouTube](https://www.youtube.com/playlist?list=PLrtCHHeadkHp92TyPt1Fj452_VGLipJnL)
 - [x] [System Design Interview - Designing Google Docs](https://www.youtube.com/watch?v=9VUnUtPZ8xg&t=1s&ab_channel=%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%80%D0%91%D0%B0%D1%80%D0%BC%D0%B8%D0%BD)
-- [ ] [System Design Questions 2.0 by Jordan has no life](https://www.youtube.com/playlist?list=PLjTveVh7FakJOoY6GPZGWHHl4shhDT8iV)
 - [ ] [Systems Design Questions 3.0 by Jordan has no life](https://www.youtube.com/playlist?list=PLjTveVh7FakLGZ36GbWAk_DMf_0xBZpGv)
 - [ ] [System design playlist #3 on YouTube](https://www.youtube.com/playlist?list=PLm6XThSMgu_FFth3WUNBKnz_1dG3BKdBn)
 - [ ] [Google SWE teaches systems design](https://www.youtube.com/playlist?list=PLjTveVh7FakKjb4UYzUazqBNNF-WGurXp)
@@ -67,6 +66,11 @@
 - [ ] [https://github.com/donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer)
 - [ ] [https://github.com/karanpratapsingh/system-design](https://github.com/karanpratapsingh/system-design)
 - [ ] [https://github.com/charlax/professional-programming](https://github.com/charlax/professional-programming)
+
+### ✍️ Excalidraw system designs:
+
+- [Rate limiter](excalidraw/rate-limiter-1.png)
+- [URL Shortener](excalidraw/url-shortener.png)
 
 ### ⚙️ Tech Blogs:
 
@@ -101,10 +105,6 @@
 - https://devblogs.microsoft.com/engineering-at-microsoft
 - https://blogs.nvidia.com
 - https://highscalability.com
-
-[//]: # (### ✍️ Excalidraw schemes:)
-
-[//]: # (- [Ticket master]&#40;excalidraw/ticket-master.excalidraw&#41;)
 
 ---
 
