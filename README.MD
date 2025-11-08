@@ -69,8 +69,9 @@
 
 ### ✍️ Excalidraw system designs:
 
-- [Rate limiter](excalidraw/rate-limiter-1.png)
 - [URL Shortener](excalidraw/url-shortener.png)
+- [Dropbox](excalidraw/dropbox.png)
+
 
 ### ⚙️ Tech Blogs:
 
