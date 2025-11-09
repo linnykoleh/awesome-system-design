@@ -69,9 +69,9 @@
 
 ### ✍️ Excalidraw system designs:
 
-- [URL Shortener](excalidraw/url-shortener.png)
-- [Dropbox](excalidraw/dropbox.png)
-
+- #### URL Shortener - [image](excalidraw/images/url-shortener.png) | [diagram](excalidraw/url-shortener.excalidraw)
+- #### Dropbox - [image](excalidraw/images/dropbox.png) | [diagram](excalidraw/dropbox.excalidraw)
+- #### Local delivery service - [image](excalidraw/images/local-delivery-service.png) | [diagram](excalidraw/local-delivery-service.excalidraw)
 
 ### ⚙️ Tech Blogs:
 
