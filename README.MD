@@ -69,11 +69,12 @@
 
 ### ✍️ Excalidraw system designs:
 
-- #### URL Shortener - [image](excalidraw/images/url-shortener.png) | [diagram](excalidraw/url-shortener.excalidraw)
-- #### Dropbox - [image](excalidraw/images/dropbox.png) | [diagram](excalidraw/dropbox.excalidraw)
-- #### Local delivery service - [image](excalidraw/images/local-delivery-service.png) | [diagram](excalidraw/local-delivery-service.excalidraw)
-- #### Ticketmaster - [image](excalidraw/images/ticketmaster.png) | [diagram](excalidraw/ticketmaster.excalidraw)
-- #### News feed - [image](excalidraw/images/news-feed.png) | [diagram](excalidraw/news-feed.excalidraw)
+1. **URL Shortener** - [image](excalidraw/images/url-shortener.png) | [diagram](excalidraw/url-shortener.excalidraw)
+2. **Dropbox** - [image](excalidraw/images/dropbox.png) | [diagram](excalidraw/dropbox.excalidraw)
+3. **Local delivery service** - [image](excalidraw/images/local-delivery-service.png) | [diagram](excalidraw/local-delivery-service.excalidraw)
+4. **Ticketmaster** - [image](excalidraw/images/ticketmaster.png) | [diagram](excalidraw/ticketmaster.excalidraw)
+5. **News feed** - [image](excalidraw/images/news-feed.png) | [diagram](excalidraw/news-feed.excalidraw)
+6. **Tinder** - [image](excalidraw/images/tinder.png) | [diagram](excalidraw/tinder.excalidraw)
 
 ### ⚙️ Tech Blogs:
 
