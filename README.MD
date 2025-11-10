@@ -73,6 +73,7 @@
 - #### Dropbox - [image](excalidraw/images/dropbox.png) | [diagram](excalidraw/dropbox.excalidraw)
 - #### Local delivery service - [image](excalidraw/images/local-delivery-service.png) | [diagram](excalidraw/local-delivery-service.excalidraw)
 - #### Ticketmaster - [image](excalidraw/images/ticketmaster.png) | [diagram](excalidraw/ticketmaster.excalidraw)
+- #### News feed - [image](excalidraw/images/news-feed.png) | [diagram](excalidraw/news-feed.excalidraw)
 
 ### ⚙️ Tech Blogs:
 
