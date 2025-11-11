@@ -75,6 +75,7 @@
 4. **Ticketmaster** - [image](excalidraw/images/ticketmaster.png) | [diagram](excalidraw/ticketmaster.excalidraw)
 5. **News feed** - [image](excalidraw/images/news-feed.png) | [diagram](excalidraw/news-feed.excalidraw)
 6. **Tinder** - [image](excalidraw/images/tinder.png) | [diagram](excalidraw/tinder.excalidraw)
+7. **Leetcode** - [image](excalidraw/images/leetcode.png) | [diagram](excalidraw/leetcode.excalidraw)
 
 ### ⚙️ Tech Blogs:
 
