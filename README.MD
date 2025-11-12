@@ -77,6 +77,7 @@
 6. **Tinder** - [image](excalidraw/images/tinder.png) | [diagram](excalidraw/tinder.excalidraw)
 7. **Leetcode** - [image](excalidraw/images/leetcode.png) | [diagram](excalidraw/leetcode.excalidraw)
 8. **Messenger** - [image](excalidraw/images/messenger.png) | [diagram](excalidraw/messenger.excalidraw)
+9. **Rate limiter** - [image](excalidraw/images/rate-limiter.png) | [diagram](excalidraw/rate-limiter.excalidraw)
 
 ### ⚙️ Tech Blogs:
 
