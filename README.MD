@@ -80,6 +80,7 @@
 9. **Rate limiter** - [image](excalidraw/images/rate-limiter.png) | [diagram](excalidraw/rate-limiter.excalidraw)
 10. **Logging system** - [image](excalidraw/images/logging-system.png) | [diagram](excalidraw/logging-system.excalidraw)
 11. **Live comments** - [image](excalidraw/images/live-comments.png) | [diagram](excalidraw/live-comments.excalidraw)
+12. **Post search** - [image](excalidraw/images/post-search.png) | [diagram](excalidraw/post-search.excalidraw)
 
 ### ⚙️ Tech Blogs:
 
