@@ -79,6 +79,7 @@
 8. **Messenger** - [image](excalidraw/images/messenger.png) | [diagram](excalidraw/messenger.excalidraw)
 9. **Rate limiter** - [image](excalidraw/images/rate-limiter.png) | [diagram](excalidraw/rate-limiter.excalidraw)
 10. **Logging system** - [image](excalidraw/images/logging-system.png) | [diagram](excalidraw/logging-system.excalidraw)
+11. **Live comments** - [image](excalidraw/images/live-comments.png) | [diagram](excalidraw/live-comments.excalidraw)
 
 ### ⚙️ Tech Blogs:
 
