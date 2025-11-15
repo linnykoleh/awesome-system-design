@@ -83,6 +83,7 @@
 12. **Post search** - [image](excalidraw/images/post-search.png) | [diagram](excalidraw/post-search.excalidraw)
 13. **Top K** - [image](excalidraw/images/top-k.png) | [diagram](excalidraw/top-k.excalidraw)
 14. **Uber** - [image](excalidraw/images/uber.png) | [diagram](excalidraw/uber.excalidraw)
+15. **Youtube** - [image](excalidraw/images/youtube.png) | [diagram](excalidraw/youtube.excalidraw)
 
 ### ⚙️ Tech Blogs:
 
