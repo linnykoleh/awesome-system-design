@@ -84,6 +84,7 @@
 13. **Top K** - [image](excalidraw/images/top-k.png) | [diagram](excalidraw/top-k.excalidraw)
 14. **Uber** - [image](excalidraw/images/uber.png) | [diagram](excalidraw/uber.excalidraw)
 15. **Youtube** - [image](excalidraw/images/youtube.png) | [diagram](excalidraw/youtube.excalidraw)
+16. **Web-crawler** - [image](excalidraw/images/web-crawler.png) | [diagram](excalidraw/web-crawler.excalidraw)
 
 ### ⚙️ Tech Blogs:
 
