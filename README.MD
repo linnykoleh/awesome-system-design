@@ -87,6 +87,7 @@
 16. **YouTube** - [image](excalidraw/images/youtube.png) | [diagram](excalidraw/youtube.excalidraw)
 17. **Web-crawler** - [image](excalidraw/images/web-crawler.png) | [diagram](excalidraw/web-crawler.excalidraw)
 18. **Ad-click-aggregator** - [image](excalidraw/images/ad-click-aggregator.png) | [diagram](excalidraw/ad-click-aggregator.excalidraw)
+19. **Miro** - [image](excalidraw/images/miro.png) | [diagram](excalidraw/miro.excalidraw)
 
 ### ⚙️ Tech Blogs:
 
