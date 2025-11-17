@@ -249,6 +249,10 @@
 
 ---
 
+![29.png](images/system.design.10/29.png)
+
+---
+
 ## [A Senior Engineer's Guide to the System Design Interview](https://interviewing.io/guides/system-design-interview)
 
 ### Part 1:
