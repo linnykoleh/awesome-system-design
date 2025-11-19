@@ -744,7 +744,7 @@ http {
 ![cdn_cover.png](images/system.design.1/cdn_cover.png)
 
 - `CDN` is a system of distributed servers (network) that deliver webpages and other web content to a user based on the
-  geographic locations of the user, the origin of the webpage and a content delivery server.
+  geographic locations of the user, the origin of the webpage, and a content delivery server.
 - `Edge server` is a server that is located at the edge of the network and is responsible for caching content. It is
   usually located in a data center that is close to the user. The edge server caches content from the origin server and
   serves it to users when requested. The edge server can also serve static content directly to users without
@@ -1539,7 +1539,7 @@ In case of **network partitioning** `P` in a distributed computer system, one ha
     1. The application first checks the cache.
     2. If the data is found in cache, we’ve cache hit. The data is read and returned to the client.
     3. If the data is not found in cache, we’ve cache miss. The application has to do some extra work. It
-       queries the database to read the data, returns it to the client and stores the data in cache so the
+       queries the database to read the data, returns it to the client, and stores the data in cache so the
        subsequent reads for the same data results in a cache hit.
 
 ![38.png](images/system.design.6/38.png)
@@ -1547,7 +1547,7 @@ In case of **network partitioning** `P` in a distributed computer system, one ha
 ##### Read-Write-Through
 
 - `Read-through cache` sits in-line with the database. When there is a cache miss, it loads
-  missing data from database, populates the cache and returns it to the application. Read-through caches work best
+  missing data from database, populates the cache, and returns it to the application. Read-through caches work best
   for `read-heavy` workloads when the same data is requested many times. For example, a news story.
     1. In cache-aside, the application is responsible for fetching data from the database and populating the cache.
        In read-through, this logic is usually supported by the library or stand-alone cache provider.
@@ -2904,7 +2904,7 @@ https://en.wikipedia.org/wiki/Hard_disk_drive
 
 ### URL Filter for web crawler
 
-- The URL filter excludes certain content types, file extensions, error links and URLs in `blacklisted` sites.
+- The URL filter excludes certain content types, file extensions, error links, and URLs in `blacklisted` sites.
 
 ### URL Seen for web crawler
 
