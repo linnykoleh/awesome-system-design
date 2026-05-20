@@ -259,7 +259,7 @@
 ### Part 1:
 
 - Do not panic!
-- Don’t think like a coder. Think like a Tech Lead.
+- Don’t think like a coder. Think like a `Tech Lead`.
   - During the interview, you’ll spend an hour playing the role of a `Tech Lead`, so just pretend that the interviewer is a junior engineer who will be implementing your design.
 - There are no optimal solutions in system design interviews.
 - It’s your responsibility to leave breadcrumbs for the interviewer to `go where you want them to go`. That way you have them walk you down the road where you are at your best
@@ -334,37 +334,41 @@
         - Adding features that are out of scope is a _nice to have_, it shows product thinking
         - Ask your interviewer: _“Are there any important requirements you have in mind that I’ve overlooked?”_
     - `Non functional` (use **why** you used such NFR)
+        - **CAP Theorem**: Should your system prioritize `consistency` or `availability`? `Partition tolerance` is a given in distributed systems. 
+          - Strong consistency
+          - Eventual consistency
+          - Causal Consistency — correct order of events
         - **High availability** system uptime in percentage
-            - 99% ⇒ 3.65 days of downtime per year
-            - 99.9% ⇒ 8.76 hours of downtime per year
-            - 99.99% ⇒ 52 minutes 35 seconds of downtime per year
-            - 99.999% ⇒ 5 minutes 15 seconds of downtime per year
-            - 99.9999% ⇒ 31 seconds of downtime per year
-        - **Scalability** the property of a system to handle a growing load
+          - 99% ⇒ 3.65 days of downtime per year
+          - 99.9% ⇒ 8.76 hours of downtime per year
+          - 99.99% ⇒ 52 minutes 35 seconds of downtime per year
+          - 99.999% ⇒ 5 minutes 15 seconds of downtime per year
+          - 99.9999% ⇒ 31 seconds of downtime per year
+        - **Scalability**: All systems need to scale, but does this system have unique scaling requirements? For example, does it have bursty traffic at a specific time of day? Are there events, like holidays, that will cause a significant increase in traffic? Also consider the read vs write ratio here. Does your system need to scale reads or writes more?
           - Vertical 
           - Horizontal
           - Elastic — ability to scale up and down
           - Auto-scaling
-        - **Performance** in terms of latency and throughput
-        - **Rezilience** is how quickly the system can recover from failures
-        - **Durability** - data should not be lost
+          - DAU
+          - RPS
+        - **Latency**: How quickly does the system need to respond to user requests? Specifically consider any requests that require meaningful computation. For example, low latency search when designing Yelp.
+          - Rendering feeds in under 200ms 
+        - **Durability**: How important is it that the data in your system is not lost? For example, a social network might be able to tolerate some data loss, but a banking system cannot.
           - Backups (full, differential, incremental)
           - RAID
           - Replication
-        - **Consistency** - data should not be corrupted
-          - Strong consistency
-          - Eventual consistency
-          - Causal Consistency — correct order of events
+        - **Security**: How secure does the system need to be? Consider data protection, access control, and compliance with regulations.
+          - Authentication and Authorization
+          - DDOS protection
+          - SQL injection
+          - Data protection in transit and storage
+        - **Fault Tolerance**: How well does the system need to handle failures? Consider redundancy, failover, and recovery mechanisms.
+        - **Compliance**: Are there legal or regulatory requirements the system needs to meet? Consider industry standards, data protection laws, and other regulations.
         - **Maintainability**
           - Failure modes and mitigations
           - Monitoring
           - Testing
           - Deployment
-        - **Security**
-          - Authentication and Authorization
-          - DDOS protection
-          - SQL injection
-          - Data protection in transit and storage
         - **Cost**
           - Engineering cost
           - Maintenance cost
@@ -434,6 +438,11 @@
             - Amount of data you want to store in disk/ssd
 - `Follow-up (2–3 min)`
     - Bottlenecks
+    - Scale
+      - 1x → 10x: usually a config change. Bigger box, more replicas, tune the pool.
+      - 10x → 100x: structural. Caching layer, read replicas, async processing, queues.
+      - 100x → 1000x: topology. Sharding, regional partitioning, CDN, separate write/read systems entirely (CQRS).
+      - 1000x+: different system. You probably need to rebuild the hot component on different primitives.
     - SPOF
     - Latency (use other protocols, cache, multi-threading, faster algorithms, compression, cdn)
     - Security
@@ -447,13 +456,244 @@
 
 ![2.png](./images/system.design.3/2.png)
 
-### Availability
-
 ![19.png](images/system.design.6/19.png)
 
 ![20.png](images/system.design.6/20.png)
 
 ![numbers_4.png](images/system.design.1/numbers_4.png)
+
+---
+
+## Common tradeoffs
+
+### 1. Consistency vs Availability (CAP)
+
+- During a network partition you must choose one.
+- `CP` (consistency) — reject requests rather than serve stale data. Banking, inventory, bookings.
+- `AP` (availability) — serve a possibly stale response, reconcile later. Social feeds, DNS, shopping carts.
+- Interview phrase: "For user profile updates I would prioritize consistency, but for feed generation eventual consistency is acceptable."
+
+### 2. Strong vs Eventual Consistency
+
+- `Strong` — every read sees the latest write. Simpler reasoning, higher latency, harder to scale. Use for: payments, auth, unique constraints.
+- `Eventual` — replicas converge over time. Cheap, scales well, but reads may be stale. Use for: timelines, view counts, recommendations, DNS.
+
+### 3. Latency vs Throughput
+
+- `Low Latency` — time for a single request. Optimize with caching, CDN, fewer hops, smaller payloads.
+  - Fast response
+  - More resources
+  - Smaller batches
+- `High Throughput` — requests per second. Optimize with batching, async processing, parallelism.
+  - More requests/sec
+  - Better batching
+  - Larger queues
+- Batching and queuing trade latency for throughput. Real-time systems (chat, gaming) prioritize latency; data pipelines and analytics prioritize throughput.
+- Example:
+  - Trading system → latency
+  - Analytics → throughput
+- Common techniques:
+  - batching
+  - buffering
+  - async processing
+  - caching
+
+### 4. SQL vs NoSQL
+
+- `SQL` (relational) — ACID, joins, strong schema, mature tooling. Vertical scale by default; horizontal scale is painful. Use for: financial data, orders, anything relational, complex queries.
+- `NoSQL` — flexible schema, built for horizontal scale, weaker consistency by default. Use for feeds, logs, analytics, massive scale, flexible schema
+  - Key-value (Redis, DynamoDB) — fastest, dumbest queries
+  - Document (MongoDB) — flexible, nested data
+  - Wide-column (Cassandra, ScyllaDB) — write-heavy, time-series
+  - Graph (Neo4j) — relationship-heavy traversals
+- Interview phrase: "I would choose PostgreSQL initially because consistency and transactional guarantees are more important than horizontal write scalability at this stage."
+
+### 5. Vertical vs Horizontal Scaling
+
+- `Vertical (scale up) `— bigger box. Simple, no code changes, hits a ceiling, single point of failure, expensive at the top end.
+  - Bigger machine
+  - Simpler
+  - Hardware limits
+  - Easier DB upgrades
+- `Horizontal (scale out)` — more boxes. Effectively unlimited, fault-tolerant, but requires stateless services or sharding, plus orchestration and data partitioning logic.
+  - More machines
+  - More scalable
+  - Distributed complexity
+  - Sharding needed
+- Most real systems start vertical and move horizontal when forced to.
+- Interview answer: "Vertical scaling is usually the first step because it is operationally cheaper."
+
+### 6. Normalization vs Denormalization
+
+- `Normalized` — no duplication, easy writes, consistent updates, but joins on every read.
+- `Denormalized` — duplicate data for fast single-table reads. Updates become writes to many places; risk of drift.
+- Read-heavy workloads (feeds, profiles, dashboards) lean denormalized. OLTP leans normalized.
+- Denormalization is common in distributed systems.
+
+### 7. Monolith vs Microservices
+
+- `Monolith` — one codebase, one deploy. 
+  - Simple deployment
+  - Easier local development
+  - Easier transactions
+  - Hard to scale teams
+- `Microservices`  
+  - language freedom
+  - Independent scaling
+  - Team autonomy
+  - Pays a heavy tax: distributed transactions, network failures, observability, service discovery, deployment complexity.
+- Default to monolith. Split when team or load makes it hurt.
+
+### 8. Synchronous vs Asynchronous
+
+- `Synchronous` (REST/gRPC) — caller waits. Simple flow, immediate errors, but couples availability — slow downstream slows you.
+- `Asynchronous` (queues, events) — fire and forget. Better throughput, isolates failures, analytics, background jobs, smooths load spikes. Adds complexity: eventual consistency, idempotency, retries, dead-letter queues.
+- Use async for anything the user doesn't need to wait on: email, video transcoding, notifications, analytics.
+- Interview phrase: "Critical user flows stay synchronous, heavy processing moves to async pipelines."
+
+### 9. Push vs Pull
+
+- `Push` (server → client / producer → consumer) — real-time, low latency, no wasted polls, but harder to handle slow consumers, needs persistent connections (WebSocket, SSE).
+- `Pull` (client polls) — simple, client controls rate, but wasted requests and higher latency, polling.
+- Hybrid: long polling, or push notifications with pull on reconnect.
+- Example:
+  - Chat → push
+  - Metrics dashboards → pull
+
+### 10. Batch vs Stream Processing
+
+- Batch (Spark, Hadoop) — high throughput, simpler semantics, results delayed by the batch window. Use for: daily reports, ETL, model training.
+- Stream (Flink, Kafka Streams) — low latency, continuous, harder to reason about (windowing, watermarks, late events). Use for: fraud detection, real-time dashboards, alerting.
+- Example:
+  - Night analytics → batch
+  - Fraud detection → stream
+
+### 11. Caching strategy
+
+- `Read-through / cache-aside` — app fills cache on miss. Simple, but first request is slow; risk of stale data.
+- `Write-through` — write to cache and DB together. Cache always fresh; writes are slower.
+- `Write-back (write-behind)` — write to cache, flush to DB async. Fast writes, risk of data loss on crash.
+- `Write-around` — write straight to DB, skip cache. Good when written data is rarely read soon after.
+- Invalidation strategy matters more than the algorithm — TTL, explicit invalidation, or versioning.
+
+### 12. Replication: Single-Leader / Multi-Leader / Leaderless
+
+- `Single-leader (primary-replica)` — easy to reason about, strong consistency on the leader, but leader is a bottleneck and SPOF until failover.
+- `Multi-leader` — accepts writes in multiple regions, better write availability and locality. Conflict resolution is hard (last-write-wins loses data).
+- `Leaderless` (Dynamo-style — Cassandra, Riak) — any node accepts writes, quorum reads/writes (R + W > N). Highly available, eventual consistency, conflict resolution via vector clocks or app logic.
+
+### 13. Sharding Strategies
+
+- `Range-based` — easy range queries, but risks hotspots (sequential IDs all hit the latest shard).
+- `Hash-based` — even distribution, terrible for range queries.
+- `Consistent hashing` — minimizes resharding when nodes are added/removed. Standard for distributed caches and Dynamo-style stores.
+- `Directory/lookup-based` — flexible, but the lookup service becomes a SPOF.
+
+### 14. REST vs gRPC vs GraphQL
+
+- `REST` — ubiquitous, cacheable, human-readable, but verbose and prone to over/under-fetching.
+- `gRPC` — binary, fast, strongly typed (protobuf), streaming. Worse browser support, harder debugging, tight coupling on schema versions. Great for internal service-to-service.
+- `GraphQL` — client picks exactly what it needs; one endpoint. Solves over-fetching but moves complexity to the server (resolvers, N+1, caching, rate limiting).
+
+### 15. Load Balancing: L4 vs L7
+
+- L4 (TCP) — fast, simple, protocol-agnostic. Can't make routing decisions based on content.
+- L7 (HTTP) — routes by path, header, cookie. Enables canaries, A/B, sticky sessions. Higher CPU cost, must terminate TLS.
+
+### 16. Stateful vs Stateless Services
+
+- Stateless — any instance handles any request. Trivial to scale and replace. Push state to DB, cache, or client.
+- Stateful — instance holds session/connection state (WebSocket servers, game servers). Harder to scale, needs sticky sessions or state replication.- 
+- Default to stateless. State belongs in dedicated storage.
+
+### 17. Optimistic vs Pessimistic Locking
+
+- `Optimistic` (version numbers, CAS) — assume conflicts are rare, detect on write, retry on conflict. Great for low-contention workloads.
+- `Pessimistic` (row locks, distributed locks) — acquire lock before changes. Safer under contention, but risks deadlocks and reduces throughput.
+
+### 18. Message Delivery Guarantees
+
+- `At-most-once` — fast, may drop messages. Use for: metrics, logs where loss is acceptable.
+- `At-least-once` — never lost, may be duplicated. Requires idempotent consumers. Default for most systems.
+- `Exactly-once` — hard, expensive, often a marketing claim. Achievable end-to-end with transactional outbox + idempotency keys.
+
+### Golden Interview Sentences
+
+- "This is a tradeoff between operational complexity and scalability."
+- "At this scale I would avoid premature optimization."
+- "This design prioritizes availability over strict consistency."
+- "I would initially optimize for simplicity."
+- "We can evolve this architecture once bottlenecks appear."
+- "The main concern here becomes coordination in distributed systems."
+- "This introduces eventual consistency, so idempotency becomes important."
+- "Replication improves reads, but not write scalability."
+- "Caching improves latency but introduces cache invalidation complexity."
+- "I'm choosing eventual consistency here. The tradeoff is that the like count can be stale for a few seconds, but we get 10x cheaper reads and survive a replica failure. For likes, that's acceptable. For payments, it wouldn't be."
+
+---
+
+## Common Bottlenecks
+
+### Database
+
+- Symptoms:
+  - slow queries
+  - connection pool exhaustion
+  - high write latency
+  - table locks
+  - replication lag
+- Solutions:
+  - indexes
+  - caching
+  - read replicas
+  - partitioning/sharding
+  - denormalization
+  - batching
+- Senior signal: "At moderate scale the database usually becomes the first bottleneck."
+
+### Network
+
+- Problems:
+  - Every service waits on another service.
+    - API → User Service → Auth Service → Billing Service → Recommendation Service
+  - bandwidth between regions
+  - One slow service slows entire request chain.
+- Solutions:
+  - caching
+  - async processing
+  - parallel calls
+  - circuit breakers
+  - timeouts
+
+### Disk I/O
+
+-  IOPS limits on cloud volumes, log writes, fsync cost.
+
+### Hot Partitions
+
+- Very common in distributed systems.
+- Example:
+  - all traffic goes to one Kafka partition
+  - celebrity user
+  - single Redis key
+  - timestamp-based partitioning
+- Solutions:
+  - better partition key
+  - hashing
+  - consistent hashing
+  - load spreading
+
+### Cache Miss Storm
+
+- Problem:
+  - Popular cache entry expires.
+  - Thousands of requests hit DB simultaneously.
+- Solutions:
+  - probabilistic expiration
+  - request coalescing
+  - stale-while-revalidate
+  - distributed locks
+  - Cache stampede
 
 ---
 
