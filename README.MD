@@ -624,6 +624,12 @@
 
 ### Golden Interview Sentences
 
+- "High-level desing is in place, now let's go deeper"
+- "From a user experience perspective"
+- "For SQL database we could use normalization to keep other data in another table"
+- "For NoSQL database we could use denormalization to keep all data in one table"
+- "It's overkill here"
+- "I was intentionally vague about it"
 - "This is a tradeoff between operational complexity and scalability."
 - "At this scale I would avoid premature optimization."
 - "This design prioritizes availability over strict consistency."
