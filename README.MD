@@ -443,13 +443,18 @@
       - 10x → 100x: structural. Caching layer, read replicas, async processing, queues.
       - 100x → 1000x: topology. Sharding, regional partitioning, CDN, separate write/read systems entirely (CQRS).
       - 1000x+: different system. You probably need to rebuild the hot component on different primitives.
+    - Failure Handling
+      - Timeouts
+      - Retries
+        - exponential backoff
+        - jitter
+      - Circuit Breakers
+      - Bulkheads
     - SPOF
     - Latency (use other protocols, cache, multi-threading, faster algorithms, compression, cdn)
     - Security
     - Cost
-    - Error cases (server failure, network loss, etc.) and how to handle them
     - Monitoring
-    - How to scale the system to the next level
 
 
 ![1.png](./images/system.design.3/1.png)
@@ -562,8 +567,8 @@
 
 ### 10. Batch vs Stream Processing
 
-- Batch (Spark, Hadoop) — high throughput, simpler semantics, results delayed by the batch window. Use for: daily reports, ETL, model training.
-- Stream (Flink, Kafka Streams) — low latency, continuous, harder to reason about (windowing, watermarks, late events). Use for: fraud detection, real-time dashboards, alerting.
+- `Batch` (Spark, Hadoop) — high throughput, simpler semantics, results delayed by the batch window. Use for: daily reports, ETL, model training.
+- `Stream` (Flink, Kafka Streams) — low latency, continuous, harder to reason about (windowing, watermarks, late events). Use for: fraud detection, real-time dashboards, alerting.
 - Example:
   - Night analytics → batch
   - Fraud detection → stream
@@ -571,7 +576,7 @@
 ### 11. Caching strategy
 
 - `Read-through / cache-aside` — app fills cache on miss. Simple, but first request is slow; risk of stale data.
-- `Write-through` — write to cache and DB together. Cache always fresh; writes are slower.
+- `Write-through` — write to cache and DB together. Cache always freаsh; writes are slower.
 - `Write-back (write-behind)` — write to cache, flush to DB async. Fast writes, risk of data loss on crash.
 - `Write-around` — write straight to DB, skip cache. Good when written data is rarely read soon after.
 - Invalidation strategy matters more than the algorithm — TTL, explicit invalidation, or versioning.
@@ -597,13 +602,13 @@
 
 ### 15. Load Balancing: L4 vs L7
 
-- L4 (TCP) — fast, simple, protocol-agnostic. Can't make routing decisions based on content.
-- L7 (HTTP) — routes by path, header, cookie. Enables canaries, A/B, sticky sessions. Higher CPU cost, must terminate TLS.
+- `L4 (TCP)` — fast, simple, protocol-agnostic. Can't make routing decisions based on content.
+- `L7 (HTTP)` — routes by path, header, cookie. Enables canaries, A/B, sticky sessions. Higher CPU cost, must terminate TLS.
 
 ### 16. Stateful vs Stateless Services
 
-- Stateless — any instance handles any request. Trivial to scale and replace. Push state to DB, cache, or client.
-- Stateful — instance holds session/connection state (WebSocket servers, game servers). Harder to scale, needs sticky sessions or state replication.- 
+- `Stateless` — any instance handles any request. Trivial to scale and replace. Push state to DB, cache, or client.
+- `Stateful` — instance holds session/connection state (WebSocket servers, game servers). Harder to scale, needs sticky sessions or state replication.- 
 - Default to stateless. State belongs in dedicated storage.
 
 ### 17. Optimistic vs Pessimistic Locking
@@ -629,12 +634,16 @@
 - "Replication improves reads, but not write scalability."
 - "Caching improves latency but introduces cache invalidation complexity."
 - "I'm choosing eventual consistency here. The tradeoff is that the like count can be stale for a few seconds, but we get 10x cheaper reads and survive a replica failure. For likes, that's acceptable. For payments, it wouldn't be."
+- "Maybe this is a problem, maybe not, need to discuss with a product manager"
+- "The most expensive part is the database, this is a bottleneck"
+- "Partitioning strategy is one of the most important long-term architectural decisions."
+- "Perfectly even traffic distribution rarely exists in real systems."
 
 ---
 
 ## Common Bottlenecks
 
-### Database
+### Database bottleneck
 
 - Symptoms:
   - slow queries
@@ -651,7 +660,7 @@
   - batching
 - Senior signal: "At moderate scale the database usually becomes the first bottleneck."
 
-### Network
+### Network bottleneck
 
 - Problems:
   - Every service waits on another service.
@@ -665,11 +674,11 @@
   - circuit breakers
   - timeouts
 
-### Disk I/O
+### Disk I/O bottleneck
 
 -  IOPS limits on cloud volumes, log writes, fsync cost.
 
-### Hot Partitions
+### Hot Partitions bottleneck
 
 - Very common in distributed systems.
 - Example:
@@ -679,11 +688,23 @@
   - timestamp-based partitioning
 - Solutions:
   - better partition key
-  - hashing
+    - hash(userId)
   - consistent hashing
-  - load spreading
+    - many virtual partitions per node
+  - Replication of Hot Data
+  - Adaptive Load Balancing
+  - Randomized Sharding
+    - Instead of: user:123
+    - Use: user:123:1, user:123:2, user:123:3
+    - Tradeoff
+      - writes scale better
+      - reads become more expensive
+  - Celebrity profile cache on:
+    - CDN
+    - Redis
+    - local memory cache
 
-### Cache Miss Storm
+### Cache Miss Storm bottleneck
 
 - Problem:
   - Popular cache entry expires.
