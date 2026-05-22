@@ -625,6 +625,8 @@
 ### Golden Interview Sentences
 
 - "High-level desing is in place, now let's go deeper"
+- "All systems have to be highly available and fault-tolerant, but what makes this system unique and interesting"
+- "I will come back to it, after satisfying all functional requirements"
 - "From a user experience perspective"
 - "For SQL database we could use normalization to keep other data in another table"
 - "For NoSQL database we could use denormalization to keep all data in one table"
