@@ -625,6 +625,8 @@
 ### Golden Interview Sentences
 
 - "High-level desing is in place, now let's go deeper"
+- "We need to fix the root problem"
+- "We could utilize a space efficient probabilistic data-structure like a bloom filter"
 - "All systems have to be highly available and fault-tolerant, but what makes this system unique and interesting"
 - "I will come back to it, after satisfying all functional requirements"
 - "From a user experience perspective"
