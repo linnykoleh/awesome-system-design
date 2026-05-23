@@ -89,6 +89,7 @@
 18. **Ad-click-aggregator** - [image](excalidraw/images/ad-click-aggregator.png) | [diagram](excalidraw/ad-click-aggregator.excalidraw)
 19. **Miro** - [image](excalidraw/images/miro.png) | [diagram](excalidraw/miro.excalidraw)
 20. **Delete users data service** - [image](excalidraw/images/delete_users_data.png) | [diagram](excalidraw/delete_users_data.excalidraw)
+21. **Google docs** - [image](excalidraw/images/google-docs.png) | [diagram](excalidraw/google-docs.excalidraw)
 
 ### ⚙️ Tech Blogs:
 
@@ -627,6 +628,7 @@
 - "High-level desing is in place, now let's go deeper"
 - "We need to fix the root problem"
 - "We could utilize a space efficient probabilistic data-structure like a bloom filter"
+- "Strong consistency – every read returns the latest write"
 - "All systems have to be highly available and fault-tolerant, but what makes this system unique and interesting"
 - "I will come back to it, after satisfying all functional requirements"
 - "From a user experience perspective"
