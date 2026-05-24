@@ -37,6 +37,7 @@
 - [x] [Designing a Payment System](https://newsletter.pragmaticengineer.com/p/designing-a-payment-system)
 - [ ] [How Figma’s databases team lived to tell the scale](https://www.figma.com/blog/how-figmas-databases-team-lived-to-tell-the-scale)
 - [ ] [27 Fundamental Techniques for Software Architects](https://www.workingsoftware.dev/fundamental-techniques-for-software-architects/)
+- [ ] [Scaling PostgreSQL to power 800 million ChatGPT users](https://openai.com/index/scaling-postgresql)
 
 ### 📚 Books:
 
@@ -88,8 +89,9 @@
 17. **Web-crawler** - [image](excalidraw/images/web-crawler.png) | [diagram](excalidraw/web-crawler.excalidraw)
 18. **Ad-click-aggregator** - [image](excalidraw/images/ad-click-aggregator.png) | [diagram](excalidraw/ad-click-aggregator.excalidraw)
 19. **Miro** - [image](excalidraw/images/miro.png) | [diagram](excalidraw/miro.excalidraw)
-20. **Delete users data service** - [image](excalidraw/images/delete_users_data.png) | [diagram](excalidraw/delete_users_data.excalidraw)
-21. **Google docs** - [image](excalidraw/images/google-docs.png) | [diagram](excalidraw/google-docs.excalidraw)
+20. **Google docs** - [image](excalidraw/images/google-docs.png) | [diagram](excalidraw/google-docs.excalidraw)
+21. **Delete users data service** - [image](excalidraw/images/delete_users_data.png) | [diagram](excalidraw/delete_users_data.excalidraw)
+22. **Instagram** - [image](excalidraw/images/instagram.png) | [diagram](excalidraw/instagram.excalidraw)
 
 ### ⚙️ Tech Blogs:
 
