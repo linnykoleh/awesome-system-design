@@ -94,6 +94,7 @@
 22. **Instagram** - [image](excalidraw/images/instagram.png) | [diagram](excalidraw/instagram.excalidraw)
 23. **ChatGPT** - [image](excalidraw/images/chatgpt.png) | [diagram](excalidraw/chatgpt.excalidraw)
 24. **Job Scheduler** - [image](excalidraw/images/job-scheduler-service.png) | [diagram](excalidraw/job-scheduler-service.excalidraw)
+25. **IP access control gateway** - [image](excalidraw/images/ip-access-control-gateway.png) | [diagram](excalidraw/ip-access-control-gateway.excalidraw)
 
 ### ⚙️ Tech Blogs:
 
