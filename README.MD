@@ -92,6 +92,7 @@
 20. **Google docs** - [image](excalidraw/images/google-docs.png) | [diagram](excalidraw/google-docs.excalidraw)
 21. **Delete users data service** - [image](excalidraw/images/delete_users_data.png) | [diagram](excalidraw/delete_users_data.excalidraw)
 22. **Instagram** - [image](excalidraw/images/instagram.png) | [diagram](excalidraw/instagram.excalidraw)
+23. **ChatGPT** - [image](excalidraw/images/chatgpt.png) | [diagram](excalidraw/chatgpt.excalidraw)
 
 ### ⚙️ Tech Blogs:
 
@@ -652,6 +653,7 @@
 - "The most expensive part is the database, this is a bottleneck"
 - "Partitioning strategy is one of the most important long-term architectural decisions."
 - "Perfectly even traffic distribution rarely exists in real systems."
+- "This solution sucks at this problem for two concrete reasons"
 
 ---
 
