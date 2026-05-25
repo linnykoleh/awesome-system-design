@@ -93,6 +93,7 @@
 21. **Delete users data service** - [image](excalidraw/images/delete_users_data.png) | [diagram](excalidraw/delete_users_data.excalidraw)
 22. **Instagram** - [image](excalidraw/images/instagram.png) | [diagram](excalidraw/instagram.excalidraw)
 23. **ChatGPT** - [image](excalidraw/images/chatgpt.png) | [diagram](excalidraw/chatgpt.excalidraw)
+24. **Job Scheduler** - [image](excalidraw/images/job-scheduler-service.png) | [diagram](excalidraw/job-scheduler-service.excalidraw)
 
 ### ⚙️ Tech Blogs:
 
@@ -342,6 +343,8 @@
           - Strong consistency
           - Eventual consistency
           - Causal Consistency — correct order of events
+        - **Latency**: How quickly does the system need to respond to user requests? Specifically consider any requests that require meaningful computation. For example, low latency search when designing Yelp.
+          - Rendering feeds in under 200ms
         - **High availability** system uptime in percentage
           - 99% ⇒ 3.65 days of downtime per year
           - 99.9% ⇒ 8.76 hours of downtime per year
@@ -355,8 +358,6 @@
           - Auto-scaling
           - DAU
           - RPS
-        - **Latency**: How quickly does the system need to respond to user requests? Specifically consider any requests that require meaningful computation. For example, low latency search when designing Yelp.
-          - Rendering feeds in under 200ms 
         - **Durability**: How important is it that the data in your system is not lost? For example, a social network might be able to tolerate some data loss, but a banking system cannot.
           - Backups (full, differential, incremental)
           - RAID
@@ -626,34 +627,127 @@
 - `At-least-once` — never lost, may be duplicated. Requires idempotent consumers. Default for most systems.
 - `Exactly-once` — hard, expensive, often a marketing claim. Achievable end-to-end with transactional outbox + idempotency keys.
 
-### Golden Interview Sentences
+---
 
-- "High-level desing is in place, now let's go deeper"
-- "We need to fix the root problem"
-- "We could utilize a space efficient probabilistic data-structure like a bloom filter"
-- "Strong consistency – every read returns the latest write"
-- "All systems have to be highly available and fault-tolerant, but what makes this system unique and interesting"
-- "I will come back to it, after satisfying all functional requirements"
-- "From a user experience perspective"
-- "For SQL database we could use normalization to keep other data in another table"
-- "For NoSQL database we could use denormalization to keep all data in one table"
-- "It's overkill here"
-- "I was intentionally vague about it"
-- "This is a tradeoff between operational complexity and scalability."
-- "At this scale I would avoid premature optimization."
-- "This design prioritizes availability over strict consistency."
-- "I would initially optimize for simplicity."
-- "We can evolve this architecture once bottlenecks appear."
-- "The main concern here becomes coordination in distributed systems."
-- "This introduces eventual consistency, so idempotency becomes important."
-- "Replication improves reads, but not write scalability."
-- "Caching improves latency but introduces cache invalidation complexity."
-- "I'm choosing eventual consistency here. The tradeoff is that the like count can be stale for a few seconds, but we get 10x cheaper reads and survive a replica failure. For likes, that's acceptable. For payments, it wouldn't be."
-- "Maybe this is a problem, maybe not, need to discuss with a product manager"
-- "The most expensive part is the database, this is a bottleneck"
-- "Partitioning strategy is one of the most important long-term architectural decisions."
-- "Perfectly even traffic distribution rarely exists in real systems."
-- "This solution sucks at this problem for two concrete reasons"
+## System Design Interview Cheat Sheet
+
+### Architecture, Tradeoffs, Scalability
+
+#### Opening / Clarification
+
+- “Before we go ahead, I have a few clarifying questions I’d like to ask.”
+- “Does that sound OK?”
+- “I’m going to take a few seconds to think about that, if that’s OK with you.”
+- “I want to first clarify the functional and non-functional requirements.”
+- “From a user experience perspective…”
+- “I will come back to it after satisfying all functional requirements.”
+
+#### High-Level Design
+
+- “High-level design is in place, now let’s go deeper.”
+- “The simplest solution would be…”
+- “The most practical approach is…”
+- “I would initially optimize for simplicity.”
+- “At this scale I would avoid premature optimization.”
+- “We can evolve this architecture once bottlenecks appear.”
+- “It’s overkill here.”
+- “I was intentionally vague about it.”
+
+#### Scalability / Distributed Systems
+
+- “This design scales horizontally.”
+- “To reduce coupling…”
+- “For fault tolerance…”
+- “To avoid a single point of failure…”
+- “The bottleneck usually appears when…”
+- “At high load…”
+- “The main concern here becomes coordination in distributed systems.”
+- “Partitioning strategy is one of the most important long-term architectural decisions.”
+- “Perfectly even traffic distribution rarely exists in real systems.”
+- “This becomes expensive under heavy concurrency.”
+
+#### Databases
+
+- “The most expensive part is the database, this is a bottleneck.”
+- “For SQL database we could use normalization to keep other data in another table.”
+- “For NoSQL database we could use denormalization to keep all data in one table.”
+- “Replication improves reads, but not write scalability.”
+- “Caching improves latency but introduces cache invalidation complexity.”
+- “Strong consistency means every read returns the latest write.”
+- “This design prioritizes availability over strict consistency.”
+- “This introduces eventual consistency, so idempotency becomes important.”
+
+#### Tradeoffs
+
+- “The main trade-off is…”
+- “This is a tradeoff between operational complexity and scalability.”
+- “This approach improves scalability because…”
+- “I’m choosing eventual consistency here.”
+- “The tradeoff is that the like count can be stale for a few seconds, but we get significantly cheaper reads and survive replica failures.”
+- “For likes, that’s acceptable. For payments, it wouldn’t be.”
+- “Maybe this is a problem, maybe not, we need to discuss it with the product manager.”
+
+### Senior-Level Phrases, Experience, Confidence
+
+#### Senior-Level Architecture Phrases
+
+- “We need to fix the root problem.”
+- “The core problem is…”
+- “The key point is…”
+- “The important part here is…”
+- “This solution sucks at this problem for two concrete reasons.”
+- “The biggest operational challenge here is…”
+- “The main complexity comes from distributed coordination.”
+- “This is where eventual consistency starts to matter.”
+- “This architecture optimizes for read-heavy workloads.”
+- “This architecture optimizes for write throughput.”
+- “This is a classic latency vs consistency tradeoff.”
+
+#### Performance / Optimization
+
+- “We could utilize a space-efficient probabilistic data structure like a bloom filter.”
+- “Caching reduces latency significantly.”
+- “The hot partition problem becomes visible when…”
+- “This endpoint is likely to become CPU-bound.”
+- “This component is network-bound rather than compute-bound.”
+- “The write path is usually more expensive than the read path.”
+- “This optimization only makes sense at scale.”
+- “I would avoid introducing operational complexity too early.”
+
+#### Production Experience
+
+- “In production we solved this by…”
+- “One issue we faced was…”
+- “What worked well for us…”
+- “We observed that…”
+- “In distributed systems this often leads to…”
+- “One common production issue is retry storms.”
+- “We had to introduce backpressure because…”
+- “We solved this using asynchronous processing.”
+- “Idempotency became critical once retries were introduced.”
+- “One thing we learned in production is that metrics and observability are essential.”
+
+### Confidence / Communication
+
+- “Let me structure my thoughts first.”
+- “I’ll start simple and evolve the design gradually.”
+- “I’ll first design for correctness, then optimize for scale.”
+- “I’ll make a few assumptions to move faster.”
+- “I’ll explicitly call out tradeoffs as we go.”
+- “I’ll prioritize reliability and operational simplicity first.”
+- “The simplest working solution is usually the best starting point.”
+- “I’d like to discuss alternative approaches as well.”
+- “This depends heavily on product requirements and traffic patterns.”
+
+#### Emergency Fallback Phrases
+
+- “I would validate this assumption with real production metrics.”
+- “At this point I would benchmark both approaches.”
+- “Without concrete traffic numbers, I’d avoid over-engineering.”
+- “This depends on read/write ratio.”
+- “The final decision depends on consistency requirements.”
+- “This is a business tradeoff as much as a technical one.”
+- “I would revisit this decision once the system reaches scale.”
 
 ---
 
