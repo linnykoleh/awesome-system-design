@@ -95,6 +95,7 @@
 23. **ChatGPT** - [image](excalidraw/images/chatgpt.png) | [diagram](excalidraw/chatgpt.excalidraw)
 24. **Job Scheduler** - [image](excalidraw/images/job-scheduler-service.png) | [diagram](excalidraw/job-scheduler-service.excalidraw)
 25. **IP access control gateway** - [image](excalidraw/images/ip-access-control-gateway.png) | [diagram](excalidraw/ip-access-control-gateway.excalidraw)
+26. **Distributed cache** - [image](excalidraw/images/distributed_cache.png) | [diagram](excalidraw/distributed_cache.excalidraw)
 
 ### ⚙️ Tech Blogs:
 
@@ -340,6 +341,7 @@
         - Adding features that are out of scope is a _nice to have_, it shows product thinking
         - Ask your interviewer: _“Are there any important requirements you have in mind that I’ve overlooked?”_
     - `Non functional` (use **why** you used such NFR)
+        - **Ask interviewer what the Scale of the system will be** 
         - **CAP Theorem**: Should your system prioritize `consistency` or `availability`? `Partition tolerance` is a given in distributed systems. 
           - Strong consistency
           - Eventual consistency
