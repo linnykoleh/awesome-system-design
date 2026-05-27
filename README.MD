@@ -96,6 +96,7 @@
 24. **Job Scheduler** - [image](excalidraw/images/job-scheduler-service.png) | [diagram](excalidraw/job-scheduler-service.excalidraw)
 25. **IP access control gateway** - [image](excalidraw/images/ip-access-control-gateway.png) | [diagram](excalidraw/ip-access-control-gateway.excalidraw)
 26. **Distributed cache** - [image](excalidraw/images/distributed_cache.png) | [diagram](excalidraw/distributed_cache.excalidraw)
+27. **Payment system** - [image](excalidraw/images/payment-system.png) | [diagram](excalidraw/payment-system.excalidraw)
 
 ### ⚙️ Tech Blogs:
 
@@ -340,6 +341,11 @@
         - Choosing just the `top 3` features 
         - Adding features that are out of scope is a _nice to have_, it shows product thinking
         - Ask your interviewer: _“Are there any important requirements you have in mind that I’ve overlooked?”_
+    - `Ask interviewer what the Scale of the system will be`  
+        - 1B users
+        - 10M dau
+        - 100k rps
+        - 10k tps
     - `Non functional` (use **why** you used such NFR)
         - **Ask interviewer what the Scale of the system will be** 
         - **CAP Theorem**: Should your system prioritize `consistency` or `availability`? `Partition tolerance` is a given in distributed systems. 
