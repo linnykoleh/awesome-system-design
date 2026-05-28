@@ -99,6 +99,7 @@
 27. **Payment system** - [image](excalidraw/images/payment-system.png) | [diagram](excalidraw/payment-system.excalidraw)
 28. **Metrics monitoring** - [image](excalidraw/images/metrics-monitoring.png) | [diagram](excalidraw/metrics-monitoring.excalidraw)
 29. **News aggregator** - [image](excalidraw/images/news-aggregator.png) | [diagram](excalidraw/news-aggregator.excalidraw)
+30. **Strava** - [image](excalidraw/images/strava.png) | [diagram](excalidraw/strava.excalidraw)
 
 ### ⚙️ Tech Blogs:
 
@@ -713,6 +714,7 @@
 - “This architecture optimizes for read-heavy workloads.”
 - “This architecture optimizes for write throughput.”
 - “This is a classic latency vs consistency tradeoff.”
+- “We should also consider GDPR and data retention policies, but I’ll keep them out of scope for now and focus on scalability.”
 
 #### Performance / Optimization
 
