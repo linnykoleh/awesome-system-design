@@ -97,6 +97,7 @@
 25. **IP access control gateway** - [image](excalidraw/images/ip-access-control-gateway.png) | [diagram](excalidraw/ip-access-control-gateway.excalidraw)
 26. **Distributed cache** - [image](excalidraw/images/distributed_cache.png) | [diagram](excalidraw/distributed_cache.excalidraw)
 27. **Payment system** - [image](excalidraw/images/payment-system.png) | [diagram](excalidraw/payment-system.excalidraw)
+28. **Metrics monitoring** - [image](excalidraw/images/metrics-monitoring.png) | [diagram](excalidraw/metrics-monitoring.excalidraw)
 
 ### ⚙️ Tech Blogs:
 
