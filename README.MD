@@ -101,6 +101,7 @@
 29. **News aggregator** - [image](excalidraw/images/news-aggregator.png) | [diagram](excalidraw/news-aggregator.excalidraw)
 30. **Strava** - [image](excalidraw/images/strava.png) | [diagram](excalidraw/strava.excalidraw)
 31. **Yelp** - [image](excalidraw/images/yelp.png) | [diagram](excalidraw/yelp.excalidraw)
+32. **Online auction** - [image](excalidraw/images/online-auction.png) | [diagram](excalidraw/online-auction.excalidraw)
 
 ### ⚙️ Tech Blogs:
 
