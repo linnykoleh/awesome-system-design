@@ -102,6 +102,7 @@
 30. **Strava** - [image](excalidraw/images/strava.png) | [diagram](excalidraw/strava.excalidraw)
 31. **Yelp** - [image](excalidraw/images/yelp.png) | [diagram](excalidraw/yelp.excalidraw)
 32. **Online auction** - [image](excalidraw/images/online-auction.png) | [diagram](excalidraw/online-auction.excalidraw)
+33. **Alert Notification system** - [image](excalidraw/images/alert_notification_system.png) | [diagram](excalidraw/alert_notification_system.excalidraw)
 
 ### ⚙️ Tech Blogs:
 
@@ -412,9 +413,9 @@
 - `Deep dives (15-20 min)`
     - Scaling the high-level design
     - Scaling individual components:
-        - Availability, Consistency and Scale story for each component
+        - Availability, Consistency, and Scale story for each component
         - Consistency and availability patterns
-    - Think about the following components, how they would fit in and how it would help:
+    - Think about the following components, how they would fit in, and how it would help:
         - Client (Mobile, Browser)
         - DNS
         - CDN (Push vs Pull)
@@ -4484,7 +4485,7 @@ The fanout service works as follows:
     - As we already know, achieving high availability requires both architecture and processes. In our system, each
       individual component should be highly available. Which means we have redundancy for every component in the system,
       heavily rely on load balancing, protect our components from atypical behaviors of clients and downstream
-      dependencies, quickly detect and resolve failures.
+      dependencies, quickly detect, and resolve failures.
 - How to ensure high durability?
     - By copying data at multiple different levels. Specifically, we rely on database data replication and backups.
 
