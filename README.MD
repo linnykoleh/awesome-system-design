@@ -102,7 +102,7 @@
 30. **Strava** - [image](excalidraw/images/strava.png) | [diagram](excalidraw/strava.excalidraw)
 31. **Yelp** - [image](excalidraw/images/yelp.png) | [diagram](excalidraw/yelp.excalidraw)
 32. **Online auction** - [image](excalidraw/images/online-auction.png) | [diagram](excalidraw/online-auction.excalidraw)
-33. **Alert Notification system** - [image](excalidraw/images/alert_notification_system.png) | [diagram](excalidraw/alert_notification_system.excalidraw)
+33. **Alert notification system** - [image](excalidraw/images/alert_notification_system.png) | [diagram](excalidraw/alert_notification_system.excalidraw)
 
 ### ⚙️ Tech Blogs:
 
