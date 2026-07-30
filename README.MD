@@ -68,6 +68,40 @@
 - [ ] [https://github.com/karanpratapsingh/system-design](https://github.com/karanpratapsingh/system-design)
 - [ ] [https://github.com/charlax/professional-programming](https://github.com/charlax/professional-programming)
 
+### ⚙️ Tech Blogs:
+
+- https://newsletter.pragmaticengineer.com
+- https://blog.bytebytego.com
+- https://netflixtechblog.com
+- https://www.uber.com/en-IN/blog/engineering
+- https://blog.cloudflare.com
+- https://www.akamai.com/blog
+- https://www.linkedin.com/blog/engineering
+- https://www.grammarly.com/blog
+- https://discord.com/category/engineering
+- https://eng.lyft.com
+- https://medium.com/tinder
+- https://newsletter.systemdesign.one
+- https://www.allthingsdistributed.com
+- https://engineering.fb.com
+- https://www.notion.so/blog/topic/tech
+- https://stripe.com/blog
+- https://medium.com/airbnb-engineering
+- https://medium.com/pinterest-engineering
+- https://www.figma.com/blog/engineering
+- https://engineering.atspotify.com
+- https://slack.engineering
+- https://stackoverflow.blog/engineering
+- https://medium.com/paypal-tech
+- https://medium.engineering
+- https://dropbox.tech
+- https://medium.com/strava-engineering
+- https://www.toptal.com/developers/blog
+- https://github.blog/engineering
+- https://devblogs.microsoft.com/engineering-at-microsoft
+- https://blogs.nvidia.com
+- https://highscalability.com
+
 ### ✍️ Excalidraw system designs:
 
 1. **URL Shortener** - [image](excalidraw/images/url-shortener.png) | [diagram](excalidraw/url-shortener.excalidraw)
@@ -103,40 +137,6 @@
 31. **Yelp** - [image](excalidraw/images/yelp.png) | [diagram](excalidraw/yelp.excalidraw)
 32. **Online auction** - [image](excalidraw/images/online-auction.png) | [diagram](excalidraw/online-auction.excalidraw)
 33. **Alert notification system** - [image](excalidraw/images/alert_notification_system.png) | [diagram](excalidraw/alert_notification_system.excalidraw)
-
-### ⚙️ Tech Blogs:
-
-- https://newsletter.pragmaticengineer.com
-- https://blog.bytebytego.com
-- https://netflixtechblog.com
-- https://www.uber.com/en-IN/blog/engineering
-- https://blog.cloudflare.com
-- https://www.akamai.com/blog
-- https://www.linkedin.com/blog/engineering
-- https://www.grammarly.com/blog
-- https://discord.com/category/engineering
-- https://eng.lyft.com
-- https://medium.com/tinder
-- https://newsletter.systemdesign.one
-- https://www.allthingsdistributed.com
-- https://engineering.fb.com
-- https://www.notion.so/blog/topic/tech
-- https://stripe.com/blog
-- https://medium.com/airbnb-engineering
-- https://medium.com/pinterest-engineering
-- https://www.figma.com/blog/engineering
-- https://engineering.atspotify.com
-- https://slack.engineering
-- https://stackoverflow.blog/engineering
-- https://medium.com/paypal-tech
-- https://medium.engineering
-- https://dropbox.tech
-- https://medium.com/strava-engineering
-- https://www.toptal.com/developers/blog
-- https://github.blog/engineering
-- https://devblogs.microsoft.com/engineering-at-microsoft
-- https://blogs.nvidia.com
-- https://highscalability.com
 
 ---
 
@@ -219,6 +219,7 @@
   - [DDOS attacks](#ddos-attacks)
   - [Storages Physics](#storages-physics)
   - [Backups](#backups)
+  - [Patterns](#patterns)
 - [System Design Interview Questions](#system-design-interview-questions)
   - [Design Rate Limiter #1](#design-rate-limiter-1)
   - [Design Rate Limiter #2](#design-rate-limiter-2)
@@ -1257,6 +1258,34 @@ http {
   work well.
 
 ![the-five-most-common-balancing-methods.jpg](images/system.design.1/the-five-most-common-balancing-methods.jpg)
+
+### L4 Load Balancer
+
+- Layer 4 load balancers operate at the transport layer (TCP/UDP). They make routing decisions based on network information like IP addresses and ports, without looking at the actual content of the packets. 
+- The effect of a L4 load balancer is as-if you randomly selected a backend server and assumed that TCP connections were established directly between the client and that server — this mental model is not far off.
+- Key characteristics of L4 load balancers:
+  - Maintain persistent TCP connections between client and server.
+  - Fast and efficient due to minimal packet inspection.
+  - Cannot make routing decisions based on application data.
+  - Typically used when raw performance is the priority.
+- For example, if a client establishes a TCP connection through an L4 load balancer, that same server will handle all subsequent requests within that TCP session. 
+- This makes L4 load balancers particularly well-suited for protocols that require persistent connections, like WebSocket connections. 
+- At a conceptual level, it's as if we have a direct TCP connection between client and server which we can use to communicate at higher layers.
+
+### L7 Load Balancer
+
+- Layer 7 load balancers operate at the application layer, understanding protocols like HTTP. 
+- They can examine the actual content of each request and make more intelligent routing decisions.
+- Key characteristics of L7 load balancers:
+  - Terminate incoming connections and create new ones to backend servers.
+  - Can route based on request content (URL, headers, cookies, etc.).
+  - More CPU-intensive due to packet inspection.
+  - Provide more flexibility and features.
+  - Better suited for HTTP-based traffic.
+- For example, an L7 load balancer could route all API requests to one set of servers while sending web page requests to another (providing similar functionality to an API Gateway), or it could ensure that all requests from a specific user go to the same server based on a cookie. 
+- The underlying TCP connection that's made to your server via an L7 load balancer is not all that relevant! It's just a way for the load balancer to forward L7 requests, like HTTP, to your server.
+0 While L7 load balancers can help us to not have to worry about lower-level details like TCP connections, we aren't able to ignore the connection-level reality if we want persistent connections to consistent servers.
+
 
 ---
 
@@ -2533,6 +2562,58 @@ https://en.wikipedia.org/wiki/Hard_disk_drive
 - This is generally done by saving byte or block-level differences rather than file-level differences.
 
 ---
+
+## Patterns
+
+### Real-time Updates
+
+#### Client-Server Connection protocols
+
+- Polling:
+  - The simplest possible approach is to have the client regularly poll the server for updates
+- Long Polling:
+    - The client makes a request to the server and the server holds the request open until new data is available. 
+    - It's as if the server is just taking really long to process the request. 
+    - The server then responds with the data, finalizes the HTTP requests, and the client immediately makes a new HTTP request.
+- Server-Sent Events (SSE):
+  - SSE is an extension on long-polling that allows the server to send a stream of data to the client.
+  - With SSE, instead of sending a full response once data becomes available, the server sends a chunk of data and then keeps the request open to send more data as needed. 
+  - SSE is perfect for scenarios where servers need to push data to clients, but clients don't need to send data back frequently.
+- Websockets: 
+  - WebSockets are the go-to choice for true bi-directional communication between client and server. 
+  - If you have high frequency writes and reads, WebSockets are the champ.
+- WebRTC: The Peer-to-Peer Solution
+  - WebRTC enables direct peer-to-peer communication between browsers, perfect for video/audio calls and some data sharing like document editors.
+  - Clients talk to a central "signaling server" which keeps track of which peers are available together with their connection information. 
+  - Once a client has the connection information for another peer, they can try to establish a direct connection without going through any intermediary servers.
+
+![30.png](images/system.design.10/30.png)
+
+#### Server-Server push/pull
+
+- Pulling with Simple Polling:
+  - Asking the server for updates and the server needs to maintain the state necessary to respond to those requests
+- Pushing via Consistent Hashes:
+  - Consistent hashing is ideal when you need to maintain persistent connections (WebSocket/SSE) and your system needs to scale dynamically. 
+  - It's particularly valuable when each connection requires significant server-side state that would be expensive to rebuild. 
+  - Requires coordination service (like Zookeeper)
+    - Any central registration service may become a bottleneck
+- Pushing via Pub/Sub
+  - When clients connect, we don't need them to connect to a specific endpoint server and instead can connect to any of them. 
+  - Once connected, the endpoint server will register the client with the pub/sub server so that any updates can be sent to them.
+  - We have a single service that is responsible for collecting updates from the source and then broadcasting them to all interested clients. 
+  - Popular options here include Kafka and Redis.
+  - `On the connection side, the following happens:`
+     - The client establishes a connection with an endpoint server.
+     - The endpoint server registers the client with the Pub/Sub service, often by creating a topic, subscribing to it, and keeping a mapping from topics to the connections associated with them.  
+  - `On the update broadcasting side, the following happens:`
+     - Updates are pushed to the Pub/Sub service to the relevant topic.
+     - The Pub/Sub service broadcasts the update to all clients subscribed to that topic.
+     - The endpoint server receives the update, looks up which client is subscribed to that topic, and forwards the update to that client over the existing connection.
+
+
+---
+
 
 # System Design Interview Questions
 
