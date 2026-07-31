@@ -2569,20 +2569,20 @@ https://en.wikipedia.org/wiki/Hard_disk_drive
 
 #### Client-Server Connection protocols
 
-- Polling:
+- `Polling`
   - The simplest possible approach is to have the client regularly poll the server for updates
-- Long Polling:
+- `Long Polling`
     - The client makes a request to the server and the server holds the request open until new data is available. 
     - It's as if the server is just taking really long to process the request. 
     - The server then responds with the data, finalizes the HTTP requests, and the client immediately makes a new HTTP request.
-- Server-Sent Events (SSE):
+- `Server-Sent Events (SSE)`
   - SSE is an extension on long-polling that allows the server to send a stream of data to the client.
   - With SSE, instead of sending a full response once data becomes available, the server sends a chunk of data and then keeps the request open to send more data as needed. 
   - SSE is perfect for scenarios where servers need to push data to clients, but clients don't need to send data back frequently.
-- Websockets: 
+- `Websockets`
   - WebSockets are the go-to choice for true bi-directional communication between client and server. 
   - If you have high frequency writes and reads, WebSockets are the champ.
-- WebRTC: The Peer-to-Peer Solution
+- `WebRTC Peer-to-Peer`
   - WebRTC enables direct peer-to-peer communication between browsers, perfect for video/audio calls and some data sharing like document editors.
   - Clients talk to a central "signaling server" which keeps track of which peers are available together with their connection information. 
   - Once a client has the connection information for another peer, they can try to establish a direct connection without going through any intermediary servers.
@@ -2591,22 +2591,22 @@ https://en.wikipedia.org/wiki/Hard_disk_drive
 
 #### Server-Server push/pull
 
-- Pulling with Simple Polling:
+- `Pulling with Simple Polling`
   - Asking the server for updates and the server needs to maintain the state necessary to respond to those requests
-- Pushing via Consistent Hashes:
+- `Pushing via Consistent Hashes`
   - Consistent hashing is ideal when you need to maintain persistent connections (WebSocket/SSE) and your system needs to scale dynamically. 
   - It's particularly valuable when each connection requires significant server-side state that would be expensive to rebuild. 
   - Requires coordination service (like Zookeeper)
     - Any central registration service may become a bottleneck
-- Pushing via Pub/Sub
+- `Pushing via Pub/Sub`
   - When clients connect, we don't need them to connect to a specific endpoint server and instead can connect to any of them. 
   - Once connected, the endpoint server will register the client with the pub/sub server so that any updates can be sent to them.
   - We have a single service that is responsible for collecting updates from the source and then broadcasting them to all interested clients. 
   - Popular options here include Kafka and Redis.
-  - `On the connection side, the following happens:`
+  - `On the connection side, the following happens`:
      - The client establishes a connection with an endpoint server.
      - The endpoint server registers the client with the Pub/Sub service, often by creating a topic, subscribing to it, and keeping a mapping from topics to the connections associated with them.  
-  - `On the update broadcasting side, the following happens:`
+  - `On the update broadcasting side, the following happens`:
      - Updates are pushed to the Pub/Sub service to the relevant topic.
      - The Pub/Sub service broadcasts the update to all clients subscribed to that topic.
      - The endpoint server receives the update, looks up which client is subscribed to that topic, and forwards the update to that client over the existing connection.
