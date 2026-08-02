@@ -2611,6 +2611,167 @@ https://en.wikipedia.org/wiki/Hard_disk_drive
      - The Pub/Sub service broadcasts the update to all clients subscribed to that topic.
      - The endpoint server receives the update, looks up which client is subscribed to that topic, and forwards the update to that client over the existing connection.
 
+### Dealing with Contention
+
+### Conditional Writes
+
+- The `WHERE` clause is just how SQL spells `compare-and-set`, the same move `DynamoDB` makes with a `ConditionExpression`, `Redis` with `SET NX`, `Cassandra` with a lightweight transaction, or an `HTTP API` with an `If-Match header`
+- Below are atomic operations enought `READ COMMITTED` isolation level with row blocking
+
+```sql
+UPDATE concerts
+SET available_seats = available_seats - 1
+WHERE concert_id = 'weeknd_tour'
+  AND available_seats > 0;
+```
+
+```sql
+UPDATE tickets
+SET status = 'sold', user_id = 'user123'
+WHERE concert_id = 'weeknd_tour'
+  AND seat_number = 'A15'
+  AND status = 'available';
+```
+
+### Pessimistic Locking
+
+- Row locks
+  - The `lock` in this context is a mechanism that prevents other database connections from accessing the same data until the lock is released. 
+  - Databases like `PostgreSQL` and `MySQL` can handle thousands of concurrent connections, but locks ensure that only one connection can modify a specific row (or set of rows) at a time.
+- Pessimistic locking prevents conflicts by acquiring locks upfront
+- The `FOR UPDATE` clause locks every row the `SELECT` returns
+- While you pick a block, no other transaction can claim those seats, so a second group running the same query waits until you commit
+
+```sql
+BEGIN TRANSACTION;
+
+-- Lock the open seats in this section while we pick a block
+SELECT seat_number FROM seats
+WHERE concert_id = 'weeknd_tour'
+  AND section = 'floor'
+  AND status = 'available'
+FOR UPDATE;
+
+-- App scans the result, finds A15-A18 open and adjacent, then claims them
+UPDATE seats
+SET status = 'sold', user_id = 'user123'
+WHERE concert_id = 'weeknd_tour'
+  AND seat_number IN ('A15', 'A16', 'A17', 'A18');
+
+COMMIT;
+```
+
+![31.png](images/system.design.10/31.png)
+
+### Optimistic Concurrency Control
+
+- It assumes conflicts are rare and detects them after the fact instead of blocking to prevent them
+- Under low contention, that skips the locking overhead entirely.
+- You need one value in the row that's guaranteed to change every time the row is written.
+- Version number, and the most common form is a dedicated integer you bump by one on every write
+
+```sql
+-- Both Alice and Bob read: 1 seat, version 42
+
+-- Alice writes first:
+BEGIN TRANSACTION;
+UPDATE concerts
+SET available_seats = available_seats - 1, version = version + 1
+WHERE concert_id = 'weeknd_tour'
+  AND version = 42;  -- the version Alice read
+
+INSERT INTO tickets (user_id, concert_id, seat_number, price, purchase_time)
+VALUES ('alice', 'weeknd_tour', 'A15', 750.00, NOW());
+COMMIT;
+-- Succeeds. seats = 0, version = 43
+
+-- Bob writes against the version he read:
+BEGIN TRANSACTION;
+UPDATE concerts
+SET available_seats = available_seats - 1, version = version + 1
+WHERE concert_id = 'weeknd_tour'
+  AND version = 42;  -- stale, the row is on 43 now
+
+-- Bob's UPDATE matches 0 rows. Check the count, roll back, skip the insert.
+ROLLBACK;
+```
+
+### Isolation Levels
+
+- `READ UNCOMMITTED` - Can see uncommitted changes from other transactions (rarely used)
+- `READ COMMITTED` - Can only see committed changes (default in PostgreSQL)
+- `REPEATABLE READ` - Same data read multiple times within a transaction stays consistent (default in MySQL)
+- `SERIALIZABLE` - Strongest isolation, transactions appear to run one after another
+
+```sql
+BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+
+-- Is anyone else on call right now?
+SELECT count(*) FROM on_call
+WHERE team_id = 'payments'
+  AND is_active = true;
+
+-- App sees 2, decides it's safe to step down, then writes:
+UPDATE on_call
+SET is_active = false
+WHERE engineer_id = 'alice';
+
+COMMIT;
+-- If Bob's transaction made the same decision concurrently,
+-- one of the two commits aborts with a serialization error.
+```
+
+![32.png](images/system.design.10/32.png)
+
+### Distributed Locks
+
+#### Redis with TTL 
+
+- Redis gives you atomic operations with automatic expiration, which makes it a great fit for a reservation lock. 
+- The `SET` command with `NX` (only set if not exists) and a `TTL` atomically creates a lock that Redis clears on its own when the `TTL` passes (the NX flag is critical, without it a second process could overwrite an existing lock).
+- No cleanup job, and any web server can check the same key
+
+#### Database columns
+
+- Lock is just two columns on the row, one for who holds it and one for when the hold expires
+- The advantage is no new infrastructure and the same consistency as the rest of your data. 
+- The disadvantage is that database writes are slower than a cache, and the lock row itself becomes a contention point under heavy load.
+
+```sql
+UPDATE seats
+SET reserved_by = 'user123', reserved_until = NOW() + INTERVAL '10 minutes'
+WHERE seat_id = 'A15'
+  AND (reserved_until IS NULL OR reserved_until < NOW());
+```
+
+#### ZooKeeper/etcd
+
+- They provide strong consistency guarantees even during network partitions and leader failures
+- Uses consensus algorithms (ZAB/Raft) for strong consistency, making them robust for complex failure scenarios at the cost of operational complexity.
+
+### Coordination multiple processes (The Saga Pattern)
+
+- Saga is a sequence of local steps where each step has a matching compensating action that undoes it.
+- You run the steps one at a time, and if a later one fails, you walk backwards firing those compensations to unwind whatever already happened.
+- There are two ways to coordinate a saga:
+  - `Choreography`
+  - `Orchestration`
+
+#### Event-Driven Choreography
+
+- There is no coordinator at all
+- Each worker subscribes to the events it cares about, does its piece, and emits new events for the next worker to react to.
+- Choreography works great for fully independent services and for mid-complexity workflows.
+
+![33.png](images/system.design.10/33.png)
+
+#### Orchestration
+
+- Where a single coordinator owns the flow and tells workers what to do.
+- Because the whole sequence lives in one place, orchestration works best for very complex workflows where you need central control and visibility.
+
+![34.png](images/system.design.10/34.png)
+
 
 ---
 
