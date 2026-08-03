@@ -1570,6 +1570,8 @@ http {
 
 #### Indexing
 
+![35.png](images/system.design.10/35.png)
+
 - For every write, indexes need to be updated. This can slow down the write operation.
   - This is an important trade-off in storage systems: well-chosen indexes speed up read queries, but every index slows down writes. For this reason, databases don’t usually index everything by default,
     but require you—the application developer or database administrator—to choose indexes manually, using your knowledge of the application’s typical query patterns. You can then choose the
@@ -2757,7 +2759,7 @@ WHERE seat_id = 'A15'
   - `Choreography`
   - `Orchestration`
 
-#### Event-Driven Choreography
+#### Choreography
 
 - There is no coordinator at all
 - Each worker subscribes to the events it cares about, does its piece, and emits new events for the next worker to react to.
@@ -2772,6 +2774,31 @@ WHERE seat_id = 'A15'
 
 ![34.png](images/system.design.10/34.png)
 
+
+### Scaling reads
+
+#### Optimize read performance within your database
+
+- Indexing
+- Hardware Upgrades
+- Denormalization
+
+#### Scale your database horizontally
+
+- Read Replicas
+- Database Sharding
+  - By business domain (Post, User, Likes)
+  - By records 
+  - Geographic sharding
+    - Particularly effective for global read scaling. 
+    - Store US user data in US databases, European data in European databases. 
+    - Users get faster reads from nearby servers while reducing load on any single database.
+
+#### Add external caching layers
+
+- Application-Level Caching
+  - In-memory caches like Redis or Memcached sit between your application and database.
+- CDN and Edge Caching
 
 ---
 
