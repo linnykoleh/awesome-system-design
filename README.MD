@@ -2774,7 +2774,6 @@ WHERE seat_id = 'A15'
 
 ![34.png](images/system.design.10/34.png)
 
-
 ### Scaling reads
 
 #### Optimize read performance within your database
@@ -2787,8 +2786,8 @@ WHERE seat_id = 'A15'
 
 - Read Replicas
 - Database Sharding
-  - By business domain (Post, User, Likes)
-  - By records 
+  - Vertical partitioning (Post, User, Likes)
+  - Horizontal partitioning (By records)
   - Geographic sharding
     - Particularly effective for global read scaling. 
     - Store US user data in US databases, European data in European databases. 
@@ -2799,6 +2798,67 @@ WHERE seat_id = 'A15'
 - Application-Level Caching
   - In-memory caches like Redis or Memcached sit between your application and database.
 - CDN and Edge Caching
+
+### Scaling writes
+
+#### Vertical Scaling and Database Choices
+
+- Vertical Scaling
+- Database Choices
+  - `Cassandra`
+    - Write-heavy database (10,000+ writes per second)
+    - Read performance isn't great - reading data often requires checking multiple files and merging results, which can be slower than a well-indexed relational database
+  - Time-series databases like `InfluxDB` or `TimescaleDB` are built for high-volume sequential writes with timestamps
+  - Log-structured databases like `LevelDB` append new data rather than updating in place
+  - Column stores like `ClickHouse` can batch writes efficiently for analytics workloads
+
+#### Sharding and Partitioning
+
+- **Horizontal** Sharding
+  - The most important detail you'll want to share is how to select a partitioning key.
+  - The principle here is that we want to select a key that minimizes variance in the number of writes per shard or, in the visual above, flat is good.
+- **Vertical** Partitioning
+  - For Post content we'll use traditional B-tree indexes and is optimized for read performance
+  - For Post metrics we might use in-memory storage or specialized counters for high-frequency updates
+  - For Post analytics we can use time-series optimized storage or database with column-oriented compression
+
+#### Handling Bursts with Queues and Load Shedding
+
+- Write **Queues** for Burst Handling
+  - Queues are only a temporary solution, if the app server continues to write to the queue faster than records can be written to the database, we get unbounded growth of our queue. 
+  - Use queues when you expect to have bursts that are short-lived, not to patch a database that can't handle the steady-state load.
+
+![38.png](images/system.design.10/38.png)
+
+- **Load Shedding** Strategies
+  - A simple solution here is to simply drop the least useful writes during times of system overload 
+  - For Uber these might be location updates that are within seconds of a previous update. 
+  - For an analytics system, we might drop impressions for a while to ensure we can process the more important clicks.
+
+![39.png](images/system.design.10/39.png)
+
+#### Batching and Hierarchical Aggregation
+
+- **Batching**
+  - Application Layer
+      - If we have a service reading from a Kafka topic, performing some processing, and then writing to the database, we can batch up the writes together before we send them to the database
+      - If the application crashes, we'll have to re-read the Kafka topic to recover but we haven't lost data.
+  - Intermediate Processing
+      - have an intermediate process which batches up writes before they are sent to the database.
+
+![41.png](images/system.design.10/41.png)
+
+  - Database Layer
+      - Most database systems have configurable options for how often writes are flushed to disk, the bottleneck for most systems.
+      - Redis' default configuration is to flush writes to disk every 100ms
+
+![40.png](images/system.design.10/40.png)
+
+- **Hierarchical Aggregation**
+    - By aggregating the data with the write processors and dis-aggregating it with the broadcast nodes, we've substantially reduced the number of writes that any one system needs to handle at the cost of some latency introduced by adding steps. 
+    - And that's the heart of hierarchical aggregation!
+
+![42.png](images/system.design.10/42.png)
 
 ---
 
