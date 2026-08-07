@@ -2860,6 +2860,30 @@ WHERE seat_id = 'A15'
 
 ![42.png](images/system.design.10/42.png)
 
+### Managing Long Running Tasks
+
+- The Managing Long-Running Tasks pattern splits API requests into two phases: immediate acknowledgment and background processing. 
+- When users submit heavy tasks (like video encoding), the web server instantly validates the request, pushes a job to a queue (Redis/RabbitMQ), and returns a job ID, all within milliseconds. 
+- Meanwhile, separate worker processes continuously poll the queue, grab pending jobs, execute the actual time-consuming work, and update the job status in a database.
+
+![43.png](images/system.design.10/43.png)
+
+#### Common system for Long Running Tasks 
+
+- `YouTube/Video Platforms` - Video upload triggers multiple async jobs: transcoding to different resolutions (1080p, 720p, 480p), generating thumbnails, extracting closed captions, running content moderation. Each video might need hours of processing across multiple workers.
+- `Instagram/Photo Sharing `- Photo uploads spawn async tasks for generating multiple sizes, applying filters, extracting metadata, running image recognition for tags, and checking content policy. The fan-out problem also uses async workers: when someone with millions of followers posts, workers propagate that post to follower feeds.
+- `Uber/Ridesharing` - Ride matching runs asynchronously. The user sees "Finding drivers near you..." while workers evaluate driver availability, calculate optimal routes, and determine pricing. Driver location updates also process through async workers to update rider apps without overloading the main API.
+- `Stripe/Payment Processing` - While basic card authorizations are synchronous, async workers handle fraud detection, 3D Secure verification, and webhook notifications. For payment methods with delayed confirmation (bank transfers, some regional methods), the API returns a pending status while workers process the actual settlement.
+- `Dropbox/File Sync` - File uploads trigger async processing: virus scanning, indexing for search, generating previews, and syncing to other devices. Large files might take minutes to process, but the upload API returns immediately.
+
+#### Handling Repeated Failures
+
+- `Dead Letter Queue (DLQ)` - after a job fails a certain number of times (typically 3-5), you move it to a separate queue instead of retrying again
+- `DLQ` becomes a collection of jobs that need human investigation.
+
+![44.png](images/system.design.10/44.png)
+
+
 ---
 
 
