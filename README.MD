@@ -19,6 +19,7 @@
   - [x] [Grokking the Advanced System Design Interview](https://www.designgurus.io/course/grokking-the-advanced-system-design-interview)
 - [ ] [System Design Simplified on interviewready.io](https://interviewready.io/course-page/system-design-course)
 - [ ] [AWS certification](https://aws.amazon.com/certification)
+- [TutorialSearch](https://tutorialsearch.io/browse/devops-it/system-reliability) - Free cross-platform search engine indexing 50,000+ tutorials from Udemy, Skillshare, Pluralsight, and other major learning platforms across 45+ categories.
 
 ### 📝 Articles:
 
