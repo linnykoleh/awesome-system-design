@@ -146,7 +146,6 @@
 
 - [A Senior Engineer's Guide to the System Design Interview](#a-senior-engineers-guide-to-the-system-design-interview)
   - [System Design Interview Requirements](#system-design-interview-requirements)
-    - [Availability](#availability)
 - [Microservices Design Patterns](#microservices-design-patterns)
 - [System Design Blueprint: The Ultimate Guide](#system-design-blueprint-the-ultimate-guide)
   - [High Load Applications Architecture](#high-load-applications-architecture)
@@ -938,10 +937,6 @@
 - In a microservices architecture, services are fine-grained and the protocols are lightweight.
 
 
-[//]: # (## System Desing resources)
-
-[//]: # (![dZEbZaT.png]&#40;./images/system.design/dZEbZaT.png&#41;)
-
 ---
 
 ## System Design Basics
@@ -1037,8 +1032,6 @@ http {
 
 
 ### TCP vs UDP vs HTTP
-
-
 
 #### TCP 
 
