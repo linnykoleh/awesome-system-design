@@ -138,7 +138,7 @@
 32. **Online auction** - [image](excalidraw/images/online-auction.png) | [diagram](excalidraw/online-auction.excalidraw)
 33. **Alert notification system** - [image](excalidraw/images/alert_notification_system.png) | [diagram](excalidraw/alert_notification_system.excalidraw)
 34. **Online chess** - [image](excalidraw/images/online-chess.png) | [diagram](excalidraw/online-chess.excalidraw)
-35. **MacDonalds** - [image](excalidraw/images/mcdonalds.png) | [diagram](excalidraw/mcdonalds.excalidraw)
+35. **McDonalds** - [image](excalidraw/images/mcdonalds.png) | [diagram](excalidraw/mcdonalds.excalidraw)
 
 ---
 
