@@ -20,6 +20,10 @@
 - [ ] [System Design Simplified on interviewready.io](https://interviewready.io/course-page/system-design-course)
 - [ ] [AWS certification](https://aws.amazon.com/certification)
 
+### 🧪 Interview Practice:
+
+- [ ] [PracHub System Design Practice](https://prachub.com/categories/system-design) - Company-tagged system design interview prompts for timed, answer-first practice.
+
 ### 📝 Articles:
 
 - [x] [Helpful list of LeetCode Posts on System Design at Facebook, Google, Amazon, Uber, Microsoft](https://leetcode.com/discuss/interview-question/1140451/helpful-list-of-leetcode-posts-on-system-design-at-facebook-google-amazon-uber-microsoft)
