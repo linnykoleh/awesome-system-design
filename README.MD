@@ -19,6 +19,7 @@
   - [x] [Grokking the Advanced System Design Interview](https://www.designgurus.io/course/grokking-the-advanced-system-design-interview)
 - [ ] [System Design Simplified on interviewready.io](https://interviewready.io/course-page/system-design-course)
 - [ ] [AWS certification](https://aws.amazon.com/certification)
+- [x] [Wyrcan Engineering Roadmap: 12-Stage Practitioner Curriculum](https://github.com/Wyrcan-io/roadmap) - Text-first curriculum grounded in Designing Data-Intensive Applications (DDIA), Linux internals, and production cloud architecture.
 
 ### 📝 Articles:
 
