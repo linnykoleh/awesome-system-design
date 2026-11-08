@@ -10,6 +10,12 @@
       <model-selection />
     </selection-state>
   </component>
+  <component name="DBNavigator.Project.DatabaseBrowserManager">
+    <autoscroll-to-editor value="false" />
+    <autoscroll-from-editor value="true" />
+    <show-object-properties value="true" />
+    <loaded-nodes />
+  </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
@@ -19,6 +25,7 @@
   <component name="DBNavigator.Project.Settings">
     <states>
       <state category="SECRET_STORAGE_MIGRATION">
+        <cleaned value="true" />
         <migrated value="true" />
       </state>
     </states>
@@ -63,7 +70,8 @@
           <object-type name="DBLINK" enabled="true" />
           <object-type name="CREDENTIAL" enabled="true" />
           <object-type name="AI_PROFILE" enabled="true" />
-          <object-type name="AI_MODEL" enabled="true" />
+          <object-type name="MINING_MODEL" enabled="true" />
+          <object-type name="DATASOURCE_CONFIG" enabled="true" />
         </object-type-filter>
       </filters>
       <sorting>
@@ -168,12 +176,9 @@
           <content-type name="Java" enabled="true" />
           <content-type name="SQL" enabled="true" />
           <content-type name="PL/SQL" enabled="true" />
-          <content-type name="JPA QL" enabled="true" />
           <content-type name="JavaScript" enabled="true" />
           <content-type name="JSON" enabled="true" />
           <content-type name="JSON5" enabled="true" />
-          <content-type name="JSP" enabled="true" />
-          <content-type name="JSPx" enabled="true" />
           <content-type name="Groovy" enabled="true" />
           <content-type name="FTL" enabled="true" />
           <content-type name="VTL" enabled="true" />
@@ -191,6 +196,8 @@
         <show-spec-declaration-navigation-gutter value="true" />
         <enable-spellchecking value="true" />
         <enable-reference-spellchecking value="false" />
+        <show-parser-issue-notifications value="true" />
+        <show-dialect-suggestion-notifications value="true" />
       </general>
       <confirmations>
         <save-changes value="false" />
@@ -232,7 +239,7 @@
             <filter-element type="OBJECT" id="dblink" selected="true" />
             <filter-element type="OBJECT" id="credential" selected="true" />
             <filter-element type="OBJECT" id="AI profile" selected="true" />
-            <filter-element type="OBJECT" id="AI model" selected="true" />
+            <filter-element type="OBJECT" id="mining model" selected="true" />
           </user-schema>
           <public-schema>
             <filter-element type="OBJECT" id="table" selected="false" />
@@ -255,7 +262,7 @@
             <filter-element type="OBJECT" id="dblink" selected="false" />
             <filter-element type="OBJECT" id="credential" selected="false" />
             <filter-element type="OBJECT" id="AI profile" selected="false" />
-            <filter-element type="OBJECT" id="AI model" selected="false" />
+            <filter-element type="OBJECT" id="mining model" selected="false" />
           </public-schema>
           <any-schema>
             <filter-element type="OBJECT" id="table" selected="true" />
@@ -278,7 +285,7 @@
             <filter-element type="OBJECT" id="dblink" selected="true" />
             <filter-element type="OBJECT" id="credential" selected="true" />
             <filter-element type="OBJECT" id="AI profile" selected="true" />
-            <filter-element type="OBJECT" id="AI model" selected="true" />
+            <filter-element type="OBJECT" id="mining model" selected="true" />
           </any-schema>
         </basic-filter>
         <extended-filter>
@@ -312,7 +319,7 @@
             <filter-element type="OBJECT" id="dblink" selected="true" />
             <filter-element type="OBJECT" id="credential" selected="true" />
             <filter-element type="OBJECT" id="AI profile" selected="true" />
-            <filter-element type="OBJECT" id="AI model" selected="true" />
+            <filter-element type="OBJECT" id="mining model" selected="true" />
           </user-schema>
           <public-schema>
             <filter-element type="OBJECT" id="table" selected="true" />
@@ -333,7 +340,7 @@
             <filter-element type="OBJECT" id="dblink" selected="true" />
             <filter-element type="OBJECT" id="credential" selected="true" />
             <filter-element type="OBJECT" id="AI profile" selected="true" />
-            <filter-element type="OBJECT" id="AI model" selected="true" />
+            <filter-element type="OBJECT" id="mining model" selected="true" />
           </public-schema>
           <any-schema>
             <filter-element type="OBJECT" id="table" selected="true" />
@@ -356,7 +363,7 @@
             <filter-element type="OBJECT" id="dblink" selected="true" />
             <filter-element type="OBJECT" id="credential" selected="true" />
             <filter-element type="OBJECT" id="AI profile" selected="true" />
-            <filter-element type="OBJECT" id="AI model" selected="true" />
+            <filter-element type="OBJECT" id="mining model" selected="true" />
           </any-schema>
         </extended-filter>
       </filters>

@@ -38,6 +38,7 @@
 - [ ] [How Figma’s databases team lived to tell the scale](https://www.figma.com/blog/how-figmas-databases-team-lived-to-tell-the-scale)
 - [ ] [27 Fundamental Techniques for Software Architects](https://www.workingsoftware.dev/fundamental-techniques-for-software-architects/)
 - [ ] [Scaling PostgreSQL to power 800 million ChatGPT users](https://openai.com/index/scaling-postgresql)
+- [ ] [RabbitMQ vs. Apache Kafka®](https://www.rabbitmq.com/docs/compare/kafka)
 
 ### 📚 Books:
 
@@ -139,6 +140,7 @@
 33. **Alert notification system** - [image](excalidraw/images/alert_notification_system.png) | [diagram](excalidraw/alert_notification_system.excalidraw)
 34. **Online chess** - [image](excalidraw/images/online-chess.png) | [diagram](excalidraw/online-chess.excalidraw)
 35. **McDonalds** - [image](excalidraw/images/mcdonalds.png) | [diagram](excalidraw/mcdonalds.excalidraw)
+36. **Tutoring Marketplace** - [image](excalidraw/images/tutoring_marketplace.png) | [diagram](excalidraw/tutoring_marketplace.excalidraw)
 
 ---
 
@@ -1737,7 +1739,7 @@ which can save a lot of work.
 
 - The `replication factor` is the number of nodes that will receive the copy of the same data
 - `Replication strategy`:
-  - `Simple replication strategy` - his strategy is used only for a single data center cluster
+  - `Simple replication strategy` - This strategy is used only for a single data center cluster
   - `Network topology strategy` - This strategy is used for multiple data-centers. This enables us to specify how many replicas will be placed in each data center.
 
 ![21.png](images/system.design.10/21.png)
